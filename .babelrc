@@ -3,7 +3,9 @@
       ["env", {
         "targets": {
           "browsers": ["last 2 versions"]
-        }
+        },
+        "useBuiltIns": false,
+        "debug": true
       }]
     ]
   }

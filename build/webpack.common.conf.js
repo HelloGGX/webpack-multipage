@@ -6,9 +6,8 @@ const pagesConfig =require('./pages.conf')
 const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
-
 const extractCss =  new ExtractTextWebpack({
-    filename: 'css/[name]-bundle-[hash:5].css',
+    filename: 'css/[name]-bundle-[contenthash:5].css',
     allChunks: false//指定提取css的范围
 })
 
@@ -93,7 +92,7 @@ const generateConfig = env => {
         output: {
             path: resolve('dist'),
             publicPath: '',
-            filename: 'js/[name].[hash:5].js',
+            filename: 'js/[name].[chunkhash:5].js',
             chunkFilename: '[name].bundle.js'
         },
         module:{

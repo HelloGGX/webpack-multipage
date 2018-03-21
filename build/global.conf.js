@@ -10,7 +10,8 @@ const pages = [//页面配置写在这里
 ]
 const dependencies = [//依赖的全局js
     'jquery',
-    'weui.js'
+    'weui.js',
+    'babel-polyfill'
 ]
 
 const globalConfig = {

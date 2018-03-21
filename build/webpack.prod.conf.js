@@ -4,9 +4,10 @@ const path = require('path')
 
 module.exports={
     plugins:[ 
+        
         new webpack.optimize.CommonsChunkPlugin({
             names: ['dependencies','manifest'],//manifest是webpack生成的代码
-            filename: '[name].[hash:5].js',
+            filename: 'js/vendor/[name].[hash:5].js',
             minChunks: Infinity
         }),
         new webpack.optimize.UglifyJsPlugin(),//js压缩

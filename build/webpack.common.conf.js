@@ -9,7 +9,7 @@ const webpack = require('webpack')
 
 const extractCss =  new ExtractTextWebpack({
     filename: 'css/[name]-bundle-[hash:5].css',
-    //allChunks: false//指定提取css的范围
+    allChunks: false//指定提取css的范围
 })
 
 function resolve(dir) {
@@ -54,27 +54,28 @@ const generateConfig = env => {
             loader:'style-loader'
         }].concat(cssLoaders)
 
-    const fileLoader = outputPath => {
+    const fileLoader = path => {
         return env === 'development'
             ? [{
                 loader: 'file-loader',
                 options: {
                     name: '[name]-[hash:5].[ext]',
                     // publicPath:'../',
-                    outputPath: outputPath
+                    outputPath: path
                 }
             }]
             : [{
                 loader: 'url-loader',//带图片转base64功能
                 options: {
                     name: '[name]-[hash:5].[ext]',
-                    limit: 1000,//1000=1kb
+                    limit: 9000,//9000=9kb
                     // publicPath:'',
-                    outputPath: outputPath,
-                    // useRelativePath:true
+                    outputPath: path,
+                   //useRelativePath:true
                 }
             }]
     }
+
     return{
         context: path.resolve(__dirname, '../'),
         entry: {
@@ -99,8 +100,8 @@ const generateConfig = env => {
             rules:[
                 {//处理js
                     test: /\.js$/,
-                    include: [resolve('src/common/js'),resolve('src/components/'),resolve('src/pages/**/')],
-                    exclude: [resolve('vendor')],
+                    include: [resolve('src/common/js'),resolve('src/components/'),resolve('src/pages/')],
+                    exclude: [resolve('src/vendor')],
                     use:scriptLoader
                 },
                  {//处理css
@@ -109,7 +110,7 @@ const generateConfig = env => {
                 },
                 {//图片的转换和压缩
                     test: /\.(png|jpg|jpeg|gif)$/,
-                    use: fileLoader('img/').concat(
+                    use: fileLoader('imgs/').concat(
                         env === 'production'
                         ?{
                             loader: 'img-loader',//压缩图片
@@ -124,11 +125,12 @@ const generateConfig = env => {
                 },
                 {//处理字体文件
                     test:/\.(eot|woff2?|ttf|svg)$/,
-                    use: fileLoader
+                    use: fileLoader('fonts/')
                 }
             ]
         },
         plugins:[
+            extractCss,
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 weui:'weui.js'

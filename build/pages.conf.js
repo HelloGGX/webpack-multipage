@@ -23,7 +23,10 @@ const generatePage = function({
                 template,
                 title,
                 filename: name + '.html',
-                chunksSortMode: 'manual'//应用文件顺序
+                chunksSortMode: 'manual',//应用文件顺序
+                minify: {
+                    collapseWhitespace: true
+                }
             })
         ]
     }

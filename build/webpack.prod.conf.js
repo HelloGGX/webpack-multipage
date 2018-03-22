@@ -3,20 +3,33 @@ const CleanWebpack = require('clean-webpack-plugin')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+//const HtmlInlinkChunkPlugin = require('html-webpack-inline-chunk-plugin')
+function resolve(dir) {
+    return path.join(__dirname, '..', dir)
+}
 
 module.exports={
     plugins:[ 
         new webpack.DllReferencePlugin({
-            manifest:require('../src/dll/dependencies-manifest.json'),
-            name: 'dependencies'
+            manifest:require('../src/dll/libs-manifest.json'),
+            name: 'libs'
         }),
-
+        new AddAssetHtmlPlugin({ 
+            filepath: resolve('src/dll/libs.dll.js'),
+            includeSourcemap:false,
+            publicPath:'./js/libs/',
+            outputPath:'./js/libs/'
+        }),
         new BundleAnalyzerPlugin(),//打包分析
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['dependencies','manifest'],//manifest是webpack生成的代码
-            filename: 'js/vendor/[name].[chunkhash:5].js',
+            names: ['manifest','libs'].reverse(),//因为用了DllReferencePlugin来优化打包速度所以这里分离出的libs是libs.dll.js的类似sourcemap的索引
+            filename: 'js/libs/[name].[hash:5].js',
             minChunks: Infinity
         }),
+        // new HtmlInlinkChunkPlugin({//把该页的js追加到html页面
+        //     inlineChunks:['manifest']
+        // }),
         new UglifyJsPlugin({
             uglifyOptions: {
               compress: {

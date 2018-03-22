@@ -59,7 +59,7 @@ const generateConfig = env => {
                 loader: 'file-loader',
                 options: {
                     name: '[name]-[hash:5].[ext]',
-                    // publicPath:'../',
+                    //publicPath:'../',
                     outputPath: path
                 }
             }]
@@ -68,7 +68,7 @@ const generateConfig = env => {
                 options: {
                     name: '[name]-[hash:5].[ext]',
                     limit: 9000,//9000=9kb
-                    // publicPath:'',
+                    publicPath:'../imgs',
                     outputPath: path,
                    //useRelativePath:true
                 }
@@ -78,7 +78,7 @@ const generateConfig = env => {
     return{
         context: path.resolve(__dirname, '../'),
         entry: {
-            dependencies: globalConfig.dependencies,
+            libs: globalConfig.dependencies,
             common:resolve('src/common/js/common.js')
         },
         resolve: {
@@ -92,7 +92,7 @@ const generateConfig = env => {
         output: {
             path: resolve('dist'),
             publicPath: '',
-            filename: 'js/[name].[chunkhash:5].js',
+            filename: 'js/[name].[hash:5].js',
             chunkFilename: '[name].bundle.js'
         },
         module:{
@@ -100,10 +100,10 @@ const generateConfig = env => {
                 {//处理js
                     test: /\.js$/,
                     include: [resolve('src/common/js'),resolve('src/components/'),resolve('src/pages/')],
-                    exclude: [resolve('src/vendor')],
+                    exclude: [resolve('src/vendor'),resolve('src/dll')],
                     use:scriptLoader
                 },
-                 {//处理css
+                {//处理css
                     test: /\.css$/,
                     use: styleLoader
                 },
@@ -133,7 +133,7 @@ const generateConfig = env => {
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 weui:'weui.js'
-            }),
+            })
         ]
     }
 }
@@ -146,6 +146,7 @@ module.exports = env => {
     ? productionConfig
     : developmentConfig
     
+
     console.log(merge(baseConfig, runConfig))
     return merge(baseConfig, runConfig)
 }

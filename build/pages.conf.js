@@ -1,7 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HtmlInlinkChunkPlugin = require('html-webpack-inline-chunk-plugin')
 const globalConfig = require('./global.conf')
-
 const pages = globalConfig.pages
 
 const generatePage = function({
@@ -9,17 +7,13 @@ const generatePage = function({
     entry = '',
     template = '',
     name = '',
-    commonChunks=['manifest','dependencies','common'],
     chunks = []
 } = {}) {
     return {
         entry,
-        plugins: [
-            new HtmlInlinkChunkPlugin({//把该页的js追加到html页面
-                inlineChunks:chunks
-            }),
+        plugins: [ 
             new HtmlWebpackPlugin({
-                chunks:chunks.concat(commonChunks),
+                chunks:chunks,
                 template,
                 title,
                 filename: name + '.html',
@@ -40,7 +34,7 @@ const normalize = (title,pageName) =>{
         entry:entry,
         template:url+'.html',
         name:pageName,
-        chunks: [pageName]
+        chunks: ['manifest','libs','common',pageName]
     }
 }
 const configPages = []

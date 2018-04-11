@@ -1,0 +1,117 @@
+@import './variable.less';
+
+.page {
+    height: 100%;
+    #index-content-v2 {
+        padding: 0 0 .49rem;
+        background-color: @color-background;
+        min-height: 100%;
+        height: 100%;
+        .content-panel{
+            .content-wrapper{
+                overflow: hidden;
+                background-color: #fff;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom:0;
+                height:100%;
+            }
+        }
+        .stores{
+            .store-item{
+                .store-content{
+                    position: relative;
+                    overflow: hidden;
+                    width: 100%;
+                    max-width: 640px;
+                    height: 1.75rem;
+                    padding-top: .05rem;
+                    padding-bottom: .05rem;
+                    font-size: 0;
+                    background-color: #fff;
+                    .goods-image{
+                        position: relative;
+                        display: inline-block;
+                        float: left;
+                        width: 1.65rem;
+                        height: 1.65rem;
+                        .image-container{
+                            img{
+                                width: 100%;
+                                height: auto;
+                            }
+                        }
+                    }
+                    .goods-detail{
+                        position: relative;
+                        display: inline-block;
+                        float: right;
+                        width: 1.95rem;
+                        height: 100%;
+                        padding-right: .1rem;
+                        .goods-name{
+                            position: relative;
+                            overflow: hidden;
+                            max-height: .38rem;
+                            margin-top: .03rem;
+                            font-size: .13rem;
+                            line-height: .19rem;
+                            text-overflow: clip;
+                            color: #151516;
+                        }
+                        .goods-content{
+                            position: relative;
+                            overflow: hidden;
+                            width: 100%;
+                            height: .26rem;
+                            margin-top: .04rem;
+                            vertical-align: top;
+                            .goods-sales{
+                                display: inline-block;
+                                float: left;
+                                height: .26rem;
+                                font-size: .12rem;
+                                line-height: .26rem;
+                                color: #9c9c9c;
+                            }
+                        }
+                        .goods-market-price{
+                            position: absolute;
+                            bottom: .27rem;
+                            left: 0;
+                            font-size: .12rem;
+                            color: #9c9c9c;     
+                        }
+                        .discount-price{
+                            position: absolute;
+                            bottom: .05rem;
+                            left: 0;
+                            margin: 0 .08rem 0 -.02rem;
+                            font-size: .19rem;
+                            color: #e02e24;
+                            font-weight: 700;
+                            i{
+                                font-size: .18rem;
+                            }
+                        }
+                        .goods-buy{
+                            position: absolute;
+                            right: .1rem;
+                            bottom: .05rem;
+                            width: .71rem;
+                            height: .33rem;
+                            font-size: .13rem;
+                            line-height: .33rem;
+                            text-align: center;
+                            color: #fff;
+                            border-radius: .03rem;
+                            background-color: #e02e24;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

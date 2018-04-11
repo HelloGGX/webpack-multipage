@@ -11,35 +11,35 @@ const generatePage = function({
 } = {}) {
     return {
         entry,
-        plugins: [ 
+        plugins: [
             new HtmlWebpackPlugin({
-                chunks:chunks,
+                chunks: chunks,
                 template,
                 title,
                 filename: name + '.html',
-                chunksSortMode: 'manual',//应用文件顺序
-                minify: {
-                    collapseWhitespace: true
-                }
+                chunksSortMode: 'manual', //应用文件顺序
+                // minify: {
+                //     collapseWhitespace: true
+                // }
             })
         ]
     }
 }
-const normalize = (title,pageName) =>{
+const normalize = (title, pageName) => {
     const entry = {}
-    const url = './src/pages/'+ pageName +'/'+ pageName
+    const url = './src/pages/' + pageName + '/' + pageName
     entry[pageName] = url
-    return  {
-        title:title,
-        entry:entry,
-        template:url+'.html',
-        name:pageName,
-        chunks: ['manifest','libs','common',pageName]
+    return {
+        title: title,
+        entry: entry,
+        template: url + '.html',
+        name: pageName,
+        chunks: ['manifest', 'libs', 'common', pageName]
     }
 }
 const configPages = []
-pages.map(item=>{
-    configPages.push(normalize(item.title,item.pageName))
+pages.map(item => {
+    configPages.push(normalize(item.title, item.pageName))
 })
 const config = []
 configPages.map(item => {

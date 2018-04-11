@@ -1,0 +1,57 @@
+{
+    "Status":[1],   
+  "navdata":[
+    { "id": 1,  "text": "首页"}, 
+    { "id": 2,  "text": "服饰"}, 
+    { "id": 3,  "text": "鞋包"}, 
+    { "id": 4,  "text": "百货"}, 
+    { "id": 5,  "text": "母婴"}, 
+    { "id": 6,  "text": "内衣"}, 
+    { "id": 7,  "text": "食品"}, 
+    { "id": 8,  "text": "电气"}, 
+    { "id": 9,  "text": "男装"}, 
+    { "id": 10, "text": "水果"}, 
+    { "id": 11, "text": "家纺"}, 
+    { "id": 12, "text": "手机"}, 
+    { "id": 13, "text": "汽车" }
+  ],
+  "slidata":[
+    { "id": 1, "href":"#", "src": "/src/imgs/1.jpg"}, 
+    { "id": 2,  "href":"#", "src": "/src/imgs/2.jpg"}, 
+    { "id": 3,  "href":"#", "src": "/src/imgs/3.jpg"}
+  ],
+  "areadata":[
+    {
+        "id":1, 
+        "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+        "name":"  唯一视觉旅拍婚纱摄影三亚丽江泰国普吉岛巴厘岛婚纱照拍摄工作室 ",
+        "distance":300,
+        "marprice":168,
+        "disprice":29.8
+    },
+    {
+        "id":2, 
+        "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+        "name":"  唯一视觉旅拍婚纱摄影三亚丽江泰国普吉岛巴厘岛婚纱照拍摄工作室 ",
+        "distance":300,
+        "marprice":168,
+        "disprice":29.8
+    },
+    {
+        "id":3, 
+        "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+        "name":"  唯一视觉旅拍婚纱摄影三亚丽江泰国普吉岛巴厘岛婚纱照拍摄工作室 ",
+        "distance":300,
+        "marprice":168,
+        "disprice":29.8
+    },
+    {
+        "id":4, 
+        "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+        "name":"  唯一视觉旅拍婚纱摄影三亚丽江泰国普吉岛巴厘岛婚纱照拍摄工作室 ",
+        "distance":300,
+        "marprice":168,
+        "disprice":29.8
+    }
+]
+}

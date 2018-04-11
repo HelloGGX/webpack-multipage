@@ -1,22 +1,32 @@
-const pages = [//页面配置写在这里
+const pages = [ //页面配置写在这里
     {
-        title:'page index',
-        pageName:'index'
+        title: 'index',
+        pageName: 'index'
     },
     {
-        title:'page bbb',
-        pageName:'b'
+        title: 'store-list',
+        pageName: 'store-list'
+    },
+    {
+        title: 'activity',
+        pageName: 'activity'
+    },
+    {
+        title: 'club',
+        pageName: 'club'
     }
 ]
-const dependencies = [//依赖的全局js
+const dependencies = [ //依赖的全局js
     'jquery',
     'weui.js',
-    'babel-polyfill'
+    'babel-polyfill',
+    'better-scroll',
+    'axios'
 ]
 
 const globalConfig = {
-    'pages':pages,
-    'dependencies':dependencies
+    'pages': pages,
+    'dependencies': dependencies
 }
 
 module.exports = globalConfig

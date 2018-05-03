@@ -1,13 +1,15 @@
-export function getIndexData (data) {//获取首页数据
-    const url = "/src/api/getIndex.json"
-    
-    return axios.get(url,{
-        params:data
-    })
-    .then((res)=>{
-        return Promise.resolve(res.data)
-    }).catch((error)=>{
-        return Promise.reject(error.data)
+var axios = require('axios')
+
+export function getIndexData (data) { // 获取首页数据
+  const url = '/src/api/getIndex.json'// http://125.65.111.19:82/api/getIndex.php
+
+  return axios.get(url, {
+    params: data
+  })
+    .then((res) => {
+      return Promise.resolve(res.data)
+    }).catch((error) => {
+      return Promise.reject(error.data)
     })
     // return new Promise(function(resolve,reject){
     //     $.ajax({
@@ -22,18 +24,17 @@ export function getIndexData (data) {//获取首页数据
     //         }
     //     });
     // })
-  };
+};
 
-  export function getActData (data) {//获取活动页面数据
-    const url = "/src/api/getAct.json"
-    
-    return axios.get(url,{
-        params:data
+export function getActData (data) { // 获取活动页面数据
+  const url = '/src/api/getAct.jspn'
+
+  return axios.get(url, {
+    params: data
+  })
+    .then((res) => {
+      return Promise.resolve(res.data)
+    }).catch((error) => {
+      return Promise.reject(error.data)
     })
-    .then((res)=>{
-        return Promise.resolve(res.data)
-    }).catch((error)=>{
-        return Promise.reject(error.data)
-    })
-  }
-  
+}

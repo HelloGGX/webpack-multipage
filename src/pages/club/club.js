@@ -1,14 +1,16 @@
 import './club.less'
+import $ from 'jquery'
 
-! function(b) {
-    b.Home = {
-        pageInit: function() {
+let all = (function () {
+  let Home = {
+    pageInit: function () {
 
-        }
     }
+  }
 
-}(window);
+  return Home
+}())
 
-$(function() {
-    Home.pageInit();
+$(function () {
+  all.pageInit()
 })

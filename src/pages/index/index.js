@@ -2,7 +2,7 @@ import './index.less'
 import {getIndexData} from 'api/getIndex'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
-import weui from 'weui.js'
+// import weui from 'weui.js'
 
 let all = (function () {
   const DIRECTION_H = 'horizontal'
@@ -179,7 +179,6 @@ let all = (function () {
   }
   let hotArea = {// 热门区域对象
     init () {
-      weui.alert('普通的alert')
       this._getAreaData()
     },
     _getAreaData () {

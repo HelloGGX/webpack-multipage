@@ -17,6 +17,58 @@
                 right: 0;
                 bottom:0;
                 height:100%;
+                .banner-container{
+                    width: 100%;
+                    z-index: 99;
+                    position: relative;
+                    top: 0;
+                    .banner{
+                        height: .44rem;
+                        background-color: #fff;
+                        border: 0;
+                        -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 0.5px 0 rgba(0,0,0,.09);
+                        box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 0.5px 0 rgba(0,0,0,.09);
+                        .banner-left{
+                            position: absolute;
+                            left: 0;
+                            height: .44rem;
+                            font-size: .16rem;
+                            line-height: .44rem;
+                            margin-left: .1rem;
+                        }
+                        .searchbar{
+                            -webkit-box-flex: 1;
+                            height: 100%;
+                            position: relative;
+                            overflow: hidden;
+                            padding: 5px .2rem 5px .2rem;
+                            p{
+                                height: 100%;
+                                display: -webkit-box;
+                                -webkit-box-align: center;
+                                box-sizing: border-box;
+                                font-size: 14px;
+                                padding-left: 31px;
+                                padding-right: 8px;
+                                background: url(../../imgs/icons/search.png) 9px no-repeat;
+                                background-size: 15px auto;
+                                color: rgba(61,61,61,.5);
+                                background-color: hsl(0,0%,94%);
+                                border-radius: 12px 0 12px 12px;
+                                span{
+                                    position: relative;
+                                    display: block;
+                                    height: 16px;
+                                    line-height: 17px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    -webkit-box-flex: 1;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         .stores{

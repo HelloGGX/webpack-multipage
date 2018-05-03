@@ -16,7 +16,7 @@ let scroll = {
       startY: 0
     }
     this.scroll = new BScroll('.content-wrapper', options)
-    console.log(this.scroll)
+    // console.log(this.scroll)
   }
 }
 $(function () {

@@ -11,6 +11,50 @@
 </head>
 
 <body>
+        <div class="search-view-container" avalonctrl="search" style="visibility: hidden;display:none">
+                <div class="search-view-box">
+                    <div class="search-view-top">
+                        <div class="view-top-container">
+                            <form onsubmit="return searchSubmit()" id="search-module-submit">
+                                <input id="view-input" type="search" style="-webkit-appearance: none" class="search-box-view-main" placeholder="输入商品名称">
+                                <i class="btn-reset">x</i>
+                            </form>
+                            <div class="search-view-icon"></div>
+                            <div class="search-content-clear" style="display: none;"></div>
+                        </div>
+                        <div class="cancel-container-view">
+                            <div class="cancel-button-view cancel-search">返回</div>
+                        </div>
+                        <div class="submit-container-view" style="display: none;">
+                            <div class="submit-button-view">搜索</div>
+                        </div>
+                        
+                    </div>
+                    <div id="search-suggestion-box" style="display: none;"><!--ms-if--></div>
+                    <div class="search-main-view">
+                        <div class="search-recent-title-view">历史搜索</div>
+                        <div class="search-recent-delete-view">
+                            <div class="delete-recent-search"></div>
+                        </div>
+                        <div class="search-recent-list-view" id="search_item">
+                        
+                        <span class="recent-history-list">山渡</span>
+                        </div>
+                        
+                    </div>
+                    <div class="search-main-view" style="">
+                        <div class="search-recent-title-view">热门搜索</div>
+                        <div class="search-recent-list-view search-hotquery-list-view">
+                            <span class="recent-history-list">山渡</span>
+                            <span class="recent-history-list">俱乐部</span>
+                            <span class="recent-history-list">活动</span>
+                        </div>
+                    </div>
+                    <div  id="search-result" class="search-main-view">
+                    
+                    </div>
+                </div>
+            </div>
     <div class="page">
         <div id="index-content-v2">
             <div class="weui-tab">
@@ -18,19 +62,13 @@
                     <div class="content-wrapper">
                         <div class="content-inner">
                             <div>
-                                <div class="weui-search-bar" id="searchBar">
-                                    <form class="weui-search-bar__form">
-                                        <div class="weui-search-bar__box">
-                                            <i class="weui-icon-search"></i>
-                                            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
-                                            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                                <div class="banner-container">
+                                    <div class="banner">
+                                        <div id="addrHome" class="banner-left"><i class="iconfont icon-location"></i><span></span></div>
+                                        <div class="searchbar">
+                                            <p><span>搜索</span></p>
                                         </div>
-                                        <label class="weui-search-bar__label" id="searchText">
-                                            <i class="weui-icon-search"></i>
-                                            <span>搜索</span>
-                                        </label>
-                                    </form>
-                                    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

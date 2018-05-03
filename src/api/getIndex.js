@@ -1,4 +1,4 @@
-var axios = require('axios')
+import axios from 'axios'
 
 export function getIndexData (data) { // 获取首页数据
   const url = '/src/api/getIndex.json'// http://125.65.111.19:82/api/getIndex.php
@@ -27,7 +27,7 @@ export function getIndexData (data) { // 获取首页数据
 };
 
 export function getActData (data) { // 获取活动页面数据
-  const url = '/src/api/getAct.jspn'
+  const url = '/src/api/getAct.json'
 
   return axios.get(url, {
     params: data

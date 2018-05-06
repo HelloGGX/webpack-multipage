@@ -38,3 +38,16 @@ export function getActData (data) { // 获取活动页面数据
       return Promise.reject(error.data)
     })
 }
+
+export function getClubData (data) { // 获取社区页面的俱乐部数据
+  const url = '/src/api/getClub.json'
+
+  return axios.get(url, {
+    params: data
+  })
+    .then((res) => {
+      return Promise.resolve(res.data)
+    }).catch((error) => {
+      return Promise.reject(error.data)
+    })
+}

@@ -1,5 +1,5 @@
 {
-    "Status":[1],   
+  "Status":[1],   
   "navdata":[
     { "id": 1,  "text": "首页"}, 
     { "id": 2,  "text": "服饰"}, 
@@ -16,9 +16,9 @@
     { "id": 13, "text": "汽车" }
   ],
   "slidata":[
-    { "id": 1, "href":"#", "src": "../imgs/1.jpg"}, 
-    { "id": 2,  "href":"#", "src": "../imgs/2.jpg"}, 
-    { "id": 3,  "href":"#", "src": "../imgs/3.jpg"}
+    { "id": 1, "href":"#", "src": "/src/imgs/1.jpg"}, 
+    { "id": 2,  "href":"#", "src": "/src/imgs/2.jpg"}, 
+    { "id": 3,  "href":"#", "src": "/src/imgs/3.jpg"}
   ],
   "areadata":[
     {

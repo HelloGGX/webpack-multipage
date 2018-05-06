@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!--搜索弹出层-->
         <div class="search-view-container" avalonctrl="search" style="visibility: hidden;display:none">
                 <div class="search-view-box">
                     <div class="search-view-top">
@@ -54,23 +55,47 @@
                     
                     </div>
                 </div>
-            </div>
+        </div>
     <div class="page">
         <div id="index-content-v2">
+            <!--搜索navbar-->
+            <div class="banner-container">
+                    <div class="banner">
+                        <div id="addrHome" class="banner-left"><i class="iconfont icon-location"></i><span></span></div>
+                        <div class="searchbar">
+                            <p><span>搜索</span></p>
+                        </div>
+                    </div>
+            </div>
             <div class="weui-tab">
                 <div class="weui-tab__panel content-panel">
-                    <div class="content-wrapper">
-                        <div class="content-inner">
-                            <div>
-                                <div class="banner-container">
-                                    <div class="banner">
-                                        <div id="addrHome" class="banner-left"><i class="iconfont icon-location"></i><span></span></div>
-                                        <div class="searchbar">
-                                            <p><span>搜索</span></p>
-                                        </div>
-                                    </div>
+                    <div class="container-wrapper">
+                        <div class="container-inner">
+                                <!--tabs选项框-->
+                                <div class="nav_fixed_wrap relative">
+                                        <ul class="nav_fixed_catgoods nav-fixed-max-width">
+                                            <li class="fixed_nav_item_catgoods fixed_nav_item_catgoods_first" data-type="city">
+                                                <span class="nav_cur_cat">同城</span>
+                                            </li>
+                                            <li class="fixed_nav_item_catgoods" data-type="hot">
+                                                <span class="">活跃</span>
+                                            </li>
+                                            <li class="fixed_nav_item_catgoods" data-type="star">
+                                                <span class="">星级</span>
+                                            </li>
+                                        </ul>
                                 </div>
-                            </div>
+                                <div class="weui-tab__panel content-panel">
+                                        <div class="content-wrapper">
+                                            <div class="content-inner">
+                                                <div>
+                                                    <ul id="club-grid">
+                    
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
                         </div>
                     </div>
                 </div>

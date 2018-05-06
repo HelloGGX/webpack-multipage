@@ -1,0 +1,41 @@
+{
+    "city":[
+      {
+          "id":1, 
+          "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+          "name":"成都乐徒户外",
+          "people":"11",
+          "keyword":["徒步","骑行","摄影"],
+          "slogan":"岁月不留痕 永远十八岁"
+      },
+      {
+        "id":2, 
+        "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+        "name":"成都山渡户外",
+        "people":"11343",
+        "keyword":["徒步","骑行","摄影"],
+        "slogan":"岁月不留痕 永远十八岁"
+    }
+    ],
+    "hot":[
+      {
+          "id":1, 
+          "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+          "name":"成都山渡",
+          "people":"1111",
+          "keyword":["徒步","骑行","摄影"],
+          "slogan":"户外健身,回归自然"
+      }
+    ],
+    "star":[
+      {
+          "id":1, 
+          "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+          "name":"成都乐徒户外",
+          "people":"117",
+          "keyword":["徒步","骑行","摄影"],
+          "slogan":"发现自然之美，寻找天人合一的乐趣"
+      }
+    ]
+    
+  }

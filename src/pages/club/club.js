@@ -1,7 +1,12 @@
 import './club.less'
+import '../../components/tabs.less'
+import '../../components/banner.less'
 import $ from 'jquery'
+import {getClubData} from '../../api/getIndex'
 
 let all = (function () {
+  let TYPE = 'city'
+
   let search = {// 搜索框显示及查询
     deleteHistory () { // 删除历史记录
       $('#search_item').html('')
@@ -71,9 +76,42 @@ let all = (function () {
 
     }
   }
+
   let Home = {
     pageInit: function () {
       search.init()
+      this._getNewData()
+    },
+    _temple: function (i, data) { // 模板
+      return `<div class="weui-panel weui-panel_access">
+      <div class="weui-panel__bd">
+        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+          <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb" src="">
+          </div>
+          <div class="weui-media-box__bd">
+            <h4 class="weui-media-box__title">标题一</h4>
+            <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+          </div>
+        </a>
+      </div>
+    </div>`
+    },
+    _getNewData: function () {
+      getClubData().then(function (data) {
+        let newdata
+        let _html = ''
+        newdata = data[TYPE]
+        let len = newdata.length
+        for (let i = 0; i < len; i++) {
+          _html += Home._temple(i, newdata)
+        }
+        $('#club-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+        $('#' + TYPE).append(_html)
+        $(document.getElementById(TYPE)).show().siblings().hide()
+      }).catch(function (ErrMsg) {
+        // 获取数据失败时的处理逻辑
+      })
     }
   }
 

@@ -8,31 +8,94 @@
         club
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="/css/libs-bundle-a176d.css" rel="stylesheet"><link href="/css/common-bundle-d01fa.css" rel="stylesheet"><link href="/css/club-bundle-dbe6f.css" rel="stylesheet"></head>
+<link href="/css/libs-bundle-5f2fb.css" rel="stylesheet"><link href="/css/common-bundle-ff5c2.css" rel="stylesheet"><link href="/css/club-bundle-c4f6e.css" rel="stylesheet"></head>
 
 <body>
+    <!--搜索弹出层-->
+        <div class="search-view-container" avalonctrl="search" style="visibility: hidden;display:none">
+                <div class="search-view-box">
+                    <div class="search-view-top">
+                        <div class="view-top-container">
+                            <form onsubmit="return searchSubmit()" id="search-module-submit">
+                                <input id="view-input" type="search" style="-webkit-appearance: none" class="search-box-view-main" placeholder="输入商品名称">
+                                <i class="btn-reset">x</i>
+                            </form>
+                            <div class="search-view-icon"></div>
+                            <div class="search-content-clear" style="display: none;"></div>
+                        </div>
+                        <div class="cancel-container-view">
+                            <div class="cancel-button-view cancel-search">返回</div>
+                        </div>
+                        <div class="submit-container-view" style="display: none;">
+                            <div class="submit-button-view">搜索</div>
+                        </div>
+                        
+                    </div>
+                    <div id="search-suggestion-box" style="display: none;"><!--ms-if--></div>
+                    <div class="search-main-view">
+                        <div class="search-recent-title-view">历史搜索</div>
+                        <div class="search-recent-delete-view">
+                            <div class="delete-recent-search"></div>
+                        </div>
+                        <div class="search-recent-list-view" id="search_item">
+                        
+                        <span class="recent-history-list">山渡</span>
+                        </div>
+                        
+                    </div>
+                    <div class="search-main-view" style="">
+                        <div class="search-recent-title-view">热门搜索</div>
+                        <div class="search-recent-list-view search-hotquery-list-view">
+                            <span class="recent-history-list">山渡</span>
+                            <span class="recent-history-list">俱乐部</span>
+                            <span class="recent-history-list">活动</span>
+                        </div>
+                    </div>
+                    <div  id="search-result" class="search-main-view">
+                    
+                    </div>
+                </div>
+        </div>
     <div class="page">
         <div id="index-content-v2">
+            <!--搜索navbar-->
+            <div class="banner-container">
+                    <div class="banner">
+                        <div id="addrHome" class="banner-left"><i class="iconfont icon-location"></i><span></span></div>
+                        <div class="searchbar">
+                            <p><span>搜索</span></p>
+                        </div>
+                    </div>
+            </div>
             <div class="weui-tab">
                 <div class="weui-tab__panel content-panel">
-                    <div class="content-wrapper">
-                        <div class="content-inner">
-                            <div>
-                                <div class="weui-search-bar" id="searchBar">
-                                    <form class="weui-search-bar__form">
-                                        <div class="weui-search-bar__box">
-                                            <i class="weui-icon-search"></i>
-                                            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
-                                            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
-                                        </div>
-                                        <label class="weui-search-bar__label" id="searchText">
-                                            <i class="weui-icon-search"></i>
-                                            <span>搜索</span>
-                                        </label>
-                                    </form>
-                                    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                    <div class="container-wrapper">
+                        <div class="container-inner">
+                                <!--tabs选项框-->
+                                <div class="nav_fixed_wrap relative">
+                                        <ul class="nav_fixed_catgoods nav-fixed-max-width">
+                                            <li class="fixed_nav_item_catgoods fixed_nav_item_catgoods_first" data-type="city">
+                                                <span class="nav_cur_cat">同城</span>
+                                            </li>
+                                            <li class="fixed_nav_item_catgoods" data-type="hot">
+                                                <span class="">活跃</span>
+                                            </li>
+                                            <li class="fixed_nav_item_catgoods" data-type="star">
+                                                <span class="">星级</span>
+                                            </li>
+                                        </ul>
                                 </div>
-                            </div>
+                                <div class="weui-tab__panel content-panel">
+                                        <div class="content-wrapper">
+                                            <div class="content-inner">
+                                                <div>
+                                                    <ul id="club-grid">
+                    
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -57,6 +120,6 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="/js/libs/libs.dll.js"></script><script type="text/javascript" src="/js/manifest.d6d0c.js"></script><script type="text/javascript" src="/js/libs/libs.d6d0c.js"></script><script type="text/javascript" src="/js/common.d01fa.js"></script><script type="text/javascript" src="/js/club.dbe6f.js"></script></body>
+<script type="text/javascript" src="/js/libs/libs.dll.js"></script><script type="text/javascript" src="/js/manifest.901be.js"></script><script type="text/javascript" src="/js/libs/libs.901be.js"></script><script type="text/javascript" src="/js/common.ff5c2.js"></script><script type="text/javascript" src="/js/club.c4f6e.js"></script></body>
 
 </html>

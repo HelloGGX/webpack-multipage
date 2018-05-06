@@ -1,5 +1,5 @@
 import './index.less'
-import {getIndexData} from 'api/getIndex'
+import {getIndexData} from '../../api/getIndex'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 // import weui from 'weui.js'

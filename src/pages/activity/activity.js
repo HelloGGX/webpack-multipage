@@ -1,5 +1,6 @@
 import './activity.less'
-import {getActData} from 'api/getIndex'
+import '../../components/tabs.less'
+import {getActData} from '../../api/getIndex'
 import $ from 'jquery'
 
 let all = (function () {

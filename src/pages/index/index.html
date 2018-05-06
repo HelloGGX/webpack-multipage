@@ -181,11 +181,11 @@
                                                 <div class="na-hint-title">
                                                     <span class="new-arrivals-icon"></span>
                                                     <!--<img ms-src="newArrivalsIcon"/>-->
-                                                    <span>热门区域</span>
+                                                    <span>最新活动</span>
                                                 </div>
                                             </div>
                                     </div>
-                                    <!--热门区域-->
+                                    <!--最新活动-->
                                     <div id="store">
                                         <div class="store-wrapper">
                                             <div class="store-group">
@@ -204,24 +204,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="footer weui-tabbar">
-                    <a href="javascript:;" class="footer-item weui-tabbar__item tabbar_on">
-                        <i class="weui-tabbar__icon iconfont icon-homepage_fill"></i>
-                        <p class="weui-tabbar__label">首页</p>
-                    </a>
-                    <a href="activity.html" class="footer-item weui-tabbar__item">
-                        <i class="weui-tabbar__icon iconfont icon-coordinates"></i>
-                        <p class="weui-tabbar__label">活动</p>
-                    </a>
-                    <a href="club.html" class="footer-item weui-tabbar__item">
-                        <i class="weui-tabbar__icon iconfont icon-interactive"></i>
-                        <p class="weui-tabbar__label">社区</p>
-                    </a>
-                    <a href="javascript:;" class="footer-item weui-tabbar__item">
-                        <i class="weui-tabbar__icon iconfont icon-mine"></i>
-                        <p class="weui-tabbar__label">我的</p>
-                    </a>
-                </div>
+                <%= require('html-loader!../../components/footer/footer.html')  %>
             </div>
 
         </div>

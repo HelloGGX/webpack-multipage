@@ -2,19 +2,35 @@ import './index.less'
 import {getIndexData} from '../../api/getIndex'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
-// import weui from 'weui.js'
+import weui from 'weui.js'
 
 let all = (function () {
   const DIRECTION_H = 'horizontal'
   const DIRECTION_V = 'vertical'
+
+  let allData = {
+    init () {
+      this._getIndexData()
+    },
+    _getIndexData () {
+      getIndexData().then((data) => {
+        scrollNav.init(data)// 顶部导航栏初始化
+        slider.init(data)// 幻灯片初始化
+        hotArea.init(data)// 热门区域初始化
+      }).catch((ErrMsg) => {
+        // 获取数据失败时的处理逻辑
+        weui.alert('数据获取有误')
+      })
+    }
+  }// 获取所有数据
   let scrollNav = {// 顶部导航对象
     probeType: 1,
     click: true,
     direction: 'horizontal',
     startY: 0,
     startX: 0,
-    init () {
-      this._getNavData()
+    init (data) {
+      this._getNavData(data)
       this.initScroll()
     },
     initScroll () {
@@ -63,25 +79,21 @@ let all = (function () {
     refresh () {
       this.scroll && this.scroll.refresh()
     },
-    _getNavData () {
+    _getNavData (data) {
       let thi = this
       // Promise的方法then,catch方法
-      getIndexData().then(function (data) {
-        thi.navdata = data.navdata
-        let _html = ''
-        let len = thi.navdata.length
-        for (let i = 0; i < len; i++) {
-          _html += '<li class="nav-bar-item" data-index=' + thi.navdata[i].id + '><span>' + thi.navdata[i].text + '</span></li>'
-        }
-        $('#navbar-ul').html(_html)
-        $('#navbar-ul li').eq(0).find('span').addClass('nbi-selected')
-        thi._initNavWidth()
-        $('body').on('click', '.nav-bar-item', function (e) {
-          thi._selectNav(this)
-          $(this).find('span').addClass('nbi-selected').parent().siblings().find('span').removeClass('nbi-selected')
-        })
-      }).catch(function (ErrMsg) {
-        // 获取数据失败时的处理逻辑
+      thi.navdata = data.navdata
+      let _html = ''
+      let len = thi.navdata.length
+      for (let i = 0; i < len; i++) {
+        _html += '<li class="nav-bar-item" data-index=' + thi.navdata[i].id + '><span>' + thi.navdata[i].text + '</span></li>'
+      }
+      $('#navbar-ul').html(_html)
+      $('#navbar-ul li').eq(0).find('span').addClass('nbi-selected')
+      thi._initNavWidth()
+      $('body').on('click', '.nav-bar-item', function (e) {
+        thi._selectNav(this)
+        $(this).find('span').addClass('nbi-selected').parent().siblings().find('span').removeClass('nbi-selected')
       })
     }
   }
@@ -140,29 +152,25 @@ let all = (function () {
         }
       })
     },
-    init () {
-      this._getSlideData()
+    init (data) {
+      this._getSlideData(data)
     },
-    _getSlideData () {
+    _getSlideData (data) {
       let thi = this
-      // Promise的方法then,catch方法
-      getIndexData().then(function (data) {
-        thi.slidata = data.slidata
-        let _html = ''
-        let _dots = ''
-        let len = thi.slidata.length
-        for (let i = 0; i < len; i++) {
-          _html += '<div data-index=' + thi.slidata[i].id + '><a class="" href=' + thi.slidata[i].href + '><img src=' + thi.slidata[i].src + ' alt=""></a></div>'
-          _dots += '<span class="dot"></span>'
-        }
-        $('.slider-group').html(_html)
-        $('.dots').html(_dots)
-        $('.dots .dot:first').addClass('active')
-        thi._initSliderWidth()
-        thi._initSlider()
-      }).catch(function (ErrMsg) {
-        // 获取数据失败时的处理逻辑
-      })
+
+      thi.slidata = data.slidata
+      let _html = ''
+      let _dots = ''
+      let len = thi.slidata.length
+      for (let i = 0; i < len; i++) {
+        _html += '<div data-index=' + thi.slidata[i].id + '><a class="" href=' + thi.slidata[i].href + '><img src=' + thi.slidata[i].src + ' alt=""></a></div>'
+        _dots += '<span class="dot"></span>'
+      }
+      $('.slider-group').html(_html)
+      $('.dots').html(_dots)
+      $('.dots .dot:first').addClass('active')
+      thi._initSliderWidth()
+      thi._initSlider()
     },
     _play () {
       let pageIndex = this.currentPageIndex + 1
@@ -178,18 +186,17 @@ let all = (function () {
     }
   }
   let hotArea = {// 热门区域对象
-    init () {
-      this._getAreaData()
+    init (data) {
+      this._getAreaData(data)
     },
-    _getAreaData () {
+    _getAreaData (data) {
       let thi = this
-      // Promise的方法then,catch方法
-      getIndexData().then(function (data) {
-        thi.areadata = data.areadata
-        let _html = ''
-        let len = thi.areadata.length
-        for (let i = 0; i < len; i++) {
-          _html += `<div class="store-item" data-id=${thi.areadata[i].id}>
+
+      thi.areadata = data.areadata
+      let _html = ''
+      let len = thi.areadata.length
+      for (let i = 0; i < len; i++) {
+        _html += `<div class="store-item" data-id=${thi.areadata[i].id}>
                     <div class="store-content">
                         <div class="goods-image">
                             <div class="image-container">
@@ -207,18 +214,13 @@ let all = (function () {
                         </div>\
                     </div>\
                 </div>`
-        }
-        $('.stores').html(_html)
-      }).catch(function (ErrMsg) {
-        // 获取数据失败时的处理逻辑
-      })
+      }
+      $('.stores').html(_html)
     }
   }
   let Home = {
     pageInit: function () {
-      scrollNav.init()// 顶部导航栏初始化
-      slider.init()// 幻灯片初始化
-      hotArea.init()// 热门区域初始化
+      allData.init()// 获取该页所有json数据并展示
     }
   }
   return Home

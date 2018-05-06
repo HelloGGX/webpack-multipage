@@ -1,19 +1,19 @@
 const pages = [ // 页面配置写在这里
   {
-    title: 'index',
+    title: '首页',
     pageName: 'index'
   },
   {
-    title: 'store-list',
-    pageName: 'store-list'
-  },
-  {
-    title: 'activity',
+    title: '活动',
     pageName: 'activity'
   },
   {
-    title: 'club',
+    title: '俱乐部社区',
     pageName: 'club'
+  },
+  {
+    title: '个人中心',
+    pageName: 'person'
   }
 ]
 const dependencies = [ // 依赖的全局js

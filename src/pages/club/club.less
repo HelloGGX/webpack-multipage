@@ -1,3 +1,5 @@
+@import '../../common/css/variable.less';
+
 #search-bar {width:100%;max-width:3.75rem;height:.45rem;background-color:#f8f8f8;position:fixed;z-index:9998}
 #search-bar:before {position:absolute;width:200%;height:200%;-webkit-transform-origin:0 0;transform-origin:0 0;-webkit-transform:scale(.5);transform:scale(.5);box-sizing:border-box;content:"";border-bottom:.01rem solid #ededed}
 #search-bar .search-container {background-color:#f2f2f2;text-align:center;height:.45rem;padding:.07rem .1rem}
@@ -18,7 +20,7 @@
 .search-view-container {position:fixed;top:0;left:0;width:100%;max-width:640px;height:200%;background-color:#f8f8f8;overflow:hidden;z-index:999999998;font-family:PingFangSC-Regular}
 .search-box-view-main,.search-recent-list-view span {font-family:PingFangSC-Regular,Helvetica,STHeiti STXihei,Microsoft JhengHei,Microsoft YaHei,Arial}
 .search-view-box {height:50%;overflow-y:auto;background-color:#fff;padding-top:0.4rem}
-.search-view-top {width:100%;max-width:640px;padding:.06rem 0 .06rem .12rem;height:.45rem;background-color:#e02e24;position: fixed;top: 0;z-index: 9999;}
+.search-view-top {width:100%;max-width:640px;padding:.06rem 0 .06rem .12rem;height:.45rem;background-color:@color-theme;position: fixed;top: 0;z-index: 9999;}
 .search-box-view-main,.view-top-container {height:.32rem;float:left;border-radius:.05rem}
 .view-top-container {width:3.03rem;background-color:#fff;position:relative;}
 .view-top-container .btn-reset {position: absolute;right: 0.14rem;top: 50%;margin-top: -0.1rem;width: 0.2rem;height: 0.2rem;line-height: 0.2rem;border-radius: 0.1rem;text-align: center; background: #B5B5B5;color: white;cursor: pointer;display: none;}
@@ -57,3 +59,25 @@
 .sticky {position:absolute;top:.43rem}
 .sticky-fixed {position:fixed!important;top:0}
 #club-grid {padding: .44rem 0}
+.club-thumb{
+    width:0.8rem!important;
+    height:0.8rem!important;
+    line-height: 0.8rem!important;
+}
+.star{
+    width:20px;
+    img{
+        width:100%;
+    }
+}
+.keyword{
+    color: @color-theme;
+    font-size:@font-size-small;
+    margin: 0.1rem 0;
+    span{
+        border: 1px solid @color-theme;
+        border-radius: .12rem;
+        padding: .02rem 0.06rem;
+        margin-right: .04rem;
+    }
+}

@@ -62,7 +62,7 @@ const generateConfig = env => {
       loader: 'file-loader',
       options: {
         name: '[name]-[hash:5].[ext]',
-        publicPath: '',
+        publicPath: '../imgs',
         outputPath: path
       }
     }] : [{

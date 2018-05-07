@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+        <div id="index-content-v2">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                    <div class="content-wrapper bg-grey">
+                        <div class="content-inner">
+                            <div>
+                                <div id="createAct">
+                                    <div class="weui-cells weui-cells_form">
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__bd">
+                                              <input class="weui-input" type="text" placeholder="输入活动主题">
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__bd">
+                                                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                                <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="weui-cells__title">基本信息</div>
+                                    <div class="weui-cells">
+                                        <div  class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">活动开始</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right" name="startTime">
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">活动结束</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right" name="endTime">
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after actAddr">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">活动地点</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right" name="address">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="weui-cells weui-cells_form margin" id="uploader">
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after actCover">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">活动封面</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right" name="cover">
+                                                    <div class="weui-uploader">
+                                                        <div class="weui-uploader__bd">
+                                                            <ul class="weui-uploader__files" id="uploaderFiles">
+                                                                <li class="weui-uploader__file"></li>
+                                                            </ul>
+                                                            <div class="weui-uploader__input-box">
+                                                                <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cells__title">报名设置</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

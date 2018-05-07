@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 声明文档使用的字符编码 -->
+<meta charset='utf-8'>
+<!-- 优先使用 IE 最新版本和 Chrome -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<!-- 页面描述 -->
+<meta name="description" content="山渡户外联盟"/>
+<!-- 页面关键词 -->
+<meta name="keywords" content="户外 摄影 登山"/>
+<!-- 网页作者 -->
+<meta name="author" content="name, 1056937524@qq.com"/>
+<!-- 搜索引擎抓取 -->
+<meta name="robots" content="index,club"/>
+<!-- 为移动设备添加 viewport -->
+<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+<!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
+
+<!-- iOS 设备 begin -->
+<meta name="apple-mobile-web-app-title" content="山渡户外">
+<!-- 添加到主屏后的标题（iOS 6 新增） -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
     <title>
-        index
+        首页
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="/css/libs-bundle-5f2fb.css" rel="stylesheet"><link href="/css/common-bundle-ff5c2.css" rel="stylesheet"><link href="/css/index-bundle-07c8b.css" rel="stylesheet"></head>
+   
+<link href="/css/libs-bundle-a20b1.css" rel="stylesheet"><link href="/css/common-bundle-b7383.css" rel="stylesheet"><link href="/css/index-bundle-97438.css" rel="stylesheet"></head>
 
 <body>
     <div class="page">
@@ -54,6 +73,7 @@
                                                 <ul class="qe3-scroller">
                                                     <li class="qe3-row">
                                                         <div data-index="0" class="qe3-item weui-flex__item">
+                                                            <a href="create-act.html">
                                                             <div class="qe3-cube">
                                                                 <div class="qe3-item-img-box">
                                                                     <img class="qe3-iib-img" src="/imgs/run@2x-23367.png">
@@ -69,6 +89,7 @@
                                                                     </span>
                                                                 </div>
                                                             </div>
+                                                            </a>
                                                         </div>
                                                         <div data-index="1" class="qe3-item weui-flex__item">
                                                             <div class="qe3-cube">
@@ -181,11 +202,11 @@
                                                 <div class="na-hint-title">
                                                     <span class="new-arrivals-icon"></span>
                                                     <!--<img ms-src="newArrivalsIcon"/>-->
-                                                    <span>热门区域</span>
+                                                    <span>最新活动</span>
                                                 </div>
                                             </div>
                                     </div>
-                                    <!--热门区域-->
+                                    <!--最新活动-->
                                     <div id="store">
                                         <div class="store-wrapper">
                                             <div class="store-group">
@@ -205,27 +226,27 @@
                     </div>
                 </div>
                 <div class="footer weui-tabbar">
-                    <a href="javascript:;" class="footer-item weui-tabbar__item tabbar_on">
-                        <i class="weui-tabbar__icon iconfont icon-homepage_fill"></i>
-                        <p class="weui-tabbar__label">首页</p>
-                    </a>
-                    <a href="activity.html" class="footer-item weui-tabbar__item">
-                        <i class="weui-tabbar__icon iconfont icon-coordinates"></i>
-                        <p class="weui-tabbar__label">活动</p>
-                    </a>
-                    <a href="club.html" class="footer-item weui-tabbar__item">
-                        <i class="weui-tabbar__icon iconfont icon-interactive"></i>
-                        <p class="weui-tabbar__label">社区</p>
-                    </a>
-                    <a href="javascript:;" class="footer-item weui-tabbar__item">
-                        <i class="weui-tabbar__icon iconfont icon-mine"></i>
-                        <p class="weui-tabbar__label">我的</p>
-                    </a>
-                </div>
+    <a id="index" href="index.html" data-type="index" class="footer-item weui-tabbar__item tabbar_on">
+        <i class="weui-tabbar__icon iconfont icon-homepage_fill"></i>
+        <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a id="activity" href="activity.html"  data-type="activity" class="footer-item weui-tabbar__item">
+        <i class="weui-tabbar__icon iconfont icon-coordinates"></i>
+        <p class="weui-tabbar__label">活动</p>
+    </a>
+    <a id="club" href="club.html"  data-type="club" class="footer-item weui-tabbar__item">
+        <i class="weui-tabbar__icon iconfont icon-interactive"></i>
+        <p class="weui-tabbar__label">社区</p>
+    </a>
+    <a id="person" href="person.html" data-type="person" class="footer-item weui-tabbar__item">
+        <i class="weui-tabbar__icon iconfont icon-mine"></i>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
             </div>
 
         </div>
     </div>
-<script type="text/javascript" src="/js/libs/libs.dll.js"></script><script type="text/javascript" src="/js/manifest.901be.js"></script><script type="text/javascript" src="/js/libs/libs.901be.js"></script><script type="text/javascript" src="/js/common.ff5c2.js"></script><script type="text/javascript" src="/js/index.07c8b.js"></script></body>
+<script type="text/javascript" src="/js/libs/libs.dll.js"></script><script type="text/javascript" src="/js/manifest.76320.js"></script><script type="text/javascript" src="/js/libs/libs.76320.js"></script><script type="text/javascript" src="/js/common.b7383.js"></script><script type="text/javascript" src="/js/index.97438.js"></script></body>
 
 </html>

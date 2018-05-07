@@ -9,6 +9,29 @@
         border: 0;
         -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 0.5px 0 rgba(0,0,0,.09);
         box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 0.5px 0 rgba(0,0,0,.09);
+        .banner-icon-back{
+            border-radius: 50%;
+            width: 40px;
+            height: 44px;
+            margin: 0 0 0 10px;
+            position: absolute;
+            z-index: 999;
+            a{
+                text-align: center;
+                color: #fff;
+                display: block;
+                span{
+                    margin: .12rem 0 0 .1rem;
+                    width: .2rem;
+                    height: .2rem;
+                    background-position: 0 0;
+                    overflow: hidden;
+                    display: block;
+                    background: url(../../imgs/icons/left.png) no-repeat;
+                    background-size: 100%;
+                }
+            }
+        }
         .banner-left{
             position: absolute;
             left: 0;
@@ -16,6 +39,22 @@
             font-size: .16rem;
             line-height: .44rem;
             margin-left: .1rem;
+        }
+        .banner-right{
+            position: absolute;
+            right: 0;
+            top:0;
+            height: .44rem;
+            font-size: .16rem;
+            line-height: .44rem;
+            margin-right: .1rem;
+        }
+        .banner-tit{
+            margin: 0 50px;
+            height: 44px;
+            font-size: 16px;
+            line-height: 44px;
+            text-align: center;
         }
         .searchbar{
             -webkit-box-flex: 1;

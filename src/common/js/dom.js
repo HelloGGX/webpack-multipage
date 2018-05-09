@@ -16,3 +16,12 @@ return output;
 })`
   return script
 }
+
+export function Trim (str, global) { // 去掉字符串中的所有空格
+  var result
+  result = str.replace(/(^\s+)|(\s+$)/g, '')
+  if (global.toLowerCase() === 'g') {
+    result = result.replace(/\s/g, '')
+  }
+  return result
+}

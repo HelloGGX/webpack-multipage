@@ -4,8 +4,9 @@ import $ from 'jquery'
 let upload = {
   uploadCount: 0,
   uploadList: [],
-  init () {
-    this._uploader()
+  maxLength: 5,
+  init (obj) {
+    this._uploader(obj)
     this._seeImg()
   },
   _seeImg () { // 预览上传图片
@@ -42,7 +43,7 @@ let upload = {
       })
     })
   },
-  _uploader () {
+  _uploader ({maxLength = this.maxLength} = {}) { // 上传图片
     let _this = this
     weui.uploader('#uploader', {
       url: 'http://localhost:8082',
@@ -56,7 +57,7 @@ let upload = {
       },
       onBeforeQueued: function (files) {
         // `this` 是轮询到的文件, `files` 是所有文件
-
+        console.log(_this.uploadCount)
         if (['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].indexOf(this.type) < 0) {
           weui.alert('请上传图片')
           return false // 阻止文件添加
@@ -65,11 +66,11 @@ let upload = {
           weui.alert('请上传不超过10M的图片')
           return false
         }
-        if (files.length > 1) { // 防止一下子选择过多文件
+        if (files.length > maxLength) { // 防止一下子选择过多文件
           weui.alert('最多只能上传1张图片，请重新选择')
           return false
         }
-        if (this.uploadCount + 1 > 2) {
+        if (_this.uploadCount + 1 > maxLength) {
           weui.alert('最多只能上传1张图片')
           return false
         }

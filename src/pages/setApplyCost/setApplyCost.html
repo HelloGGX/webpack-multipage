@@ -1,0 +1,66 @@
+<!--======================这是设置活动费用项的页面=========================-->
+<div id="setApplyCost" class="cover" style="display: block;">
+        <div class="apply-cost-inner">
+            <div class="cover-banner-container">
+                    <div class="cover-banner">
+                        <div class="cover-banner-icon-back cover-banner-left"><a href="#"><span></span></a></div>
+                        <div class="cover-banner-tit">活动费用</div>
+                        <div class="cover-banner-right"><a href="#">保存</a></div>
+                    </div>
+            </div>
+            <div class="apply-cost-form">
+                    <div class="weui-cells weui-cells_radio margin"> 
+                        <label class="weui-cell weui-check__label" for="r1">
+                            <div class="weui-cell__bd">免费</div> 
+                            <div class="weui-cell__ft"> 
+                                <input required="" type="radio"  class="weui-check" name="sex" value="male" id="r1" tips="请选择性别">
+                                <span class="weui-icon-checked"></span> 
+                            </div> 
+                        </label> 
+                        <label class="weui-cell weui-check__label" for="r2"> 
+                            <div class="weui-cell__bd">付费</div> 
+                            <div class="weui-cell__ft">
+                                <input type="radio" name="sex" class="weui-check" value="female" id="r2">
+                                <span class="weui-icon-checked"></span> 
+                            </div> 
+                        </label>
+                        <div class="weui-cell">
+                                <div class="weui-cell__hd"><label class="weui-label">活动总名额</label></div>
+                                <div class="weui-cell__bd">
+                                        <input class="weui-input" pattern="[0-9]*" id="apllyNum" type="number" name="fyzme" value="34" placeholder="默认不限">
+                                </div>
+                        </div>
+                        
+                    </div>
+                    <div id="feeDetail">
+                        <div class="weui-cells">
+                            <a class="weui-cell weui-cell_access" href="javascript:;">
+                                <div class="weui-cell__bd">
+                                    <p>退款设置</p>
+                                </div>
+                                <div class="weui-cell__ft">活动开始前均可申请退款</div>
+                            </a>
+                        </div>
+                        <div class="weui-cells__title">费用设置</div>
+                        <div id="addfee">
+                                <div class="list-block margin">
+                                    <ul>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media addIcon">
+                                                    <span class="">
+                                                         <img src="../../imgs/icons/addIcon.png" alt="">
+                                                    </span>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title small-txt high-grey">费用设置</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+            </div>
+        </div>
+</div>

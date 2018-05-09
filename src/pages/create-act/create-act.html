@@ -39,7 +39,7 @@
                                                 <label for="" class="weui-label">活动开始</label>
                                             </div>
                                             <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" name="startTime">
+                                                <div class="weui-select text-right" data-name="startTime">
                                                    
                                                 </div>
                                             </div>
@@ -49,7 +49,7 @@
                                                 <label for="" class="weui-label">活动结束</label>
                                             </div>
                                             <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" name="endTime">
+                                                <div class="weui-select text-right" data-name="endTime">
                                                   
                                                 </div>
                                             </div>
@@ -59,7 +59,7 @@
                                                 <label for="" class="weui-label">活动地点</label>
                                             </div>
                                             <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" name="address">
+                                                <div class="weui-select text-right" data-name="address">
                                                     
                                                 </div>
                                             </div>
@@ -72,13 +72,13 @@
                                                 <label for="" class="weui-label">活动封面</label>
                                             </div>
                                             <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" name="cover">
+                                                <div class="weui-select text-right" data-name="cover">
                                                     <div class="weui-uploader">
                                                         <div class="weui-uploader__bd">
-                                                            <ul class="weui-uploader__files" id="uploaderFiles">
-                                                                <li class="weui-uploader__file"></li>
+                                                            <ul class="weui-uploader__files img-covers" id="uploaderFiles">
+                                                               
                                                             </ul>
-                                                            <div class="weui-uploader__input-box">
+                                                            <div class="weui-uploader__input-box fright uploade-cover">
                                                                 <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
                                                             </div>
                                                         </div>
@@ -88,14 +88,185 @@
                                         </div>
                                     </div>
                                     <div class="weui-cells__title">报名设置</div>
+                                    <div class="weui-cells">
+                                        <div id="actCost"  class="weui-cell weui-cell_select weui-cell_select-after">
+                                            <div class="weui-cell__hd">
+                                                <label  class="weui-label">活动费用</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right" data-name="actCost">
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">活动保险</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <select class="weui-select" style="padding-left:1rem" name="insurance">
+                                                    <option value="1">无保险要求</option>
+                                                    <option value="2">会员自行购买</option>
+                                                    <option value="3">主办方统一购买</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after block" style="padding: 0.1rem;">
+                                            <div class="weui-cell__hd" style="padding: 0.1rem 0;">
+                                                <label for="" class="weui-label">报名填写项</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <input type="hidden" name="hdbmtx" value="昵称,手机,性别,真实姓名,身份证号">
+                                                <input type="hidden" name="hdbmnc" id="hdbmnc" value="昵称">
+                                                <input type="hidden" name="hdbmsj" id="hdbmsj" value="手机">
+                                                <input type="hidden" name="hdbmsex" id="hdbmsex" value="">
+                                                <input type="hidden" name="hdbzsname" id="hdbzsname" value="">
+                                                <input type="hidden" name="hdbmsfz" id="hdbmsfz" value="">
+                                                <input type="hidden" name="hdbmzb" id="hdbmzb" value="">
+                                                <input type="hidden" name="hdbmtxid" value="">
+                                                <ul class="apply-options row ">
+                                                    <li class="apply-item col-33">
+                                                        <a class="bm-item apply-active">昵称</a>
+                                                    </li>
+                                                    <li class="apply-item col-33">
+                                                        <a class="bm-item apply-active">手机</a>
+                                                    </li>
+                                                    <li class="apply-item col-33">
+                                                        <a class="bm-item ">性别</a>
+                                                    </li>
+                                                    <li class="apply-item col-33">
+                                                        <a class="bm-item apply-active">真实姓名</a>
+                                                    </li>
+                                                    <li class="apply-item col-33">
+                                                        <a class="bm-item apply-active">身份证号</a>
+                                                    </li>
+                                                    <li id="addItem" class="apply-item col-33">
+                                                        <a class="bm-item"><i class="iconfont icon-add f-l"></i></a>
+                                                    </li>
+                                                </ul>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cells margin">
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">报名截至</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right" data-name="endApplyTime">
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__bd">报名方式(个人/组队)</div>
+                                            <div class="weui-cell__ft">
+                                                <div class="bm-way">
+                                                    <input type="hidden" name="hdbmfs" id="hdbmfs" value="个人">
+                                                    <div id="gr" class="bm-way-item f-m active">
+                                                        个人
+                                                    </div>
+                                                    <div id="zd" class="bm-way-item f-m">
+                                                        组队
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="bmWay" style="display: none">
+                                            <div class="weui-cell">
+                                                <div class="weui-cell__hd"><label class="weui-label">队伍数量</label></div>
+                                                <div class="weui-cell__bd">
+                                                    <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入队伍数量">
+                                                </div>
+                                            </div>
+                                            <div class="weui-cell list-block margin">
+                                                <div class="row margin ">
+                                                    <div class="col-50">
+                                                        <div class="peopleNum">
+                                                            <span class="smaller-txt">每队人员下限</span>
+                                                            <span>
+                                                                <input name="zdend" maxlength="6" class="high-grey" type="number" value="0" id="groupminNum" placeholder="默认不限" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-50">
+                                                        <div class="peopleNum">
+                                                            <span class="smaller-txt">每队人员上限</span>
+                                                            <span><input name="zdtop" maxlength="6" class="high-grey" type="number" value="0" id="groupmaxNum" placeholder="默认不限" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_switch">
+                                            <div class="weui-cell__bd">报名需要审核</div>
+                                            <div class="weui-cell__ft">
+                                                <input class="weui-switch" type="checkbox">
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_switch">
+                                            <div class="weui-cell__bd">允许帮人报名</div>
+                                            <div class="weui-cell__ft">
+                                                <input class="weui-switch" type="checkbox">
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">活动类型</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <select class="weui-select" style="padding-left:1rem" name="insurance">
+                                                    <option value="1">私人活动</option>
+                                                    <option value="2">公开活动</option>
+                                                    <option value="3">俱乐部内活动</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">短信提醒</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <select class="weui-select" style="padding-left:0.8rem" name="insurance">
+                                                    <option value="1">活动开始24小时前</option>
+                                                    <option value="2">活动开始12小时前</option>
+                                                    <option value="3">活动开始6小时前</option>
+                                                    <option value="3">活动开始3小时前</option>
+                                                    <option value="3">活动开始1小时前</option>
+                                                    <option value="3">不发送</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cells__title">活动发布后，创建活动聊天群项不可更改</div>
+                                    <div class="weui-cells weui-cells_form">
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__bd">
+                                                <textarea class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
+                                                <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label for="weuiAgree" class="weui-agree">
+                                        <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+                                        <span class="weui-agree__text">
+                                            阅读并同意<a href="javascript:void(0);">《山渡户外联盟服务协议》</a>
+                                        </span>
+                                    </label>
+                                    <div class="weui-btn-area">
+                                        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">发布</a>
+                                        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">保存草稿</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>   
                 </div>
             </div>
-
         </div>
+        <%= require('html-loader!../addApplyOption/addApplyOption.html')  %>
+        <%= require('html-loader!../setApplyCost/setApplyCost.html')  %>
     </div>
 </body>
 

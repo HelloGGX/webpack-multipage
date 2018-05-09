@@ -1,9 +1,11 @@
-import '../../components/banner/banner.less'
+import 'components/banner/banner.less'
 import './create-act.less'
 
-import {pickerAddr, pickerData} from '../../components/picker/picker'// 引入地区和日期选择对象方法
-import {upload} from '../../components/upload/upload'// 引入上传图片对象方法
+import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
+import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
+import {AddapplyOption, EditapplyOption} from '../addApplyOption/addApplyOption'
+import '../setApplyCost/setApplyCost'
 
 let all = (function () {
   let banner = {
@@ -16,9 +18,29 @@ let all = (function () {
     }
 
   }
+
+  let actCost = {
+    init () {
+      $('#actCost').on('click', () => {
+        // require.ensure([], () => {
+        //   require('vendor/dialog')
+        //   $.alert.aler({
+        //     title: '提示',
+        //     content: '<p class="f16">hello</p>',
+        //     height: 120,
+        //     blankclose: true
+        //   })
+        // }, 'aler')
+
+      })
+    }
+  }
   let Home = {
     pageInit: function () {
-      banner.init()
+      banner.init()// 草稿箱初始化
+      AddapplyOption.Addinit()// 增加报名项初始化
+      EditapplyOption.Editinit()// 编辑报名项初始化
+      actCost.init()// 活动费用设置初始化
       $('.actTime').on('click', (e) => {
         pickerData.showDate(e.currentTarget)
       })
@@ -27,8 +49,29 @@ let all = (function () {
         pickerAddr.showAddr(e.currentTarget)
       })
 
-      $('.actCover').on('click', (e) => {
-        upload.init()
+      $('.actCover').on('click', () => {
+        upload.init({maxLength: 1})
+      })
+      $('.bm-way-item').on('click', (e) => {
+        $(e.currentTarget).addClass('active').siblings('.bm-way-item').removeClass('active')
+        if ($('#gr').hasClass('active')) {
+          $(e.currentTarget).parents('li').nextAll('li').hide()
+          $('#hdbmfs').val('个人')
+        } else if ($('#zd').hasClass('active')) {
+          $(e.currentTarget).parents('li').nextAll('li').show()
+          $('#hdbmfs').val('组队')
+        }
+      })
+
+      $('.bm-way-item').on('click', (e) => {
+        $(e.currentTarget).addClass('active').siblings('.bm-way-item').removeClass('active')
+        if ($('#gr').hasClass('active')) {
+          $('#bmWay').hide()
+          $('#hdbmfs').val('个人')
+        } else if ($('#zd').hasClass('active')) {
+          $('#bmWay').show()
+          $('#hdbmfs').val('组队')
+        }
       })
     }
   }

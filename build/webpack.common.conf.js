@@ -91,7 +91,9 @@ const generateConfig = env => {
         'common': resolve('src/common'),
         'components': resolve('src/components'),
         'api': resolve('src/api'),
-        'assets': resolve('src/assets')
+        'assets': resolve('src/assets'),
+        'vendor': resolve('src/vendor'),
+        'pages': resolve('src/pages')
       }
     },
     output: {
@@ -111,8 +113,8 @@ const generateConfig = env => {
         },
         { // 处理js
           test: /\.js$/,
-          include: [resolve('src/common/js'), resolve('src/components/'), resolve('src/pages/'), resolve('src/api/')],
-          exclude: [resolve('src/vendor'), resolve('src/dll'), '/node_modules/'],
+          include: [resolve('src/common/js'), resolve('src/components/'), resolve('src/pages/'), resolve('src/api/'), resolve('src/vendor')],
+          exclude: [resolve('src/dll'), '/node_modules/'],
           use: scriptLoader
         },
         { // 处理less

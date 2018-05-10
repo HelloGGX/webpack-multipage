@@ -21,11 +21,28 @@
                 right: auto;
                 height: 1px;
                 width: 100%;
-                background-color: #c8c7cc;
+                background-color: #ffffff;
                 display: block;
                 z-index: 15;
                 -webkit-transform-origin: 50% 0;
                 transform-origin: 50% 0;
+                transform: scaleY(.5);
+            }
+            &:after{
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                right: auto;
+                top: auto;
+                height: 1px;
+                width: 100%;
+                background-color: #ffffff;
+                display: block;
+                z-index: 15;
+                -webkit-transform-origin: 50% 100%;
+                transform-origin: 50% 100%;
+                transform: scaleY(.5);
             }
             li{
                 box-sizing: border-box;
@@ -101,6 +118,37 @@
             -ms-flex-item-align: stretch;
             -webkit-align-self: stretch;
             align-self: stretch;
+            &:after{
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                right: auto;
+                top: auto;
+                height: 1px;
+                width: 100%;
+                background-color: #c8c7cc;
+                display: block;
+                z-index: 15;
+                -webkit-transform-origin: 50% 100%;
+                transform-origin: 50% 100%;
+                -webkit-transform: scaleY(.5);
+                transform: scaleY(.5);
+            }
+            .item-after{
+                white-space: nowrap;
+                color: #8e8e93;
+                -webkit-flex-shrink: 0;
+                -ms-flex: 0 0 auto;
+                flex-shrink: 0;
+                margin-left: auto;
+                padding-left: 5px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                max-height: 28px;
+            }
         }
         .item-title {
             -webkit-flex-shrink: 1;

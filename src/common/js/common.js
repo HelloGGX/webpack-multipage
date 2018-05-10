@@ -42,8 +42,38 @@ let scroll = {
     // console.log(this.scroll)
   }
 }
+let textArea = {// 监听textArea的输入字数
+  init () {
+    $('body').on('keyup', '.weui-textarea', (e) => {
+      this.listenText(e.currentTarget)
+    })
+  },
+  listenText (_this) {
+    var les = $(_this).val()
+    // var slogan = 200-les.length;
+    var slogan = les.length
+    $(_this).next('.weui-textarea-counter').find('span').text(slogan > 0 ? slogan : 0)
+  }
+}
+
+let swit = {
+  init () {
+    $('body').on('click', '.weui-cell__ft', (e) => {
+      this.change(e.currentTarget)
+    })
+  },
+  change (classname) {
+    if ($(classname).find('input').is(':checked')) {
+      $(classname).find('input').val('是')
+    } else {
+      $(classname).find('input').val('否')
+    }
+  }
+}
 $(function () {
   title.init()
   scroll.init()
   tabar.init()
+  textArea.init()
+  swit.init()
 })

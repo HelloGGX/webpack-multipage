@@ -17,7 +17,7 @@
                     <div class="content-wrapper bg-grey">
                         <div class="content-inner">
                             <div>
-                                <div id="createAct">
+                                <form id="createAct" action="" name="form1" method="post">
                                     <div class="weui-cells weui-cells_form">
                                         <div class="weui-cell">
                                             <div class="weui-cell__bd">
@@ -26,7 +26,7 @@
                                         </div>
                                         <div class="weui-cell">
                                             <div class="weui-cell__bd">
-                                                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                                <textarea  maxlength="200" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
                                                 <div class="weui-textarea-counter"><span>0</span>/200</div>
                                             </div>
                                         </div>
@@ -100,11 +100,44 @@
                                             </div>
                                         </div>
                                         <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动积分</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <select class="weui-select" style="padding-left:1.6rem" name="actStar">
+                                                        <option value="10">10分</option>
+                                                        <option value="20">20分</option>
+                                                        <option value="30">30分</option>
+                                                        <option value="40">40分</option>
+                                                        <option value="50">50分</option>
+                                                        <option value="60">60分</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                    <div class="weui-cell__hd">
+                                                        <label for="" class="weui-label">活动类别</label>
+                                                    </div>
+                                                    <div class="weui-cell__bd">
+                                                        <select class="weui-select" style="padding-left:1.6rem" name="actStar">
+                                                            <option value="徒步">徒步</option>
+                                                            <option value="登山">登山</option>
+                                                            <option value="露营">露营</option>
+                                                            <option value="跑步">跑步</option>
+                                                            <option value="骑行">骑行</option>
+                                                            <option value="速降">速降</option>
+                                                            <option value="赛事">赛事</option>
+                                                            <option value="团购">团购</option>
+                                                            <option value="会务">会务</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
                                             <div class="weui-cell__hd">
                                                 <label for="" class="weui-label">活动保险</label>
                                             </div>
                                             <div class="weui-cell__bd">
-                                                <select class="weui-select" style="padding-left:1rem" name="insurance">
+                                                <select class="weui-select" style="padding-left:1.1rem" name="insurance">
                                                     <option value="1">无保险要求</option>
                                                     <option value="2">会员自行购买</option>
                                                     <option value="3">主办方统一购买</option>
@@ -202,13 +235,13 @@
                                         <div class="weui-cell weui-cell_switch">
                                             <div class="weui-cell__bd">报名需要审核</div>
                                             <div class="weui-cell__ft">
-                                                <input class="weui-switch" type="checkbox">
+                                                <input class="weui-switch" type="checkbox" value="否">
                                             </div>
                                         </div>
                                         <div class="weui-cell weui-cell_switch">
                                             <div class="weui-cell__bd">允许帮人报名</div>
                                             <div class="weui-cell__ft">
-                                                <input class="weui-switch" type="checkbox">
+                                                <input class="weui-switch" type="checkbox" value="否">
                                             </div>
                                         </div>
                                         <div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -243,7 +276,7 @@
                                     <div class="weui-cells weui-cells_form">
                                         <div class="weui-cell">
                                             <div class="weui-cell__bd">
-                                                <textarea class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
+                                                <textarea maxlength="200" class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
                                                 <div class="weui-textarea-counter"><span>0</span>/200</div>
                                             </div>
                                         </div>
@@ -258,7 +291,7 @@
                                         <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">发布</a>
                                         <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">保存草稿</a>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>   

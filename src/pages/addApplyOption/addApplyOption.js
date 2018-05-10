@@ -29,29 +29,44 @@ let applyOption = {
     $('.bakeInfo').on('click', '.button_removeItem', (e) => {
       this.removeOption(e.currentTarget)
     })
+
+    $('.apply-option-show').on('click', (e) => {
+      if ($('.apply-edit-list').is(':hidden')) {
+        $('.apply-edit-list').show()
+        $(e.currentTarget).addClass('apply-bake-opt')
+      } else {
+        $('.apply-edit-list').hide()
+        $(e.currentTarget).removeClass('apply-bake-opt')
+        $('.button_zjxx').unbind()
+      }
+    })
   },
   confirm () {
     let bakeInfo = ''
     let $info = $('#infoEdit .bakeInfo input')
     let len = $info.length
     if (Trim($('.apply-text').val(), 'g') !== '') {
-      // 遍历获取相关的候选项信息
-      for (let m = 0; m < len; m++) {
-        if (Trim($($info[m]).val(), 'g') === '') {
-          weui.alert(`第${m + 1}项候选项没有填写哦`)
-          bakeInfo = false
-          break
-        } else {
-          bakeInfo += Trim($($info[m]).val(), 'g')// 去掉所有的空格
-          if (m < len - 1) {
-            bakeInfo += ','
+      if ($('.apply-option-show').hasClass('apply-bake-opt')) { // 如果有候选项
+        // 遍历获取相关的候选项信息
+        for (let m = 0; m < len; m++) {
+          if (Trim($($info[m]).val(), 'g') === '') {
+            weui.alert(`第${m + 1}项候选项没有填写哦`)
+            bakeInfo = false
+            break
+          } else {
+            bakeInfo += Trim($($info[m]).val(), 'g')// 去掉所有的空格
+            if (m < len - 1) {
+              bakeInfo += ','
+            }
           }
         }
-      }
-      if (bakeInfo) {
-        if (bakeInfo.substring(bakeInfo.length - 1) === ',') {
-          bakeInfo = bakeInfo.substring(0, bakeInfo.lastIndexOf(','))
+        if (bakeInfo) {
+          if (bakeInfo.substring(bakeInfo.length - 1) === ',') {
+            bakeInfo = bakeInfo.substring(0, bakeInfo.lastIndexOf(','))
+          }
         }
+      } else { // 如果没有候选项
+        bakeInfo = ''
       }
     } else {
       weui.alert(`报名主选项还没有填写哦`)
@@ -171,11 +186,12 @@ EditapplyOption.Editshow = function (me) { // me代表点击的报名选项
     }
   ])
 }
-EditapplyOption.Editcomfirm = function () {
-  let bakeInfo = this.confirm()
+EditapplyOption.Editcomfirm = function () { // 当编辑的时候点击保存
   let _thi = this
   var _id = $('#infoEdit').attr('target-id')
-  if (bakeInfo) {
+
+  let bakeInfo = this.confirm()
+  if (bakeInfo || bakeInfo.length === 0) {
     $(`#${_id}`).html(`<a class="bm-item apply-active" data-child=${bakeInfo}>${$('.apply-text').val()}</a>`)
     weui.alert('修改成功!', function () { _thi.hide() })
   }
@@ -193,14 +209,14 @@ AddapplyOption.Addshow = function () {
 }
 AddapplyOption.Addconfirm = function () { // 新增报名项点击确定按钮
   let _thi = this
-  let bakeInfo = this.confirm()
 
+  let bakeInfo = this.confirm()
   let index = $('.apply-options .apply-item').length - 1
   let _html = `<li class="apply-item col-33 edit-item" id=${'bm_' + index}>
             <a class="bm-item apply-active" data-child=${bakeInfo}>${$('.apply-text').val()}</a>
         </li>`
 
-  if (bakeInfo) {
+  if (bakeInfo || bakeInfo.length === 0) {
     $('#addItem').before(_html)
     weui.alert('添加成功', function () { _thi.hide() })
   }

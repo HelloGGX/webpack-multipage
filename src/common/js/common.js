@@ -55,7 +55,20 @@ let textArea = {// 监听textArea的输入字数
     $(_this).next('.weui-textarea-counter').find('span').text(slogan > 0 ? slogan : 0)
   }
 }
-
+let back = {// 返回
+  init () {
+    this.back()
+  },
+  back () {
+    $('body').on('click', '.back', function () {
+      if (document.referrer === '') {
+        window.location.href = 'index.html'
+      } else {
+        window.location.href = document.referrer
+      }
+    })
+  }
+}
 let swit = {
   init () {
     $('body').on('click', '.weui-cell__ft', (e) => {
@@ -76,4 +89,5 @@ $(function () {
   tabar.init()
   textArea.init()
   swit.init()
+  back.init()
 })

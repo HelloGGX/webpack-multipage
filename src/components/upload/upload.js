@@ -46,10 +46,10 @@ let upload = {
   _uploader ({maxLength = this.maxLength} = {}) { // 上传图片
     let _this = this
     weui.uploader('#uploader', {
-      url: 'http://localhost:8082',
+      url: 'http://125.65.111.19:82/api/getupload.php',
       auto: true,
-      type: 'file',
-      fileVal: 'fileVal',
+      type: 'base64',
+      fileVal: 'imgfile',
       compress: {
         width: 1600,
         height: 1600,
@@ -57,7 +57,7 @@ let upload = {
       },
       onBeforeQueued: function (files) {
         // `this` 是轮询到的文件, `files` 是所有文件
-        console.log(_this.uploadCount)
+        console.log(files)
         if (['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].indexOf(this.type) < 0) {
           weui.alert('请上传图片')
           return false // 阻止文件添加
@@ -109,6 +109,7 @@ let upload = {
         console.log(this, err)
         // return true; // 阻止默认行为，不使用默认的失败态
       }
+
     })
   }
 

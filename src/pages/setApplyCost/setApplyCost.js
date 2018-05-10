@@ -187,6 +187,7 @@ let costWay = { // 费用设置类方法
       this.hide()
     } else { // 如果是免费
       $('#actCost').find('.weui-select').html('免费')
+      $('.act_cost_ticket').remove()
       weui.alert('添加成功')
       this.hide()
     }

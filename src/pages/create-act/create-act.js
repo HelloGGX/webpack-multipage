@@ -51,7 +51,7 @@ let all = (function () {
       })
 
       $('.actCover').on('click', () => {
-        upload.init({maxLength: 1})
+        upload.init({maxLength: 1, fileVal: 'imgfile'})
       })
       $('.bm-way-item').on('click', (e) => {
         $(e.currentTarget).addClass('active').siblings('.bm-way-item').removeClass('active')

@@ -5,6 +5,7 @@ let upload = {
   uploadCount: 0,
   uploadList: [],
   maxLength: 5,
+  fileVal: 'imgfile',
   init (obj) {
     this._uploader(obj)
     this._seeImg()
@@ -43,13 +44,13 @@ let upload = {
       })
     })
   },
-  _uploader ({maxLength = this.maxLength} = {}) { // 上传图片
+  _uploader ({maxLength = this.maxLength, fileVal = this.fileVal} = {}) { // 上传图片
     let _this = this
     weui.uploader('#uploader', {
       url: 'http://125.65.111.19:82/api/getupload.php',
       auto: true,
-      type: 'base64',
-      fileVal: 'imgfile',
+      type: 'file',
+      fileVal: fileVal,
       compress: {
         width: 1600,
         height: 1600,
@@ -62,8 +63,8 @@ let upload = {
           weui.alert('请上传图片')
           return false // 阻止文件添加
         }
-        if (this.size > 10 * 1024 * 1024) {
-          weui.alert('请上传不超过10M的图片')
+        if (this.size > 1 * 1024 * 1024) {
+          weui.alert('请上传不超过1M的图片')
           return false
         }
         if (files.length > maxLength) { // 防止一下子选择过多文件
@@ -85,7 +86,7 @@ let upload = {
         // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
         // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
 
-        // this.upload(); // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
+        // this.upload() // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
         // this.stop(); // 中断上传
 
         // return true; // 阻止默认行为，不显示预览图的图像
@@ -102,7 +103,7 @@ let upload = {
         // return true; // 阻止默认行为，不使用默认的进度显示
       },
       onSuccess: function (ret) {
-        console.log(this, ret)
+        $('#hdimg').val(ret.imgurl)
         // return true; // 阻止默认行为，不使用默认的成功态
       },
       onError: function (err) {

@@ -69,7 +69,7 @@ let pickerAddr = {// 地区选择
         console.log(result)
       },
       onConfirm: function onConfirm (result) {
-        $(_this).find('.weui-select').html(`${result[0].label} ${result[1].label} ${result[2].label}`)
+        $(_this).find('.weui-select input').val(`${result[0].label} ${result[1].label} ${result[2].label}`)
       },
       className: 'actAddr'
     })
@@ -123,7 +123,7 @@ let pickerData = {// 日期选择
       onConfirm: function (result) {
         let time = result[0].label + ':' + result[2].label
         let expectDate = date + ' ' + time
-        $(_this).find('.weui-select').html(expectDate)
+        $(_this).find('.weui-select input').val(expectDate)
       }
     })
   }

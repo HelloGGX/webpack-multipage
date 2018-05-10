@@ -17,11 +17,8 @@ let applyOption = {
         </div>
     </div>
 </li>`,
+  applyItem: {}, // 保存添加的报名项
   init () {
-    $('.cancel').on('click', () => {
-      this.hide()
-    })
-
     $('.button_addItem').on('click', (e) => {
       this.addOption(e.currentTarget)
     })
@@ -87,7 +84,8 @@ let applyOption = {
     var isFlag = false
     if (flag) {
       var i = 0
-      $('.apply-options .apply-item').each(function (i) {
+
+      $('.apply-options .apply-item').not('.editDoing').each(function (i) {
         let item = $(this).find('.bm-item')
         let opName = item.html()
         if (Trim(opName, 'g') === Trim(itemName, 'g')) {
@@ -98,7 +96,7 @@ let applyOption = {
         isFlag = true // 有重复为true
       }
     } else {
-      $('.apply-options .apply-item').each(function (i) {
+      $('.apply-options .apply-item').not('.editDoing').each(function (i) {
         var item = $(this).find('.bm-item')
         var opName = item.html()
         if (Trim(opName, 'g') === Trim(itemName, 'g')) {
@@ -122,10 +120,11 @@ let applyOption = {
   show () { // 显示新增项
     $('#applyOptions').show()
   },
-  hide () { // 隐藏新增项版面
+  hide (me) { // 隐藏新增项版面
     $('#applyOptions').hide()
     $('.apply-text,.apply-edit-list div :input').val('')
     $('.button_addItem').parents('li').siblings().remove()
+    $(me) && $(me).removeClass('editDoing')
   }
 }
 let AddapplyOption = {}// 增加报名选项对象
@@ -134,16 +133,13 @@ Object.setPrototypeOf(AddapplyOption, applyOption) // 这种更好更标准
 Object.setPrototypeOf(EditapplyOption, applyOption)
 EditapplyOption.Editinit = function () {
   $('.apply-options').on('click', '.edit-item', (e) => {
-    this.Editshow($(e.currentTarget))
-  })
-
-  $('.edit-comfirm').on('click', (e) => { // 绑定编辑按钮的事件
-    this.Editcomfirm()
+    this.Editshow(e.currentTarget)
   })
 }
 EditapplyOption.Editshow = function (me) { // me代表点击的报名选项
   let title = $(me).find('a').html()
   let child = $(me).find('a').attr('data-child').split(',') // 将data-child字符串转换成数组
+  $(me).addClass('editDoing')// 代表正在编辑中
   let _thi = this// 代表该EditapplyOption对象
   $('.confirm').hide()
   $('.edit-comfirm').show()
@@ -152,10 +148,16 @@ EditapplyOption.Editshow = function (me) { // me代表点击的报名选项
       label: '编辑',
       onClick: function () {
         _thi.show()
+        $('.edit-comfirm').off('click').on('click', () => { // 绑定编辑后的保存按钮事件
+          _thi.Editcomfirm(me)
+        })
+        $('.cancel').off('click').on('click', () => {
+          _thi.hide(me)
+        })
         $('.addWay-title').find('h2').html('编辑填写项')
         $('.apply-text').val(title)
         $('.button_addItem').parents('li').siblings().remove()
-        $('#infoEdit').attr('target-id', me.attr('id'))
+        $('#infoEdit').attr('target-id', $(me).attr('id'))
         for (var z = 0; z < child.length; z++) {
           $('.bakeInfo').prepend(`<li>
             <div class="item-content">
@@ -174,26 +176,50 @@ EditapplyOption.Editshow = function (me) { // me代表点击的报名选项
     }, {
       label: '删除',
       onClick: function () {
-        me.remove()
+        let key
+        let sessionApply = JSON.parse(window.sessionStorage.getItem('applyItems'))
+        let oldApplyName = $(me).find('a').text()
+        $(me).remove()
+        for (key in sessionApply) {
+          if (key === oldApplyName) {
+            delete sessionApply[key]// 删除老属性
+            delete _thi.applyItem[oldApplyName]
+          }
+        }
+        window.sessionStorage.setItem('applyItems', JSON.stringify(sessionApply))// 存储报名选项
       }
     }
   ], [
     {
       label: '取消',
       onClick: function () {
-
+        $(me).removeClass('editDoing')
       }
     }
   ])
 }
-EditapplyOption.Editcomfirm = function () { // 当编辑的时候点击保存
+EditapplyOption.Editcomfirm = function (me) { // 当编辑的时候点击保存
   let _thi = this
-  var _id = $('#infoEdit').attr('target-id')
-
+  let _id = $('#infoEdit').attr('target-id')
+  let oldApplyName = $('.editDoing').find('a').text()
+  let applyName = $('.apply-text').val()
   let bakeInfo = this.confirm()
+  let key
+  let sessionApply = JSON.parse(window.sessionStorage.getItem('applyItems'))
   if (bakeInfo || bakeInfo.length === 0) {
-    $(`#${_id}`).html(`<a class="bm-item apply-active" data-child=${bakeInfo}>${$('.apply-text').val()}</a>`)
-    weui.alert('修改成功!', function () { _thi.hide() })
+    $(`#${_id}`).html(`<a class="bm-item apply-active" data-child=${bakeInfo}>${applyName}</a>`)
+
+    for (key in sessionApply) {
+      if (key === oldApplyName) {
+        delete sessionApply[key]// 删除老属性
+        delete _thi.applyItem[key]
+        sessionApply[applyName] = bakeInfo.split(',')// 设置新属性
+        _thi.applyItem[applyName] = bakeInfo.split(',')
+      }
+    }
+    window.sessionStorage.setItem('applyItems', JSON.stringify(sessionApply))// 存储报名选项
+
+    weui.alert('修改成功!', function () { _thi.hide(me) })
   }
 }
 AddapplyOption.Addshow = function () {
@@ -201,6 +227,9 @@ AddapplyOption.Addshow = function () {
     weui.alert('添加项目数量到达上限!')
   } else {
     this.show()
+    $('.cancel').off('click').on('click', () => {
+      this.hide()
+    })
     // 新增报名填写项
     $('.addWay-title').find('h2').html('新增填写项')
     $('.confirm').show()
@@ -211,13 +240,18 @@ AddapplyOption.Addconfirm = function () { // 新增报名项点击确定按钮
   let _thi = this
 
   let bakeInfo = this.confirm()
+  let applyName = $('.apply-text').val()
   let index = $('.apply-options .apply-item').length - 1
   let _html = `<li class="apply-item col-33 edit-item" id=${'bm_' + index}>
-            <a class="bm-item apply-active" data-child=${bakeInfo}>${$('.apply-text').val()}</a>
+            <a class="bm-item apply-active" data-child=${bakeInfo}>${applyName}</a>
         </li>`
 
   if (bakeInfo || bakeInfo.length === 0) {
     $('#addItem').before(_html)
+
+    this.applyItem[applyName] = bakeInfo.split(',')
+    let applyItems = JSON.stringify(this.applyItem)
+    window.sessionStorage.setItem('applyItems', applyItems)// 存储报名选项
     weui.alert('添加成功', function () { _thi.hide() })
   }
 }

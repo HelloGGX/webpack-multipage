@@ -18,15 +18,16 @@
                         <div class="content-inner">
                             <div>
                                 <form id="createAct" action="" name="form1" method="post">
+                                    
                                     <div class="weui-cells weui-cells_form">
                                         <div class="weui-cell">
                                             <div class="weui-cell__bd">
-                                              <input class="weui-input" type="text" placeholder="输入活动主题">
+                                              <input class="weui-input" name="actTitle" type="text" placeholder="输入活动主题">
                                             </div>
                                         </div>
                                         <div class="weui-cell">
                                             <div class="weui-cell__bd">
-                                                <textarea  maxlength="200" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                                <textarea  maxlength="200" name="actDetail" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
                                                 <div class="weui-textarea-counter"><span>0</span>/200</div>
                                             </div>
                                         </div>
@@ -40,7 +41,7 @@
                                             </div>
                                             <div class="weui-cell__bd">
                                                 <div class="weui-select text-right" data-name="startTime">
-                                                   
+                                                    <input id="starTime"  type="text" name="starTime" readonly="">
                                                 </div>
                                             </div>
                                         </div>
@@ -50,7 +51,7 @@
                                             </div>
                                             <div class="weui-cell__bd">
                                                 <div class="weui-select text-right" data-name="endTime">
-                                                  
+                                                    <input id="endTime"  type="text" name="endTime" readonly="">
                                                 </div>
                                             </div>
                                         </div>
@@ -60,13 +61,14 @@
                                             </div>
                                             <div class="weui-cell__bd">
                                                 <div class="weui-select text-right" data-name="address">
-                                                    
+                                                    <input id="Actaddr"  type="text" name="actAddr" readonly="">
                                                 </div>
                                             </div>
                                         </div>
                                        
                                     </div>
                                     <div class="weui-cells weui-cells_form margin" id="uploader">
+                                            <input type="hidden" name="hdimg" id="hdimg" value="">
                                         <div class="weui-cell weui-cell_select weui-cell_select-after actCover">
                                             <div class="weui-cell__hd">
                                                 <label for="" class="weui-label">活动封面</label>
@@ -149,14 +151,8 @@
                                                 <label for="" class="weui-label">报名填写项</label>
                                             </div>
                                             <div class="weui-cell__bd">
-                                                <input type="hidden" name="hdbmtx" value="昵称,手机,性别,真实姓名,身份证号">
-                                                <input type="hidden" name="hdbmnc" id="hdbmnc" value="昵称">
-                                                <input type="hidden" name="hdbmsj" id="hdbmsj" value="手机">
-                                                <input type="hidden" name="hdbmsex" id="hdbmsex" value="">
-                                                <input type="hidden" name="hdbzsname" id="hdbzsname" value="">
-                                                <input type="hidden" name="hdbmsfz" id="hdbmsfz" value="">
-                                                <input type="hidden" name="hdbmzb" id="hdbmzb" value="">
-                                                <input type="hidden" name="hdbmtxid" value="">
+                                                <input type="hidden" name="actOptions" value="昵称,手机">
+                                                
                                                 <ul class="apply-options row ">
                                                     <li class="apply-item col-33">
                                                         <a class="bm-item apply-active">昵称</a>
@@ -188,7 +184,7 @@
                                             </div>
                                             <div class="weui-cell__bd">
                                                 <div class="weui-select text-right" data-name="endApplyTime">
-                                                  
+                                                    <input id="endApplyTime"  type="text" name="endApplyTime" readonly="">
                                                 </div>
                                             </div>
                                         </div>
@@ -210,7 +206,7 @@
                                             <div class="weui-cell">
                                                 <div class="weui-cell__hd"><label class="weui-label">队伍数量</label></div>
                                                 <div class="weui-cell__bd">
-                                                    <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入队伍数量">
+                                                    <input class="weui-input" name="groupNum" type="number" pattern="[0-9]*" placeholder="请输入队伍数量">
                                                 </div>
                                             </div>
                                             <div class="weui-cell list-block margin">
@@ -219,14 +215,16 @@
                                                         <div class="peopleNum">
                                                             <span class="smaller-txt">每队人员下限</span>
                                                             <span>
-                                                                <input name="zdend" maxlength="6" class="high-grey" type="number" value="0" id="groupminNum" placeholder="默认不限" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                                                <input name="zdend" pattern="[0-9]*" maxlength="6" class="high-grey" type="number" value="0" id="groupminNum" placeholder="默认不限">
                                                             </span>
                                                         </div>
                                                     </div>
                                                     <div class="col-50">
                                                         <div class="peopleNum">
                                                             <span class="smaller-txt">每队人员上限</span>
-                                                            <span><input name="zdtop" maxlength="6" class="high-grey" type="number" value="0" id="groupmaxNum" placeholder="默认不限" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"> </span>
+                                                            <span>
+                                                                <input name="zdtop" pattern="[0-9]*" maxlength="6" class="high-grey" type="number" value="0" id="groupmaxNum" placeholder="默认不限">
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -235,13 +233,13 @@
                                         <div class="weui-cell weui-cell_switch">
                                             <div class="weui-cell__bd">报名需要审核</div>
                                             <div class="weui-cell__ft">
-                                                <input class="weui-switch" type="checkbox" value="否">
+                                                <input class="weui-switch" name="bmsh" type="checkbox" value="否">
                                             </div>
                                         </div>
                                         <div class="weui-cell weui-cell_switch">
                                             <div class="weui-cell__bd">允许帮人报名</div>
                                             <div class="weui-cell__ft">
-                                                <input class="weui-switch" type="checkbox" value="否">
+                                                <input class="weui-switch" name="bmbr" type="checkbox" value="否">
                                             </div>
                                         </div>
                                         <div class="weui-cell weui-cell_select weui-cell_select-after">

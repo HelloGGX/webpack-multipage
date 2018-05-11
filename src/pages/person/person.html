@@ -13,16 +13,17 @@
         <div id="index-content-v2">
             <div class="weui-tab">
                 <div class="weui-tab__panel content-panel">
+                    <div class="banner-container">
+                        <div class="banner banner-opacity">
+                            <div class="banner-tit"></div>
+                            <div class="banner-right"><a href="#"><i class="iconfont icon-setup" style="font-size: 0.26rem;color:#fff"></i></a></div>
+                        </div>
+                    </div>
                     <div class="content-wrapper bg-person">
                         <div class="content-inner">
                             <div>
                                 <div id="personPage">
-                                    <div class="banner-container">
-                                        <div class="banner banner-opacity">
-                                            <div class="banner-tit"></div>
-                                            <div class="banner-right"><a href="#"><i class="iconfont icon-setup" style="font-size: 0.26rem;color:#fff"></i></a></div>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="per-info">
                                         <div class="per-head">
                                             <a href="#">
@@ -66,58 +67,64 @@
                                             </div>
                                         </div>
                                     </section>
-                                    <section class="myOrder">
-                                        <div class="orderTitle clearfix">
-                                            <a href="#">
-                                                <h3 class="high-grey">我的钱包</h3>
-                                                <div class="allOrder">全部订单<i class="iconfont icon-enter"></i></div>
-                                            </a>
-                                        </div>
-                                        <div class="orderOption">
-                                            <div class="row">
-                                                <div class="col-25">
-                                                    <div class="orderOption-img"><img src="<%= require('../../imgs/icons/pay-df.png')%>" alt=""></div>
-                                                    <p>待付款</p>
-                                                </div>
-                                                <div class="col-25">
-                                                    <div class="orderOption-img"><img src="<%= require('../../imgs/icons/pay-yf.png')%>" alt=""></div>
-                                                    <p>已付款</p>
-                                                </div>
-                                                <div class="col-25">
-                                                    <div class="orderOption-img"><img src="<%= require('../../imgs/icons/pay-sk.png')%>" alt=""></div>
-                                                    <p>收款</p>
-                                                </div>
-                                                <div class="col-25">
-                                                    <a href="#" class="">
-                                                        <div class="orderOption-img"><img src="<%= require('../../imgs/icons/pay-tk.png')%>" alt=""></div>
-                                                        <p class="high-grey">退款</p>
-                                                    </a>
-                                                </div>
-                                                <div class="col-25">
-                                                    <a href="#">
-                                                        <div class="orderOption-img"><img src="<%= require('../../imgs/icons/pay-tx.png')%>" alt=""></div>
-                                                        <p class="high-grey">提现</p>
-                                                    </a>
-                                                </div>
-                                                <div class="col-25">
-                                                    <a href="#">
-                                                        <div class="orderOption-img"><img src="<%= require('../../imgs/icons/pay-sf.png')%>" alt=""></div>
-                                                        <p class="high-grey">身份认证</p>
-                                                    </a>
-                                                </div>
-                                                <div class="col-25">
-                                                    <a href="#">
-                                                        <div class="orderOption-img"><img src="<%= require('../../imgs/icons/pay-hb.png')%>" alt=""></div>
-                                                        <p class="high-grey">发红包</p>
-                                                    </a>
-                                                </div>
-                                                <div class="col-25">
-                                                    
-                                                </div>
-            
+                                    <section class="weui-cells margin" style="padding-top: 0.2rem">
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-df.png')%>" alt=""></div>
+                                            <div class="weui-cell__bd">
+                                                <p>待付款</p>
                                             </div>
-                                        </div>
+                                    
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-yf.png')%>" alt=""></div>
+                                            <div class="weui-cell__bd">
+                                                <p>已付款</p>
+                                            </div>
+                                           
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-sk.png')%>" alt=""></div>
+                                            <div class="weui-cell__bd">
+                                                <p>收款</p>
+                                            </div>
+                                            
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-tk.png')%>" alt=""></div>
+                                            <div class="weui-cell__bd">
+                                                <p>退款</p>
+                                            </div>
+                                           
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-tx.png')%>" alt=""></div>
+                                            <div class="weui-cell__bd">
+                                                <p>提现</p>
+                                            </div>
+                                           
+                                        </a>
+                                        <div class="line"></div>
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                                <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-sfrz.png')%>" alt=""></div>
+                                                <div class="weui-cell__bd">
+                                                    <p>身份认证</p>
+                                                </div>
+                                               
+                                            </a>
+                                            <a class="weui-cell weui-cell_access" href="javascript:;">
+                                                <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-hb.png')%>" alt=""></div>
+                                                <div class="weui-cell__bd">
+                                                    <p>发红包</p>
+                                                </div>
+                                            </a>
+                                            <a class="weui-cell weui-cell_access" href="javascript:;">
+                                                <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-jf.png')%>" alt=""></div>
+                                                <div class="weui-cell__bd">
+                                                    <p>我的积分</p>
+                                                </div>
+                                            </a>
                                     </section>
+                                    
                                 </div>
                             </div>
                         </div>

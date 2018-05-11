@@ -197,6 +197,7 @@ let all = (function () {
       let len = thi.areadata.length
       for (let i = 0; i < len; i++) {
         _html += `<div class="store-item" data-id=${thi.areadata[i].id}>
+                    <a href="activity-detail.html">
                     <div class="store-content">
                         <div class="goods-image">
                             <div class="image-container">
@@ -211,8 +212,9 @@ let all = (function () {
                             <del class="goods-market-price">${thi.areadata[i].marprice}</del>
                             <div class="discount-price"><i>￥</i>${thi.areadata[i].disprice}</div>
                             <div class="goods-buy">立即抢</div>
-                        </div>\
-                    </div>\
+                        </div>
+                    </div>
+                    </a>
                 </div>`
       }
       $('.stores').html(_html)

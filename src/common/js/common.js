@@ -7,8 +7,8 @@ import $ from 'jquery'
 
 let title = {// 把每页的title值赋值给banner上的标题
   init () {
-    if ($('.banner-tit').length > 0) {
-      $('.banner-tit').html($('title').html())
+    if ($('.banner-container .banner-text').length > 0) {
+      $('.banner-container .banner-text').html($('title').html())
     }
   }
 }
@@ -23,7 +23,9 @@ let tabar = {// 底部工具栏
     let pageType = window.location.pathname.match(/^\/[a-zA-Z]*/g)
     let [, ...rest] = pageType[0]
     let result = rest.join('')
-    $('#' + result) && $('#' + result).addClass('tabbar_on').siblings().removeClass('tabbar_on')
+    if (result !== '') {
+      $('#' + result).addClass('tabbar_on').siblings().removeClass('tabbar_on')
+    }
   }
 }
 let scroll = {

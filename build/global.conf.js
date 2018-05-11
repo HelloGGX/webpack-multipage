@@ -8,6 +8,10 @@ const pages = [ // 页面配置写在这里
     pageName: 'activity'
   },
   {
+    title: '活动详情',
+    pageName: 'activity-detail'
+  },
+  {
     title: '组织活动',
     pageName: 'create-act'
   },

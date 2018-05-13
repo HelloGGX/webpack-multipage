@@ -4,7 +4,13 @@ import axios from 'axios'
 const request = axios.create({
   baseURL: '/', // 'http://125.65.111.19:82/api'
   // `headers` 是即将被发送的自定义请求头
-  headers: {'Content-type': 'text/html'}
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  },
+  auth: {
+    username: 'username',
+    password: 'password'
+  }
 })
 
 const createError = (code, resp) => {

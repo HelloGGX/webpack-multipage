@@ -1,5 +1,5 @@
 import './index.less'
-import {getIndexData} from '../../api/getIndex'
+import model from '../../api/getIndex'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 import weui from 'weui.js'
@@ -13,7 +13,7 @@ let all = (function () {
       this._getIndexData()
     },
     _getIndexData () {
-      getIndexData().then((data) => {
+      model.getIndexData().then((data) => {
         scrollNav.init(data)// 顶部导航栏初始化
         slider.init(data)// 幻灯片初始化
         hotArea.init(data)// 热门区域初始化

@@ -20,6 +20,10 @@ const pages = [ // 页面配置写在这里
     pageName: 'club'
   },
   {
+    title: '创建俱乐部',
+    pageName: 'create-club'
+  },
+  {
     title: '个人中心',
     pageName: 'person'
   }

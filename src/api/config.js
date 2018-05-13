@@ -1,13 +1,6 @@
-export const commonParams = {
-  g_tk: 5381,
-  format: 'jsonp',
-  inCharset: 'utf-8',
-  outCharset: 'utf-8',
-  notice: 0
+module.exports = {
+  db: {
+    appId: 'A6063806368698',
+    appKey: '193E1039-3882-CA44-ADB7-E4D08C590A1E'
+  }
 }
-
-export const options = {
-  param: 'jsonpCallback'
-}
-
-export const ERR_OK = 0

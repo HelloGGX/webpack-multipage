@@ -31,7 +31,7 @@
             <div class="v5-banner banner"></div>
         </div>
         <div class="bg-layer"></div>
-        <div class="act-list" style="top: 300px;">
+        <div class="act-list content-wrapper" style="top: 300px;">
             <div class="general-goods-wrapper flagIndex">
                 <div>
                     <section id="g-base" class="">
@@ -49,16 +49,16 @@
                     </section>
                     <div id="actType" class="g-mall-service">
                         <div  class="g-service-list">
-                            <span class="g-service-item">骑行</span>
-                            <span class="g-service-item">美食</span>
-                            <span class="g-service-item">登山</span>
                         </div>
                     </div>
                     <div class="line"></div>
                     <div class="goods-mall margin">
                         <div class="goods-mall-main"><img src="<%= require('../../imgs/icons/cup@2x.png')%>" >
                             <div class="goods-mall-info">
-                                <div class="goods-mall-name">山渡户外俱乐部</div><span>活动数量&nbsp;100</span><span>会员数量&nbsp;100</span></div>
+                                <div class="goods-mall-name"></div>
+                                <span></span>
+                                <span></span>
+                            </div>
                             <div class="goods-mall-btn"><span>进去看看</span></div>
                         </div>
                     </div>
@@ -69,19 +69,19 @@
                             <div class="weui-cell__bd">
                                 <p>地点</p>
                             </div>
-                            <div  class="weui-cell__ft"><input type="text" class="f-m" readonly name="MeetingPlace" value="四川省成都市新都区青年创业园现代服务西北面"></div>
+                            <div  class="weui-cell__ft"><input type="text" class="f-m" readonly name="MeetingPlace" value=""></div>
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
                                 <p>时间</p>
                             </div>
-                            <div  class="weui-cell__ft"><input type="text" class="f-m" readonly name="MeetingTime" value="2017-11-23 09:00至2018-06-20 22:00"></div>
+                            <div  class="weui-cell__ft"><input type="text" class="f-m" readonly name="MeetingTime" value=""></div>
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
                                 <p>活动积分</p>
                             </div>
-                            <div  class="weui-cell__ft"><input type="text" class="f-m" readonly name="actStar" value="100"></div>
+                            <div  class="weui-cell__ft"><input type="text" class="f-m" readonly name="actStar" value=""></div>
                         </div>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
@@ -97,48 +97,7 @@
                         </span>
                         <div class="mall-recommend-main">
                           <ul>
-                            <li class="mall-recommend-item">
-                              <img src="//t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg"
-                              data-url="//t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg">
-                              <span class="mr-goods-name">
-                                【丹蒂曼】2018夏小狗圆领亮丝T恤女短袖款宽松打底衫体恤ins上衣
-                              </span>
-                              <div class="mr-goods-detail">
-                                <span class="mr-price">
-                                  <i> ￥</i>
-                                  29.9  
-                                </span>
-                                <span class="mr-sales">已拼11件 </span>
-                              </div>
-                            </li>
-                            <li class="mall-recommend-item">
-                                <img src="//t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg"
-                                data-url="//t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg">
-                                <span class="mr-goods-name">
-                                  【丹蒂曼】2018夏小狗圆领亮丝T恤女短袖款宽松打底衫体恤ins上衣
-                                </span>
-                                <div class="mr-goods-detail">
-                                  <span class="mr-price">
-                                    <i> ￥</i>
-                                    29.9  
-                                  </span>
-                                  <span class="mr-sales">已拼11件 </span>
-                                </div>
-                              </li>
-                              <li class="mall-recommend-item">
-                                <img src="//t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg"
-                                data-url="//t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg">
-                                <span class="mr-goods-name">
-                                  【丹蒂曼】2018夏小狗圆领亮丝T恤女短袖款宽松打底衫体恤ins上衣
-                                </span>
-                                <div class="mr-goods-detail">
-                                  <span class="mr-price">
-                                    <i> ￥</i>
-                                    29.9  
-                                  </span>
-                                  <span class="mr-sales">已拼11件 </span>
-                                </div>
-                              </li>
+                           
                           </ul>
                         </div>
                       </div>
@@ -146,24 +105,28 @@
                     <div class="goods-details margin flagIndex">
                         <p>活动须知</p>
                         <div class="goods-details-desc">
-                            <div class="goods-details-desc-content">符合人体黄金比例的版型,时尚百搭,适合任何场合,适合大多数人身材,缔造与众不同的高品质女装,为你的气场加分,只为展现完美的你而倾心打造,全店款式新颖到你让你心跳,气质美到让你尖叫!</div>
+                            <div id="notice" class="goods-details-desc-content"></div>
                         </div>
                     </div>
-                    <div class="goods-details flagIndex">
+                    <div class="line"></div>
+                    <div class="goods-details flagIndex margin">
                         <p>活动详情</p>
                         <div class="goods-details-desc">
-                                <div class="goods-details-desc-content">符合人体黄金比例的版型,时尚百搭,适合任何场合,适合大多数人身材,缔造与众不同的高品质女装,为你的气场加分,只为展现完美的你而倾心打造,全店款式新颖到你让你心跳,气质美到让你尖叫!</div>
+                                <div id="detailText" class="goods-details-desc-content"></div>
                         </div>
                         <div class="act-detail-img">
-                            <li class="gd-item">
-                                <img src="" alt="">
-                            </li>
+                            
                         </div>    
                     </div>
                 </div>
             </div>
         </div>
+        <div class="goods-bottom-bar">
+		    <div class="goods-chat-button"><span><a href="#">客服</a></span></div>
+			<div class="goods-group-btn"><span class="goods-buy-price index_price2"><i>￥</i>3888</span><span>立即参加</span></div>
+		</div>
     </div>
+    <%= require('html-loader!../../components/totop/go-top.html')  %>
 </body>
 
 </html>

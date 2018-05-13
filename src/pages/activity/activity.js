@@ -1,6 +1,6 @@
 import './activity.less'
-import '../../components/tabs/tabs.less'
-import {getActData} from '../../api/getIndex'
+import 'components/tabs/tabs.less'
+import model from '../../api/getIndex'
 import $ from 'jquery'
 import weui from 'weui.js'
 
@@ -11,7 +11,7 @@ let all = (function () {
       this._getActData()
     },
     _getActData () {
-      getActData().then((data) => { // 获取数据成功时的处理逻辑
+      model.getActData().then((data) => { // 获取数据成功时的处理逻辑
         Home._getNewData(data)
       }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
         weui.alert('数据获取有误')

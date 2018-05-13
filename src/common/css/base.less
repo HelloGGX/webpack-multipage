@@ -445,3 +445,36 @@
         }
     }
 }
+#go-top, .go-top {
+    display: block;
+    width: .43rem;
+    height: .43rem;
+    position: fixed;
+    right: .18rem;
+    bottom: .64rem;
+    z-index: 999;
+    background-image: url('../../imgs/icons/go_top.png');
+    background-size: contain;
+    opacity: 1;
+    -webkit-transition: bottom .8s ease,opacity .6s ease;
+}
+
+.top-button-hide {
+    bottom: -.64rem;
+    opacity: 0;
+}
+.top-button-show {
+    bottom: .64rem;
+    opacity: 1;
+}
+#go-top span, .go-top span {
+    position: absolute;
+    bottom: .07rem;
+    width: 100%;
+    display: block;
+    height: .12rem;
+    line-height: .12rem;
+    text-align: center;
+    font-size: .1rem;
+    color: #333;
+}

@@ -1,8 +1,8 @@
 import './club.less'
-import '../../components/tabs/tabs.less'
-import '../../components/banner/banner.less'
+import 'components/tabs/tabs.less'
+import 'components/banner/banner.less'
 import $ from 'jquery'
-import {getClubData} from '../../api/getIndex'
+import model from '../../api/getIndex'
 import weui from 'weui.js'
 
 let all = (function () {
@@ -103,7 +103,7 @@ let all = (function () {
     </div>`
     },
     _getNewData: function () {
-      getClubData().then((data) => {
+      model.getClubData().then((data) => {
         let newdata
         let _html = ''
         // let src

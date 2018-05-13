@@ -64,14 +64,14 @@ let pickerAddr = {// 地区选择
     this.calculateDepth()
     weui.picker(this.formatDistricts(), {
       depth: me.depth,
-      defaultValue: [0, 1, 1],
+      defaultValue: [510000, 510100, 510114],
       onChange: function onChange (result) {
         console.log(result)
       },
       onConfirm: function onConfirm (result) {
         $(_this).find('.weui-select input').val(`${result[0].label} ${result[1].label} ${result[2].label}`)
       },
-      className: 'actAddr'
+      className: 'picker'
     })
   }
 
@@ -91,12 +91,12 @@ let pickerData = {// 日期选择
       },
       onConfirm: (result) => {
         // 二级调用：时间
-        $('.actTime .weui-picker').on('animationend webkitAnimationEnd', () => {
+        $('.picker .weui-picker').on('animationend webkitAnimationEnd', () => {
           this.show_expect_time_picker(_this, result)
         })
       },
       id: 'datePicker',
-      className: 'actTime'
+      className: 'picker'
     })
   },
   show_expect_time_picker (_this, date) {
@@ -118,7 +118,7 @@ let pickerData = {// 日期选择
       }
     }
     weui.picker(this.hours, this.symbol, this.minites, {
-      className: 'actTime',
+      className: 'picker',
       defaultValue: [new Date().getHours() + 1, 0, 0],
       onConfirm: function (result) {
         let time = result[0].label + ':' + result[2].label

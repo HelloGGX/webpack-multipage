@@ -41,6 +41,67 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="weui-cells">
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+                                            <div class="weui-cell__bd">
+                                                <input class="weui-input text-right" type="text"  placeholder="俱乐部名称">
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after actAddr">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">所在地</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right" data-name="address">
+                                                    <input type="text" name="clubAddr" readonly="" value="请选择">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a id="addMainType" class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__bd">
+                                                <p>主打项目</p>
+                                            </div>
+                                            <div class="weui-cell__ft"></div>
+                                        </a>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">宣言</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right">
+                                                    <input id="declaration" type="text" name="declaration" readonly="" value="请填写俱乐部愿景">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                            <div class="weui-cell__hd">
+                                                <label for="" class="weui-label">简介</label>
+                                            </div>
+                                            <div class="weui-cell__bd">
+                                                <div class="weui-select text-right">
+                                                    <input id="introduction" type="text" name="introduction" readonly="" value="请简单介绍一下你的俱乐部">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cells">
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__hd"><label class="weui-label">负责人</label></div>
+                                            <div class="weui-cell__bd">
+                                                <input class="weui-input" type="text"  placeholder="输入">
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__hd"><label class="weui-label">手机号码</label></div>
+                                            <div class="weui-cell__bd">
+                                                <input class="weui-input" type="number" pattern="[0-9]*" placeholder="输入">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-btn-area">
+                                        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交审核</a>
+                                    </div>
                                 </form>  
                             </div>
                         </div>
@@ -48,6 +109,7 @@
                 </div>
             </div>
         </div>
+        <%= require('html-loader!../addMainItem/addMainItem.html')  %>
     </div>
 </body>
 

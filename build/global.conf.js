@@ -5,11 +5,11 @@ const pages = [ // 页面配置写在这里
   },
   {
     title: '活动',
-    pageName: 'activity'
+    pageName: 'act'
   },
   {
     title: '活动详情',
-    pageName: 'activity-detail'
+    pageName: 'act-detail'
   },
   {
     title: '组织活动',

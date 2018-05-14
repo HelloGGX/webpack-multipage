@@ -1,4 +1,4 @@
-import './activity-detail.less'
+import './act-detail.less'
 import 'components/banner/banner.less'
 
 import $ from 'jquery'

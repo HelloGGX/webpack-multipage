@@ -15,12 +15,12 @@ let costWay = { // 费用设置类方法
   init () {
     $('#fee').on('click', () => {
       this._showfee()
-      $('#fycl').val('收费')
+      $('input[name=applyCostType]').val('收费')
       this._fee = true
     })
     $('#unfee').on('click', () => {
       this._showunfee()
-      $('#fycl').val('免费')
+      $('input[name=applyCostType]').val('免费')
       this._fee = false
     })
 
@@ -90,7 +90,7 @@ let costWay = { // 费用设置类方法
           {
             label: '活动开始前均可申请退款',
             onClick: function () {
-              $('.refund').find('.weui-select').html('活动开始前均可申请退款')
+              $('.refund').find('.weui-select input').val('活动开始前均可申请退款')
               me._setBeforeActRefund()
             }
           }, {
@@ -102,7 +102,7 @@ let costWay = { // 费用设置类方法
           }, {
             label: '不支持退款',
             onClick: function () {
-              $('.refund').find('.weui-select').html('不支持退款')
+              $('.refund').find('.weui-select input').val('不支持退款')
               me._setUnRefund()
             }
           }
@@ -120,22 +120,22 @@ let costWay = { // 费用设置类方法
     }
   },
   _applyCostTemp (arr, arrPrice, arrNum) {
-    return `<div class="act_cost_ticket">
-    <ul class="padding" id="fymx">
-    ${arr.map((key, i) => `
+    return `${arr.map((key, i) => `
     <li class="row">
+   
     <div class="col-70">
     <div class="act_cost_title f-l">${arr[i]}</div>
+    <input type="hidden" name="applyCostName[]" value="${arr[i]}">
     <div class="act_cost_people f-s ">
     <span>名额</span>${arrNum[i]}人
+    <input type="hidden" name="applyCostNum[]" value="${arrNum[i]}">
     </div>
     </div>
     <div class="col-30">
     <div class="act_cost_num f-l-x">￥<span>${arrPrice[i]}</span></div>
+    <input type="hidden" name="applyCostPrice[]" value="${arrPrice[i]}">
     </div></li>
-  `).join('')}
-    </ul>
-</div>`
+  `).join('')}`
   },
   _saveApply () {
     let allNum = 0
@@ -181,7 +181,7 @@ let costWay = { // 费用设置类方法
         weui.alert('费用设置名额之合不能大于活动总名额')
         return false
       }
-      $('#actCost').after(this._applyCostTemp(arr, arrPrice, arrNum))
+      $('#fymx').append(this._applyCostTemp(arr, arrPrice, arrNum))
       $('#actCost').find('.weui-select').html('收费')
       weui.alert('添加成功')
       this.hide()
@@ -191,6 +191,11 @@ let costWay = { // 费用设置类方法
       weui.alert('添加成功')
       this.hide()
     }
+    $('input[name=applyCostNums]').val($('input[name=fysfzme]').val())// 活动总名额
+    $('input[name=ExpDescr]').val($('textarea[name=ExpDescr]').val())// 活动须知
+    $('input[name=payOnlineInput]').val($('input[name=payOnline]').val())// 是否在线付费
+    $('input[name=otherPayInput]').val($('input[name=otherPay]').val())// 是否其他付费方式
+    $('input[name=refund]').val($('input[name=refundSet]').val())// 退款设置
   },
   _removeItem (item) {
     $(item).parents('.feeitems').remove()

@@ -19,7 +19,6 @@
                             <div class="content-inner">
                                 <div>
                                     <form id="createAct" action="" name="form1" method="post">
-
                                         <div class="weui-cells weui-cells_form">
                                             <div class="weui-cell">
                                                 <div class="weui-cell__bd">
@@ -66,7 +65,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="weui-cell">
+                                                <div class="weui-cell__hd"><label class="weui-label">详细地点</label></div>
+                                                <div class="weui-cell__bd">
+                                                    <input class="weui-input text-right" name="actDetailAddr" type="text" placeholder="详细地址">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="weui-cells weui-cells_form margin" id="uploader">
                                             <input type="hidden" name="hdimg" id="hdimg" value="">
@@ -93,14 +97,27 @@
                                         <div class="weui-cells__title">报名设置</div>
                                         <div class="weui-cells">
                                             <div id="actCost" class="weui-cell weui-cell_select weui-cell_select-after">
+                                               <input type="hidden" name="applyCostType" value="收费">
+                                        
+                                               <input type="hidden" name="refund" value="">
+                                               <input  name="ExpDescr" type="hidden" value="活动须知">
+                                               <input  name="payOnlineInput" type="hidden" value="否">
+                                               <input  name="otherPayInput" type="hidden" value="否">
+
                                                 <div class="weui-cell__hd">
                                                     <label class="weui-label">活动费用</label>
                                                 </div>
                                                 <div class="weui-cell__bd">
-                                                    <div class="weui-select text-right" data-name="actCost">
+                                                    <div class="weui-select text-right">
 
                                                     </div>
                                                 </div>
+
+                                            </div>
+                                            <div class="act_cost_ticket">
+                                                <ul class="padding" id="fymx">
+
+                                                </ul>
                                             </div>
                                             <div class="weui-cell weui-cell_select weui-cell_select-after">
                                                 <div class="weui-cell__hd">
@@ -122,7 +139,7 @@
                                                     <label for="" class="weui-label">活动类别</label>
                                                 </div>
                                                 <div class="weui-cell__bd">
-                                                    <select class="weui-select" style="padding-left:1.6rem" name="actStar">
+                                                    <select class="weui-select" style="padding-left:1.6rem" name="actType">
                                                             <option value="徒步">徒步</option>
                                                             <option value="登山">登山</option>
                                                             <option value="露营">露营</option>
@@ -152,17 +169,17 @@
                                                     <label for="" class="weui-label">报名填写项</label>
                                                 </div>
                                                 <div class="weui-cell__bd">
-                                                    <input type="hidden" name="actOptions" value="昵称,手机">
+                                                    <input id="defaultOptions" type="hidden" name="actOptions[]" value="">
 
                                                     <ul class="apply-options row ">
                                                         <li class="apply-item col-33">
-                                                            <a class="bm-item apply-active">昵称</a>
+                                                            <a class="bm-item apply-active-only">昵称</a>
                                                         </li>
                                                         <li class="apply-item col-33">
-                                                            <a class="bm-item apply-active">手机</a>
+                                                            <a class="bm-item apply-active-only">手机</a>
                                                         </li>
                                                         <li class="apply-item col-33">
-                                                            <a class="bm-item ">性别</a>
+                                                            <a class="bm-item">性别</a>
                                                         </li>
                                                         <li class="apply-item col-33">
                                                             <a class="bm-item apply-active">真实姓名</a>
@@ -170,7 +187,7 @@
                                                         <li class="apply-item col-33">
                                                             <a class="bm-item apply-active">身份证号</a>
                                                         </li>
-                                                        <li id="addItem" class="apply-item col-33">
+                                                        <li id="addItem" class="col-33">
                                                             <a class="bm-item"><i class="iconfont icon-add f-l"></i></a>
                                                         </li>
                                                     </ul>
@@ -260,7 +277,7 @@
                                                     <label for="" class="weui-label">短信提醒</label>
                                                 </div>
                                                 <div class="weui-cell__bd">
-                                                    <select class="weui-select" style="padding-left:0.8rem" name="insurance">
+                                                    <select class="weui-select" style="padding-left:0.8rem" name="sms">
                                                     <option value="1">活动开始24小时前</option>
                                                     <option value="2">活动开始12小时前</option>
                                                     <option value="3">活动开始6小时前</option>
@@ -275,7 +292,7 @@
                                         <div class="weui-cells weui-cells_form">
                                             <div class="weui-cell">
                                                 <div class="weui-cell__bd">
-                                                    <textarea maxlength="200" class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
+                                                    <textarea maxlength="200" name="applyNotice" class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
                                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                                 </div>
                                             </div>
@@ -287,8 +304,8 @@
                                         </span>
                                     </label>
                                         <div class="weui-btn-area">
-                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">发布</a>
-                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">保存草稿</a>
+                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="actSubmit">发布</a>
+                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="actSave">保存草稿</a>
                                         </div>
                                     </form>
                                 </div>

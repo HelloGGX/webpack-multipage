@@ -1,7 +1,7 @@
 import './addApplyOption.less'
 
 import weui from 'weui.js'
-import {Trim} from '../../common/js/dom'
+import {Trim} from 'common/js/dom'
 import $ from 'jquery'
 
 let applyOption = {
@@ -85,7 +85,7 @@ let applyOption = {
     if (flag) {
       var i = 0
 
-      $('.apply-options .apply-item').not('.editDoing').each(function (i) {
+      $('.apply-options .col-33').not('.editDoing').each(function (i) {
         let item = $(this).find('.bm-item')
         let opName = item.html()
         if (Trim(opName, 'g') === Trim(itemName, 'g')) {
@@ -96,7 +96,7 @@ let applyOption = {
         isFlag = true // 有重复为true
       }
     } else {
-      $('.apply-options .apply-item').not('.editDoing').each(function (i) {
+      $('.apply-options .col-33').not('.editDoing').each(function (i) {
         var item = $(this).find('.bm-item')
         var opName = item.html()
         if (Trim(opName, 'g') === Trim(itemName, 'g')) {
@@ -223,7 +223,7 @@ EditapplyOption.Editcomfirm = function (me) { // 当编辑的时候点击保存
   }
 }
 AddapplyOption.Addshow = function () {
-  if ($('.apply-options .apply-item').length >= 11) {
+  if ($('.apply-options .col-33').length >= 11) {
     weui.alert('添加项目数量到达上限!')
   } else {
     this.show()
@@ -241,8 +241,8 @@ AddapplyOption.Addconfirm = function () { // 新增报名项点击确定按钮
 
   let bakeInfo = this.confirm()
   let applyName = $('.apply-text').val()
-  let index = $('.apply-options .apply-item').length - 1
-  let _html = `<li class="apply-item col-33 edit-item" id=${'bm_' + index}>
+  let index = $('.apply-options .col-33').length - 1
+  let _html = `<li class="edit-item col-33" id=${'bm_' + index}>
             <a class="bm-item apply-active" data-child=${bakeInfo}>${applyName}</a>
         </li>`
 
@@ -258,11 +258,29 @@ AddapplyOption.Addconfirm = function () { // 新增报名项点击确定按钮
 
 AddapplyOption.Addinit = function () {
   this.init()
-
+  let defaultArray = ['身份证号', '真实姓名']
   $('#addItem').on('click', () => {
     this.Addshow()
   })
-
+  $('.apply-item').on('click', (e) => {
+    if ($(e.currentTarget).find('.bm-item').hasClass('apply-active-only')) {
+      return false
+    } else {
+      if ($(e.currentTarget).find('.bm-item').hasClass('apply-active')) {
+        $(e.currentTarget).find('.bm-item').removeClass('apply-active')
+        for (var i = 0; i < defaultArray.length; i++) {
+          if (defaultArray[i] === $(e.currentTarget).find('.bm-item').html()) {
+            defaultArray.splice(i, 1)
+          }
+        }
+      } else {
+        $(e.currentTarget).find('.bm-item').addClass('apply-active')
+        defaultArray.push($(e.currentTarget).find('.bm-item').html())
+      }
+    }
+    $('#defaultOptions').val(defaultArray)
+    // console.log($('#defaultOptions').val())
+  })
   $('.confirm').on('click', () => {
     this.Addconfirm()
   })

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- 声明文档使用的字符编码 -->
 <meta charset='utf-8'>
@@ -22,111 +23,124 @@
 <!-- 添加到主屏后的标题（iOS 6 新增） -->
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
-    <title>
-        组织活动
-    </title>
-   
-<link href="/css/libs-bundle-7163b.css" rel="stylesheet"><link href="/css/common-bundle-4c474.css" rel="stylesheet"><link href="/css/create-act-bundle-dba10.css" rel="stylesheet"></head>
+        <title>
+            组织活动
+        </title>
+
+<link href="/css/manifest-bundle-fdb0a.css" rel="stylesheet"><link href="/css/libs-bundle-0bcb9.css" rel="stylesheet"><link href="/css/common-bundle-05ec0.css" rel="stylesheet"><link href="/css/create-act-bundle-efa22.css" rel="stylesheet"></head>
 
 <body>
     <div class="page">
         <div class="banner-container">
     <div class="banner">
         <div class="banner-icon-back banner-left back" ><a href="#"><span></span></a></div>
-        <div class="banner-tit"></div>
+        <div class="banner-tit banner-text"></div>
         <div class="banner-right"><a href="#"></a></div>
     </div>
 </div>
-        <div id="index-content-v2">
-            <div class="weui-tab">
-                <div class="weui-tab__panel content-panel">
-                    <div class="content-wrapper bg-grey">
-                        <div class="content-inner">
-                            <div>
-                                <form id="createAct" action="" name="form1" method="post">
-                                    <div class="weui-cells weui-cells_form">
-                                        <div class="weui-cell">
-                                            <div class="weui-cell__bd">
-                                              <input class="weui-input" type="text" placeholder="输入活动主题">
-                                            </div>
-                                        </div>
-                                        <div class="weui-cell">
-                                            <div class="weui-cell__bd">
-                                                <textarea  maxlength="200" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
-                                                <div class="weui-textarea-counter"><span>0</span>/200</div>
-                                            </div>
-                                        </div>
-                                       
-                                    </div>
-                                    <div class="weui-cells__title">基本信息</div>
-                                    <div class="weui-cells">
-                                        <div  class="weui-cell weui-cell_select weui-cell_select-after actTime">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">活动开始</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" data-name="startTime">
-                                                   
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-grey">
+                            <div class="content-inner">
+                                <div>
+                                    <form id="createAct" action="" name="form1" method="post">
+                                        <div class="weui-cells weui-cells_form">
+                                            <div class="weui-cell">
+                                                <div class="weui-cell__bd">
+                                                    <input class="weui-input" name="actTitle" type="text" placeholder="输入活动主题">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">活动结束</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" data-name="endTime">
-                                                  
+                                            <div class="weui-cell">
+                                                <div class="weui-cell__bd">
+                                                    <textarea maxlength="200" name="actDetail" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                                    <div class="weui-textarea-counter"><span>0</span>/200</div>
                                                 </div>
                                             </div>
+
                                         </div>
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after actAddr">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">活动地点</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" data-name="address">
-                                                    
+                                        <div class="weui-cells__title">基本信息</div>
+                                        <div class="weui-cells">
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动开始</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <div class="weui-select text-right" data-name="startTime">
+                                                        <input id="starTime" type="text" name="starTime" readonly="">
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动结束</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <div class="weui-select text-right" data-name="endTime">
+                                                        <input id="endTime" type="text" name="endTime" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after actAddr">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动地点</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <div class="weui-select text-right" data-name="address">
+                                                        <input id="Actaddr" type="text" name="actAddr" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                       
-                                    </div>
-                                    <div class="weui-cells weui-cells_form margin" id="uploader">
+                                        <div class="weui-cells weui-cells_form margin" id="uploader">
                                             <input type="hidden" name="hdimg" id="hdimg" value="">
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after actCover">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">活动封面</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" data-name="cover">
-                                                    <div class="weui-uploader">
-                                                        <div class="weui-uploader__bd">
-                                                            <ul class="weui-uploader__files img-covers" id="uploaderFiles">
-                                                               
-                                                            </ul>
-                                                            <div class="weui-uploader__input-box fright uploade-cover">
-                                                                <input id="uploaderInput" name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after actCover">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动封面</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <div class="weui-select text-right" data-name="cover">
+                                                        <div class="weui-uploader">
+                                                            <div class="weui-uploader__bd">
+                                                                <ul class="weui-uploader__files img-covers" id="uploaderFiles">
+
+                                                                </ul>
+                                                                <div class="weui-uploader__input-box fright uploade-cover">
+                                                                    <input id="uploaderInput" name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="weui-cells__title">报名设置</div>
-                                    <div class="weui-cells">
-                                        <div id="actCost"  class="weui-cell weui-cell_select weui-cell_select-after">
-                                            <div class="weui-cell__hd">
-                                                <label  class="weui-label">活动费用</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" data-name="actCost">
-                                                   
+                                        <div class="weui-cells__title">报名设置</div>
+                                        <div class="weui-cells">
+                                            <div id="actCost" class="weui-cell weui-cell_select weui-cell_select-after">
+                                               <input type="hidden" name="applyCostType" value="收费">
+                                        
+                                               <input type="hidden" name="refund" value="">
+                                               <input  name="ExpDescr" type="hidden" value="活动须知">
+                                               <input  name="payOnlineInput" type="hidden" value="否">
+                                               <input  name="otherPayInput" type="hidden" value="否">
+
+                                                <div class="weui-cell__hd">
+                                                    <label class="weui-label">活动费用</label>
                                                 </div>
+                                                <div class="weui-cell__bd">
+                                                    <div class="weui-select text-right">
+
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                        </div>
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                            <div class="act_cost_ticket">
+                                                <ul class="padding" id="fymx">
+
+                                                </ul>
+                                            </div>
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after">
                                                 <div class="weui-cell__hd">
                                                     <label for="" class="weui-label">活动积分</label>
                                                 </div>
@@ -142,11 +156,11 @@
                                                 </div>
                                             </div>
                                             <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                                    <div class="weui-cell__hd">
-                                                        <label for="" class="weui-label">活动类别</label>
-                                                    </div>
-                                                    <div class="weui-cell__bd">
-                                                        <select class="weui-select" style="padding-left:1.6rem" name="actStar">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动类别</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <select class="weui-select" style="padding-left:1.6rem" name="actType">
                                                             <option value="徒步">徒步</option>
                                                             <option value="登山">登山</option>
                                                             <option value="露营">露营</option>
@@ -157,138 +171,134 @@
                                                             <option value="团购">团购</option>
                                                             <option value="会务">会务</option>
                                                         </select>
-                                                    </div>
                                                 </div>
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">活动保险</label>
                                             </div>
-                                            <div class="weui-cell__bd">
-                                                <select class="weui-select" style="padding-left:1.1rem" name="insurance">
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动保险</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <select class="weui-select" style="padding-left:1.1rem" name="insurance">
                                                     <option value="1">无保险要求</option>
                                                     <option value="2">会员自行购买</option>
                                                     <option value="3">主办方统一购买</option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after block" style="padding: 0.1rem;">
-                                            <div class="weui-cell__hd" style="padding: 0.1rem 0;">
-                                                <label for="" class="weui-label">报名填写项</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <input type="hidden" name="hdbmtx" value="昵称,手机,性别,真实姓名,身份证号">
-                                                <input type="hidden" name="hdbmnc" id="hdbmnc" value="昵称">
-                                                <input type="hidden" name="hdbmsj" id="hdbmsj" value="手机">
-                                                <input type="hidden" name="hdbmsex" id="hdbmsex" value="">
-                                                <input type="hidden" name="hdbzsname" id="hdbzsname" value="">
-                                                <input type="hidden" name="hdbmsfz" id="hdbmsfz" value="">
-                                                <input type="hidden" name="hdbmzb" id="hdbmzb" value="">
-                                                <input type="hidden" name="hdbmtxid" value="">
-                                                <ul class="apply-options row ">
-                                                    <li class="apply-item col-33">
-                                                        <a class="bm-item apply-active">昵称</a>
-                                                    </li>
-                                                    <li class="apply-item col-33">
-                                                        <a class="bm-item apply-active">手机</a>
-                                                    </li>
-                                                    <li class="apply-item col-33">
-                                                        <a class="bm-item ">性别</a>
-                                                    </li>
-                                                    <li class="apply-item col-33">
-                                                        <a class="bm-item apply-active">真实姓名</a>
-                                                    </li>
-                                                    <li class="apply-item col-33">
-                                                        <a class="bm-item apply-active">身份证号</a>
-                                                    </li>
-                                                    <li id="addItem" class="apply-item col-33">
-                                                        <a class="bm-item"><i class="iconfont icon-add f-l"></i></a>
-                                                    </li>
-                                                </ul>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="weui-cells margin">
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">报名截至</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <div class="weui-select text-right" data-name="endApplyTime">
-                                                  
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="weui-cell">
-                                            <div class="weui-cell__bd">报名方式(个人/组队)</div>
-                                            <div class="weui-cell__ft">
-                                                <div class="bm-way">
-                                                    <input type="hidden" name="hdbmfs" id="hdbmfs" value="个人">
-                                                    <div id="gr" class="bm-way-item f-m active">
-                                                        个人
-                                                    </div>
-                                                    <div id="zd" class="bm-way-item f-m">
-                                                        组队
-                                                    </div>
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after block" style="padding: 0.1rem;">
+                                                <div class="weui-cell__hd" style="padding: 0.1rem 0;">
+                                                    <label for="" class="weui-label">报名填写项</label>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div id="bmWay" style="display: none">
-                                            <div class="weui-cell">
-                                                <div class="weui-cell__hd"><label class="weui-label">队伍数量</label></div>
                                                 <div class="weui-cell__bd">
-                                                    <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入队伍数量">
+                                                    <input id="defaultOptions" type="hidden" name="actOptions[]" value="">
+
+                                                    <ul class="apply-options row ">
+                                                        <li class="apply-item col-33">
+                                                            <a class="bm-item apply-active-only">昵称</a>
+                                                        </li>
+                                                        <li class="apply-item col-33">
+                                                            <a class="bm-item apply-active-only">手机</a>
+                                                        </li>
+                                                        <li class="apply-item col-33">
+                                                            <a class="bm-item">性别</a>
+                                                        </li>
+                                                        <li class="apply-item col-33">
+                                                            <a class="bm-item apply-active">真实姓名</a>
+                                                        </li>
+                                                        <li class="apply-item col-33">
+                                                            <a class="bm-item apply-active">身份证号</a>
+                                                        </li>
+                                                        <li id="addItem" class="col-33">
+                                                            <a class="bm-item"><i class="iconfont icon-add f-l"></i></a>
+                                                        </li>
+                                                    </ul>
+
                                                 </div>
                                             </div>
-                                            <div class="weui-cell list-block margin">
-                                                <div class="row margin ">
-                                                    <div class="col-50">
-                                                        <div class="peopleNum">
-                                                            <span class="smaller-txt">每队人员下限</span>
-                                                            <span>
-                                                                <input name="zdend" maxlength="6" class="high-grey" type="number" value="0" id="groupminNum" placeholder="默认不限" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                        </div>
+                                        <div class="weui-cells margin">
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">报名截至</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <div class="weui-select text-right" data-name="endApplyTime">
+                                                        <input id="endApplyTime" type="text" name="endApplyTime" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="weui-cell">
+                                                <div class="weui-cell__bd">报名方式(个人/组队)</div>
+                                                <div class="weui-cell__ft">
+                                                    <div class="bm-way">
+                                                        <input type="hidden" name="hdbmfs" id="hdbmfs" value="个人">
+                                                        <div id="gr" class="bm-way-item f-m active">
+                                                            个人
+                                                        </div>
+                                                        <div id="zd" class="bm-way-item f-m">
+                                                            组队
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="bmWay" style="display: none">
+                                                <div class="weui-cell">
+                                                    <div class="weui-cell__hd"><label class="weui-label">队伍数量</label></div>
+                                                    <div class="weui-cell__bd">
+                                                        <input class="weui-input" name="groupNum" type="number" pattern="[0-9]*" placeholder="请输入队伍数量">
+                                                    </div>
+                                                </div>
+                                                <div class="weui-cell list-block margin">
+                                                    <div class="row margin ">
+                                                        <div class="col-50">
+                                                            <div class="peopleNum">
+                                                                <span class="smaller-txt">每队人员下限</span>
+                                                                <span>
+                                                                <input name="zdend" pattern="[0-9]*" maxlength="6" class="high-grey" type="number" value="0" id="groupminNum" placeholder="默认不限">
                                                             </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <div class="peopleNum">
-                                                            <span class="smaller-txt">每队人员上限</span>
-                                                            <span><input name="zdtop" maxlength="6" class="high-grey" type="number" value="0" id="groupmaxNum" placeholder="默认不限" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"> </span>
+                                                        <div class="col-50">
+                                                            <div class="peopleNum">
+                                                                <span class="smaller-txt">每队人员上限</span>
+                                                                <span>
+                                                                <input name="zdtop" pattern="[0-9]*" maxlength="6" class="high-grey" type="number" value="0" id="groupmaxNum" placeholder="默认不限">
+                                                            </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="weui-cell weui-cell_switch">
-                                            <div class="weui-cell__bd">报名需要审核</div>
-                                            <div class="weui-cell__ft">
-                                                <input class="weui-switch" type="checkbox" value="否">
+                                            <div class="weui-cell weui-cell_switch">
+                                                <div class="weui-cell__bd">报名需要审核</div>
+                                                <div class="weui-cell__ft">
+                                                    <input class="weui-switch" name="bmsh" type="checkbox" value="否">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="weui-cell weui-cell_switch">
-                                            <div class="weui-cell__bd">允许帮人报名</div>
-                                            <div class="weui-cell__ft">
-                                                <input class="weui-switch" type="checkbox" value="否">
+                                            <div class="weui-cell weui-cell_switch">
+                                                <div class="weui-cell__bd">允许帮人报名</div>
+                                                <div class="weui-cell__ft">
+                                                    <input class="weui-switch" name="bmbr" type="checkbox" value="否">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">活动类型</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <select class="weui-select" style="padding-left:1rem" name="insurance">
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动类型</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <select class="weui-select" style="padding-left:1rem" name="insurance">
                                                     <option value="1">私人活动</option>
                                                     <option value="2">公开活动</option>
                                                     <option value="3">俱乐部内活动</option>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                            <div class="weui-cell__hd">
-                                                <label for="" class="weui-label">短信提醒</label>
-                                            </div>
-                                            <div class="weui-cell__bd">
-                                                <select class="weui-select" style="padding-left:0.8rem" name="insurance">
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">短信提醒</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <select class="weui-select" style="padding-left:0.8rem" name="sms">
                                                     <option value="1">活动开始24小时前</option>
                                                     <option value="2">活动开始12小时前</option>
                                                     <option value="3">活动开始6小时前</option>
@@ -296,36 +306,36 @@
                                                     <option value="3">活动开始1小时前</option>
                                                     <option value="3">不发送</option>
                                                 </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="weui-cells__title">活动发布后，创建活动聊天群项不可更改</div>
-                                    <div class="weui-cells weui-cells_form">
-                                        <div class="weui-cell">
-                                            <div class="weui-cell__bd">
-                                                <textarea maxlength="200" class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
-                                                <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                        <div class="weui-cells__title">活动发布后，创建活动聊天群项不可更改</div>
+                                        <div class="weui-cells weui-cells_form">
+                                            <div class="weui-cell">
+                                                <div class="weui-cell__bd">
+                                                    <textarea maxlength="200" name="applyNotice" class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
+                                                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <label for="weuiAgree" class="weui-agree">
+                                        <label for="weuiAgree" class="weui-agree">
                                         <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
                                         <span class="weui-agree__text">
                                             阅读并同意<a href="javascript:void(0);">《山渡户外联盟服务协议》</a>
                                         </span>
                                     </label>
-                                    <div class="weui-btn-area">
-                                        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">发布</a>
-                                        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">保存草稿</a>
-                                    </div>
-                                </form>
+                                        <div class="weui-btn-area">
+                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="actSubmit">发布</a>
+                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="actSave">保存草稿</a>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--======================这是新增编辑活动报名项的页面=========================-->
+            <!--======================这是新增编辑活动报名项的页面=========================-->
 <div id="applyOptions" class="cover" style="display: none;">
         <div id="infoEdit">
             <div class="addWay-title">
@@ -336,7 +346,7 @@
             </div>
             <input  class="post_party_title apply-text" type="text" maxlength="10" placeholder="输入用户报名填写项,10个字以内">
 
-            <p class="item-divider apply-edit-title apply-option-show apply-bake-opt"><i class="iconfont icon-enter"></i>报名设置</p>
+            <p class="item-divider apply-edit-title apply-option-show apply-bake-opt"><i class="iconfont icon-enter"></i>是否需要报名候选项(关闭：否，打开：是)</p>
 
             <div class="list-block margin apply-edit-list">
                 <ul class="bakeInfo">
@@ -357,9 +367,9 @@
             </div>
         </div>
     </div>
-        <!--======================这是设置活动费用项的页面=========================-->
+                <!--======================这是设置活动费用项的页面=========================-->
 <div id="setApplyCost" class="cover" style="display: none;">
-        <div class="apply-cost-inner">
+        <div class="cover-inner">
             <div class="cover-banner-container">
                     <div class="cover-banner">
                         <div id="applyCostCancel" class="cover-banner-icon-back cover-banner-left"><a href="#"><span></span></a></div>
@@ -367,8 +377,7 @@
                         <div id="applyCostSave" class="cover-banner-right"><a href="#">保存</a></div>
                     </div>
             </div>
-            <div class="apply-cost-form">
-                    <input type="hidden" name="fycl" id="fycl" value="免费">
+            <div class="cover-form">
                     <div class="weui-cells weui-cells_radio margin"> 
                         <label id="unfee" class="weui-cell weui-check__label" for="r1">
                             <div class="weui-cell__bd">免费</div> 
@@ -386,12 +395,12 @@
                         </label>
                     </div>
                     <div class="weui-cells">
-                            <div  id="unfeeDetail" class="weui-cell">
-                                    <div class="weui-cell__hd"><label class="weui-label">活动总名额</label></div>
-                                    <div class="weui-cell__bd">
-                                            <input class="weui-input" pattern="[0-9]*" id="apllyNum" type="number" name="fyzme"  placeholder="默认不限">
-                                    </div>
+                        <div  id="unfeeDetail" class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">活动总名额</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" pattern="[0-9]*" id="apllyNum" type="number" name="fyzme"  placeholder="默认不限">
                             </div>
+                        </div>
                     </div>
                     <div id="feeDetail" style="display: none;">
                         <div class="weui-cells margin">
@@ -405,12 +414,10 @@
                                         <div class="weui-cell__hd">
                                             <label for="" class="weui-label">退款设置</label>
                                         </div>
-                                        <input type="hidden" name="tk" id="tk" value="2">
-                                    <input type="hidden" name="tkname" id="tkname" value="指定时间前可申请退款">
-                                    <input type="hidden" name="tkday" id="tkday" value="2018-5-9 16:26">
+                                       
                                         <div class="weui-cell__bd">
-                                            <div class="weui-select text-right" data-name="refund">
-                                               
+                                            <div class="weui-select text-right">
+                                               <input type="text" name="refundSet" value="不支持退款">
                                             </div>
                                         </div>
                                 </div>
@@ -438,7 +445,7 @@
                         <div class="weui-cells weui-cells_form">
                             <div class="weui-cell">
                                 <div class="weui-cell__bd">
-                                    <textarea maxlength="200" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                    <textarea maxlength="200" name="ExpDescr"  class="weui-textarea" placeholder="费用说明" rows="3"></textarea>
                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                 </div>
                             </div>
@@ -447,7 +454,7 @@
                             <div class="weui-cell weui-cell_switch">
                                 <div class="weui-cell__bd">在线付费</div>
                                 <div class="weui-cell__ft">
-                                    <input class="weui-switch" type="checkbox" value="否">
+                                    <input class="weui-switch" name="payOnline" type="checkbox" value="否">
                                 </div>
                             </div>
                         </div>
@@ -459,7 +466,7 @@
                             <div class="weui-cell weui-cell_switch">
                                 <div class="weui-cell__bd">其他支付方式</div>
                                 <div class="weui-cell__ft">
-                                    <input class="weui-switch" type="checkbox" value="否">
+                                    <input class="weui-switch" type="checkbox" name="otherPay" value="否">
                                 </div>
                             </div>
                         </div>
@@ -471,6 +478,6 @@
         </div>
 </div>
     </div>
-<script type="text/javascript" src="/js/libs/libs.dll.js"></script><script type="text/javascript" src="/js/manifest.dc9c8.js"></script><script type="text/javascript" src="/js/libs/libs.dc9c8.js"></script><script type="text/javascript" src="/js/common.4c474.js"></script><script type="text/javascript" src="/js/create-act.dba10.js"></script></body>
+<script type="text/javascript" src="/js/libs/libs.dll.js"></script><script type="text/javascript" src="/js/manifest.bf151.js"></script><script type="text/javascript" src="/js/libs/libs.bf151.js"></script><script type="text/javascript" src="/js/common.05ec0.js"></script><script type="text/javascript" src="/js/create-act.efa22.js"></script></body>
 
 </html>

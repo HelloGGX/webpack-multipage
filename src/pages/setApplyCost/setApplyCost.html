@@ -9,7 +9,6 @@
                     </div>
             </div>
             <div class="cover-form">
-                    <input type="hidden" name="fycl" id="fycl" value="免费">
                     <div class="weui-cells weui-cells_radio margin"> 
                         <label id="unfee" class="weui-cell weui-check__label" for="r1">
                             <div class="weui-cell__bd">免费</div> 
@@ -27,12 +26,12 @@
                         </label>
                     </div>
                     <div class="weui-cells">
-                            <div  id="unfeeDetail" class="weui-cell">
-                                    <div class="weui-cell__hd"><label class="weui-label">活动总名额</label></div>
-                                    <div class="weui-cell__bd">
-                                            <input class="weui-input" pattern="[0-9]*" id="apllyNum" type="number" name="fyzme"  placeholder="默认不限">
-                                    </div>
+                        <div  id="unfeeDetail" class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">活动总名额</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" pattern="[0-9]*" id="apllyNum" type="number" name="fyzme"  placeholder="默认不限">
                             </div>
+                        </div>
                     </div>
                     <div id="feeDetail" style="display: none;">
                         <div class="weui-cells margin">
@@ -46,12 +45,10 @@
                                         <div class="weui-cell__hd">
                                             <label for="" class="weui-label">退款设置</label>
                                         </div>
-                                        <input type="hidden" name="tk" id="tk" value="2">
-                                    <input type="hidden" name="tkname" id="tkname" value="指定时间前可申请退款">
-                                    <input type="hidden" name="tkday" id="tkday" value="2018-5-9 16:26">
+                                       
                                         <div class="weui-cell__bd">
-                                            <div class="weui-select text-right" data-name="refund">
-                                               
+                                            <div class="weui-select text-right">
+                                               <input type="text" name="refundSet" value="不支持退款">
                                             </div>
                                         </div>
                                 </div>
@@ -79,7 +76,7 @@
                         <div class="weui-cells weui-cells_form">
                             <div class="weui-cell">
                                 <div class="weui-cell__bd">
-                                    <textarea maxlength="200" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                    <textarea maxlength="200" name="ExpDescr"  class="weui-textarea" placeholder="费用说明" rows="3"></textarea>
                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                 </div>
                             </div>
@@ -88,7 +85,7 @@
                             <div class="weui-cell weui-cell_switch">
                                 <div class="weui-cell__bd">在线付费</div>
                                 <div class="weui-cell__ft">
-                                    <input class="weui-switch" type="checkbox" value="否">
+                                    <input class="weui-switch" name="payOnline" type="checkbox" value="否">
                                 </div>
                             </div>
                         </div>
@@ -100,7 +97,7 @@
                             <div class="weui-cell weui-cell_switch">
                                 <div class="weui-cell__bd">其他支付方式</div>
                                 <div class="weui-cell__ft">
-                                    <input class="weui-switch" type="checkbox" value="否">
+                                    <input class="weui-switch" type="checkbox" name="otherPay" value="否">
                                 </div>
                             </div>
                         </div>

@@ -7,6 +7,16 @@ let clubItem = {
   <input type="text" name="alerInput" maxlength="10" placeholder="创建我自己的主打项目">
   <div id="saveMyOwnItem" class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
   </div>`,
+  textAreaTemp: `<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+      <div class="weui-cell__bd">
+          <textarea name="declaration" class="weui-textarea" style="height: 1.4rem;" maxlength="200" placeholder="请输入文本" rows="3"></textarea>
+          <div class="weui-textarea-counter"><span>0</span>/200</div>
+          <div class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
+      </div>
+  </div>
+</div>`,
+  itemArray: ['徒步'],
   init () {
     $('#createMyType').on('click', (e) => {
       require.ensure([], () => {
@@ -19,26 +29,74 @@ let clubItem = {
         })
       }, 'aler')
     })
-
+    $('#declaration').click((e) => {
+      let _thi = this
+      require.ensure([], () => {
+        require('vendor/dialog')
+        $.alert.aler({
+          title: '提示',
+          content: this.textAreaTemp,
+          height: 320,
+          blankclose: true,
+          okCallback: function () {
+            $(e.currentTarget).val(_thi.getVal())
+          }
+        })
+      }, 'aler')
+    })
+    $('#introduction').click((e) => {
+      let _thi = this
+      require.ensure([], () => {
+        require('vendor/dialog')
+        $.alert.aler({
+          title: '提示',
+          content: this.textAreaTemp,
+          height: 320,
+          blankclose: true,
+          okCallback: function () {
+            $(e.currentTarget).val(_thi.getVal())
+          }
+        })
+      }, 'aler')
+    })
     $('body').on('click', '#saveMyOwnItem', () => {
       this.createItem()
     })
     $('#itemSave').on('click', () => {
       this.saveItems()
     })
+    $('.weui-check__label').click(() => {
+      this.selected()
+    })
+    $('#addMainType').click(() => {
+      $('#addClubMainItem').show()
+    })
+    $('#itemCancel').click(() => {
+      $('#addClubMainItem').hide()
+    })
   },
   selected () {
-
+    let _thi = this
+    this.itemArray = []
+    $.each($('input[name=labelItem]:checkbox:checked'), function () {
+      _thi.itemArray.push($(this).val())
+    })
+    console.log(_thi.itemArray)
   },
   saveItems () {
-    weui.form.validate('.cover-form', function (error) {
+    weui.form.validate('.cover-form', (error) => {
       console.log(error)
       if (!error) {
         var loading = weui.loading('提交中...')
-
-        setTimeout(function () {
+        setTimeout(() => {
           loading.hide()
-          weui.toast('提交成功', 3000)
+          $('#addMainType').find('.weui-cell__ft').html(`
+            ${this.itemArray.map(item => `
+              <span>${item}</span>
+            `)}
+          `)
+          weui.toast('提交成功', 1000)
+          $('#addClubMainItem').hide()
         }, 800)
       }
     })
@@ -48,7 +106,7 @@ let clubItem = {
     $('#labelLists').prepend(`
     <label class="weui-cell weui-check__label">
     <div class="weui-cell__hd">
-        <input type="checkbox" class="weui-check" name="labelItem"  checked="checked">
+        <input type="checkbox" class="weui-check" name="labelItem"  checked="checked" value="${itemVal}">
         <i class="weui-icon-checked"></i>
     </div>
     <div class="weui-cell__bd">
@@ -56,6 +114,10 @@ let clubItem = {
     </div>
 </label>
     `)
+    this.selected()
+  },
+  getVal () {
+    return $('textarea[name=declaration]').val()
   }
 }
 export {clubItem}

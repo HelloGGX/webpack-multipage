@@ -4,9 +4,17 @@ import './create-act.less'
 import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
+import weui from 'weui.js'
 import {AddapplyOption, EditapplyOption} from '../addApplyOption/addApplyOption'// 引入增加和编辑报名选项的对象
 import {costWay} from '../setApplyCost/setApplyCost'// 引入费用设置的对象
+import model from 'api/getIndex'
+import vali from 'vendor/validate'
 
+let regexp = {
+  regexp: {
+    PHONE: vali.mobile()
+  }
+}
 let all = (function () {
   let banner = {
     init () {
@@ -23,15 +31,6 @@ let all = (function () {
     init () {
       $('#actCost').on('click', () => {
         costWay.show()
-        // require.ensure([], () => {
-        //   require('vendor/dialog')
-        //   $.alert.aler({
-        //     title: '提示',
-        //     content: '<p class="f16">hello</p>',
-        //     height: 120,
-        //     blankclose: true
-        //   })
-        // }, 'aler')
       })
     }
   }
@@ -73,6 +72,31 @@ let all = (function () {
           $('#bmWay').show()
           $('#hdbmfs').val('组队')
         }
+      })
+      $('#actSubmit').click((e) => {
+        let _thi = this
+        weui.form.validate('#createAct', function (error) {
+          console.log(error)
+          if (!error) {
+            var loading = weui.loading('提交中...')
+            setTimeout(function () {
+              loading.hide()
+              _thi._postActData()
+              weui.toast('提交成功', 3000)
+            }, 1500)
+          }
+        }, regexp)
+      })
+    },
+
+    _postActData: function () {
+      model.createActData($('#createAct')).then(() => {
+        // 获取数据失败时的处理逻辑
+
+        weui.alert('提交成功')
+      }).catch((ErrMsg) => {
+        // 获取数据失败时的处理逻辑
+        weui.alert('数据获取有误')
       })
     }
   }

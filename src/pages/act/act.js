@@ -1,4 +1,4 @@
-import './activity.less'
+import './act.less'
 import 'components/tabs/tabs.less'
 import model from '../../api/getIndex'
 import $ from 'jquery'

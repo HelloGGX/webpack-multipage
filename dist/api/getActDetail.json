@@ -1,0 +1,128 @@
+{
+    "server_time": 1526031634,
+    "club":{
+        "club_name":"山渡户外俱乐部",
+        "club_member":200,
+        "club_acts":100
+    },
+    "club_recent_act": [
+        {
+            "act_id": 1179585836,
+            "act_name": "【丹蒂曼】2018夏小狗圆领亮丝T恤女短袖款宽松打底衫体恤ins上衣",
+            "short_name": "【降价抢100件，抢完恢复39.9】",
+            "act_type":["骑行","美食","登山"],
+            "act_addr":"四川省成都市新都区青年路西北门",
+            "act_time":"2017-11-23 09:00至2018-06-20 22:00",
+            "act_integral":100,
+            "thumb_url": "http://t10img.yangkeduo.com/images/2018-04-28/b57656c791bdcac43f8903486f0eb857.jpeg",
+            "hd_thumb_url": "http://t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg",
+            "image_url": "http://t08img.yangkeduo.com/images/2018-04-28/a950c27d03ef573e1ab59af16be2d2b1.jpeg",
+            "sales": 1123,
+            "sales_limit":"不限",
+            "price": 2990,
+            "normal_price": 3990,
+            "mall_id": 91243,
+            "act_should_know":"符合人体黄金比例的版型,时尚百搭,适合任何场合,适合大多数人身材,缔造与众不同的高品质女装,为你的气场加分,只为展现完美的你而倾心打造,全店款式新颖到你让你心跳,气质美到让你尖叫!",
+            "act_detail_text":"详情介绍信息",
+            "act_detail_imgs":[
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg"
+            ],
+            "p_rec": {
+                "t": "default",
+                "g": "OLD",
+                "bk": "27"
+            }
+        },
+        {
+            "act_id": 1179585836,
+            "act_name": "【丹蒂曼】2018夏小狗圆领亮丝T恤女短袖款宽松打底衫体恤ins上衣",
+            "short_name": "【降价抢100件，抢完恢复39.9】",
+            "act_type":["骑行","美食","登山"],
+            "act_addr":"四川省成都市新都区青年路西北门",
+            "act_time":"2017-11-23 09:00至2018-06-20 22:00",
+            "act_integral":100,
+            "thumb_url": "http://t10img.yangkeduo.com/images/2018-04-28/b57656c791bdcac43f8903486f0eb857.jpeg",
+            "hd_thumb_url": "http://t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg",
+            "image_url": "http://t08img.yangkeduo.com/images/2018-04-28/a950c27d03ef573e1ab59af16be2d2b1.jpeg",
+            "sales": 1123,
+            "sales_limit":"不限",
+            "price": 2990,
+            "normal_price": 3990,
+            "mall_id": 91243,
+            "act_should_know":"符合人体黄金比例的版型,时尚百搭,适合任何场合,适合大多数人身材,缔造与众不同的高品质女装,为你的气场加分,只为展现完美的你而倾心打造,全店款式新颖到你让你心跳,气质美到让你尖叫!",
+            "act_detail_text":"详情介绍信息",
+            "act_detail_imgs":[
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg"
+            ],
+            "p_rec": {
+                "t": "default",
+                "g": "OLD",
+                "bk": "27"
+            }
+        },
+        {
+            "act_id": 1179585836,
+            "act_name": "【丹蒂曼】2018夏小狗圆领亮丝T恤女短袖款宽松打底衫体恤ins上衣",
+            "short_name": "【降价抢100件，抢完恢复39.9】",
+            "act_type":["骑行","美食","登山"],
+            "act_addr":"四川省成都市新都区青年路西北门",
+            "act_time":"2017-11-23 09:00至2018-06-20 22:00",
+            "act_integral":100,
+            "thumb_url": "http://t10img.yangkeduo.com/images/2018-04-28/b57656c791bdcac43f8903486f0eb857.jpeg",
+            "hd_thumb_url": "http://t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg",
+            "image_url": "http://t08img.yangkeduo.com/images/2018-04-28/a950c27d03ef573e1ab59af16be2d2b1.jpeg",
+            "sales": 1123,
+            "sales_limit":"不限",
+            "price": 2990,
+            "normal_price": 3990,
+            "mall_id": 91243,
+            "act_should_know":"符合人体黄金比例的版型,时尚百搭,适合任何场合,适合大多数人身材,缔造与众不同的高品质女装,为你的气场加分,只为展现完美的你而倾心打造,全店款式新颖到你让你心跳,气质美到让你尖叫!",
+            "act_detail_text":"详情介绍信息",
+            "act_detail_imgs":[
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg"
+            ],
+            "p_rec": {
+                "t": "default",
+                "g": "OLD",
+                "bk": "27"
+            }
+        }
+    ],
+    "list": [
+        {
+            "act_id": 1179585836,
+            "act_name": "【丹蒂曼】2018夏小狗圆领亮丝T恤女短袖款宽松打底衫体恤ins上衣",
+            "short_name": "【降价抢100件，抢完恢复39.9】",
+            "act_type":["骑行","美食","登山"],
+            "act_addr":"四川省成都市新都区青年路西北门",
+            "act_time":"2017-11-23 09:00至2018-06-20 22:00",
+            "act_integral":100,
+            "thumb_url": "http://t10img.yangkeduo.com/images/2018-04-28/b57656c791bdcac43f8903486f0eb857.jpeg",
+            "hd_thumb_url": "http://t09img.yangkeduo.com/images/2018-04-28/da4915516bc910a53df445f20a54b584.jpeg",
+            "image_url": "http://t08img.yangkeduo.com/images/2018-04-28/a950c27d03ef573e1ab59af16be2d2b1.jpeg",
+            "sales": 1123,
+            "sales_limit":"不限",
+            "price": 2990,
+            "normal_price": 3990,
+            "mall_id": 91243,
+            "act_should_know":"符合人体黄金比例的版型,时尚百搭,适合任何场合,适合大多数人身材,缔造与众不同的高品质女装,为你的气场加分,只为展现完美的你而倾心打造,全店款式新颖到你让你心跳,气质美到让你尖叫!",
+            "act_detail_text":"详情介绍信息",
+            "act_detail_imgs":[
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg",
+                "//t10img.yangkeduo.com/images/2018-05-09/b5663b5aa8dafe2ed0d8bdce162d72ac.jpeg"
+            ],
+            "p_rec": {
+                "t": "default",
+                "g": "OLD",
+                "bk": "27"
+            }
+        }
+    ]
+}

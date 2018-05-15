@@ -187,6 +187,7 @@ EditapplyOption.Editshow = function (me) { // me代表点击的报名选项
           }
         }
         window.sessionStorage.setItem('applyItems', JSON.stringify(sessionApply))// 存储报名选项
+        $('input[name=actOptions1]').val(window.sessionStorage.getItem('applyItems'))
       }
     }
   ], [
@@ -218,7 +219,7 @@ EditapplyOption.Editcomfirm = function (me) { // 当编辑的时候点击保存
       }
     }
     window.sessionStorage.setItem('applyItems', JSON.stringify(sessionApply))// 存储报名选项
-
+    $('input[name=actOptions1]').val(window.sessionStorage.getItem('applyItems'))
     weui.alert('修改成功!', function () { _thi.hide(me) })
   }
 }
@@ -252,6 +253,7 @@ AddapplyOption.Addconfirm = function () { // 新增报名项点击确定按钮
     this.applyItem[applyName] = bakeInfo.split(',')
     let applyItems = JSON.stringify(this.applyItem)
     window.sessionStorage.setItem('applyItems', applyItems)// 存储报名选项
+    $('input[name=actOptions1]').val(window.sessionStorage.getItem('applyItems'))
     weui.alert('添加成功', function () { _thi.hide() })
   }
 }

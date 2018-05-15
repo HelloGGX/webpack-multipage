@@ -125,15 +125,15 @@ let costWay = { // 费用设置类方法
    
     <div class="col-70">
     <div class="act_cost_title f-l">${arr[i]}</div>
-    <input type="hidden" name="applyCostName[]" value="${arr[i]}">
+    <input type="hidden" name="applyCostName" value="${arr[i]}">
     <div class="act_cost_people f-s ">
     <span>名额</span>${arrNum[i]}人
-    <input type="hidden" name="applyCostNum[]" value="${arrNum[i]}">
+    <input type="hidden" name="applyCostNum" value="${arrNum[i]}">
     </div>
     </div>
     <div class="col-30">
     <div class="act_cost_num f-l-x">￥<span>${arrPrice[i]}</span></div>
-    <input type="hidden" name="applyCostPrice[]" value="${arrPrice[i]}">
+    <input type="hidden" name="applyCostPrice" value="${arrPrice[i]}">
     </div></li>
   `).join('')}`
   },
@@ -221,7 +221,7 @@ let costWay = { // 费用设置类方法
                 费用设置
               </div>
               <div class="item-after  entered-input" style="width:70%;">
-                <input id="feename" maxlength="20" type="text" name="fyName[]" class="fyName"
+                <input id="feename" maxlength="20" type="text" name="fyName" class="fyName"
                 placeholder="20字以内">
               </div>
             </div>
@@ -236,7 +236,7 @@ let costWay = { // 费用设置类方法
                 金额
               </div>
               <div class="item-after  entered-input" style="width:70%;">
-                <input class="feeprice" pattern="[0-9]*" type="number" name="fyje[]" placeholder="有人报名后不能修改">
+                <input class="feeprice" pattern="[0-9]*" type="number" name="fyje" placeholder="有人报名后不能修改">
               </div>
             </div>
           </div>
@@ -250,7 +250,7 @@ let costWay = { // 费用设置类方法
                 名额
               </div>
               <div class="item-after  entered-input" style="width:70%;">
-                <input class="feenum" pattern="[0-9]*" type="number" name="fyme[]" placeholder="默认不限">
+                <input class="feenum" pattern="[0-9]*" type="number" name="fyme" placeholder="默认不限">
               </div>
             </div>
           </div>

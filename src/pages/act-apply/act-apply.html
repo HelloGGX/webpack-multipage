@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+        <div id="index-content-v2">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                    <div class="content-wrapper bg-grey">
+                        <div class="content-inner">
+                            <div>
+                                <form id="actApply" action="" name="form1" method="post">
+                                    <div class="weui-cells__title">报名人</div>
+            
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-apply-comfirm">
+                        <a href="javascript:;" class="weui-btn weui-btn_primary">确定报名</a>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

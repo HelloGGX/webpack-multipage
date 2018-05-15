@@ -8,7 +8,7 @@ const request = axios.create()
 
 request.interceptors.request.use(config => {
   config.data = qs.stringify(config.data)
-  config.header = {
+  config.headers = {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
   return config

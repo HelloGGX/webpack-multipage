@@ -15,7 +15,6 @@ export default {
   createActData (e) { // 创建活动提交数据
     let data = serializeObject(e)
 
-    console.log(data)
     return db.handleRequest(db.request.post('getAct_up.php', {
       // params: {
       //   appid: 'SD119',

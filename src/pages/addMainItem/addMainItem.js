@@ -95,6 +95,7 @@ let clubItem = {
               <span>${item}</span>
             `)}
           `)
+          $('input[name=majorType]').val(this.itemArray)
           weui.toast('提交成功', 1000)
           $('#addClubMainItem').hide()
         }, 800)

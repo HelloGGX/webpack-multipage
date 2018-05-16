@@ -43,8 +43,11 @@ let all = (function () {
       })
     },
     _postClubData: function () { // 提交俱乐部数据
-      model.createClubData($('#createClub')).then(() => {
+      model.createClubData($('#createClub')).then((e) => {
         // 获取数据成功时的处理逻辑
+        if (e.state === 'ok') {
+          weui.alert('提交成功，等待审核')
+        }
 
         weui.alert('提交成功')
       }).catch((ErrMsg) => {

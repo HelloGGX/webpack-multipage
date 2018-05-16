@@ -49,14 +49,18 @@ const handleRequest = (request) => {
       if (!data) {
         return reject(createError(400, 'no data'))
       }
+      // if (res.statusText === 'OK') { // 数据插入成功
+      //   weui.alert('创建成功，正在加紧审核')
+      // }
       // if (!data.success) {
       //   return reject(createError(400, data.message))
       // }
+
       resolve(data)
     }).catch((err) => {
       const resp = err.response
       console.log('---------------', resp)
-      if (resp.status === 401) {
+      if (resp.statusText === 401) {
         reject(createError(401, 'need auth'))
       }
     })

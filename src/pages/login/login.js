@@ -14,7 +14,7 @@ let all = (function () {
       })
 
       $('.am-list-action').on('click', (e) => {
-
+        $(e.currentTarget).prev().find('input').val('')
       })
     }
   }

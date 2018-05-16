@@ -25,6 +25,7 @@ let all = (function () {
     },
     _temple: function (i, data) { // 模板
       return `<div class="store-item" data-id=${data[i].id}>
+            <a href="act-detail.html?id=${data[i].id}">
             <div class="store-content">
                 <div class="goods-image">
                     <div class="image-container">
@@ -41,6 +42,7 @@ let all = (function () {
                     <div class="goods-buy">立即查看</div>
                 </div>
             </div>
+            </a>
             </div>`
     },
     _getNewData: function (data) {

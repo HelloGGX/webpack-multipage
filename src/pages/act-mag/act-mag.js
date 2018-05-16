@@ -18,7 +18,7 @@ let all = (function () {
         <a href="act-info-mag.html">
           <div class="mag-item-inner">
               <div class="mag-item-title-row" style="margin-bottom:0.1rem">
-                  <div class="mag-item-title">${data[i].act_name}</div>
+                  <div class="mag-item-title"><p>${data[i].act_name}</p></div>
               </div>
               <div class="mag-item-subtitle">
                   <span class="act_over">

@@ -2,6 +2,17 @@ import {serializeObject} from 'common/js/dom'
 import db from '../db/db'
 
 export default {
+  postLoginData (e) {
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('login_up.php', {
+      params: {
+        username: 'ggx',
+        passwd: '12345678'
+      },
+      data: data,
+      showLoading: true
+    }))
+  },
   getIndexData (data) { // 获取首页数据
     return db.handleRequest(db.request.get('getIndex.php', {
       params: data,

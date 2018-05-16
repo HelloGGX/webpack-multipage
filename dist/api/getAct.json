@@ -7,7 +7,15 @@
         "time":"2018/3/29",
         "price":168,
         "integral":100
-    }
+    },
+    {
+      "id":2, 
+      "imgsrc":"//img.alicdn.com/bao/uploaded/i4/1910949384/TB1k_WRaEo09KJjSZFDXXb9npXa_!!0-item_pic.jpg_400x400Q50s50.jpg_.webp",
+      "name":"同城的活动 ",
+      "time":"2018/3/29",
+      "price":168,
+      "integral":100
+  }
   ],
   "hot":[
     {

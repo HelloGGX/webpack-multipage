@@ -82,7 +82,7 @@ let all = (function () {
             setTimeout(function () {
               loading.hide()
               _thi._postActData()
-              weui.toast('提交成功', 3000)
+              weui.toast('提交成功', 1000)
             }, 1500)
           }
         }, regexp)

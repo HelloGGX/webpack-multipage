@@ -2,7 +2,7 @@ import './club.less'
 import 'components/tabs/tabs.less'
 import 'components/banner/banner.less'
 import $ from 'jquery'
-import model from '../../api/getIndex'
+import model from 'api/getIndex'
 import weui from 'weui.js'
 
 let all = (function () {
@@ -83,6 +83,7 @@ let all = (function () {
       this.switch()
     },
     _temple: function (i, data) { // 模板
+      let keyword = data[i].keyword.split(',')
       return `<div class="margin weui-panel weui-panel_access" id="${TYPE + data[i].id}">
       <div class="weui-panel__bd">
         <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
@@ -92,7 +93,7 @@ let all = (function () {
           <div class="weui-media-box__bd">
             <h4 class="f-m weui-media-box__title">${data[i].name}</h4>
             <div class="star"><img src=${require(`../../imgs/icons/VIP${data[i].star}@2x.png`)} /></div>
-            <div class="keyword">${data[i].keyword.map(key => `
+            <div class="keyword">${keyword.map(key => `
               <span>${key}</span>
             `).join('')}
             </div>

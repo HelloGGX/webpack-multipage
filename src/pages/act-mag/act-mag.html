@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page">
+            <%= require('html-loader!../../components/banner/banner.html')  %>
+        <div id="index-content-v2">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                    <div class="container-wrapper">
+                        <div class="container-inner">
+                                <!--tabs选项框-->
+                                <div class="nav_fixed_wrap relative">
+                                        <ul class="nav_fixed_catgoods nav-fixed-max-width">
+                                            <li class="fixed_nav_item_catgoods fixed_nav_item_catgoods_first" data-type="createActs">
+                                                <span class="nav_cur_cat">我管理的</span>
+                                            </li>
+                                            <li class="fixed_nav_item_catgoods" data-type="applyActs">
+                                                <span class="">我报名的</span>
+                                            </li>
+                                        </ul>
+                                </div>
+                                <div class="weui-tab__panel content-panel">
+                                        <div class="content-wrapper">
+                                            <div class="content-inner">
+                                                <div>
+                                                    <ul id="acts-grid" style="margin-top: 0.4rem;">
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

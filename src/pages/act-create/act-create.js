@@ -1,5 +1,5 @@
 import 'components/banner/banner.less'
-import './create-act.less'
+import './act-create.less'
 
 import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法

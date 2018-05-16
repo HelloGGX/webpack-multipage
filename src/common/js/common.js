@@ -85,6 +85,7 @@ let swit = {
     }
   }
 }
+
 $(function () {
   title.init()
   scroll.init()

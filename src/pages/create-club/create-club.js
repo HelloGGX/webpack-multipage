@@ -6,6 +6,7 @@ import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import {pickerAddr} from 'components/picker/picker'// 引入地区和日期选择对象方法
 import {clubItem} from '../addMainItem/addMainItem'// 添加主打项目 宣言 简介
 import vali from 'vendor/validate'
+import model from 'api/getIndex'
 let regexp = {
   regexp: {
     PHONE: vali.mobile()
@@ -26,17 +27,29 @@ let all = (function () {
         if ($('#uploaderFiles li').length === 0) {
           weui.topTips('请上传俱乐部logo', 1000)
         } else {
+          let _thi = this
           weui.form.validate('#createClub', function (error) {
             console.log(error)
             if (!error) {
               var loading = weui.loading('提交中...')
               setTimeout(function () {
                 loading.hide()
-                weui.toast('提交成功', 3000)
+                _thi._postClubData()
+                weui.toast('提交成功', 1000)
               }, 1500)
             }
           }, regexp)
         }
+      })
+    },
+    _postClubData: function () { // 提交俱乐部数据
+      model.createClubData($('#createClub')).then(() => {
+        // 获取数据成功时的处理逻辑
+
+        weui.alert('提交成功')
+      }).catch((ErrMsg) => {
+        // 获取数据失败时的处理逻辑
+        weui.alert('数据获取有误')
       })
     }
   }

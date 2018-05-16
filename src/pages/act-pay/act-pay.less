@@ -105,3 +105,48 @@
 	font-size: 14px;
 	color: #8e8e8e;
 }
+/*支付方式*/
+
+.payways-main-li{
+	height: 50px;
+	padding-left: 15px;
+}
+.payways-main-li img{
+	float: left;
+	margin: 10px 0;
+}
+.payways-main-li span {
+	line-height: 50px;
+	font-size: 16px;
+	float: left;
+	margin-left: 10px;
+}
+.payways-main-li a{
+	font-size: 12px;
+	color: #8E8E8E;
+	margin-left: 9px;
+}
+.payways-main-radio{
+	float: right;
+	margin-right: 30px;
+}
+
+.payways-main-radio{position: relative;display: inline-block;margin-top: 8px;}
+input[type=radio] {visibility: hidden;}
+.payways-main-radio label{cursor: pointer;position: absolute; width: 20px; height: 20px;top: 5px; left: 0; background: url(../../imgs/icons/pay_uncheck.png) no-repeat center; z-index: 10;}
+/*.payways-main-radio input[type=radio]:checked + label:after { display: none;opacity:1; background: transparent;}
+.payways-main-radio input[type=radio]:checked + label{background: url(../img/选择@2x-拷贝-2@2x.png) no-repeat center; background-size: 20px 20px;z-index: 100;}*/
+.payways-main-li .active{
+	cursor: pointer;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    left: 0;
+    background: url('../../imgs/icons/pay_check.png') no-repeat center;
+    z-index: 10;
+}
+.add-apply-person{
+    float: right; padding-right: 15px;position: absolute;right: 0;top: 15px;font-size: 16px;color: #1aad19;
+}
+

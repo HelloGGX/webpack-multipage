@@ -7,7 +7,7 @@ let clubItem = {
   <input type="text" name="alerInput" maxlength="10" placeholder="创建我自己的主打项目">
   <div id="saveMyOwnItem" class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
   </div>`,
-  textAreaTemp: `<div class="weui-cells weui-cells_form">
+  textAreaTemp: `<div class="weui-cells weui-cells_form margin">
   <div class="weui-cell">
       <div class="weui-cell__bd">
           <textarea name="declaration" class="weui-textarea" style="height: 1.4rem;" maxlength="200" placeholder="请输入文本" rows="3"></textarea>

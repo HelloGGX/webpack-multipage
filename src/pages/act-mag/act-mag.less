@@ -1,0 +1,104 @@
+@import '../../common/css/variable.less';
+
+.mag-grid-wrapper{
+    background:@color-background;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    .mag-item{
+        box-sizing: border-box;
+    position: relative;
+    background-color: #fff;
+    margin: .06rem 0;
+        .mag-item-content{
+            box-sizing: border-box;
+    padding-left: 15px;
+    min-height: 44px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+            .mag-item-inner{
+                padding-right: 15px;
+    position: relative;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 7px;
+    min-height: 44px;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    overflow: hidden;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -ms-flex-item-align: stretch;
+    -webkit-align-self: stretch;
+    align-self: stretch;
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    -ms-flex-item-align: stretch;
+    -webkit-align-self: stretch;
+    align-self: stretch;
+                .mag-item-title-row{
+                    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+                    .mag-item-title{
+                        -webkit-flex-shrink: 1;
+                        -ms-flex: 0 1 auto;
+                        flex-shrink: 1;
+                        min-width: 0;
+                        white-space: nowrap;
+                        position: relative;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 100%;
+                        font-size: @font-size-medium-x;
+                    }
+                }
+                .mag-item-subtitle{
+                    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    text-overflow: ellipsis;
+                    span{
+                        background-color: #464646;
+                        border-radius: .8rem;
+                        padding: .02rem .14rem;
+                        color: #fff;
+                        margin-right: 0.1rem;
+                        font-size: @font-size-small;
+                        padding: .02rem .14rem;
+                    }
+                }
+            }
+        }
+    }
+}

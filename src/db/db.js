@@ -1,12 +1,18 @@
 
 import axios from 'axios'
 import qs from 'qs'
+import weui from 'weui.js'
+// import {showFullScreenLoading, tryHideFullScreenLoading} from 'common/js/common'
 
 axios.defaults.baseURL = 'http://125.65.111.19:82/api/'
 
 const request = axios.create()
-
-request.interceptors.request.use(config => {
+let loading
+request.interceptors.request.use(config => { // 在请求或响应被 then 或 catch 处理前拦截它们。
+  // 在发送请求之前做些什么
+  if (config.showLoading) {
+    loading = weui.loading('正在加载')
+  }
   config.data = qs.stringify(config.data)
   config.headers = {
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -14,6 +20,20 @@ request.interceptors.request.use(config => {
   return config
 }, function (error) {
   // 对请求错误做些什么
+  return Promise.reject(error)
+})
+
+// 添加响应拦截器
+request.interceptors.response.use(response => {
+  // 对响应数据做点什么
+  if (response.config.showLoading) {
+    setTimeout(function () {
+      loading.hide()
+    }, 800)
+  }
+  return response
+}, function (error) {
+  // 对响应错误做点什么
   return Promise.reject(error)
 })
 

@@ -21,7 +21,15 @@ const pages = [ // 页面配置写在这里
   },
   {
     title: '组织活动',
-    pageName: 'create-act'
+    pageName: 'act-create'
+  },
+  {
+    title: '活动管理列表',
+    pageName: 'act-mag'
+  },
+  {
+    title: '活动信息管理',
+    pageName: 'act-info-mag'
   },
   {
     title: '俱乐部社区',

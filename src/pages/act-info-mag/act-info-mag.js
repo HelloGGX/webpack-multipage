@@ -5,6 +5,68 @@ import $ from 'jquery'
 import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
 
 let all = (function () {
+  let search = {// 搜索框显示及查询
+
+    init () {
+      $('body').on('click', '.cancel-search', () => {
+        this.hide()
+      })
+
+      $('body').on('click', '.searchbar', () => {
+        this.show()
+      })
+      this.searchange()
+
+      $('body').on('click', '.search', () => {
+        var inputVal = $('#view-input').val().trim()
+        // alert(inputVal)
+        this.searchVal(inputVal)
+      })
+
+      $('body').on('click', '.recent-history-list', (e) => {
+        var val = $(e.currentTarget).html().trim()
+        this.searchVal(val)
+      })
+      $('.search-recent-list-view .recent-history-list').on('click', (e) => {
+        var val = $(e.currentTarget).html().trim()
+        this.searchVal(val)
+      })
+      $('.btn-reset').on('click', () => {
+        $('#view-input').val('')
+        $('.cancel-button-view').removeClass('search')
+        $('.cancel-button-view').addClass('cancel-search')
+        $('.cancel-button-view').html('返回')
+        $('.btn-reset').hide()
+      })
+    },
+    show () {
+      $('.search-view-container').css('visibility', 'visible')
+      $('.search-view-container').css('display', 'block')
+    },
+    hide () {
+      $('.search-view-container').css('visibility', 'hidden')
+      $('.search-view-container').css('display', 'none')
+    },
+    searchange () {
+      $('#view-input').bind('input propertychange', (e) => {
+        var newval = $(e.currentTarget).val()
+        if (newval.length > 0) {
+          $('.cancel-button-view').addClass('search')
+          $('.cancel-button-view').removeClass('cancel-search')
+          $('.cancel-button-view').html('搜索')
+          $('.btn-reset').show()
+        } else {
+          $('.cancel-button-view').removeClass('search')
+          $('.cancel-button-view').addClass('cancel-search')
+          $('.cancel-button-view').html('返回')
+          $('.btn-reset').hide()
+        }
+      })
+    },
+    searchVal (val) {
+
+    }
+  }
   let textAreaTemp = `<div class="weui-cells weui-cells_form margin">
   <div class="weui-cell">
       <div class="weui-cell__bd">
@@ -17,6 +79,7 @@ let all = (function () {
   let Home = {
     pageInit: function () {
       this.switch()
+      search.init()
       $('.actTime').on('click', (e) => {
         pickerData.showDate(e.currentTarget)
       })

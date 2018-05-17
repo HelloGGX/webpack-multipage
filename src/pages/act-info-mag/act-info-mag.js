@@ -76,10 +76,24 @@ let all = (function () {
       </div>
   </div>
 </div>`
+  let applyMagGroup = { // 分组报名成员对象
+    init () {
+      $('.unclass-item').on('click', (e) => {
+        this.unclassItemShow(e)
+      })
+      $('.tit-group').on('click', (e) => {
+        $(e.currentTarget).next('.unclass-lists').toggle()
+      })
+    },
+    unclassItemShow (e) {
+      $(e.currentTarget).find('.moreInfo').toggle()
+    }
+  }
   let Home = {
     pageInit: function () {
       this.switch()
       search.init()
+      applyMagGroup.init()
       $('.actTime').on('click', (e) => {
         pickerData.showDate(e.currentTarget)
       })

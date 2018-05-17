@@ -1,212 +1,272 @@
 <!DOCTYPE html>
 <html>
-  
-  <head>
-    <%=r equire( 'html-loader!../../components/meta/meta.html') %>
-      <title>
-        <%=h tmlWebpackPlugin.options.title %></title>
-  </head>
-  
-  <body>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
     <div class="page">
-      <%=r equire( 'html-loader!../../components/banner/banner.html') %>
-        <!--搜索弹出层-->
-        <div class="search-view-container" avalonctrl="search" style="visibility: hidden;display:none">
-          <div class="search-view-box">
-            <div class="search-view-top">
-              <div class="view-top-container">
-                <form onsubmit="return searchSubmit()" id="search-module-submit">
-                  <input id="view-input" type="search" style="-webkit-appearance: none" class="search-box-view-main" placeholder="搜索活动报名用户">
-                  <i class="btn-reset">x</i></form>
-                <div class="search-view-icon"></div>
-                <div class="search-content-clear" style="display: none;"></div>
-              </div>
-              <div class="cancel-container-view">
-                <div class="cancel-button-view cancel-search">返回</div></div>
-              <div class="submit-container-view" style="display: none;">
-                <div class="submit-button-view">搜索</div></div>
-            </div>
-            <div id="search-result" class="search-main-view"></div>
-          </div>
-        </div>
-        <div id="index-content-v2">
-          <div class="weui-tab">
-            <div class="weui-tab__panel content-panel">
-              <div class="container-wrapper">
-                <div class="container-inner">
-                  <!--tabs选项框-->
-                  <div class="nav_fixed_wrap relative">
-                    <ul class="nav_fixed_catgoods nav-fixed-max-width">
-                      <li class="fixed_nav_item_catgoods fixed_nav_item_catgoods_first" data-type="baseInfo">
-                        <span class="nav_cur_cat">基本信息</span></li>
-                      <li class="fixed_nav_item_catgoods" data-type="applyMag">
-                        <span class="">报名管理</span></li>
-                    </ul>
-                  </div>
-                  <div class="weui-tab__panel content-panel">
-                    <div class="content-wrapper">
-                      <div class="content-inner">
-                        <div>
-                          <div id="acts-info-grid" style="margin-top: 0.4rem;padding-bottom: 0.6rem;">
-                            <div class="act-base-info">
-                              <section class="weui-flex act-base-list">
-                                <div class="weui-flex__item">
-                                  <div class="item-img">
-                                    <img src="<%= require('../../imgs/icons/badge@2x.png')%>" alt=""></div>
-                                  <div class="item-txt">
-                                    <p>活动签到</p>
-                                  </div>
-                                </div>
-                                <div class="weui-flex__item">
-                                  <div class="item-img">
-                                    <img src="<%= require('../../imgs/icons/document@2x.png')%>" alt=""></div>
-                                  <div class="item-txt">
-                                    <p>问券调查</p>
-                                  </div>
-                                </div>
-                                <div class="weui-flex__item">
-                                  <div class="item-img">
-                                    <img src="<%= require('../../imgs/icons/speech@2x.png')%>" alt=""></div>
-                                  <div class="item-txt">
-                                    <p>免费短信</p>
-                                  </div>
-                                </div>
-                                <div class="weui-flex__item">
-                                  <div class="item-img">
-                                    <img src="<%= require('../../imgs/icons/shield@2x.png')%>" alt=""></div>
-                                  <div class="item-txt">
-                                    <p>活动保险</p>
-                                  </div>
-                                </div>
-                              </section>
-                              <section class="actInfo">
-                                <div class="actInfoInner">
-                                  <ul class="clearfix">
-                                    <li>
-                                      <p>报名
-                                        <span>0</span></p>
-                                    </li>
-                                    <li style="border-right:none">
-                                      <p>花絮
-                                        <span>0</span></p>
-                                    </li>
-                                    <li>
-                                      <p>分享
-                                        <span>0</span></p>
-                                    </li>
-                                    <li style="border-right:none">
-                                      <p>阅读
-                                        <span>52</span></p>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </section>
-                              <section class="weui-cells">
-                                <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                  <div class="weui-cell__hd">
-                                    <label for="" class="weui-label">活动主题</label></div>
-                                  <div class="weui-cell__bd">
-                                    <div class="weui-select text-right">
-                                      <input id="theme" type="text" required="" name="theme" readonly="" emptytips="请输入活动主题"></div>
-                                  </div>
-                                </div>
-                                <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                  <div class="weui-cell__hd">
-                                    <label for="" class="weui-label">活动详情</label></div>
-                                  <div class="weui-cell__bd">
-                                    <div class="weui-select text-right">
-                                      <input id="actDetail" type="text" required="" name="actDetail" readonly="" emptytips="请输入活动详情"></div>
-                                  </div>
-                                </div>
-                                <div class="line"></div>
-                                <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
-                                  <div class="weui-cell__hd">
-                                    <label for="" class="weui-label">报名截止</label></div>
-                                  <div class="weui-cell__bd">
-                                    <div class="weui-select text-right">
-                                      <input id="applyDeadline" type="text" name="applyDeadline" readonly=""></div>
-                                  </div>
-                                </div>
-                                <div class="line"></div>
-                                <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
-                                  <div class="weui-cell__hd">
-                                    <label for="" class="weui-label">活动开始</label></div>
-                                  <div class="weui-cell__bd">
-                                    <div class="weui-select text-right">
-                                      <input id="actStartLine" type="text" name="actStartLine" readonly=""></div>
-                                  </div>
-                                </div>
-                                <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
-                                  <div class="weui-cell__hd">
-                                    <label for="" class="weui-label">活动结束</label></div>
-                                  <div class="weui-cell__bd">
-                                    <div class="weui-select text-right">
-                                      <input id="actEndLine" type="text" name="actEndLine" readonly=""></div>
-                                  </div>
-                                </div>
-                                <div class="weui-cell weui-cell_select weui-cell_select-after actAddr">
-                                  <div class="weui-cell__hd">
-                                    <label for="" class="weui-label">活动地点</label></div>
-                                  <div class="weui-cell__bd">
-                                    <div class="weui-select text-right">
-                                      <input id="Actaddr" type="text" name="actAddr" readonly=""></div>
-                                  </div>
-                                </div>
-                                <div class="weui-cell">
-                                  <div class="weui-cell__hd">
-                                    <label class="weui-label">详细地点</label></div>
-                                  <div class="weui-cell__bd">
-                                    <input class="weui-input text-right" name="actDetailAddr" type="text" placeholder="详细地址"></div>
-                                </div>
-                              </section>
-                              <section class="act-mag-btn">
-                                <ul class="clearfix">
-                                  <li>
-                                    <a href="#">
-                                      <button>编辑活动</button></a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <button>打开报名</button></a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <button id="deleteAct">删除活动</button></a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <button>再发一个</button></a>
-                                  </li>
-                                </ul>
-                              </section>
-                            </div>
-                            <div class="act-mag" style="display: none">
-                              <!--搜索navbar-->
-                              <div class="banner-container">
-                                <div class="banner">
-                                  <div id="addrHome" class="banner-left">
-                                    <i class="iconfont icon-location"></i>
-                                    <span></span>
-                                  </div>
-                                  <div class="searchbar">
-                                    <p>
-                                      <span>搜索</span></p>
-                                  </div>
-                                </div>
-                              </div>
-                              
-                            </div>
-                          </div>
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <!--搜索弹出层-->
+            <div class="search-view-container" avalonctrl="search" style="visibility: hidden;display:none">
+                <div class="search-view-box">
+                    <div class="search-view-top">
+                        <div class="view-top-container">
+                            <form onsubmit="return searchSubmit()" id="search-module-submit">
+                                <input id="view-input" type="search" style="-webkit-appearance: none" class="search-box-view-main" placeholder="搜索活动报名用户">
+                                <i class="btn-reset">x</i>
+                            </form>
+                            <div class="search-view-icon"></div>
+                            <div class="search-content-clear" style="display: none;"></div>
                         </div>
-                      </div>
+                        <div class="cancel-container-view">
+                            <div class="cancel-button-view cancel-search">返回</div>
+                        </div>
+                        <div class="submit-container-view" style="display: none;">
+                            <div class="submit-button-view">搜索</div>
+                        </div>
+
                     </div>
-                  </div>
+                    <div id="search-result" class="search-main-view">
+
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="container-wrapper">
+                            <div class="container-inner">
+                                <!--tabs选项框-->
+                                <div class="nav_fixed_wrap relative">
+                                    <ul class="nav_fixed_catgoods nav-fixed-max-width">
+                                        <li class="fixed_nav_item_catgoods fixed_nav_item_catgoods_first" data-type="baseInfo">
+                                            <span class="nav_cur_cat">基本信息</span>
+                                        </li>
+                                        <li class="fixed_nav_item_catgoods" data-type="applyMag">
+                                            <span class="">报名管理</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="weui-tab__panel content-panel">
+                                    <div class="content-wrapper">
+                                        <div class="content-inner">
+                                            <div>
+                                                <div id="acts-info-grid" style="margin-top: 0.4rem;padding-bottom: 0.6rem;">
+                                                    <div class="act-base-info">
+                                                        <section class="weui-flex act-base-list">
+                                                            <div class="weui-flex__item">
+                                                                <div class="item-img"><img src="<%= require('../../imgs/icons/badge@2x.png')%>" alt=""></div>
+                                                                <div class="item-txt">
+                                                                    <p>活动签到</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="weui-flex__item">
+                                                                <div class="item-img"><img src="<%= require('../../imgs/icons/document@2x.png')%>" alt=""></div>
+                                                                <div class="item-txt">
+                                                                    <p>问券调查</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="weui-flex__item">
+                                                                <div class="item-img"><img src="<%= require('../../imgs/icons/speech@2x.png')%>" alt=""></div>
+                                                                <div class="item-txt">
+                                                                    <p>免费短信</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="weui-flex__item">
+                                                                <div class="item-img"><img src="<%= require('../../imgs/icons/shield@2x.png')%>" alt=""></div>
+                                                                <div class="item-txt">
+                                                                    <p>活动保险</p>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                        <section class="actInfo">
+                                                            <div class="actInfoInner">
+                                                                <ul class="clearfix">
+                                                                    <li>
+                                                                        <p>报名<span>0</span></p>
+                                                                    </li>
+                                                                    <li style="border-right:none">
+                                                                        <p>花絮<span>0</span></p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p>分享<span>0</span></p>
+                                                                    </li>
+                                                                    <li style="border-right:none">
+                                                                        <p>阅读<span>52</span></p>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </section>
+                                                        <section class="weui-cells">
+                                                            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                                <div class="weui-cell__hd">
+                                                                    <label for="" class="weui-label">活动主题</label>
+                                                                </div>
+                                                                <div class="weui-cell__bd">
+                                                                    <div class="weui-select text-right">
+                                                                        <input id="theme" type="text" required="" name="theme" readonly="" emptytips="请输入活动主题">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                                <div class="weui-cell__hd">
+                                                                    <label for="" class="weui-label">活动详情</label>
+                                                                </div>
+                                                                <div class="weui-cell__bd">
+                                                                    <div class="weui-select text-right">
+                                                                        <input id="actDetail" type="text" required="" name="actDetail" readonly="" emptytips="请输入活动详情">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="line"></div>
+                                                            <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                                                <div class="weui-cell__hd">
+                                                                    <label for="" class="weui-label">报名截止</label>
+                                                                </div>
+                                                                <div class="weui-cell__bd">
+                                                                    <div class="weui-select text-right">
+                                                                        <input id="applyDeadline" type="text" name="applyDeadline" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="line"></div>
+                                                            <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                                                <div class="weui-cell__hd">
+                                                                    <label for="" class="weui-label">活动开始</label>
+                                                                </div>
+                                                                <div class="weui-cell__bd">
+                                                                    <div class="weui-select text-right">
+                                                                        <input id="actStartLine" type="text" name="actStartLine" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="weui-cell weui-cell_select weui-cell_select-after actTime">
+                                                                <div class="weui-cell__hd">
+                                                                    <label for="" class="weui-label">活动结束</label>
+                                                                </div>
+                                                                <div class="weui-cell__bd">
+                                                                    <div class="weui-select text-right">
+                                                                        <input id="actEndLine" type="text" name="actEndLine" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="weui-cell weui-cell_select weui-cell_select-after actAddr">
+                                                                <div class="weui-cell__hd">
+                                                                    <label for="" class="weui-label">活动地点</label>
+                                                                </div>
+                                                                <div class="weui-cell__bd">
+                                                                    <div class="weui-select text-right">
+                                                                        <input id="Actaddr" type="text" name="actAddr" readonly="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="weui-cell">
+                                                                <div class="weui-cell__hd"><label class="weui-label">详细地点</label></div>
+                                                                <div class="weui-cell__bd">
+                                                                    <input class="weui-input text-right" name="actDetailAddr" type="text" placeholder="详细地址">
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                        <section class="act-mag-btn">
+                                                            <ul class="clearfix">
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <button>编辑活动</button>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <button>打开报名</button>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <button id="deleteAct">删除活动</button>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <button>再发一个</button>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </section>
+                                                    </div>
+                                                    <div class="act-mag" style="display: none">
+                                                        <!--搜索navbar-->
+                                                        <div class="banner-container">
+                                                            <div class="banner">
+                                                                <div id="addrHome" class="banner-left"><i class="iconfont icon-location"></i><span></span></div>
+                                                                <div class="searchbar">
+                                                                    <p><span>搜索</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-confirm">
+                                                            <div class="m-getperson f-m">已确认报名<span>2</span>人</div>
+                                                        </div>
+                                                        <div class="weui-cells g-lists">
+                                                            <div class="weui-cell weui-cell_access g-item">
+                                                                <div class="weui-cell__hd g-img"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt=""></div>
+                                                                <div class="weui-cell__bd g-name">
+                                                                    <p>新分组(1人)</p>
+                                                                </div>
+                                                                <div class="weui-cell__ft"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-group">
+                                                            <div class="tit-group">
+                                                                <div class="txt-group icon-red f-m-x">未分组<span class="">（2）</span>人</div>
+                                                                <button type="btn" class="btn-group btn-batch">
+                                                                批量分组
+                                                                </button>
+                                                            </div>
+                                                            <div class="weui-cells margin unclass-lists">
+                                                                <div class="unclass-item">
+                                                                    <div class="weui-cell ">
+                                                                        <div class="weui-cell__hd per-head"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt=""></div>
+                                                                        <div class="weui-cell__bd">
+                                                                            <p class="f-m per-name">用户1</p>
+                                                                            <p class="f-s per-bbname">(用户2帮报)</p>
+                                                                        </div>
+                                                                        <div class="weui-cell__ft">
+                                                                            <p class="per-apply-cost">活动费用vip ￥121.00</p>
+                                                                            <p class="per-pay-way">微信支付</p>
+                                                                        </div>      
+                                                                    </div>
+                                                                    <div class="moreInfo show">
+                                                                        <div class="moreInfo-top">
+                                                                            <p>男 </p>
+                                                                            <p>15202860360</p>
+                                                                        </div>
+                                                                        <div class="moreInfo-dowm">
+                                                                            <a class="txt-green" href="">短信</a>
+                                                                            <a class="txt-green" href="">电话</a>
+                                                                            <a class="txt-green" href="">编辑</a>
+                                                                            <a class="text-red btn-audit" id="1" href="">分组</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
-  </body>
+</body>
 
 </html>

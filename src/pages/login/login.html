@@ -21,16 +21,15 @@
                                 <div class="am-list">
                                     <div class="am-list-item">
                                         <div class="am-list-control">
-                                            <input type="text" class="am-input-required" name="TPL_username" placeholder="手机号/邮箱/会员名" value="" id="username">
+                                            <input type="text" class="am-input-required" required pattern="REG_PHONE" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号" name="username" placeholder="请输入手机号" value="" id="username">
                                         </div>
-                                        <div class="am-list-action"><i class="am-icon-clear" style="display: none;"></i></div>
+                                        <div class="am-list-action removeVal"><i class="am-icon-clear" style="display: none;"></i></div>
                                     </div>
                                     <div class="am-list-item">
                                         <div class="am-list-control">
-                                            <input type="password" class="am-input-required am-input-required-password" name="TPL_password" placeholder="请输入密码" value="" id="password">
+                                            <input type="password" class="am-input-required am-input-required-password" required pattern="REG_PASSWD" emptyTips="请输入登陆密码" notMatchTips="请输入字母开头的6到16位密码" name="password" placeholder="请输入密码" value="" id="password">
                                         </div>
-                                        <div class="am-list-action am-list-action-password"><i class="am-icon-clear" style="display: none;"></i></div>
-                                        <div class="pwd-show iconfont" id="show-pwd"></div>
+                                        <div class="am-list-action seePwd  am-list-action-password"><i class="iconfont icon-browse_fill" style="display: none;"></i></div>
                                     </div>
                                 </div>
                                 <div class="checkcode-wrap">

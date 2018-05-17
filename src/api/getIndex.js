@@ -1,18 +1,24 @@
-import {serializeObject} from 'common/js/dom'
+import {serializeObject, setCookie} from 'common/js/dom'
 import db from '../db/db'
 
 export default {
-  postLoginData (e) {
+  postLoginData (e) { // 登陆
     let data = serializeObject(e)
+    setCookie('username', data.username, 1000 * 60)
     return db.handleRequest(db.request.post('login_up.php', {
-      params: {
-        username: 'ggx',
-        passwd: '12345678'
-      },
       data: data,
       showLoading: true
     }))
   },
+  postRegistData (e) { // 注册
+    let data = serializeObject(e)
+    setCookie('username', data.username, 1000 * 60)
+    return db.handleRequest(db.request.post('regist_up.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+
   getIndexData (data) { // 获取首页数据
     return db.handleRequest(db.request.get('getIndex.php', {
       params: data,

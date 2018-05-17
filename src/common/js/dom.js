@@ -40,3 +40,36 @@ export function serializeObject (form) {
   })
   return o
 }
+export function pageName () {
+  let a = window.location.href
+  let b = a.split('/')
+  let c = b.slice(b.length - 1, b.length).toString(String).split('.')
+  return c.slice(0, 1)
+}
+/* 用export把方法暴露出来 */
+/* 设置cookie */
+export function setCookie (cName, value, expire) {
+  var date = new Date()
+  // 这个是cookie有效期，将cookie的有效时间设成当前时间之前就是删除
+  date.setSeconds(date.getSeconds() + expire)
+  document.cookie = cName + '=' + escape(value) + '; expires=' + date.toGMTString()
+}
+
+/* 获取cookie */
+export function getCookie (cName) {
+  if (document.cookie.length > 0) {
+    let cStart = document.cookie.indexOf(cName + '=')
+    if (cStart !== -1) {
+      cStart = cStart + cName.length + 1
+      let cEnd = document.cookie.indexOf(';', cStart)
+      if (cEnd === -1) cEnd = document.cookie.length
+      return unescape(document.cookie.substring(cStart, cEnd))
+    }
+  }
+  return ''
+}
+
+/* 删除cookie */
+export function delCookie (cName) {
+  setCookie(cName, '', -1)
+}

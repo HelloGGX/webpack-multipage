@@ -4,6 +4,7 @@ import 'common/css/iconfont.css'
 import 'weui'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
+import {pageName, getCookie} from 'common/js/dom'
 
 let title = {// 把每页的title值赋值给banner上的标题
   init () {
@@ -85,8 +86,18 @@ let swit = {
     }
   }
 }
+let login = {
+  init () {
+    if (pageName()[0] === 'person' || pageName()[0] === 'act-create' || pageName()[0] === 'create-club') {
+      if (!getCookie('username')) {
+        window.location.href = 'login.html'
+      }
+    }
+  }
+}
 
 $(function () {
+  login.init()
   title.init()
   scroll.init()
   tabar.init()

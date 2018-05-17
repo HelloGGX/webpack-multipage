@@ -7,7 +7,8 @@ import vali from 'vendor/validate'
 
 let regexp = {
   regexp: {
-    PHONE: vali.mobile()
+    PHONE: vali.mobile(),
+    PASSWD: vali.password()
   }
 }
 
@@ -23,9 +24,18 @@ let all = (function () {
         }
       })
 
-      $('.am-list-action').on('click', (e) => {
+      $('.removeVal').on('click', (e) => {
         $(e.currentTarget).prev().find('input').val('')
       })
+
+      $('.seePwd').on('click', (e) => {
+        if ($(e.currentTarget).prev().find('input').attr('type') === 'password') {
+          $(e.currentTarget).prev().find('input').attr('type', 'text')
+        } else {
+          $(e.currentTarget).prev().find('input').attr('type', 'password')
+        }
+      })
+
       $('#btn-submit').on('click', (e) => {
         let _thi = this
         weui.form.validate('#loginForm', function (error) {

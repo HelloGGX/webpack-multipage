@@ -14,6 +14,7 @@ let regexp = {
 
 let all = (function () {
   let Home = {
+
     pageInit: function () {
       $('.am-list-control').find('input').on('input propertychange', function () {
         var result = $(this).val()
@@ -44,16 +45,23 @@ let all = (function () {
             setTimeout(function () {
               loading.hide()
               _thi._postLoginData()
-              weui.toast('登陆成功', 1000)
             }, 1500)
           }
         }, regexp)
       })
     },
+    href (uid) {
+      return `index.html?uid=${uid}`
+    },
     _postLoginData () {
       model.postLoginData($('#loginForm')).then((data) => {
         // 获取数据成功时的处理逻辑
         console.log(data)
+        if (data.state === 'ok') { // 如果存在该用户
+          weui.toast('登陆成功', 1000)
+          window.location.href = this.href(data.uid)
+          window.sessionStorage.setItem('ucl', data.ucl)
+        }
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)

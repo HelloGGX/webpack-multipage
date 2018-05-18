@@ -154,6 +154,15 @@ let all = (function () {
     },
     init (data) {
       this._getSlideData(data)
+      $('.weui-flex__item').on('click', (e) => {
+        if ($(e.currentTarget).data('index') === 0) {
+          if (window.sessionStorage.getItem('ucl') === '用户') {
+            weui.alert('抱歉你是普通用户，不能创建活动')
+          } else {
+            window.location.href = 'act-create.html'
+          }
+        }
+      })
     },
     _getSlideData (data) {
       let thi = this

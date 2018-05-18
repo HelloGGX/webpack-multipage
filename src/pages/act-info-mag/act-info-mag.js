@@ -7,6 +7,7 @@ import weui from 'weui.js'
 import {pickerAddr, pickerData} from 'components/picker/picker' // 引入地区和日期选择对象方法
 import {batchG} from '../batchGroup/batch-group'
 import {addApplyPer} from '../addApplyPerson/add-apply-per'
+import {showGroupPer} from '../showGroupPer/show-g-per'
 let all = (function () {
   let search = {// 搜索框显示及查询
 
@@ -111,6 +112,7 @@ let all = (function () {
       applyMagGroup.init()
       batchG.init()
       addApplyPer.init()
+      showGroupPer.init()
       $('.actTime').on('click', (e) => {
         pickerData.showDate(e.currentTarget)
       })

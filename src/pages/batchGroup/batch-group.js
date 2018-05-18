@@ -50,7 +50,7 @@ let batchG = {
       $.alert.aler({
         title: '温馨提示',
         content: clear(this.groupListTemp(gData)),
-        height: 190,
+        height: 'auto',
         blankclose: true,
         okCallback: function () {
           // 这里做插入到新分组，删除在未分组ajax的操作
@@ -65,7 +65,7 @@ let batchG = {
       $.alert.aler({
         title: '添加到分组',
         content: this.inputTemp,
-        height: 190,
+        height: 'auto',
         blankclose: true,
         okCallback: function () {
           // 这里做插入到新分组，删除在未分组ajax的操作

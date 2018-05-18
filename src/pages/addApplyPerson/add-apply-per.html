@@ -13,13 +13,13 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" name="nickName" placeholder="请填写昵称">
+                        <input class="weui-input" required type="text" name="nickName" placeholder="请填写昵称" emptyTips="请输入昵称">
                     </div>
                 </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">手机</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="number" name="phone" placeholder="请填写手机">
+                        <input class="weui-input" required pattern="REG_PHONE" type="number" name="phone" placeholder="请填写手机" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号" >
                     </div>
                 </div>
                 <div class="weui-cell weui-cell_select weui-cell_select-after">

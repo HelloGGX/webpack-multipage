@@ -53,6 +53,7 @@ let all = (function () {
     _postLoginData () {
       model.postLoginData($('#loginForm')).then((data) => {
         // 获取数据成功时的处理逻辑
+        console.log(data)
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)

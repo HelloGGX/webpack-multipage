@@ -51,9 +51,9 @@ let all = (function () {
       })
     },
     _postRegistData () {
-      model.postRegistData($('#registForm')).then((data) => {
+      model.postRegistData($('#registForm')).then((data) => { // resolve状态的回调函数
         // 获取数据成功时的处理逻辑
-      }).catch((ErrMsg) => {
+      }).catch((ErrMsg) => { // reject状态的回调函数
         // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)
       })

@@ -1,7 +1,37 @@
 import {serializeObject, setCookie} from 'common/js/dom'
 import db from '../db/db'
 
+let magAct = {// 管理活动
+  deleteAct (id) { // 删除活动
+    return db.handleRequest(db.request.delete('act_delete.php', {
+      data: {
+        id: id
+      }
+    }))
+  },
+  ubdateAct (e) { // 编辑更新活动
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.put(``, {
+      data: data,
+      showLoading: true
+    }))
+  },
+  addPer () { // 添加报名成员
+
+  },
+  getPer () { // 获取未分组报名人员信息
+
+  },
+  moveToGroup () { // 移动人员到相应组
+
+  },
+  addGroup () { // 新增组
+
+  }
+}
+
 export default {
+  magAct,
   postLoginData (e) { // 登陆
     let data = serializeObject(e)
     setCookie('username', data.username, 1000 * 60)

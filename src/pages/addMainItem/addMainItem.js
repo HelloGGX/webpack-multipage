@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import './addMainItem.less'
 import $ from 'jquery'
 import weui from 'weui.js'

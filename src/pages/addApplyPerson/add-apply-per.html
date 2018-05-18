@@ -1,0 +1,62 @@
+<!--=============================添加报名成员#==============================-->
+<div id="addApplyPer" class="cover" style="display: none;">
+    <div class="cover-inner">
+        <div class="cover-banner-container">
+                <div class="cover-banner">
+                    <div id="cancel" class="cover-banner-icon-back cover-banner-left"><a href="#"><span></span></a></div>
+                    <div class="cover-banner-tit">添加报名成员</div>
+                </div>
+        </div>
+        <div class="cover-form">
+            <form id="addPerForm" action="" name="form1" method="post">
+            <div class="weui-cells margin">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" name="nickName" placeholder="请填写昵称">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">手机</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" name="phone" placeholder="请填写手机">
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">费用选择</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" name="applyCostOpt">
+                            <option value="1">中国</option>
+                            <option value="2">美国</option>
+                            <option value="3">英国</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">支付方式</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" name="costWay" readonly placeholder="" value="其他支付方式">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">支付状态</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" name="payStatus" readonly placeholder="" value="未付款">
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a id="setAlreadyPay" style="color:#e02e24">设为已付款</a>
+                    </div>
+                </div>
+                <div class="line"></div>
+            </div>
+            <div class="weui-btn-area">
+                    <a class="weui-btn weui-btn_primary" href="javascript:" id="savePer">保存</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

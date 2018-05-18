@@ -27,6 +27,10 @@ export function Trim (str, global) { // 去掉字符串中的所有空格
   }
   return result
 }
+export function clear (str) { // 取消字符串中出现的所有逗号
+  str = str.replace(/,/g, '')
+  return str
+}
 
 // 将从form中通过$('#form').serialize()获取的值转成json
 export function serializeObject (form) {

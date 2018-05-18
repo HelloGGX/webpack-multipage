@@ -56,12 +56,12 @@ const handleRequest = (request) => {
       //   return reject(createError(400, data.message))
       // }
 
-      resolve(data)
+      resolve(data)// 异步操作成功时调用，并将异步操作的结果作为参数传递出去
     }).catch((err) => {
       const resp = err.response
       console.log('---------------', resp)
       if (resp.statusText === 401) {
-        reject(createError(401, 'need auth'))
+        reject(createError(401, 'need auth'))// 异步操作失败时调用，并将异步操作爆出的错误作为参数传递出去
       }
     })
   })

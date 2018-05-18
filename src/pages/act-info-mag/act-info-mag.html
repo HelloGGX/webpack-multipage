@@ -37,6 +37,8 @@
                     </div>
                 </div>
             </div>
+            <%= require('html-loader!../batchGroup/batch-group.html')  %>
+            <%= require('html-loader!../addApplyPerson/add-apply-per.html')  %>
             <div id="index-content-v2">
                 <div class="weui-tab">
                     <div class="weui-tab__panel content-panel">
@@ -212,10 +214,17 @@
                                                             <div class="m-getperson f-m">已确认报名<span>2</span>人</div>
                                                         </div>
                                                         <div class="weui-cells g-lists">
-                                                            <div class="weui-cell weui-cell_access g-item">
-                                                                <div class="weui-cell__hd g-img"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt=""></div>
+                                                            <div id="gId1" class="weui-cell weui-cell_access g-item">
+                                                                <div class="weui-cell__hd g-img"><img src="<%= require('../../imgs/icons/group.png')%>" alt=""></div>
                                                                 <div class="weui-cell__bd g-name">
-                                                                    <p>新分组(1人)</p>
+                                                                    <p>新分组1(1人)</p>
+                                                                </div>
+                                                                <div class="weui-cell__ft"></div>
+                                                            </div>
+                                                            <div id="gId2" class="weui-cell weui-cell_access g-item">
+                                                                <div class="weui-cell__hd g-img"><img src="<%= require('../../imgs/icons/group.png')%>" alt=""></div>
+                                                                <div class="weui-cell__bd g-name">
+                                                                    <p>新分组2(1人)</p>
                                                                 </div>
                                                                 <div class="weui-cell__ft"></div>
                                                             </div>
@@ -229,8 +238,8 @@
                                                             </div>
                                                             <div class="weui-cells margin unclass-lists">
                                                                 <div class="unclass-item">
-                                                                    <div class="weui-cell ">
-                                                                        <div class="weui-cell__hd per-head"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt=""></div>
+                                                                    <div class="weui-cell unclass-item-top">
+                                                                        <div class="weui-cell__hd per-head"><img src="<%= require('../../imgs/icons/boy.jpg')%>" alt=""></div>
                                                                         <div class="weui-cell__bd">
                                                                             <p class="f-m per-name">用户1</p>
                                                                             <p class="f-s per-bbname">(用户2帮报)</p>
@@ -249,11 +258,16 @@
                                                                             <a class="txt-green" href="">短信</a>
                                                                             <a class="txt-green" href="">电话</a>
                                                                             <a class="txt-green" href="">编辑</a>
-                                                                            <a class="text-red btn-audit" id="1" href="">分组</a>
+                                                                            <a class="text-red btn-audit" id="1">分组</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>  
                                                             </div>
+                                                        </div>
+                                                        <!--====================================添加报名成员按钮==================================-->
+                                                        <div class="addPer">
+                                                            <i class="iconfont icon-addition_fill"></i>
+                                                            <span>添加报名成员</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -266,7 +280,8 @@
                     </div>
                 </div>
             </div>
-    </div>
+            
+        </div>
 </body>
 
 </html>

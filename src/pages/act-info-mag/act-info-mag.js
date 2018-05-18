@@ -1,9 +1,12 @@
+/* jshint esversion: 6 */
 import './act-info-mag.less'
 import 'components/banner/banner.less'
 import 'components/tabs/tabs.less'
 import $ from 'jquery'
-import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
-
+import weui from 'weui.js'
+import {pickerAddr, pickerData} from 'components/picker/picker' // 引入地区和日期选择对象方法
+import {batchG} from '../batchGroup/batch-group'
+import {addApplyPer} from '../addApplyPerson/add-apply-per'
 let all = (function () {
   let search = {// 搜索框显示及查询
 
@@ -76,17 +79,29 @@ let all = (function () {
       </div>
   </div>
 </div>`
+
   let applyMagGroup = { // 分组报名成员对象
+
     init () {
-      $('.unclass-item').on('click', (e) => {
+      $('.unclass-item .weui-cell').on('click', (e) => {
         this.unclassItemShow(e)
       })
-      $('.tit-group').on('click', (e) => {
-        $(e.currentTarget).next('.unclass-lists').toggle()
+      $('.tit-group .txt-group').on('click', (e) => {
+        $(e.currentTarget).parent().next('.unclass-lists').toggle()
+      })
+      $('.unclass-item').on('click', '.btn-audit', (e) => {
+        this.singleClass(e)
       })
     },
-    unclassItemShow (e) {
-      $(e.currentTarget).find('.moreInfo').toggle()
+    unclassItemShow (e) { // 未分组单个成员的显示隐藏切换
+      $(e.currentTarget).next('.moreInfo').toggle()
+    },
+    singleClass (e) { // 单个分组
+      if (batchG.len > 0) { // 如果有分组
+        batchG.showGroup()
+      } else { // 如果没有分组
+        weui.confirm('请先在"批量分组"中创建分组')
+      }
     }
   }
   let Home = {
@@ -94,6 +109,8 @@ let all = (function () {
       this.switch()
       search.init()
       applyMagGroup.init()
+      batchG.init()
+      addApplyPer.init()
       $('.actTime').on('click', (e) => {
         pickerData.showDate(e.currentTarget)
       })

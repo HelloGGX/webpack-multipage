@@ -1,4 +1,4 @@
-import './create-club.less'
+import './club-create.less'
 import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'

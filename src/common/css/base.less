@@ -29,6 +29,7 @@
         text-align: right!important;
     }
 }
+.text-center{text-align: center!important;}
 .text-left{text-align: left!important;}
 .fleft{float: left!important;}
 .fright{float: right!important;}
@@ -388,13 +389,14 @@
            
         }
         .stores{
+            margin-top: 0.1rem;
             .store-item{
                 .store-content{
                     position: relative;
                     overflow: hidden;
                     width: 100%;
                     max-width: 640px;
-                    height: 1.75rem;
+                    height: 1.4rem;
                     padding-top: .05rem;
                     padding-bottom: .05rem;
                     font-size: 0;
@@ -403,8 +405,8 @@
                         position: relative;
                         display: inline-block;
                         float: left;
-                        width: 1.65rem;
-                        height: 1.65rem;
+                        width: 1.4rem;
+                        height: 1.4rem;
                         .image-container{
                             img{
                                 width: 100%;
@@ -416,7 +418,7 @@
                         position: relative;
                         display: inline-block;
                         float: right;
-                        width: 1.95rem;
+                        width: 2.2rem;
                         height: 100%;
                         padding-right: .1rem;
                         .goods-name{
@@ -424,7 +426,7 @@
                             overflow: hidden;
                             max-height: .38rem;
                             margin-top: .03rem;
-                            font-size: .13rem;
+                            font-size: @font-size-medium;
                             line-height: .19rem;
                             text-overflow: clip;
                             color: #151516;
@@ -443,6 +445,27 @@
                                 font-size: .12rem;
                                 line-height: .26rem;
                                 color: #9c9c9c;
+                            }
+                        }
+                        .author{
+                            position: absolute;
+                            bottom: 0.1rem;
+                            left: 0;
+                            width: 100%;
+                            .author-head{
+                                width: 0.22rem;
+                                height: 0.22rem;
+                                border-radius: 50%;
+                                overflow: hidden;
+                                float:left;
+                                img{}
+                            }
+                            .author-name{
+                                float: left;
+                                margin-left: 0.08rem;
+                                p{
+                                    font-size: @font-size-small;
+                                }
                             }
                         }
                         .goods-market-price{
@@ -478,6 +501,7 @@
                             background-color: #e02e24;
                         }
                     }
+
                 }
             }
         }

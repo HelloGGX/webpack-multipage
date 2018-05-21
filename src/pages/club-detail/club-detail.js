@@ -19,6 +19,7 @@ let all = (function () {
           if (index === 1) {
             this._getActs()
           } else if (index === 2) {
+            $('#addAlbums').parent().nextAll().remove()
             this._getAlbums()
           } else if (index === 3) {
             this._getNews()
@@ -72,11 +73,7 @@ let all = (function () {
       for (let i = 0; i < len; i++) {
         _html += this._albumsTemp(i, newdata)
       }
-      if ($('.tidbits-con .col-50').length > 1) {
-        $('#addAlbums').parent().nextAll().html(_html)
-      } else {
-        $('#addAlbums').parent().after(_html)
-      }
+      $('#addAlbums').parent().after(_html)
     },
     _albumsTemp (i, data) { // 活动相册模板
       return `<div class="col-50" data-id="${data[i].id}" style="margin-top: 0.1rem;">

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+        <div id="index-content-v2">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                    <div class="content-wrapper bg-grey">
+                        <div class="content-inner">
+                            <div>    
+                                <div class="bg-head-container">
+                                    <div class="bg-head">
+                                        <img src="<%= require('../../imgs/bg/bg-club.jpg')%>" alt="">
+                                    </div>
+                                    <div class="join-club">
+
+                                    </div>
+                                </div>
+                                <section class="club-head">
+                                        <div class="club-logo">
+                                                <img src="" alt="">
+                                            </div>
+                                        <div class="club-motto"><p></p></div>
+                                        <div class="club-name"></div>
+                                        <ul>
+                                            <li class="club-base-info">
+                                                <div class="club-wrapper">
+                                                    <span class="club-score">
+                                                        <em class="score-name">ID:</em>
+                                                        <span id="clubId"></span>
+                                                    </span>
+                                                    <span class="club-score">
+                                                        <em class="score-name">成员:</em>
+                                                        <span id="clubPer"></span>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                </section>
+                                <section class="club-notice">
+                                    <div class="notice">
+                                        <div class="notice-info">
+                                            <em></em>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="weui-tab" id="clubTab">
+                                    <div class="weui-navbar club-tabs">
+                                        <div class="weui-navbar__item club-item">主页</div>
+                                        <div class="weui-navbar__item club-item">活动</div>
+                                        <div class="weui-navbar__item club-item">相册</div>
+                                        <div class="weui-navbar__item club-item">游记</div>
+                                    </div>
+                                    <div class="weui-tab__panel">
+                                        <div class="weui-tab__content club-tab-con">
+                                            <div class="weui-cells margin">
+                                                <div class="weui-cell">
+                                                    <div class="weui-cell__hd">
+                                                        <p>所在地</p>
+                                                    </div>
+                                                    <div class="weui-cell__bd ">
+                                                        <p id="clubAddr" style="padding-left: 0.2rem;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="weui-cell">
+                                                    <div class="weui-cell__hd">
+                                                        <p>简介</p>
+                                                    </div>
+                                                    <div class="weui-cell__bd">
+                                                        <p id="clubIntro" style="padding-left: 0.34rem;"> 
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="weui-cell">
+                                                    <div class="weui-cell__hd">
+                                                        <p>主打项目</p>
+                                                    </div>
+                                                    <div id="clubTips" class="weui-cell__bd ">
+                                                      
+                                                    </div>
+                                                </div>
+                                                <div class="line"></div>
+                                                <a class="weui-cell weui-cell_access" href="javascript:;">
+                                                    <div class="weui-cell__hd club-cell-hd"><img src="<%= require('../../imgs/icons/icon-people.png')%>" alt=""></div>
+                                                    <div class="weui-cell__bd">
+                                                        <p>俱乐部成员</p>
+                                                    </div>
+                                                    <div id="clubPeople" class="weui-cell__ft club-cell-ft"></div>
+                                                </a>
+                                                <a class="weui-cell weui-cell_access" href="javascript:;">
+                                                    <div class="weui-cell__hd club-cell-hd"><img src="<%= require('../../imgs/icons/icon-ph.png')%>" alt=""></div>
+                                                    <div class="weui-cell__bd">
+                                                        <p>俱乐部排行</p>
+                                                    </div>
+                                                    <div id="clubRank" class="weui-cell__ft club-cell-ft"></div>
+                                                </a>
+                                    
+                                            </div>
+                                           
+                                        </div>
+                                        <div id="acts" class="weui-tab__content"></div>
+                                        <div class="weui-tab__content"></div>
+                                        <div class="weui-tab__content"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

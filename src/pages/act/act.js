@@ -54,7 +54,7 @@ let all = (function () {
         _html += Home._temple(i, newdata)
       }
       $('#act-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-      $('#' + TYPE).append(_html)
+      $('#' + TYPE).html(_html)
       $(document.getElementById(TYPE)).show().siblings().hide()
     },
     switch: function () {

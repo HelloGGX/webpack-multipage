@@ -93,6 +93,12 @@ export default {
       showLoading: true
     }))
   },
+  getClubDetailData (data) { // 获取俱乐部的详细数据（包括活动）
+    return db.handleRequest(db.request.get('getClubDetail.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
   getActDetailData (data) { // 获取活动详情页的数据
     return db.handleRequest(db.request.get('getActDetail.php', {
       params: data,

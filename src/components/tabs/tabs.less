@@ -1,3 +1,5 @@
+@import '../../common/css/variable.less';
+
 .nav_fixed_wrap {
     max-width: 640px;
     position: fixed;
@@ -48,4 +50,18 @@
     color: #e02e24;
     height: .4rem;
     display: inline-block;
+}
+
+.club-tabs{
+    background-color: #fff;
+    .club-item{
+        &.weui-bar__item_on{
+            border-bottom: 2px solid @color-theme;
+            color: @color-theme;
+            background-color: #fff;
+        }
+        &::after{
+            border-right: none;
+        }
+    }
 }

@@ -29,14 +29,12 @@ let all = (function () {
         } else {
           let _thi = this
           weui.form.validate('#createClub', function (error) {
-            console.log(error)
             if (!error) {
               var loading = weui.loading('提交中...')
               setTimeout(function () {
                 loading.hide()
                 _thi._postClubData()
-                weui.toast('提交成功', 1000)
-              }, 1500)
+              }, 1000)
             }
           }, regexp)
         }
@@ -45,11 +43,12 @@ let all = (function () {
     _postClubData: function () { // 提交俱乐部数据
       model.createClubData($('#createClub')).then((e) => {
         // 获取数据成功时的处理逻辑
+        console.log(e)
         if (e.state === 'ok') {
           weui.alert('提交成功，等待审核')
+        } else if (e.state === '402') {
+          weui.alert('你已经创建了俱乐部，不能再次创建')
         }
-
-        weui.alert('提交成功')
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
         weui.alert('数据获取有误')

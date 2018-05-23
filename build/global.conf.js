@@ -40,6 +40,10 @@ const pages = [ // 页面配置写在这里
     pageName: 'act-info-mag'
   },
   {
+    title: '活动相册',
+    pageName: 'act-album'
+  },
+  {
     title: '俱乐部社区',
     pageName: 'club'
   },

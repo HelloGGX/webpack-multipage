@@ -1,6 +1,0 @@
-这是一个完整的webpack多页应用开发配置
-1:发布到服务器的流程，先修改src/api目录下的getIndex.js中的json路径为服务器路径如:http://125.65.111.19:82/api/getIndex.php
-2:json文件改为php后缀
-3：cnpm run build
-4:复制粘贴生成的dist到服务器
-5：imgs文件夹中的json文件引用的图片要复制到服务器的imgs文件夹下

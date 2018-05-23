@@ -86,7 +86,6 @@ let clubItem = {
   },
   saveItems () {
     weui.form.validate('.cover-form', (error) => {
-      console.log(error)
       if (!error) {
         var loading = weui.loading('提交中...')
         setTimeout(() => {

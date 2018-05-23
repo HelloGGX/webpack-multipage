@@ -11,7 +11,13 @@
 
 <body>
     <div class="page">
-        <%= require('html-loader!../../components/banner/banner.html')  %>
+        <div class="banner-container">
+            <div class="banner">
+                <div class="banner-icon-back banner-left back" ><a href="#"><span></span></a></div>
+                <div class="banner-tit banner-text">俱乐部详情</div>
+                <div class="banner-right"><a href="#"><i class="iconfont icon-other" style="font-size: 0.28rem;"></i></a></div>
+            </div>
+        </div>
         <div id="index-content-v2">
             <div class="weui-tab">
                 <div class="weui-tab__panel content-panel">
@@ -63,7 +69,7 @@
                                     </div>
                                     <div class="weui-tab__panel">
                                         <div class="weui-tab__content club-tab-con">
-                                            <div class="weui-cells margin">
+                                            <div class="weui-cells margin f-m-x">
                                                 <div class="weui-cell">
                                                     <div class="weui-cell__hd">
                                                         <p>所在地</p>

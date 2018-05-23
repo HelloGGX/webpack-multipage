@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page">
+            <div class="banner-container">
+                    <div class="banner">
+                        <div class="banner-icon-back banner-left back" ><a href="#"><span></span></a></div>
+                        <div class="banner-tit banner-text"></div>
+                        <div id="BtnUpload" class="banner-right"><a href="#"><i class="iconfont icon-add" style="font-size: 0.28rem"></i></a></div>
+                    </div>
+                </div>
+        <!--==================上传照片页面========================-->
+        <div id="uploadPage" class="cover" style="display: none;">
+                <div class="cover-inner">
+                    <div class="cover-banner-container">
+                        <div class="cover-banner">
+                            <div id="uploadCancel" class="cover-banner-icon-back cover-banner-left"><a href="#"><span></span></a></div>
+                            <div class="cover-banner-tit">上传照片</div>
+                        </div>
+                    </div>
+                    <div class="cover-form">
+                            <div class="weui-cells weui-cells_form" id="uploader">
+                                    <div class="weui-cell">
+                                      <div class="weui-cell__bd">
+                                        <div class="weui-uploader">
+                                          <div class="weui-uploader__hd">
+                                            <p class="weui-uploader__title">
+                                              图片上传
+                                            </p>
+                                          </div>
+                                          <div class="weui-uploader__bd">
+                                            <ul class="weui-uploader__files" id="uploaderFiles">
+                                            </ul>
+                                            <div class="weui-uploader__input-box">
+                                              <input id="uploaderCustomInput" class="weui-uploader__input" type="file"
+                                              accept="image/*" multiple="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="weui-btn-area"> 
+                                      <a id="uploaderCustomBtn" href="javascript:" class="weui-btn weui-btn_primary">上传</a> 
+                                </div> 
+                    </div>   
+                </div>
+            </div>
+        <div id="index-content-v2">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                    <div class="content-wrapper bg-grey">
+                        <div class="content-inner">
+                            <div id="album-container">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

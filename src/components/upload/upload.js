@@ -6,8 +6,11 @@ let upload = {
   uploadList: [],
   maxLength: 5,
   fileVal: 'imgfile',
+  auto: true,
+  okCallBack: () => {},
   init (obj) {
     this._uploader(obj)
+    this._customLoader()
     this._seeImg()
   },
   _seeImg () { // 预览上传图片
@@ -44,11 +47,11 @@ let upload = {
       })
     })
   },
-  _uploader ({maxLength = this.maxLength, fileVal = this.fileVal} = {}) { // 上传图片
+  _uploader ({maxLength = this.maxLength, fileVal = this.fileVal, auto = this.auto, okCallBack = this.okCallBack} = {}) { // 上传图片
     let _this = this
     weui.uploader('#uploader', {
       url: 'http://125.65.111.19:82/api/getupload.php',
-      auto: true,
+      auto: auto,
       type: 'file',
       fileVal: fileVal,
       compress: {
@@ -68,11 +71,11 @@ let upload = {
           return false
         }
         if (files.length > maxLength) { // 防止一下子选择过多文件
-          weui.alert('最多只能上传1张图片，请重新选择')
+          weui.alert(`最多只能上传${maxLength}张图片，请重新选择`)
           return false
         }
         if (_this.uploadCount + 1 > maxLength) {
-          weui.alert('最多只能上传1张图片')
+          weui.alert(`最多只能上传${maxLength}张图片`)
           return false
         }
 
@@ -81,7 +84,6 @@ let upload = {
         // return true; // 阻止默认行为，不插入预览图的框架
       },
       onQueued: function () {
-        console.log(this)
         _this.uploadList.push(this)
         // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
         // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
@@ -99,11 +101,13 @@ let upload = {
         // return false; // 阻止文件上传
       },
       onProgress: function (procent) {
-        console.log(this, procent)
+        // console.log(this, procent)
         // return true; // 阻止默认行为，不使用默认的进度显示
       },
       onSuccess: function (ret) {
         $('#hdimg').val(ret.imgurl)
+        weui.alert(`上传成功`)
+        okCallBack()
         // return true; // 阻止默认行为，不使用默认的成功态
       },
       onError: function (err) {
@@ -111,6 +115,13 @@ let upload = {
         // return true; // 阻止默认行为，不使用默认的失败态
       }
 
+    })
+  },
+  _customLoader () { // 手动上传按钮
+    $('#uploaderCustomBtn').on('click', () => {
+      this.uploadList.forEach(function (file) {
+        file.upload()
+      })
     })
   }
 

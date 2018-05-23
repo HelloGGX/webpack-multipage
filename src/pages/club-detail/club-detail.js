@@ -4,6 +4,7 @@ import 'components/tabs/tabs.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
+import {getQueryString} from 'common/js/dom'
 
 let all = (function () {
   let DATA
@@ -136,7 +137,7 @@ let all = (function () {
       $('#clubRank').html(`活动人气榜前${data.club_rank}`)
     },
     _getClubDetail () {
-      model.getClubDetailData().then((data) => {
+      model.getClubDetailData({clubId: getQueryString('clubId')}).then((data) => {
         DATA = data
         console.log(DATA)
         this._getClubInfo(DATA)// 获取俱乐部基本数据

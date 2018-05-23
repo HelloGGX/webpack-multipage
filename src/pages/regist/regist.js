@@ -44,7 +44,6 @@ let all = (function () {
             setTimeout(function () {
               loading.hide()
               _thi._postRegistData()
-              weui.toast('注册成功', 1000)
             }, 1500)
           }
         }, regexp)
@@ -53,6 +52,13 @@ let all = (function () {
     _postRegistData () {
       model.postRegistData($('#registForm')).then((data) => { // resolve状态的回调函数
         // 获取数据成功时的处理逻辑
+        if (data.state === 'ok') { // 如果存在该用户"
+          weui.toast('注册成功', 800)
+          window.location.href = `index.html?uid=${data.uid}`
+        } else if (data.state === 'reg_y') {
+          weui.alert('你已经注册过了,请直接登陆')
+          window.location.href = 'login.html'
+        }
       }).catch((ErrMsg) => { // reject状态的回调函数
         // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)

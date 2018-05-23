@@ -86,7 +86,7 @@ let all = (function () {
       let keyword = data[i].keyword.split(',')
       return `<div class="margin weui-panel weui-panel_access" id="${TYPE + data[i].id}">
       <div class="weui-panel__bd">
-        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+        <a href="club-detail.html?clubId=${data[i].id}" class="weui-media-box weui-media-box_appmsg">
           <div class="club-thumb weui-media-box__hd ">
             <img class="weui-media-box__thumb" src="${data[i].imgsrc}">
           </div>

@@ -31,7 +31,12 @@ export function clear (str) { // 取消字符串中出现的所有逗号
   str = str.replace(/,/g, '')
   return str
 }
-
+export function getQueryString (name) {
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+  var r = window.location.search.substr(1).match(reg)
+  if (r != null) return unescape(r[2])
+  return null
+}
 // 将从form中通过$('#form').serialize()获取的值转成json
 export function serializeObject (form) {
   var o = {}

@@ -104,6 +104,18 @@ export default {
       params: data,
       showLoading: true
     }))
+  },
+  getApplyData (data) {
+    return db.handleRequest(db.request.get('getApply.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  getAlbumData (data) {
+    return db.handleRequest(db.request.get('getActAlbum.php', {
+      params: data,
+      showLoading: true
+    }))
   }
 }
 

@@ -4,8 +4,9 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import BScroll from 'better-scroll'
 import weui from 'weui.js'
+import {getQueryString} from 'common/js/dom'
 
-import model from '../../api/getIndex'
+import model from 'api/getIndex'
 
 let all = (function () {
   let imgScroll = {
@@ -78,7 +79,9 @@ let all = (function () {
       this._getActDetailData()
     },
     _getActDetailData: function () {
-      model.getActDetailData().then((data) => {
+      model.getActDetailData({id: getQueryString('id')}).then((data) => {
+        let actId = data.list[0].act_id
+        let clubId = data.club[0].club_id
         let hdThumbUrl = data.list[0].hd_thumb_url
         let price = data.list[0].price
         let clubName = data.club.club_name
@@ -97,6 +100,7 @@ let all = (function () {
         let detailImgs = data.list[0].act_detail_imgs
         $('.v5-banner').css({'background-image': 'url(' + hdThumbUrl + ')'})
         $('.index_price').html(price)
+        $('.goods-buy-price').html(`<i>￥</i>${price}`)
         $('.g-repeated-coupon-tag').html(clubName)
         $('#index_name').html(actName)
         $('.g-service-list').html(`${actType.map((key) => `<span class="g-service-item">${key}</span>`)}`)
@@ -132,6 +136,7 @@ let all = (function () {
     </li>
         `)}
         `)
+        $('.goods-group-btn a').attr('href', `act-apply.html?id=${actId}&clubId=${clubId}`)
       }).catch((errMess) => {
         // 获取数据失败时的处理逻辑
         weui.alert(errMess)

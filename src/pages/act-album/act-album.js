@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
-import {clear, transDate} from 'common/js/dom'
+import {clear, transDate, getQueryString} from 'common/js/dom'
 import model from 'api/getIndex'
 import {gallery} from 'components/gallery/gallery'
 
@@ -61,7 +61,7 @@ let all = (function () {
       })
     },
     _getAlbumData () {
-      model.getAlbumData().then((data) => {
+      model.getAlbumData({albumId: getQueryString('albumId')}).then((data) => {
         let newdata
         let _html = ''
         newdata = data['albums']

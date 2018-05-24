@@ -1,4 +1,4 @@
-import {serializeObject, setCookie} from 'common/js/dom'
+import {serializeObject} from 'common/js/dom'
 import db from '../db/db'
 
 let magAct = {// 管理活动
@@ -34,7 +34,6 @@ export default {
   magAct,
   postLoginData (e) { // 登陆
     let data = serializeObject(e)
-    setCookie('username', data.username, 1000 * 60)
     return db.handleRequest(db.request.post('login_up.php', {
       data: data,
       showLoading: true
@@ -42,7 +41,6 @@ export default {
   },
   postRegistData (e) { // 注册
     let data = serializeObject(e)
-    setCookie('username', data.username, 1000 * 60)
     return db.handleRequest(db.request.post('regist_up.php', {
       data: data,
       showLoading: true
@@ -52,6 +50,12 @@ export default {
   getIndexData (data) { // 获取首页数据
     return db.handleRequest(db.request.get('getIndex.php', {
       params: data,
+      showLoading: true
+    }))
+  },
+  postUserData (data) { // 发送用户信息
+    return db.handleRequest(db.request.post('getIndex.php', {
+      data: data,
       showLoading: true
     }))
   },
@@ -99,19 +103,25 @@ export default {
       showLoading: true
     }))
   },
+  joinClubData (data) { // 加入俱乐部提交数据
+    return db.handleRequest(db.request.post('getClubDetail.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
   getActDetailData (data) { // 获取活动详情页的数据
     return db.handleRequest(db.request.get('getActDetail.php', {
       params: data,
       showLoading: true
     }))
   },
-  getApplyData (data) {
+  getApplyData (data) { // 获取报名选项数据
     return db.handleRequest(db.request.get('getApply.php', {
       params: data,
       showLoading: true
     }))
   },
-  getAlbumData (data) {
+  getAlbumData (data) { // 获取对应活动相册数据
     return db.handleRequest(db.request.get('getActAlbum.php', {
       params: data,
       showLoading: true

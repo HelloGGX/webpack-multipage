@@ -1,4 +1,4 @@
-import Swiper from './swiper.min.js'
+import Swiper from './swiper.min'
 import $ from 'jquery'
 import './swiper.min.css'
 import './gallery.less'

@@ -2,8 +2,9 @@ import './regist.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
-
+import sha1 from 'sha1'
 import vali from 'vendor/validate'
+import {setCookie, delCookie} from 'common/js/dom'
 
 let regexp = {
   regexp: {
@@ -52,8 +53,12 @@ let all = (function () {
     _postRegistData () {
       model.postRegistData($('#registForm')).then((data) => { // resolve状态的回调函数
         // 获取数据成功时的处理逻辑
+        delCookie('username')
+        delCookie('password')
         if (data.state === 'ok') { // 如果存在该用户"
           weui.toast('注册成功', 800)
+          setCookie('username', sha1(`${data.username}SD${'ggx888'}`), 1000 * 60)
+          setCookie('password', sha1(`${data.password}SD${'ggx888'}`), 1000 * 60)
           window.location.href = `index.html?uid=${data.uid}`
         } else if (data.state === 'reg_y') {
           weui.alert('你已经注册过了,请直接登陆')

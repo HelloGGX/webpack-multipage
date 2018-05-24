@@ -62,7 +62,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "bcrypt": "^2.0.1",
     "better-scroll": "^1.8.4",
+    "from": "^0.1.7",
     "jquery": "^3.3.1",
     "jsonp": "^0.2.1",
     "qs": "^6.5.2",

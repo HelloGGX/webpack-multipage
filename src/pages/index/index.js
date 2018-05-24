@@ -3,6 +3,7 @@ import model from '../../api/getIndex'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 import weui from 'weui.js'
+import {getCookie} from 'common/js/dom'
 
 let all = (function () {
   const DIRECTION_H = 'horizontal'
@@ -13,13 +14,20 @@ let all = (function () {
       this._getIndexData()
     },
     _getIndexData () {
-      model.getIndexData().then((data) => {
-        scrollNav.init(data)// 顶部导航栏初始化
-        slider.init(data)// 幻灯片初始化
-        hotArea.init(data)// 热门区域初始化
-      }).catch((ErrMsg) => {
-        // 获取数据失败时的处理逻辑
-        weui.alert('数据获取有误')
+      let username = getCookie('username')
+      let password = getCookie('password')
+      model.postUserData({username: username, password: password}).then((res) => { // 如果匹配用户信息成功
+        // 这里看data的返回
+        model.getIndexData().then((data) => { // 初始化页面数据
+          scrollNav.init(data)// 顶部导航栏初始化
+          slider.init(data)// 幻灯片初始化
+          hotArea.init(data)// 热门区域初始化
+        }).catch((ErrMsg) => {
+          // 获取数据失败时的处理逻辑
+          weui.alert('数据获取有误')
+        })
+      }).catch((errMsg) => {
+
       })
     }
   }// 获取所有数据

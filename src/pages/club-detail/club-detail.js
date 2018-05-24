@@ -12,6 +12,26 @@ let all = (function () {
     pageInit () {
       this.switch()
       this._getClubDetail()
+      $('.join-club').on('click', (e) => {
+        weui.confirm('加入俱乐部成为会员', {
+          title: '确定要要加入俱乐部吗？',
+          buttons: [{
+            label: '考虑一下',
+            type: 'default',
+            onClick: function () {}
+          }, {
+            label: '马上加入',
+            type: 'primary',
+            onClick: function () {
+              model.joinClubData().then(data => {
+
+              }).catch(errMsg => {
+
+              })
+            }
+          }]
+        })
+      })
     },
     switch () {
       weui.tab('#clubTab', {
@@ -36,6 +56,7 @@ let all = (function () {
       for (let i = 0; i < len; i++) {
         _html += this._newTemp(i, newdata)
       }
+
       $('#news').html(_html)
     },
     _newTemp (i, data) { // 游记模板
@@ -78,7 +99,7 @@ let all = (function () {
     },
     _albumsTemp (i, data) { // 活动相册模板
       return `<div class="col-50" data-id="${data[i].id}" style="margin-top: 0.1rem;">
-      <a href="act-album.html">
+      <a href="act-album.html?albumId=${data[i].id}">
           <div class="tidbits-item">
               <div class="tidbits-img">
                   <img src="${data[i].photos[0].url[0]}" alt="">
@@ -139,7 +160,6 @@ let all = (function () {
     _getClubDetail () {
       model.getClubDetailData({clubId: getQueryString('clubId')}).then((data) => {
         DATA = data
-        console.log(DATA)
         this._getClubInfo(DATA)// 获取俱乐部基本数据
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑

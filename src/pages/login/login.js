@@ -2,7 +2,8 @@ import './login.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
-
+import {setCookie} from 'common/js/dom'
+import sha1 from 'sha1'
 import vali from 'vendor/validate'
 
 let regexp = {
@@ -56,9 +57,10 @@ let all = (function () {
     _postLoginData () {
       model.postLoginData($('#loginForm')).then((data) => {
         // 获取数据成功时的处理逻辑
-        console.log(data)
+
         if (data.state === 'ok') { // 如果存在该用户
           weui.toast('登陆成功', 1000)
+          setCookie('username', sha1(`${data.username}SD${'ggx888'}`), 1000 * 60)
           window.location.href = this.href(data.uid)
           window.sessionStorage.setItem('ucl', data.ucl)
         }

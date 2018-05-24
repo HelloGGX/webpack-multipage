@@ -74,11 +74,11 @@ let all = (function () {
       for (let i = 0; i < len; i++) {
         _html += this._albumsTemp(i, newdata)
       }
-      $('#addAlbums').parent().after(_html)
+      $('.tidbits-con .row').html(_html)
     },
     _albumsTemp (i, data) { // 活动相册模板
       return `<div class="col-50" data-id="${data[i].id}" style="margin-top: 0.1rem;">
-      <a href="#">
+      <a href="act-album.html">
           <div class="tidbits-item">
               <div class="tidbits-img">
                   <img src="${data[i].photos[0].url[0]}" alt="">

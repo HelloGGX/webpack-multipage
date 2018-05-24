@@ -1,15 +1,15 @@
 import $ from 'jquery'
 
 export function compile (template) { // 模板编译函数
-  var evalExpr = /<%=(.+?)%>/g
-  var expr = /<%([\s\S]+?)%>/g
+  let evalExpr = /<%=(.+?)%>/g
+  let expr = /<%([\s\S]+?)%>/g
   template = template
     .replace(evalExpr, '`); \n echo( $1 ); \n echo(`')
     .replace(expr, '`); \n $1 \n echo(`')
   template = 'echo(`' + template + '`);'
-  var script =
+  let script =
 `(function parse(data){
-var output = "";
+let output = "";
 function echo(html){
 output += html;
 }
@@ -20,7 +20,7 @@ return output;
 }
 
 export function Trim (str, global) { // 去掉字符串中的所有空格
-  var result
+  let result
   result = str.replace(/(^\s+)|(\s+$)/g, '')
   if (global.toLowerCase() === 'g') {
     result = result.replace(/\s/g, '')
@@ -32,14 +32,14 @@ export function clear (str) { // 取消字符串中出现的所有逗号
   return str
 }
 export function getQueryString (name) {
-  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
-  var r = window.location.search.substr(1).match(reg)
+  let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+  let r = window.location.search.substr(1).match(reg)
   if (r != null) return unescape(r[2])
   return null
 }
 // 将从form中通过$('#form').serialize()获取的值转成json
 export function serializeObject (form) {
-  var o = {}
+  let o = {}
   $.each(form.serializeArray(), function (index) {
     if (o[this['name']]) {
       o[this['name']] = o[this['name']] + ',' + this['value']
@@ -58,7 +58,7 @@ export function pageName () {
 /* 用export把方法暴露出来 */
 /* 设置cookie */
 export function setCookie (cName, value, expire) {
-  var date = new Date()
+  let date = new Date()
   // 这个是cookie有效期，将cookie的有效时间设成当前时间之前就是删除
   date.setSeconds(date.getSeconds() + expire)
   document.cookie = cName + '=' + escape(value) + '; expires=' + date.toGMTString()
@@ -81,4 +81,32 @@ export function getCookie (cName) {
 /* 删除cookie */
 export function delCookie (cName) {
   setCookie(cName, '', -1)
+}
+
+/** ************把最近日期转换成前天，昨天，明天************************** */
+export function transDate ($time) {
+  let date = $time.trim()
+  let tt = new Date(date)
+  let days = parseInt((new Date().getTime() - tt.getTime()) / 86400000)
+  let today = new Date().getDate()
+  // let year = tt.getFullYear()
+  let mouth = tt.getMonth() + 1
+  let day = tt.getDate()
+  let time = tt.getHours() < 10 ? '0' + tt.getHours() : tt.getHours()
+  let min = tt.getMinutes() < 10 ? '0' + tt.getMinutes() : tt.getMinutes()
+  let result
+  let offset
+  offset = Math.abs(today - day)
+  if (days < 3 && offset < 3) {
+    if (offset === 0) {
+      result = '今天' + time + ':' + min
+    } else if (offset === 1) {
+      result = '昨天' + time + ':' + min
+    } else if (offset === 2) {
+      result = '前天' + time + ':' + min
+    }
+  } else {
+    result = mouth + '-' + day + ' ' + time + ':' + min
+  }
+  return result
 }

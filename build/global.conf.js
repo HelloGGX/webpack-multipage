@@ -58,6 +58,10 @@ const pages = [ // 页面配置写在这里
   {
     title: '个人中心',
     pageName: 'person'
+  },
+  {
+    title: '我的档案',
+    pageName: 'per-data'
   }
 ]
 const dependencies = [ // 依赖的全局js

@@ -1,5 +1,6 @@
 import weui from 'weui.js'
 import $ from 'jquery'
+import {getQueryString} from 'common/js/dom'
 
 let upload = {
   uploadCount: 0,
@@ -10,7 +11,6 @@ let upload = {
   okCallBack: () => {},
   init (obj) {
     this._uploader(obj)
-    this._customLoader()
     this._seeImg()
   },
   _seeImg () { // 预览上传图片
@@ -59,9 +59,9 @@ let upload = {
         height: 1600,
         quality: 0.8
       },
-      onBeforeQueued: function (files) {
+      onBeforeQueued: function (files) { // 文件添加前的回调，return false则不添加
         // `this` 是轮询到的文件, `files` 是所有文件
-        console.log(files)
+
         if (['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].indexOf(this.type) < 0) {
           weui.alert('请上传图片')
           return false // 阻止文件添加
@@ -83,7 +83,7 @@ let upload = {
 
         // return true; // 阻止默认行为，不插入预览图的框架
       },
-      onQueued: function () {
+      onQueued: function () { // 文件添加成功的回调
         _this.uploadList.push(this)
         // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
         // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
@@ -93,11 +93,11 @@ let upload = {
 
         // return true; // 阻止默认行为，不显示预览图的图像
       },
-      onBeforeSend: function (data, headers) {
-        console.log(this, data, headers)
-        // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
-        // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
-
+      onBeforeSend: function (data, headers) { // 文件上传前调用
+        // console.log(`文件上传前调用的data:${headers}`)
+        $.extend(data, { albumId: getQueryString('albumId') }) // 可以扩展此对象来控制上传参数
+        // $.extend(headers, { Origin: 'http://125.65.111.19:82' }) // 可以扩展此对象来控制上传头部
+        console.log(`文件上传前调用的data:${data.albumId}`)
         // return false; // 阻止文件上传
       },
       onProgress: function (procent) {
@@ -118,10 +118,8 @@ let upload = {
     })
   },
   _customLoader () { // 手动上传按钮
-    $('#uploaderCustomBtn').on('click', () => {
-      this.uploadList.forEach(function (file) {
-        file.upload()
-      })
+    this.uploadList.map(file => {
+      file.upload()
     })
   }
 

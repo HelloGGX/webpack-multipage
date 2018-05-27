@@ -79,10 +79,12 @@ let swit = {
     })
   },
   change (classname) {
-    if ($(classname).find('input').is(':checked')) {
-      $(classname).find('input').val('是')
-    } else {
-      $(classname).find('input').val('否')
+    if ($(classname).find('input').attr('type') === 'checkbox') {
+      if ($(classname).find('input').is(':checked')) {
+        $(classname).find('input').val('是')
+      } else {
+        $(classname).find('input').val('否')
+      }
     }
   }
 }

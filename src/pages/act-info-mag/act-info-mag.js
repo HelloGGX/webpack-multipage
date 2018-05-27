@@ -8,6 +8,9 @@ import {pickerAddr, pickerData} from 'components/picker/picker' // 引入地区�
 import {batchG} from '../batchGroup/batch-group'
 import {addApplyPer} from '../addApplyPerson/add-apply-per'
 import {showGroupPer} from '../showGroupPer/show-g-per'
+import model from 'api/getIndex'
+import {getQueryString} from 'common/js/dom'
+
 let all = (function () {
   let search = {// 搜索框显示及查询
 
@@ -106,7 +109,8 @@ let all = (function () {
     }
   }
   let Home = {
-    pageInit: function () {
+    pageInit () {
+      this._getActInfoData()
       this.switch()
       search.init()
       applyMagGroup.init()
@@ -139,7 +143,7 @@ let all = (function () {
     getVal () {
       return $('textarea[name=theme]').val()
     },
-    switch: function () {
+    switch () {
       let TYPE
       $('.nav_fixed_catgoods').on('click', '.fixed_nav_item_catgoods', (e) => {
         $(e.currentTarget).find('span').addClass('nav_cur_cat').parent().siblings().find('span').removeClass('nav_cur_cat')
@@ -149,6 +153,29 @@ let all = (function () {
         } else {
           $('.act-mag').show().siblings().hide()
         }
+      })
+    },
+    _getActInfoData () {
+      model.magAct.getActInfoData({id: getQueryString('id')}).then(data => {
+        console.log(data)
+        let sales = data.list[0].sales
+        let theme = data.list[0].act_name
+        let detail = data.list[0].act_detail_text
+        let applyEndTime = data.list[0].apply_endtime
+        let actStartTime = data.list[0].act_kstime
+        let actEndTime = data.list[0].act_jstime
+        let actAddr = data.list[0].act_addr
+        let actDetailAddr = data.list[0].act_addrs
+        $('.actInfoInner ul li:first').find('span').html(sales)
+        $('#theme').val(theme)
+        $('#actDetail').val(detail)
+        $('#applyDeadline').val(applyEndTime)
+        $('#actStartLine').val(actStartTime)
+        $('#actEndLine').val(actEndTime)
+        $('#Actaddr').val(actAddr)
+        $('input[name=actDetailAddr]').val(actDetailAddr)
+      }).catch(errMsg => {
+        weui.alert(errMsg)
       })
     }
   }

@@ -15,7 +15,7 @@ let all = (function () {
     _createActTemple: function (i, data) { // 管理活动列表模板
       return `<div class="mag-item" id="${TYPE + data[i].act_id}">
       <div class="mag-item-content">
-        <a href="act-info-mag.html">
+        <a href="act-info-mag.html?id=${data[i].act_id}">
           <div class="mag-item-inner">
               <div class="mag-item-title-row" style="margin-bottom:0.1rem">
                   <div class="mag-item-title"><p>${data[i].act_name}</p></div>
@@ -31,7 +31,24 @@ let all = (function () {
       </div>
   </div>`
     },
-    _getActMagData: function () {
+    _getApplyData () { // 获取报名信息
+      model.getApplyInfo().then(data => {
+        let newdata
+        let _html = ''
+
+        newdata = data[TYPE]
+        let len = newdata.length
+        $('#acts-grid').append("<li class='mag-grid-wrapper' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+        $(document.getElementById(TYPE)).show().siblings().hide()
+        for (let i = 0; i < len; i++) {
+          _html = this._createActTemple(i, newdata)
+          $('#' + TYPE).append(_html)
+        }
+      }).catch(errMsg => {
+
+      })
+    },
+    _getActMagData () {
       model.getActMagData().then((data) => {
         let newdata
         let _html = ''
@@ -56,7 +73,11 @@ let all = (function () {
         if (document.getElementById(TYPE)) {
           $(document.getElementById(TYPE)).show().siblings().hide()
         } else {
-          this._getActMagData()
+          if (TYPE === 'createActs') {
+            this._getActMagData()
+          } else {
+            this._getApplyData()
+          }
         }
       })
     }

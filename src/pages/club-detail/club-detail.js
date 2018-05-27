@@ -23,7 +23,7 @@ let all = (function () {
             label: '马上加入',
             type: 'primary',
             onClick: function () {
-              model.joinClubData().then(data => {
+              model.joinClubData({clubId: getQueryString('clubId')}).then(data => {
 
               }).catch(errMsg => {
 

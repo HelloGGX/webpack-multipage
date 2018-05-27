@@ -18,6 +18,17 @@ let all = (function () {
       $('#uploadCancel').on('click', () => {
         this.hide()
       })
+
+      $('#uploaderCustomBtn').on('click', () => {
+        upload._customLoader()
+        // upload._customLoader(() => {
+        //   model.postAlbumData({albumId: getQueryString('albumId')}).then(res => {
+
+        //   }).catch(errMsg => {
+        //     weui.alert(errMsg)
+        //   })
+        // })
+      })
     },
     show () {
       $('#uploadPage').show()

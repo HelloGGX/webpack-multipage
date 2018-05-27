@@ -2,6 +2,12 @@ import {serializeObject} from 'common/js/dom'
 import db from '../db/db'
 
 let magAct = {// 管理活动
+  getActInfoData (data) { // 获取活动信息数据
+    return db.handleRequest(db.request.get('getActDetail.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
   deleteAct (id) { // 删除活动
     return db.handleRequest(db.request.delete('act_delete.php', {
       data: {
@@ -47,13 +53,13 @@ export default {
     }))
   },
 
-  getIndexData (data) { // 获取首页数据
-    return db.handleRequest(db.request.get('getIndex.php', {
-      params: data,
-      showLoading: true
-    }))
-  },
-  postUserData (data) { // 发送用户信息
+  // getIndexData (data) { // 获取首页数据
+  //   return db.handleRequest(db.request.get('getIndex.php', {
+  //     params: data,
+  //     showLoading: true
+  //   }))
+  // },
+  postUserData (data) { // 获取首页数据,发送用户信息
     return db.handleRequest(db.request.post('getIndex.php', {
       data: data,
       showLoading: true
@@ -71,14 +77,12 @@ export default {
       showLoading: true
     }))
   },
+
   createActData (e) { // 创建活动提交数据
     let data = serializeObject(e)
 
     return db.handleRequest(db.request.post('getAct_up.php', {
-      // params: {
-      //   appid: 'SD119',
-      //   key: 'SD119110'
-      // },
+
       data: data,
       showLoading: true
     }))
@@ -104,7 +108,7 @@ export default {
     }))
   },
   joinClubData (data) { // 加入俱乐部提交数据
-    return db.handleRequest(db.request.post('getClubDetail.php', {
+    return db.handleRequest(db.request.post('joinClub.php', {
       data: data,
       showLoading: true
     }))
@@ -124,6 +128,25 @@ export default {
   getAlbumData (data) { // 获取对应活动相册数据
     return db.handleRequest(db.request.get('getActAlbum.php', {
       params: data,
+      showLoading: true
+    }))
+  },
+  postAlbumData (data) { // 上传提交数据
+    return db.handleRequest(db.request.post('getupload.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  getApplyInfo (data) { // 获取报名信息
+    return db.handleRequest(db.request.get('getApplyInfo.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  postApplyInfo (e) { // 提交报名信息
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('postApplyInfo.php', {
+      data: data,
       showLoading: true
     }))
   }

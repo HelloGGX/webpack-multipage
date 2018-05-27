@@ -57,8 +57,8 @@ let all = (function () {
         delCookie('password')
         if (data.state === 'ok') { // 如果存在该用户"
           weui.toast('注册成功', 800)
-          setCookie('username', sha1(`${data.username}SD${'ggx888'}`), 1000 * 60)
-          setCookie('password', sha1(`${data.password}SD${'ggx888'}`), 1000 * 60)
+          setCookie('username', sha1(`${data.username}SD${'山渡户外119'}`), 1000 * 60)
+          setCookie('password', sha1(`${data.password}SD${'山渡户外119'}`), 1000 * 60)
           window.location.href = `index.html?uid=${data.uid}`
         } else if (data.state === 'reg_y') {
           weui.alert('你已经注册过了,请直接登陆')

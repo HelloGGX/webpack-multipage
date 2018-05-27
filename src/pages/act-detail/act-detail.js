@@ -80,6 +80,7 @@ let all = (function () {
     },
     _getActDetailData: function () {
       model.getActDetailData({id: getQueryString('id')}).then((data) => {
+        console.log(data)
         let actId = data.list[0].act_id
         let clubId = data.club[0].club_id
         let hdThumbUrl = data.list[0].hd_thumb_url
@@ -90,7 +91,8 @@ let all = (function () {
         let actName = data.list[0].act_name
         let actType = data.list[0].act_type
         let actAddr = data.list[0].act_addr
-        let actTime = data.list[0].act_time
+        let actStartTime = data.list[0].act_kstime
+        let actEndTime = data.list[0].act_jstime
         let actIntegral = data.list[0].act_integral
         let sales = data.list[0].sales
         let salesLimit = data.list[0].sales_limit
@@ -108,7 +110,8 @@ let all = (function () {
         $('.goods-mall-info span:first').html(`活动数量&nbsp;${clubActs}`)
         $('.goods-mall-info span:last').html(`会员数量&nbsp;${clubMember}`)
         $('input[name=MeetingPlace]').val(actAddr)
-        $('input[name=MeetingTime]').val(actTime)
+        $('input[name=startTime]').val(actStartTime)
+        $('input[name=endTime]').val(actEndTime)
         $('input[name=actStar]').val(actIntegral)
         $('input[name=applyPeople]').val(`${sales}/${salesLimit}`)
         $('.mall-recommend-main ul').html(`

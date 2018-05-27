@@ -3,7 +3,7 @@ import model from '../../api/getIndex'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {getCookie} from 'common/js/dom'
+import {getCookie, delCookie} from 'common/js/dom'
 
 let all = (function () {
   const DIRECTION_H = 'horizontal'
@@ -15,19 +15,24 @@ let all = (function () {
     },
     _getIndexData () {
       let username = getCookie('username')
-      let password = getCookie('password')
-      model.postUserData({username: username, password: password}).then((res) => { // 如果匹配用户信息成功
-        // 这里看data的返回
-        model.getIndexData().then((data) => { // 初始化页面数据
-          scrollNav.init(data)// 顶部导航栏初始化
-          slider.init(data)// 幻灯片初始化
-          hotArea.init(data)// 热门区域初始化
-        }).catch((ErrMsg) => {
-          // 获取数据失败时的处理逻辑
-          weui.alert('数据获取有误')
-        })
-      }).catch((errMsg) => {
+      let token = getCookie('token')
+      // let password = getCookie('password')
 
+      model.postUserData({username: username, token: token}).then((res) => { // 如果匹配用户信息成功
+        // 这里看res的返回
+
+        scrollNav.init(res.navdata)// 顶部导航栏初始化
+        slider.init(res.slidata)// 幻灯片初始化
+        hotArea.init(res.areadata)// 热门区域初始化
+        if (res.login === 'ok') { // 如果已经登陆过
+
+        } else { // 如果没有登陆
+          delCookie('username')
+          weui.alert('建议登陆体验哦~')
+        }
+      }).catch((errMsg) => {
+        // 获取数据失败时的处理逻辑
+        weui.alert(errMsg)
       })
     }
   }// 获取所有数据
@@ -90,7 +95,7 @@ let all = (function () {
     _getNavData (data) {
       let thi = this
       // Promise的方法then,catch方法
-      thi.navdata = data.navdata
+      thi.navdata = data
       let _html = ''
       let len = thi.navdata.length
       for (let i = 0; i < len; i++) {
@@ -175,7 +180,7 @@ let all = (function () {
     _getSlideData (data) {
       let thi = this
 
-      thi.slidata = data.slidata
+      thi.slidata = data
       let _html = ''
       let _dots = ''
       let len = thi.slidata.length
@@ -209,12 +214,12 @@ let all = (function () {
     _getAreaData (data) {
       let thi = this
 
-      thi.areadata = data.areadata
+      thi.areadata = data
       let _html = ''
       let len = thi.areadata.length
       for (let i = 0; i < len; i++) {
         _html += `<div class="store-item" data-id=${thi.areadata[i].id}>
-                    <a href="act-detail.html">
+                    <a href="act-detail.html?id=${thi.areadata[i].id}">
                     <div class="store-content">
                         <div class="goods-image">
                             <div class="image-container">

@@ -182,6 +182,11 @@ let costWay = { // 费用设置类方法
         weui.alert('费用设置名额之合不能大于活动总名额')
         return false
       }
+
+      if ($('input[name=payOnline]').val() === '否' && $('input[name=otherPay]').val() === '否') {
+        weui.alert('在线支付和其他支付方式至少选择一个')
+        return false
+      }
       $('#fymx').append(this._applyCostTemp(arr, arrPrice, arrNum))
       $('#actCost').find('.weui-select').html('收费')
       weui.alert('添加成功')

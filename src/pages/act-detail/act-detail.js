@@ -100,6 +100,14 @@ let all = (function () {
         let actNotice = data.list[0].act_should_know
         let detailText = data.list[0].act_detail_text
         let detailImgs = data.list[0].act_detail_imgs
+        let actState = data.list[0].act_state
+        if (actState === '报名中') {
+          $('.goods-group-btn a').attr('href', `act-apply.html?id=${actId}&clubId=${clubId}`)
+        } else if (actState === '关闭报名') {
+          $('.goods-group-btn').css('backgroundColor', '#b7b7b7')
+          $('.goods-group-btn a').attr('href', 'javascript:')
+          $('.goods-group-btn a span:last-child').html('报名已经关闭')
+        }
         $('.v5-banner').css({'background-image': 'url(' + hdThumbUrl + ')'})
         $('.index_price').html(price)
         $('.goods-buy-price').html(`<i>￥</i>${price}`)
@@ -139,7 +147,6 @@ let all = (function () {
     </li>
         `)}
         `)
-        $('.goods-group-btn a').attr('href', `act-apply.html?id=${actId}&clubId=${clubId}`)
       }).catch((errMess) => {
         // 获取数据失败时的处理逻辑
         weui.alert(errMess)

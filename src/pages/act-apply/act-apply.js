@@ -70,7 +70,7 @@ let all = (function () {
       })
     },
     helpApply () { // 帮人报名
-      $('.btn-bb-apply').on('click', (e) => {
+      $('#actApply').on('click', '.btn-bb-apply', (e) => {
         this.INDEX = $('#actApply .help-apply').length + 1
         $(e.currentTarget).before(`
           <div id="help${this.INDEX}" class="help-apply">
@@ -93,19 +93,26 @@ let all = (function () {
       })
     },
     _getApplyData () {
-      model.getApplyData({id: getQueryString('id'), clubId: getQueryString('clubId')}).then((data) => {
+      model.getApplyData({id: getQueryString('id')}).then((data) => {
         let applyInfo = data.actDetail
         let actForm = applyInfo.actForm
-
+        if (applyInfo.actbbm === '是') {
+          $('.main-apply').after(`<div class="btn-bb-apply">
+          <i class="iconfont icon-add"></i>
+          <span class="f-l">帮人报名</span>
+      </div>`)
+        }
+        $('input[name=actId]').val(getQueryString('id'))
+        $('input[name=clubId]').val(getQueryString('clubId'))
         $('.main-apply .weui-cells').prepend(`
           <div class="weui-cell weui-cell_select weui-cell_select-after">
             <div class="weui-cell__hd">
-              <label for="" class="weui-label">费用</label>
+              <label for="" class="weui-label">费用选择</label>
             </div>
             <div class="weui-cell__bd">
               <select class="weui-select" name="price" style="padding-left:1.6rem">
                   ${applyInfo.Price.map(key => `
-                  <option value="${key.Pricename}￥${key.Price}">${key.Pricename}￥${key.Price}</option>
+                  <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
                   `)}                                      
               </select>
             </div>
@@ -118,7 +125,7 @@ let all = (function () {
           <div class="weui-cell__bd">
             <select class="weui-select" name="price" style="padding-left:1.6rem">
                 ${applyInfo.Price.map(key => `
-                <option value="${key.Pricename}￥${key.Price}">${key.Pricename}￥${key.Price}</option>
+                <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
                 `)}                                      
             </select>
           </div>
@@ -165,7 +172,14 @@ let all = (function () {
                    `)}
                 </select>
             </div>
-        </div>`
+        </div><div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label myopt-title"></label>
+        </div>
+        <div class="weui-cell__bd text-right">
+          <button class="delete-apply" type="btn">删除报名</button>
+        </div>
+      </div>`
           }
         } else {
           this.temp += `<div class="weui-cell">
@@ -184,7 +198,7 @@ let all = (function () {
     _postApplyData () { // 提交报名
       model.postApplyInfo($('#actApply')).then(res => {
         if (res.state === 'ok') {
-          window.location.href = `act-pay.html?id=${getQueryString('id')}&clubId=${getQueryString('clubId')}`
+          window.location.href = `act-pay.html?id=${getQueryString('id')}&clubId=${getQueryString('clubId')}&orderId=${res.order_id}`
         }
       }).catch(errMsg => {
 

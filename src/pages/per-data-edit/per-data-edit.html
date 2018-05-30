@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page"> 
+        <div class="banner-container">
+            <div class="banner">
+                <div class="banner-icon-back banner-left back" ><a href="#"><span></span></a></div>
+                <div class="banner-tit banner-text"></div>
+                <div id="saveEdit" class="banner-right"><a>保存</a></div>
+            </div>
+        </div>
+        <div class="weui-tab">
+            <div class="weui-tab__panel content-panel">
+                <div class="content-wrapper bg-grey">
+                    <div class="content-inner">
+                        <div>
+                            <form id="perEdit" action="" name="form1" method="post">
+                                <div class="weui-cells weui-cells_form club-logo-upload" id="uploader">
+                                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                        <div class="weui-cell__hd">
+                                            <label for="" class="weui-label">头像</label>
+                                        </div>
+                                        <div class="weui-cell__bd">
+                                            <div class="weui-select text-right">
+                                                <div class="weui-uploader">
+                                                    <div class="weui-uploader__bd">
+                                                        <ul class="weui-uploader__files img-covers uploaderFiles" id="uploaderFiles">
+
+                                                        </ul>
+                                                        <div class="weui-uploader__input-box fright">
+                                                            <input id="uploaderInput" name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="weui-cells weui-cells_form">
+                                    <div class="weui-cell">
+                                        <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
+                                        <div class="weui-cell__bd f-m-x">
+                                            <input class="weui-input text-right"  type="text" name="myName">
+                                        </div>
+                                    </div>
+                                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                        <div class="weui-cell__hd">
+                                            <label for="" class="weui-label">个性签名</label>
+                                        </div>
+                                        <div class="weui-cell__bd f-m-x">
+                                            <div class="weui-select text-right">
+                                                <input id="signature" type="text"  name="signature" readonly="" placeholder="未填写">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                        <div class="weui-cell__hd">
+                                            <label for="" class="weui-label">性别</label>
+                                        </div>
+                                        <div class="weui-cell__bd">
+                                            <select class="weui-select" style="padding-left:2rem" name="sex">
+                                                <option value="男">男</option>
+                                                <option value="女">女</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                        <div class="weui-cell__hd">
+                                            <label for="" class="weui-label">年龄</label>
+                                        </div>
+                                        <div class="weui-cell__bd f-m-x">
+                                            <div class="weui-select text-right">
+                                                <input id="age" type="text"  name="age" readonly="" placeholder="未填写">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                        <div class="weui-cell__hd">
+                                            <label for="" class="weui-label">职业</label>
+                                        </div>
+                                        <div class="weui-cell__bd f-m-x">
+                                            <div class="weui-select text-right">
+                                                <input id="job" type="text"  name="job" readonly="" placeholder="未填写">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cell weui-cell_select weui-cell_select-after myAddr">
+                                        <div class="weui-cell__hd">
+                                            <label for="" class="weui-label">家乡</label>
+                                        </div>
+                                        <div class="weui-cell__bd f-m-x">
+                                            <div class="weui-select text-right">
+                                                <input type="text" name="myAddr" readonly="" placeholder="请选择">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

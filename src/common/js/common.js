@@ -67,7 +67,7 @@ let back = {// 返回
       if (document.referrer === '') {
         window.location.href = 'index.html'
       } else {
-        window.location.href = document.referrer
+        window.history.go(-1)
       }
     })
   }

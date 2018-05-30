@@ -109,8 +109,9 @@ let all = (function () {
     }
   }
   let Home = {
+
     pageInit () {
-      this._getActInfoData()
+      this._getData()
       this.switch()
       search.init()
       applyMagGroup.init()
@@ -121,6 +122,49 @@ let all = (function () {
         pickerData.showDate(e.currentTarget)
       })
 
+      $('#openApply').on('click', (e) => { // 打开关闭活动
+        model.magAct.openApply({id: getQueryString('id')}).then(res => {
+          if (res.state === '0') { // 如果是活动打开的
+            $('#openApply').find('button').html('关闭活动')
+          } else if (res.state === '1') {
+            $('#openApply').find('button').html('打开活动')
+          }
+        }).catch(errMsg => {
+
+        })
+      })
+
+      $('#deleteAct').on('click', () => { // 删除活动
+        weui.confirm('删除活动', {
+          title: '确定要删除活动吗？',
+          buttons: [{
+            label: '考虑一下',
+            type: 'default',
+            onClick: function () { }
+          }, {
+            label: '心意已决',
+            type: 'primary',
+            onClick: function () {
+              model.magAct.deleteAct(getQueryString('id')).then(res => {
+                console.log(res)
+                if (res.state === 'delete_ok') {
+                  window.alert('删除成功')
+                  window.history.go(-1)
+                } else if (res.state === 'delete_no') {
+                  window.alert('删除失败')
+                  return false
+                }
+              }).catch(errMsg => {
+
+              })
+            }
+          }]
+        })
+      })
+
+      $('#editApply').on('click', () => { // 编辑活动
+
+      })
       $('.actAddr').on('click', (e) => {
         pickerAddr.showAddr(e.currentTarget)
       })
@@ -155,25 +199,36 @@ let all = (function () {
         }
       })
     },
-    _getActInfoData () {
-      model.magAct.getActInfoData({id: getQueryString('id')}).then(data => {
-        console.log(data)
-        let sales = data.list[0].sales
-        let theme = data.list[0].act_name
-        let detail = data.list[0].act_detail_text
-        let applyEndTime = data.list[0].apply_endtime
-        let actStartTime = data.list[0].act_kstime
-        let actEndTime = data.list[0].act_jstime
-        let actAddr = data.list[0].act_addr
-        let actDetailAddr = data.list[0].act_addrs
-        $('.actInfoInner ul li:first').find('span').html(sales)
-        $('#theme').val(theme)
-        $('#actDetail').val(detail)
-        $('#applyDeadline').val(applyEndTime)
-        $('#actStartLine').val(actStartTime)
-        $('#actEndLine').val(actEndTime)
-        $('#Actaddr').val(actAddr)
-        $('input[name=actDetailAddr]').val(actDetailAddr)
+
+    _getActInfoData (data) {
+      let sales = data.list[0].sales
+      let theme = data.list[0].act_name
+      let detail = data.list[0].act_detail_text
+      let applyEndTime = data.list[0].apply_endtime
+      let actStartTime = data.list[0].act_kstime
+      let actEndTime = data.list[0].act_jstime
+      let actAddr = data.list[0].act_addr
+      let actDetailAddr = data.list[0].act_addrs
+      let actState = data.list[0].act_state
+      if (actState === '关闭报名') {
+        $('#openApply').find('button').html('打开活动')
+      } else if (actState === '报名中') {
+        $('#openApply').find('button').html('关闭活动')
+      }
+      $('#editApply a').attr('href', `act-create.html?id=${getQueryString('id')}`)
+      $('.actInfoInner ul li:first').find('span').html(sales)
+      $('#theme').val(theme)
+      $('#actDetail').val(detail)
+      $('#applyDeadline').val(applyEndTime)
+      $('#actStartLine').val(actStartTime)
+      $('#actEndLine').val(actEndTime)
+      $('#Actaddr').val(actAddr)
+      $('input[name=actDetailAddr]').val(actDetailAddr)
+    },
+    _getData () {
+      model.getMagInfo({id: getQueryString('id')}).then(args => {
+        this._getActInfoData(args[0])
+        addApplyPer.getApplyData(args[1])
       }).catch(errMsg => {
         weui.alert(errMsg)
       })

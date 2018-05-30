@@ -10,34 +10,56 @@ let magAct = {// 管理活动
   },
   deleteAct (id) { // 删除活动
     return db.handleRequest(db.request.delete('act_delete.php', {
-      data: {
+      params: {
         id: id
       }
     }))
   },
-  ubdateAct (e) { // 编辑更新活动
-    let data = serializeObject(e)
-    return db.handleRequest(db.request.put(``, {
+  openApply (data) { // 打开或者关闭活动
+    return db.handleRequest(db.request.post('openApply.php', {
       data: data,
       showLoading: true
     }))
   },
-  addPer () { // 添加报名成员
-
+  ubdateAct (data) { // 编辑更新活动
+    return db.handleRequest(db.request.put(`ubdateApply.php`, {
+      data: data,
+      showLoading: true
+    }))
   },
-  getPer () { // 获取未分组报名人员信息
 
+  addPer (e) { // 添加报名成员
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('addPer.php', {
+      data: data,
+      showLoading: true
+    }))
   },
-  moveToGroup () { // 移动人员到相应组
-
+  getPer (data) { // 获取未分组报名人员信息
+    return db.handleRequest(db.request.get('getPer.php', {
+      params: data,
+      showLoading: true
+    }))
   },
-  addGroup () { // 新增组
-
+  moveToGroup (data) { // 移动人员到相应组
+    return db.handleRequest(db.request.put('moveToGroup.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  addGroup (data) { // 新增组
+    return db.handleRequest(db.request.post('addGroup.php', {
+      data: data,
+      showLoading: true
+    }))
   }
 }
 
 export default {
   magAct,
+  getMagInfo (data) { // 获取活动详情数据和报名选项数据
+    return db.handleAll([this.getActDetailData(data), this.getApplyData(data)])
+  },
   postLoginData (e) { // 登陆
     let data = serializeObject(e)
     return db.handleRequest(db.request.post('login_up.php', {
@@ -144,7 +166,14 @@ export default {
       data: data,
       showLoading: true
     }))
+  },
+  getApplySuccess (data) { // 报名成功后获取相关信息
+    return db.handleRequest(db.request.get('getApplySucess.php', {
+      params: data,
+      showLoading: true
+    }))
   }
+
 }
 
 // export function getIndexData (data) { // 获取首页数据

@@ -9,7 +9,7 @@ import {AddapplyOption, EditapplyOption} from '../addApplyOption/addApplyOption'
 import {costWay} from '../setApplyCost/setApplyCost'// 引入费用设置的对象
 import model from 'api/getIndex'
 import vali from 'vendor/validate'
-
+import {converToDate, getQueryString} from 'common/js/dom'
 let regexp = {
   regexp: {
     PHONE: vali.mobile()
@@ -35,7 +35,33 @@ let all = (function () {
     }
   }
   let Home = {
-    pageInit: function () {
+    _getActData () {
+      model.getActDetailData({id: getQueryString('id')}).then(data => {
+        console.log(data)
+      }).catch(errMsg => {
+        console.log(errMsg)
+      })
+    },
+    pageInit () {
+      if (getQueryString('id')) { // 如果是编辑模式
+        $('input[name=edit]').val(getQueryString('id'))
+        this._getActData()
+      } else { // 如果是创建活动模式
+        $('#actSubmit').on('click', (e) => {
+          let _thi = this
+          weui.form.validate('#createAct', function (error) {
+            if (!error) {
+              this.judgTime()
+              var loading = weui.loading('提交中...')
+              setTimeout(function () {
+                loading.hide()
+                _thi._postActData()
+                weui.toast('提交成功', 1000)
+              }, 1000)
+            }
+          }, regexp)
+        })
+      }
       banner.init()// 草稿箱初始化
       AddapplyOption.Addinit()// 增加报名项初始化
       EditapplyOption.Editinit()// 编辑报名项初始化
@@ -78,21 +104,18 @@ let all = (function () {
           $('#hdbmfs').val('组队')
         }
       })
-      $('#actSubmit').click((e) => {
-        let _thi = this
-        weui.form.validate('#createAct', function (error) {
-          if (!error) {
-            var loading = weui.loading('提交中...')
-            setTimeout(function () {
-              loading.hide()
-              _thi._postActData()
-              weui.toast('提交成功', 1000)
-            }, 1000)
-          }
-        }, regexp)
-      })
     },
-
+    judgTime () {
+      let starTime = converToDate($('#starTime').val())// 活动开始时间
+      let endTime = converToDate($('#endTime').val())// 活动结束时间
+      let endApplyTime = converToDate($('#endApplyTime').val())// 活动报名截止时间
+      if (starTime >= endTime) {
+        weui.alert('活动结束时间不能早于或等于活动开始时间')
+      }
+      if (endApplyTime > starTime) {
+        weui.alert('报名截止时间不能晚于活动开始时间')
+      }
+    },
     _postActData: function () {
       model.createActData($('#createAct')).then((res) => {
         // 获取数据成功时的处理逻辑

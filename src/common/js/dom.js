@@ -77,10 +77,26 @@ export function getCookie (cName) {
   }
   return ''
 }
+/* 日期转年龄 */
+export function ages (str) {
+  var r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/)
+  if (r == null) return false
+  var d = new Date(r[1], r[3] - 1, r[4])
 
+  if (d.getFullYear() === parseInt(r[1]) && (d.getMonth() + 1) === parseInt(r[3]) && d.getDate() === parseInt(r[4])) {
+    var Y = new Date().getFullYear()
+    return (`${Y - r[1]}`)
+  } else {
+    return ('输入的日期格式错误！')
+  }
+}
 /* 删除cookie */
 export function delCookie (cName) {
   setCookie(cName, '', -1)
+}
+/* 把2018年5月5号转换成时间格式 */
+export function converToDate (starTime) {
+  return new Date(Date.parse(starTime.replace(/[\u4e00-\u9fa5](?=\d+)/g, '/').replace(/[\u4e00-\u9fa5]/g, '')))
 }
 
 /** ************把最近日期转换成前天，昨天，明天************************** */

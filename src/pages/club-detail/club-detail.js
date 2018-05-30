@@ -1,56 +1,96 @@
 import './club-detail.less'
 import 'components/banner/banner.less'
 import 'components/tabs/tabs.less'
+import '../club-info/club-info.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {getQueryString} from 'common/js/dom'
+import {getQueryString, clear} from 'common/js/dom'
+import {judgeLogin} from 'components/judgeLogin/judge-login'
 
 let all = (function () {
   let DATA
+  let clubInfo = {
+    init () {
+      $('#clubInfoBack').on('click', (e) => {
+        this.hide()
+      })
+      $('#clubInfoShow').on('click', () => {
+        this.show()
+      })
+    },
+    show () {
+      $('#clubInfo').show()
+    },
+    hide () {
+      $('#clubInfo').hide()
+    },
+    _getClubInfo (data) {
+      $('#coverClubName').html(data.club_name)
+      $('#coverClubId').html(data.club_id)
+      $('#coverClubLogo').find('img').attr('src', data.thumb_logo)
+      // $('#coverClubStar')
+      $('#coverClubMajor').html(clear(`
+      ${data.club_major.map(key => `<span>${key}</span>`)}
+      `))
+      $('#coverClubAddr').html(data.club_addr)
+      $('#coverClubMotto').html(data.club_motto)
+      $('#coverClubIntr p').text(data.club_intr)
+      $('#coverClubMember').html(`<p>俱乐部成员${data.club_renshu}</p>`)
+    }
+  }
   let Home = {
     pageInit () {
       this.switch()
-      this._getClubDetail()
-      $('.join-club').on('click', (e) => {
-        weui.confirm('加入俱乐部成为会员', {
-          title: '确定要要加入俱乐部吗？',
-          buttons: [{
-            label: '考虑一下',
-            type: 'default',
-            onClick: function () {}
-          }, {
-            label: '马上加入',
-            type: 'primary',
-            onClick: function () {
-              model.joinClubData({clubId: getQueryString('clubId')}).then(res => {
-                if (res.clubs === 'ycj') {
-                  require.ensure([], () => {
-                    require('vendor/dialog')
-                    $.alert.aler({
-                      title: '提示',
-                      content: '<p style="text-align: center;line-height: 0.44rem;font-size: 16px;">你已经是俱乐部的一员了</p>',
-                      height: 'auto',
-                      blankclose: true
-                    })
-                  }, 'aler')
-                } else {
-                  require.ensure([], () => {
-                    require('vendor/dialog')
-                    $.alert.aler({
-                      title: '提示',
-                      content: '<p style="text-align: center;line-height: 0.44rem;font-size: 16px;">申请成功，正在加紧审核</p>',
-                      height: 'auto',
-                      blankclose: true
-                    })
-                  }, 'aler')
-                }
-              }).catch(errMsg => {
 
-              })
-            }
-          }]
+      clubInfo.init()
+
+      judgeLogin(() => { // 判断是否登陆
+        this._getClubDetail()// 不管等没登陆都要执行的句子
+      }, () => { // 如果已经登陆
+        $('.join-club').click((e) => {
+          weui.confirm('加入俱乐部成为会员', {
+            title: '确定要要加入俱乐部吗？',
+            buttons: [{
+              label: '考虑一下',
+              type: 'default',
+              onClick: function () {}
+            }, {
+              label: '马上加入',
+              type: 'primary',
+              onClick: function () {
+                model.joinClubData({clubId: getQueryString('clubId')}).then(res => {
+                  if (res.clubs === 'ycj') { // 如果已经是俱乐部一员
+                    require.ensure([], () => {
+                      require('vendor/dialog')
+                      $.alert.aler({
+                        title: '提示',
+                        content: '<p style="text-align: center;line-height: 0.44rem;font-size: 16px;">你已经是俱乐部的一员了</p>',
+                        height: 'auto',
+                        blankclose: true
+                      })
+                    }, 'aler')
+                  } else {
+                    require.ensure([], () => {
+                      require('vendor/dialog')
+                      $.alert.aler({
+                        title: '提示',
+                        content: '<p style="text-align: center;line-height: 0.44rem;font-size: 16px;">申请成功，正在加紧审核</p>',
+                        height: 'auto',
+                        blankclose: true
+                      })
+                    }, 'aler')
+                  }
+                }).catch(errMsg => {
+                  weui.alert(errMsg)
+                })
+              }
+            }]
+          })
         })
+      }, () => { // 如果还没登陆
+        weui.alert('你还没有登陆,请登陆再试一次')
+        return false
       })
     },
     switch () {
@@ -181,6 +221,7 @@ let all = (function () {
       model.getClubDetailData({clubId: getQueryString('clubId')}).then((data) => {
         DATA = data
         this._getClubInfo(DATA)// 获取俱乐部基本数据
+        clubInfo._getClubInfo(DATA)
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)

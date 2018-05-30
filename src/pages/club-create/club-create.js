@@ -14,7 +14,16 @@ let regexp = {
 }
 let all = (function () {
   let home = {
-    pageInit: function () {
+    textAreaTemp: `<div class="weui-cells weui-cells_form margin">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <textarea name="declaration" class="weui-textarea" style="height: 1.4rem;" maxlength="200" placeholder="请输入文本" rows="3"></textarea>
+            <div class="weui-textarea-counter"><span>0</span>/200</div>
+            <div class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
+        </div>
+    </div>
+  </div>`,
+    pageInit () {
       $('#uploader .weui-cell_select').on('click', () => {
         upload.init({maxLength: 1, id: 'uploader'})
       })
@@ -39,8 +48,41 @@ let all = (function () {
           }, regexp)
         }
       })
+      $('#declaration').click((e) => {
+        let _thi = this
+        require.ensure([], () => {
+          require('vendor/dialog')
+          $.alert.aler({
+            title: '提示',
+            content: this.textAreaTemp,
+            height: 320,
+            blankclose: true,
+            okCallback: function () {
+              $(e.currentTarget).val(_thi.getVal())
+            }
+          })
+        }, 'aler')
+      })
+      $('#introduction').click((e) => {
+        let _thi = this
+        require.ensure([], () => {
+          require('vendor/dialog')
+          $.alert.aler({
+            title: '提示',
+            content: this.textAreaTemp,
+            height: 320,
+            blankclose: true,
+            okCallback: function () {
+              $(e.currentTarget).val(_thi.getVal())
+            }
+          })
+        }, 'aler')
+      })
     },
-    _postClubData: function () { // 提交俱乐部数据
+    getVal () {
+      return $('textarea[name=declaration]').val()
+    },
+    _postClubData () { // 提交俱乐部数据
       model.createClubData($('#createClub')).then((e) => {
         // 获取数据成功时的处理逻辑
         console.log(e)

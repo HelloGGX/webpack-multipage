@@ -16,7 +16,7 @@ let regexp = {
 let all = (function () {
   let Home = {
 
-    pageInit: function () {
+    pageInit () {
       $('.am-list-control').find('input').on('input propertychange', function () {
         var result = $(this).val()
         if (result.length > 0) {
@@ -59,7 +59,7 @@ let all = (function () {
 
       model.postLoginData($('#loginForm')).then((data) => {
         // 获取数据成功时的处理逻辑
-        console.log(data)
+
         if (data.state === 'ok') { // 如果存在该用户
           weui.toast('登陆成功', 1000)
           setCookie('token', sha1(`${data.username}${pass}SD${'山渡户外119'}`), 1000 * 60)

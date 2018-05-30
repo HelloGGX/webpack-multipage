@@ -42,6 +42,21 @@ const createError = (code, resp) => {
   err.code = code
   return err
 }
+
+const handleAll = (request) => {
+  let args = []
+  for (let i = 0; i < request.length; i++) {
+    args.push(`data${i}`)
+  }
+  return new Promise((resolve, reject) => {
+    axios.all(request).then(axios.spread((...args) => {
+      resolve(args)
+    })).catch((err) => {
+      console.log(err)
+      reject(createError(401, 'need auth'))
+    })
+  })
+}
 const handleRequest = (request) => {
   return new Promise((resolve, reject) => {
     request.then((res) => {
@@ -69,7 +84,8 @@ const handleRequest = (request) => {
 
 export default {
   request,
-  handleRequest
+  handleRequest,
+  handleAll
 }
 // // http response 拦截器
 // request.interceptors.response.use(

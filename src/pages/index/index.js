@@ -1,9 +1,8 @@
 import './index.less'
-import model from '../../api/getIndex'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {getCookie, delCookie} from 'common/js/dom'
+import {judgeLogin} from 'components/judgeLogin/judge-login'
 
 let all = (function () {
   const DIRECTION_H = 'horizontal'
@@ -14,25 +13,12 @@ let all = (function () {
       this._getIndexData()
     },
     _getIndexData () {
-      let username = getCookie('username')
-      let token = getCookie('token')
-      // let password = getCookie('password')
-
-      model.postUserData({username: username, token: token}).then((res) => { // 如果匹配用户信息成功
-        // 这里看res的返回
-
+      judgeLogin((res) => { // 判断是否登陆
         scrollNav.init(res.navdata)// 顶部导航栏初始化
         slider.init(res.slidata)// 幻灯片初始化
         hotArea.init(res.areadata)// 热门区域初始化
-        if (res.login === 'ok') { // 如果已经登陆过
-
-        } else { // 如果没有登陆
-          delCookie('username')
-          weui.alert('建议登陆体验哦~')
-        }
-      }).catch((errMsg) => {
-        // 获取数据失败时的处理逻辑
-        weui.alert(errMsg)
+      }, () => {}, () => {
+        weui.alert('建议登陆体验哦~')
       })
     }
   }// 获取所有数据

@@ -15,9 +15,10 @@
             <div class="banner">
                 <div class="banner-icon-back banner-left back" ><a href="#"><span></span></a></div>
                 <div class="banner-tit banner-text">俱乐部详情</div>
-                <div class="banner-right"><a href="#"><i class="iconfont icon-other" style="font-size: 0.28rem;"></i></a></div>
+                <div id="clubInfoShow" class="banner-right"><a><i class="iconfont icon-other" style="font-size: 0.28rem;"></i></a></div>
             </div>
         </div>
+        <%= require('html-loader!../club-info/club-info.html')  %>
         <div id="index-content-v2">
             <div class="weui-tab">
                 <div class="weui-tab__panel content-panel">
@@ -74,7 +75,7 @@
                                                     <div class="weui-cell__hd">
                                                         <p>所在地</p>
                                                     </div>
-                                                    <div class="weui-cell__bd ">
+                                                    <div class="weui-cell__bd f-m">
                                                         <p id="clubAddr" style="padding-left: 0.2rem;"></p>
                                                     </div>
                                                 </div>
@@ -82,7 +83,7 @@
                                                     <div class="weui-cell__hd">
                                                         <p>简介</p>
                                                     </div>
-                                                    <div class="weui-cell__bd">
+                                                    <div class="weui-cell__bd f-m">
                                                         <p id="clubIntro" style="padding-left: 0.34rem;"> 
                                                         </p>
                                                     </div>
@@ -91,7 +92,7 @@
                                                     <div class="weui-cell__hd">
                                                         <p>主打项目</p>
                                                     </div>
-                                                    <div id="clubTips" class="weui-cell__bd ">
+                                                    <div id="clubTips" class="weui-cell__bd f-m">
                                                       
                                                     </div>
                                                 </div>

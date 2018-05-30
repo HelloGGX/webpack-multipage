@@ -62,6 +62,10 @@ const pages = [ // 页面配置写在这里
   {
     title: '我的档案',
     pageName: 'per-data'
+  },
+  {
+    title: '资料编辑',
+    pageName: 'per-data-edit'
   }
 ]
 const dependencies = [ // 依赖的全局js

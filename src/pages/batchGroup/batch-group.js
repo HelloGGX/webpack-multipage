@@ -1,7 +1,8 @@
 import './batch-group.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {clear} from 'common/js/dom'
+import {getQueryString, clear} from 'common/js/dom'
+import model from 'api/getIndex'
 
 let batchG = {
   len: $('.g-lists .g-item').length, // 分的组的个数
@@ -60,6 +61,7 @@ let batchG = {
     }, 'aler')
   },
   showAddGroup () { // 显示添加到分组
+    let _thi = this
     require.ensure([], () => {
       require('vendor/dialog')
       $.alert.aler({
@@ -68,11 +70,18 @@ let batchG = {
         height: 'auto',
         blankclose: true,
         okCallback: function () {
-          // 这里做插入到新分组，删除在未分组ajax的操作
+          _thi._addNewGroup()
           weui.alert('添加到新分组成功')
         }
       })
     }, 'aler')
+  },
+  _addNewGroup () {
+    model.magAct.addGroup({id: getQueryString('id')}).then(res => {
+      console.log(res)
+    }).catch(errMsg => {
+      console.log(errMsg)
+    })
   },
   moveToGroup () {
     let flag = false

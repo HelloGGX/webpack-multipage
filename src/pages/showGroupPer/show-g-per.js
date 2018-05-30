@@ -47,7 +47,6 @@ let showGroupPer = {
     })
   },
   groupListTemp (data) {
-    console.log(data)
     return `<div class="group-list">
       <ul>
         <li class="dialog-confirm">未分组<li>

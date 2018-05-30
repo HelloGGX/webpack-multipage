@@ -11,7 +11,7 @@
 
 <body>
     <div class="page">
-            <%= require('html-loader!../../components/banner/banner.html')  %>
+        <%= require('html-loader!../../components/banner/banner.html')  %>
         <div id="index-content-v2">
             <div class="weui-tab">
                 <div class="weui-tab__panel content-panel">
@@ -44,7 +44,7 @@
                                     <div class="weui-cells">
                                         <div class="weui-cell">
                                             <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
-                                            <div class="weui-cell__bd">
+                                            <div class="weui-cell__bd f-m-x">
                                                 <input class="weui-input text-right" required type="text" name="clubName"  placeholder="俱乐部名称">
                                             </div>
                                         </div>
@@ -52,7 +52,7 @@
                                             <div class="weui-cell__hd">
                                                 <label for="" class="weui-label">所在地</label>
                                             </div>
-                                            <div class="weui-cell__bd">
+                                            <div class="weui-cell__bd f-m-x">
                                                 <div class="weui-select text-right" data-name="address">
                                                     <input type="text" name="clubAddr" required readonly="" placeholder="请选择" emptyTips="请输入俱乐部名称">
                                                 </div>
@@ -71,7 +71,7 @@
                                             <div class="weui-cell__hd">
                                                 <label for="" class="weui-label">宣言</label>
                                             </div>
-                                            <div class="weui-cell__bd">
+                                            <div class="weui-cell__bd f-m-x">
                                                 <div class="weui-select text-right">
                                                     <input id="declaration"  type="text" required name="declaration" readonly="" placeholder="请填写俱乐部愿景" emptyTips="请输入俱乐部宣言">
                                                 </div>
@@ -81,7 +81,7 @@
                                             <div class="weui-cell__hd">
                                                 <label for="" class="weui-label">简介</label>
                                             </div>
-                                            <div class="weui-cell__bd">
+                                            <div class="weui-cell__bd f-m-x">
                                                 <div class="weui-select text-right">
                                                     <input id="introduction" type="text" required name="introduction" readonly="" placeholder="请简单介绍一下你的俱乐部">
                                                 </div>
@@ -91,13 +91,13 @@
                                     <div class="weui-cells">
                                         <div class="weui-cell">
                                             <div class="weui-cell__hd"><label class="weui-label">负责人</label></div>
-                                            <div class="weui-cell__bd">
+                                            <div class="weui-cell__bd f-m-x">
                                                 <input class="weui-input" required name="principal" type="text"  placeholder="输入" emptyTips="请输入负责人姓名">
                                             </div>
                                         </div>
                                         <div class="weui-cell">
                                             <div class="weui-cell__hd"><label class="weui-label">手机号码</label></div>
-                                            <div class="weui-cell__bd">
+                                            <div class="weui-cell__bd f-m-x">
                                                 <input class="weui-input" required  name="phoneNum" pattern="REG_PHONE" type="number" placeholder="请输入手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
                                             </div>
                                         </div>

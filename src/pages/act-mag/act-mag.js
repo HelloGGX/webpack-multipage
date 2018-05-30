@@ -35,14 +35,20 @@ let all = (function () {
       model.getApplyInfo().then(data => {
         let newdata
         let _html = ''
-
-        newdata = data[TYPE]
-        let len = newdata.length
-        $('#acts-grid').append("<li class='mag-grid-wrapper' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-        $(document.getElementById(TYPE)).show().siblings().hide()
-        for (let i = 0; i < len; i++) {
-          _html = this._createActTemple(i, newdata)
-          $('#' + TYPE).append(_html)
+        if (data[TYPE]) {
+          newdata = data[TYPE]
+          let len = newdata.length
+          $('#acts-grid').append("<li class='mag-grid-wrapper' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+          $(document.getElementById(TYPE)).show().siblings().hide()
+          for (let i = 0; i < len; i++) {
+            _html = this._createActTemple(i, newdata)
+            $('#' + TYPE).append(_html)
+          }
+        } else {
+          $('#acts-grid').html(`<div class="nothing-text">
+          <div class="nothing-img"></div>
+          <p>暂时还没有活动</p>
+      </div>`)
         }
       }).catch(errMsg => {
 
@@ -53,13 +59,20 @@ let all = (function () {
         let newdata
         let _html = ''
         // let src
-        newdata = data[TYPE]
-        let len = newdata.length
-        $('#acts-grid').append("<li class='mag-grid-wrapper' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-        $(document.getElementById(TYPE)).show().siblings().hide()
-        for (let i = 0; i < len; i++) {
-          _html = this._createActTemple(i, newdata)
-          $('#' + TYPE).append(_html)
+        if (data[TYPE]) {
+          newdata = data[TYPE]
+          let len = newdata.length
+          $('#acts-grid').append("<li class='mag-grid-wrapper' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+          $(document.getElementById(TYPE)).show().siblings().hide()
+          for (let i = 0; i < len; i++) {
+            _html = this._createActTemple(i, newdata)
+            $('#' + TYPE).append(_html)
+          }
+        } else {
+          $('#acts-grid').html(`<div class="nothing-text">
+          <div class="nothing-img"></div>
+          <p>暂时还没有活动</p>
+      </div>`)
         }
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑

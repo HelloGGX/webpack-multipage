@@ -50,8 +50,13 @@ let all = (function () {
       })
 
       $('.actCover').on('click', () => {
-        upload.init({maxLength: 1, fileVal: 'imgfile'})
+        upload.init({maxLength: 2, id: 'uploader'})
       })
+
+      $('.actDetailCover').on('click', () => {
+        upload.init({maxLength: 2, size: 3, id: 'Detailuploader'})
+      })
+
       $('.bm-way-item').on('click', (e) => {
         $(e.currentTarget).addClass('active').siblings('.bm-way-item').removeClass('active')
         if ($('#gr').hasClass('active')) {
@@ -76,24 +81,26 @@ let all = (function () {
       $('#actSubmit').click((e) => {
         let _thi = this
         weui.form.validate('#createAct', function (error) {
-          console.log(error)
           if (!error) {
             var loading = weui.loading('提交中...')
             setTimeout(function () {
               loading.hide()
               _thi._postActData()
               weui.toast('提交成功', 1000)
-            }, 1500)
+            }, 1000)
           }
         }, regexp)
       })
     },
 
     _postActData: function () {
-      model.createActData($('#createAct')).then(() => {
-        // 获取数据失败时的处理逻辑
-
-        weui.alert('提交成功')
+      model.createActData($('#createAct')).then((res) => {
+        // 获取数据成功时的处理逻辑
+        if (res.state === 'ok') {
+          weui.alert('提交成功')
+        } else {
+          weui.alert('提交失败，请检查填写项')
+        }
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
         weui.alert('数据获取有误')

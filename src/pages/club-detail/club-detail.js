@@ -23,8 +23,28 @@ let all = (function () {
             label: '马上加入',
             type: 'primary',
             onClick: function () {
-              model.joinClubData({clubId: getQueryString('clubId')}).then(data => {
-
+              model.joinClubData({clubId: getQueryString('clubId')}).then(res => {
+                if (res.clubs === 'ycj') {
+                  require.ensure([], () => {
+                    require('vendor/dialog')
+                    $.alert.aler({
+                      title: '提示',
+                      content: '<p style="text-align: center;line-height: 0.44rem;font-size: 16px;">你已经是俱乐部的一员了</p>',
+                      height: 'auto',
+                      blankclose: true
+                    })
+                  }, 'aler')
+                } else {
+                  require.ensure([], () => {
+                    require('vendor/dialog')
+                    $.alert.aler({
+                      title: '提示',
+                      content: '<p style="text-align: center;line-height: 0.44rem;font-size: 16px;">申请成功，正在加紧审核</p>',
+                      height: 'auto',
+                      blankclose: true
+                    })
+                  }, 'aler')
+                }
               }).catch(errMsg => {
 
               })

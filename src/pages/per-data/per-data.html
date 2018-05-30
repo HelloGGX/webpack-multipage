@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page"> 
+            <div class="banner-container">
+                    <div class="banner">
+                        <div class="banner-icon-back banner-left back" ><a href="person.html"><span></span></a></div>
+                        <div class="banner-tit banner-text"></div>
+                        <div class="banner-right"><a href="#"><i class="iconfont icon-brush" style="font-size: 0.28rem;"></i></a></div>
+                    </div>
+                </div>
+        <div class="weui-tab">
+            <div class="weui-tab__panel content-panel">
+                <div class="container-wrapper">
+                    <div class="container-inner">
+                        <div class="showHead">
+                            <div class="show-pic">
+                                <img src="<%= require('../../imgs/icons/head.jpg')%>" alt="">
+                            </div>
+                            <div class="show-name">
+                                <h3>山度户外</h3>
+                                <p class="smaller-txt midd-grey">会员号：2</p>
+                            </div>
+                            
+                        </div>
+                        <div class="weui-cells margin">
+                                <a class="weui-cell weui-cell_access" href="javascript:;">
+                                    <div class="weui-cell__bd">
+                                        <p>二维码</p>
+                                    </div>
+                                    <div class="weui-cell__ft">
+                                    </div>
+                                </a>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>个人签名</p>
+                                    </div>
+                                    <div class="weui-cell__ft">说明文字</div>
+                                </div>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>职业</p>
+                                    </div>
+                                    <div class="weui-cell__ft">徒步专家</div>
+                                </div>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>家乡</p>
+                                    </div>
+                                    <div class="weui-cell__ft">新都区</div>
+                                </div>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>所在城市</p>
+                                    </div>
+                                    <div class="weui-cell__ft">四川省成都市</div>
+                                </div>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>喜欢的运动</p>
+                                    </div>
+                                    <div class="weui-cell__ft">爬山</div>
+                                </div>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>足迹</p>
+                                    </div>
+                                    <div class="weui-cell__ft">巴西，英国，美国，德国，意大利</div>
+                                </div>
+                             </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -144,6 +144,7 @@ let costWay = { // 费用设置类方法
       let arr = []// 存储费用名称的数组
       let arrPrice = []// 存储费用金额的数组
       let arrNum = []// 存储费用名额的数组
+
       let feeApllyNum = parseInt($.trim($('#feeApllyNum').val()))// 获取活动总名额
       $('#feeItem .feeitems').each(function (i, e) {
         arr[i] = $(this).find('.fyName').val() // 把选择的费用名称存进数组中

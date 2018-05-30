@@ -22,16 +22,38 @@
                                         <div class="weui-cells weui-cells_form">
                                             <div class="weui-cell">
                                                 <div class="weui-cell__bd">
-                                                    <input class="weui-input" name="actTitle" type="text" placeholder="输入活动主题">
+                                                    <input class="weui-input" required emptyTips="主题不能是空的" name="actTitle" type="text" placeholder="输入活动主题">
                                                 </div>
                                             </div>
                                             <div class="weui-cell">
                                                 <div class="weui-cell__bd">
-                                                    <textarea maxlength="200" name="actDetail" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                                    <textarea maxlength="200" required emptyTips="活动简介不能是空的" name="actDetail" class="weui-textarea" placeholder="请输入活动简介文本" rows="3"></textarea>
                                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                                 </div>
                                             </div>
 
+                                        </div>
+                                        <div class="weui-cells weui-cells_form margin" id="Detailuploader">
+                                     
+                                            <div class="weui-cell weui-cell_select weui-cell_select-after actDetailCover">
+                                                <div class="weui-cell__hd">
+                                                    <label for="" class="weui-label">活动详情图</label>
+                                                </div>
+                                                <div class="weui-cell__bd">
+                                                    <div class="weui-select text-right" data-name="cover">
+                                                        <div class="weui-uploader">
+                                                            <div class="weui-uploader__bd">
+                                                                <ul class="weui-uploader__files img-covers uploaderFiles">
+
+                                                                </ul>
+                                                                <div class="weui-uploader__input-box fright uploade-cover">
+                                                                    <input id="detailUploadInput" name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="weui-cells__title">基本信息</div>
                                         <div class="weui-cells">
@@ -41,7 +63,7 @@
                                                 </div>
                                                 <div class="weui-cell__bd">
                                                     <div class="weui-select text-right" data-name="startTime">
-                                                        <input id="starTime" type="text" name="starTime" readonly="">
+                                                        <input id="starTime" required emptyTips="活动开始时间不能是空的" type="text" name="starTime" readonly="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -51,7 +73,7 @@
                                                 </div>
                                                 <div class="weui-cell__bd">
                                                     <div class="weui-select text-right" data-name="endTime">
-                                                        <input id="endTime" type="text" name="endTime" readonly="">
+                                                        <input id="endTime" required emptyTips="活动结束时间不能是空的" type="text" name="endTime" readonly="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -61,14 +83,14 @@
                                                 </div>
                                                 <div class="weui-cell__bd">
                                                     <div class="weui-select text-right" data-name="address">
-                                                        <input id="Actaddr" type="text" name="actAddr" readonly="">
+                                                        <input id="Actaddr" type="text" required emptyTips="活动地点不能是空的" name="actAddr" readonly="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="weui-cell">
                                                 <div class="weui-cell__hd"><label class="weui-label">详细地点</label></div>
                                                 <div class="weui-cell__bd">
-                                                    <input class="weui-input text-right" name="actDetailAddr" type="text" placeholder="详细地址">
+                                                    <input class="weui-input text-right" required emptyTips="详细地点不能是空的" name="actDetailAddr" type="text" placeholder="详细地址">
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +104,7 @@
                                                     <div class="weui-select text-right" data-name="cover">
                                                         <div class="weui-uploader">
                                                             <div class="weui-uploader__bd">
-                                                                <ul class="weui-uploader__files img-covers" id="uploaderFiles">
+                                                                <ul class="weui-uploader__files img-covers uploaderFiles" id="uploaderFiles">
 
                                                                 </ul>
                                                                 <div class="weui-uploader__input-box fright uploade-cover">
@@ -110,7 +132,7 @@
                                                 </div>
                                                 <div class="weui-cell__bd">
                                                     <div class="weui-select text-right">
-
+                                                        免费
                                                     </div>
                                                 </div>
 
@@ -293,7 +315,7 @@
                                         <div class="weui-cells weui-cells_form">
                                             <div class="weui-cell">
                                                 <div class="weui-cell__bd">
-                                                    <textarea maxlength="200" name="applyNotice" class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
+                                                    <textarea maxlength="200" required emptyTips="报名须知不能是空的" name="applyNotice" class="weui-textarea" placeholder="填写报名须知" rows="3"></textarea>
                                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                                 </div>
                                             </div>

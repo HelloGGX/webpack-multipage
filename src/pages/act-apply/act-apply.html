@@ -20,33 +20,33 @@
                             <div>
                                 <form id="actApply" action="" name="form1" method="post">
                                     <div class="main-apply">
-                                        <input type="hidden" name="perType" val="0">
+                                        <input type="hidden" name="perType" value="0">
                                         <div class="weui-cells__title">报名人</div>
                                         <div class="weui-cells">
                                             <div class="weui-cell">
                                                 <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
                                                 <div class="weui-cell__bd">
-                                                    <input class="weui-input text-right" name="nickname" type="text" placeholder="你的昵称">
+                                                    <input class="weui-input text-right" required emptyTips="请输入昵称" name="nickname" type="text" placeholder="你的昵称">
                                                 </div>
                                             </div>
                                             <div class="weui-cell">
                                                 <div class="weui-cell__hd"><label class="weui-label">手机</label></div>
                                                 <div class="weui-cell__bd">
-                                                    <input class="weui-input text-right" name="phone" type="number" placeholder="请输入手机号">
+                                                    <input class="weui-input text-right" required pattern="REG_PHONE" name="phone" type="number" placeholder="请输入手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
                                                 </div>
                                             </div> 
                                         </div>
                                     </div>
-                                    <div class="btn-bb-apply">
+                                    <div class="btn-bb-apply ">
                                         <i class="iconfont icon-add"></i>
-                                        <span>帮人报名</span>
+                                        <span class="f-l">帮人报名</span>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="btn-apply-comfirm">
-                        <a href="act-pay.html" class="weui-btn weui-btn_primary">确定报名</a>
+                        <a class="weui-btn weui-btn_primary">确定报名</a>
                     </div>
                 </div>            
             </div>

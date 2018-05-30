@@ -131,12 +131,6 @@ export default {
       showLoading: true
     }))
   },
-  postAlbumData (data) { // 上传提交数据
-    return db.handleRequest(db.request.post('getupload.php', {
-      data: data,
-      showLoading: true
-    }))
-  },
   getApplyInfo (data) { // 获取报名信息
     return db.handleRequest(db.request.get('getApplyInfo.php', {
       params: data,
@@ -145,6 +139,7 @@ export default {
   },
   postApplyInfo (e) { // 提交报名信息
     let data = serializeObject(e)
+
     return db.handleRequest(db.request.post('postApplyInfo.php', {
       data: data,
       showLoading: true

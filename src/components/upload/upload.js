@@ -8,13 +8,15 @@ let upload = {
   maxLength: 5,
   fileVal: 'imgfile',
   auto: true,
+  size: 1,
+  id: 'uploader',
   okCallBack: () => {},
   init (obj) {
     this._uploader(obj)
     this._seeImg()
   },
   _seeImg () { // 预览上传图片
-    $('#uploaderFiles').on('click', (e) => {
+    $('.uploaderFiles').on('click', (e) => {
       let target = e.target
       let _this = this
       while (!target.classList.contains('weui-uploader__file') && target) {
@@ -47,16 +49,16 @@ let upload = {
       })
     })
   },
-  _uploader ({maxLength = this.maxLength, fileVal = this.fileVal, auto = this.auto, okCallBack = this.okCallBack} = {}) { // 上传图片
+  _uploader ({id = this.id, maxLength = this.maxLength, fileVal = this.fileVal, size = this.size, auto = this.auto, okCallBack = this.okCallBack} = {}) { // 上传图片
     let _this = this
-    weui.uploader('#uploader', {
+    weui.uploader(`#${id}`, {
       url: 'http://125.65.111.19:82/api/getupload.php',
       auto: auto,
       type: 'file',
       fileVal: fileVal,
       compress: {
         width: 1600,
-        height: 1600,
+        height: 41800,
         quality: 0.8
       },
       onBeforeQueued: function (files) { // 文件添加前的回调，return false则不添加
@@ -66,8 +68,8 @@ let upload = {
           weui.alert('请上传图片')
           return false // 阻止文件添加
         }
-        if (this.size > 1 * 1024 * 1024) {
-          weui.alert('请上传不超过1M的图片')
+        if (this.size > size * 1024 * 1024) {
+          weui.alert(`请上传不超过${size}M的图片`)
           return false
         }
         if (files.length > maxLength) { // 防止一下子选择过多文件

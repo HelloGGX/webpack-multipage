@@ -16,7 +16,7 @@ let all = (function () {
   let home = {
     pageInit: function () {
       $('#uploader .weui-cell_select').on('click', () => {
-        upload.init({maxLength: 1, fileVal: 'imgfile'})
+        upload.init({maxLength: 1, id: 'uploader'})
       })
       $('.actAddr').on('click', (e) => {
         pickerAddr.showAddr(e.currentTarget)

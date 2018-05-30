@@ -56,7 +56,7 @@ let all = (function () {
     },
     _postLoginData () {
       let pass = $('input[name=password]').val()
-      console.log(pass)
+
       model.postLoginData($('#loginForm')).then((data) => {
         // 获取数据成功时的处理逻辑
         console.log(data)
@@ -66,6 +66,8 @@ let all = (function () {
           setCookie('username', data.username, 1000 * 60)
           window.location.href = this.href(data.uid)
           window.sessionStorage.setItem('ucl', data.ucl)
+        } else if (data.state === 'loginno') {
+          weui.alert('登陆不成功，请检查你的电话或密码是否正确')
         }
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑

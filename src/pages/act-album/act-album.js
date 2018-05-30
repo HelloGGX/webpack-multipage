@@ -21,19 +21,14 @@ let all = (function () {
 
       $('#uploaderCustomBtn').on('click', () => {
         upload._customLoader()
-        // upload._customLoader(() => {
-        //   model.postAlbumData({albumId: getQueryString('albumId')}).then(res => {
-
-        //   }).catch(errMsg => {
-        //     weui.alert(errMsg)
-        //   })
-        // })
       })
     },
     show () {
       $('#uploadPage').show()
 
-      upload.init({maxLength: 5,
+      upload.init({
+        id: 'uploader',
+        maxLength: 5,
         fileVal: 'imgfile',
         auto: false,
         okCallBack: () => {

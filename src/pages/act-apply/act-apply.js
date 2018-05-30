@@ -1,8 +1,16 @@
 import './act-apply.less'
 import 'components/banner/banner.less'
 import $ from 'jquery'
+import weui from 'weui.js'
 import model from 'api/getIndex'
 import {clear, getQueryString} from 'common/js/dom'
+import vali from 'vendor/validate'
+let regexp = {
+  regexp: {
+    PHONE: vali.mobile(),
+    IDNUM: /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/
+  }
+}
 
 let all = (function () {
   let Home = {
@@ -11,19 +19,19 @@ let all = (function () {
     htmlTemp: `<div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
     <div class="weui-cell__bd">
-        <input class="weui-input text-right" name="nickname" type="text" placeholder="你的昵称">
+        <input class="weui-input text-right" required emptyTips="请输入昵称" name="nickname" type="text" placeholder="你的昵称">
     </div>
 </div>
 <div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">手机</label></div>
     <div class="weui-cell__bd">
-        <input class="weui-input text-right" name="phone" type="number" placeholder="请输入手机号">
+        <input class="weui-input text-right" required pattern="REG_PHONE" name="phone" type="tel" placeholder="请输入手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
     </div>
 </div> `,
     realNameTemp: `<div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">真实姓名</label></div>
     <div class="weui-cell__bd">
-        <input class="weui-input text-right" name="realName" type="text" placeholder="你的姓名">
+        <input class="weui-input text-right" required emptyTips="请输入真实姓名" name="realName" type="text" placeholder="你的姓名">
     </div>
 </div>`,
     sexTemp: `<div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -40,19 +48,33 @@ let all = (function () {
     idCard: `<div  class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">身份证</label></div>
     <div class="weui-cell__bd">
-        <input class="weui-input text-right" name="idCard" type="number" placeholder="请输入身份证号码">
+        <input class="weui-input text-right" required pattern="REG_IDNUM" name="idCard" type="text" placeholder="请输入身份证号码" emptyTips="请输入身份证号码" notMatchTips="请输入正确的身份证号码">
     </div>
 </div>`,
-    pageInit: function () {
+    pageInit () {
       this._getApplyData()
       this.helpApply()
       this.deleteApply()
+
+      $('.btn-apply-comfirm').click((e) => {
+        let _thi = this
+        weui.form.validate('#actApply', function (error) {
+          if (!error) {
+            var loading = weui.loading('提交中...')
+            setTimeout(() => {
+              loading.hide()
+              _thi._postApplyData()
+            }, 1000)
+          }
+        }, regexp)
+      })
     },
     helpApply () { // 帮人报名
       $('.btn-bb-apply').on('click', (e) => {
         this.INDEX = $('#actApply .help-apply').length + 1
         $(e.currentTarget).before(`
           <div id="help${this.INDEX}" class="help-apply">
+            <input type="hidden" name="perType" value="1">
             <div class="weui-cells__title">帮报名${this.INDEX}</div>
             <div class="weui-cells"></div>
           </div>
@@ -143,17 +165,28 @@ let all = (function () {
                    `)}
                 </select>
             </div>
-        </div><div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label for="" class="weui-label myopt-title"></label>
-        </div>
-        <div class="weui-cell__bd text-right">
-          <button class="delete-apply" type="btn">删除报名</button>
-        </div>
-    </div>`
+        </div>`
           }
+        } else {
+          this.temp += `<div class="weui-cell">
+          <div class="weui-cell__hd">
+              <label for="" class="weui-label myopt-title"></label>
+          </div>
+          <div class="weui-cell__bd text-right">
+            <button class="delete-apply" type="btn">删除报名</button>
+          </div>
+        </div>`
         }
       }).catch((errMess) => {
+
+      })
+    },
+    _postApplyData () { // 提交报名
+      model.postApplyInfo($('#actApply')).then(res => {
+        if (res.state === 'ok') {
+          window.location.href = `act-pay.html?id=${getQueryString('id')}&clubId=${getQueryString('clubId')}`
+        }
+      }).catch(errMsg => {
 
       })
     }

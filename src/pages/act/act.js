@@ -14,7 +14,7 @@ let all = (function () {
       model.getActData().then((data) => { // 获取数据成功时的处理逻辑
         Home._getNewData(data)
       }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
-        weui.alert('数据获取有误')
+        weui.alert(ErrMsg)
       })
     }
   }// 获取所有数据
@@ -28,8 +28,8 @@ let all = (function () {
             <a href="act-detail.html?id=${data[i].id}">
             <div class="store-content">
                 <div class="goods-image">
-                    <div class="image-container">
-                        <img src=${data[i].imgsrc} alt="">
+                    <div class="image-container" style="background-image:url(${data[i].imgsrc})">
+                       
                     </div>
                 </div>
                 <div class="goods-detail">
@@ -49,13 +49,20 @@ let all = (function () {
       let newdata
       let _html = ''
       newdata = data[TYPE]
-      let len = newdata.length
-      for (let i = 0; i < len; i++) {
-        _html += Home._temple(i, newdata)
+      if (newdata === null) {
+        $('#act-grid').html(`<div class="nothing-text">
+        <div class="nothing-img"></div>
+        <p>暂时还没有活动</p>
+    </div>`)
+      } else {
+        let len = newdata.length
+        for (let i = 0; i < len; i++) {
+          _html += Home._temple(i, newdata)
+        }
+        $('#act-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+        $('#' + TYPE).html(_html)
+        $(document.getElementById(TYPE)).show().siblings().hide()
       }
-      $('#act-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-      $('#' + TYPE).html(_html)
-      $(document.getElementById(TYPE)).show().siblings().hide()
     },
     switch: function () {
       $('.nav_fixed_catgoods').on('click', '.fixed_nav_item_catgoods', (e) => {

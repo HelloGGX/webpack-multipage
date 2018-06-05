@@ -109,13 +109,20 @@ let all = (function () {
         let _html = ''
         // let src
         newdata = data[TYPE]
-        let len = newdata.length
-        $('#club-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-        for (let i = 0; i < len; i++) {
-          _html = this._temple(i, newdata)
-          $('#' + TYPE).append(_html)
+        if (newdata === null) {
+          $('#club-grid').html(`<div class="nothing-text">
+          <div class="nothing-club"></div>
+          <p>暂时还没有俱乐部</p>
+      </div>`)
+        } else {
+          let len = newdata.length
+          $('#club-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+          for (let i = 0; i < len; i++) {
+            _html = this._temple(i, newdata)
+            $('#' + TYPE).append(_html)
+          }
+          $(document.getElementById(TYPE)).show().siblings().hide()
         }
-        $(document.getElementById(TYPE)).show().siblings().hide()
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)

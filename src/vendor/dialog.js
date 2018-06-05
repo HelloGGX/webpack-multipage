@@ -39,8 +39,8 @@ $.alert = (function () {
           _this.closeModal(event)
         })
       }
-      $('body').on('click', '.dialog-confirm', function () {
-        _this.okCallback()
+      $('body').on('click', '.dialog-confirm', function (e) {
+        _this.okCallback(e)
         _this.closeModal()
       })
     },

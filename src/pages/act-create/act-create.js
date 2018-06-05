@@ -43,21 +43,23 @@ let all = (function () {
       })
     },
     pageInit () {
-      if (getQueryString('id')) { // 如果是编辑模式
+      if (getQueryString('id') !== null) { // 如果是编辑模式
         $('input[name=edit]').val(getQueryString('id'))
         this._getActData()
       } else { // 如果是创建活动模式
         $('#actSubmit').on('click', (e) => {
           let _thi = this
+
           weui.form.validate('#createAct', function (error) {
             if (!error) {
-              this.judgTime()
-              var loading = weui.loading('提交中...')
-              setTimeout(function () {
-                loading.hide()
-                _thi._postActData()
-                weui.toast('提交成功', 1000)
-              }, 1000)
+              if (_thi.judgTime()) {
+                var loading = weui.loading('提交中...')
+                setTimeout(function () {
+                  loading.hide()
+                  _thi._postActData()
+                  weui.toast('提交成功', 1000)
+                }, 1000)
+              }
             }
           }, regexp)
         })
@@ -76,11 +78,11 @@ let all = (function () {
       })
 
       $('.actCover').on('click', () => {
-        upload.init({maxLength: 2, id: 'uploader'})
+        upload({maxLength: 1, id: 'uploader'}).init()
       })
 
       $('.actDetailCover').on('click', () => {
-        upload.init({maxLength: 2, size: 3, id: 'Detailuploader'})
+        upload({maxLength: 1, size: 3, id: 'Detailuploader'}).init()
       })
 
       $('.bm-way-item').on('click', (e) => {
@@ -106,21 +108,25 @@ let all = (function () {
       })
     },
     judgTime () {
+      let flag = true
       let starTime = converToDate($('#starTime').val())// 活动开始时间
       let endTime = converToDate($('#endTime').val())// 活动结束时间
       let endApplyTime = converToDate($('#endApplyTime').val())// 活动报名截止时间
       if (starTime >= endTime) {
         weui.alert('活动结束时间不能早于或等于活动开始时间')
+        flag = false
       }
       if (endApplyTime > starTime) {
         weui.alert('报名截止时间不能晚于活动开始时间')
+        flag = false
       }
+      return flag
     },
     _postActData: function () {
       model.createActData($('#createAct')).then((res) => {
         // 获取数据成功时的处理逻辑
         if (res.state === 'ok') {
-          weui.alert('提交成功')
+          weui.alert('提交成功,等待审核')
         } else {
           weui.alert('提交失败，请检查填写项')
         }

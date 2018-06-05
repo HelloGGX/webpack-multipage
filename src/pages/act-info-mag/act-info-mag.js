@@ -9,7 +9,8 @@ import {batchG} from '../batchGroup/batch-group'
 import {addApplyPer} from '../addApplyPerson/add-apply-per'
 import {showGroupPer} from '../showGroupPer/show-g-per'
 import model from 'api/getIndex'
-import {getQueryString} from 'common/js/dom'
+import {getQueryString, clear} from 'common/js/dom'
+import {moveToGroup} from 'components/moveToGroup/moveToGroup'
 
 let all = (function () {
   let search = {// 搜索框显示及查询
@@ -87,13 +88,13 @@ let all = (function () {
   let applyMagGroup = { // 分组报名成员对象
 
     init () {
-      $('.unclass-item .weui-cell').on('click', (e) => {
+      $('.unclass-lists').on('click', '.unclass-item-top', (e) => {
         this.unclassItemShow(e)
       })
       $('.tit-group .txt-group').on('click', (e) => {
         $(e.currentTarget).parent().next('.unclass-lists').toggle()
       })
-      $('.unclass-item').on('click', '.btn-audit', (e) => {
+      $('.unclass-lists').on('click', '.btn-audit', (e) => {
         this.singleClass(e)
       })
     },
@@ -101,8 +102,8 @@ let all = (function () {
       $(e.currentTarget).next('.moreInfo').toggle()
     },
     singleClass (e) { // 单个分组
-      if (batchG.len > 0) { // 如果有分组
-        batchG.showGroup()
+      if ($('.g-lists .g-item').length > 0) { // 如果有分组
+        moveToGroup({perIdArr: [$(e.currentTarget).data('id')]}).init()
       } else { // 如果没有分组
         weui.confirm('请先在"批量分组"中创建分组')
       }
@@ -115,9 +116,11 @@ let all = (function () {
       this.switch()
       search.init()
       applyMagGroup.init()
-      batchG.init()
-      addApplyPer.init()
+      batchG.init(this._initActData)
+
+      addApplyPer.init(this._initActData)
       showGroupPer.init()
+
       $('.actTime').on('click', (e) => {
         pickerData.showDate(e.currentTarget)
       })
@@ -199,7 +202,60 @@ let all = (function () {
         }
       })
     },
-
+    _groupTemp (arr) { // 组模板
+      if (arr !== null) {
+        return `${arr.map(key => `
+        <div id="${key.group_id}" class="weui-cell weui-cell_access g-item" style="padding: 6px 15px;">
+            <div class="weui-cell__hd g-img"><i class="icon iconfont icon-group_fill" style="font-size:26px;color: #e02e24;"></i></div>
+              <div class="weui-cell__bd g-name">
+                <p>${key.group_name}<span>(${key.group_guest !== null ? key.group_guest.length : 0}人)</span></p>
+              </div>
+            <div class="weui-cell__ft"></div>
+         </div>`)}`
+      } else {
+        return ''
+      }
+    },
+    _unclassItemTemp (data) { // 未分组人员模板
+      if (data !== null) {
+        let mainPer = data[0].guest_name
+        return ` ${data.map(key => `
+        <div class="unclass-item">
+          <div class="weui-cell unclass-item-top">
+              <div class="weui-cell__hd per-head"><img src=${require(`../../imgs/icons/${key.guest_sex === '男' ? 'boy' : 'girl'}.jpg`)} alt=""></div>
+                <div class="weui-cell__bd">
+                    <p class="f-m per-name">${key.guest_name}</p>
+                    <p class="f-s per-bbname">${key.guest_type === '0' ? `发起人` : `${mainPer}帮报`}</p>
+                </div>
+                <div class="weui-cell__ft">
+                  <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
+                  <p class="per-pay-way">${key.guest_pay}</p>
+                </div>      
+              </div>
+              <div class="moreInfo show" style="display: none;">
+                <div class="moreInfo-top">
+                  <p>${key.guest_sex}</p>
+                  <p>${key.guest_tel}</p>
+                </div>
+                <div class="moreInfo-dowm">
+                  <a class="txt-green" href="">短信</a>
+                  <a class="txt-green" href="">电话</a>
+                  <a class="txt-green" href="">编辑</a>
+                  <a class="text-red btn-audit" data-id="${key.guest_id}">分组</a>
+                </div>
+              </div>
+            </div>
+        `)}`
+      } else {
+        return ''
+      }
+    },
+    _getGroups (arr) { // 获取分组信息
+      $('.g-lists').html(clear(this._groupTemp(arr)))
+    },
+    _getUnClassPer (data) { // 获取未分组人员信息
+      $('.unclass-lists').html(clear(this._unclassItemTemp(data)))
+    },
     _getActInfoData (data) {
       let sales = data.list[0].sales
       let theme = data.list[0].act_name
@@ -210,11 +266,20 @@ let all = (function () {
       let actAddr = data.list[0].act_addr
       let actDetailAddr = data.list[0].act_addrs
       let actState = data.list[0].act_state
+      let group = data.group
+      let guest = data.guest
+
+      this._getGroups(group)
+
+      this._getUnClassPer(guest)// 在活动管理页面获取未分组游客信息
+      batchG.batchGetUnclassPer(guest)// 这里是批量分组里面获取未分组游客信息
+
       if (actState === '关闭报名') {
         $('#openApply').find('button').html('打开活动')
       } else if (actState === '报名中') {
         $('#openApply').find('button').html('关闭活动')
       }
+
       $('#editApply a').attr('href', `act-create.html?id=${getQueryString('id')}`)
       $('.actInfoInner ul li:first').find('span').html(sales)
       $('#theme').val(theme)
@@ -225,10 +290,16 @@ let all = (function () {
       $('#Actaddr').val(actAddr)
       $('input[name=actDetailAddr]').val(actDetailAddr)
     },
+    _initActData: function () { // 刷新重新初始化数据
+      model.getActDetailData({id: getQueryString('id')}).then(data => {
+        Home._getActInfoData(data)// 获取活动详细信息
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    },
     _getData () {
       model.getMagInfo({id: getQueryString('id')}).then(args => {
-        this._getActInfoData(args[0])
-        addApplyPer.getApplyData(args[1])
+        this._getActInfoData(args[0])// 获取活动详细信息
       }).catch(errMsg => {
         weui.alert(errMsg)
       })
@@ -240,3 +311,5 @@ let all = (function () {
 $(function () {
   all.pageInit()
 })
+
+export {all}

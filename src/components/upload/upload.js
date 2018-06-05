@@ -2,19 +2,21 @@ import weui from 'weui.js'
 import $ from 'jquery'
 import {getQueryString} from 'common/js/dom'
 
-let upload = {
-  uploadCount: 0,
-  uploadList: [],
-  maxLength: 5,
-  fileVal: 'imgfile',
-  auto: true,
-  size: 1,
-  id: 'uploader',
-  okCallBack: () => {},
-  init (obj) {
-    this._uploader(obj)
+export default class Upload {
+  constructor ({id = 'uploader', uploadCount = 0, uploadList = [], maxLength = 5, fileVal = 'imgfile', auto = true, size = 1, okCallBack = () => {}} = {}) {
+    this.id = id
+    this.uploadCount = uploadCount
+    this.uploadList = uploadList
+    this.maxLength = maxLength
+    this.fileVal = fileVal
+    this.auto = auto
+    this.size = size
+    this.okCallBack = okCallBack
+  }
+  init () {
     this._seeImg()
-  },
+    this._uploader()
+  }
   _seeImg () { // 预览上传图片
     $('.uploaderFiles').on('click', (e) => {
       let target = e.target
@@ -48,14 +50,14 @@ let upload = {
         }
       })
     })
-  },
-  _uploader ({id = this.id, maxLength = this.maxLength, fileVal = this.fileVal, size = this.size, auto = this.auto, okCallBack = this.okCallBack} = {}) { // 上传图片
+  }
+  _uploader () {
     let _this = this
-    weui.uploader(`#${id}`, {
+    weui.uploader(`#${_this.id}`, {
       url: 'http://125.65.111.19:82/api/getupload.php',
-      auto: auto,
+      auto: _this.auto,
       type: 'file',
-      fileVal: fileVal,
+      fileVal: _this.fileVal,
       compress: {
         width: 1600,
         height: 41800,
@@ -68,16 +70,16 @@ let upload = {
           weui.alert('请上传图片')
           return false // 阻止文件添加
         }
-        if (this.size > size * 1024 * 1024) {
-          weui.alert(`请上传不超过${size}M的图片`)
+        if (this.size > _this.size * 1024 * 1024) {
+          weui.alert(`请上传不超过${_this.size}M的图片`)
           return false
         }
-        if (files.length > maxLength) { // 防止一下子选择过多文件
-          weui.alert(`最多只能上传${maxLength}张图片，请重新选择`)
+        if (files.length > _this.maxLength) { // 防止一下子选择过多文件
+          weui.alert(`最多只能上传${_this.maxLength}张图片，请重新选择`)
           return false
         }
-        if (_this.uploadCount + 1 > maxLength) {
-          weui.alert(`最多只能上传${maxLength}张图片`)
+        if (_this.uploadCount + 1 > _this.maxLength) {
+          weui.alert(`最多只能上传${_this.maxLength}张图片`)
           return false
         }
 
@@ -107,9 +109,9 @@ let upload = {
         // return true; // 阻止默认行为，不使用默认的进度显示
       },
       onSuccess: function (ret) {
-        $('#hdimg').val(ret.imgurl)
+        $(`#${_this.id}`).find('input').first().val(ret.imgurl)
         weui.alert(`上传成功`)
-        okCallBack()
+        _this.okCallBack()
         // return true; // 阻止默认行为，不使用默认的成功态
       },
       onError: function (err) {
@@ -118,13 +120,22 @@ let upload = {
       }
 
     })
-  },
+  }
   _customLoader () { // 手动上传按钮
     this.uploadList.map(file => {
       file.upload()
     })
   }
-
 }
-
-export {upload}
+export function upload (opt) {
+  return new Upload({
+    id: opt.id,
+    uploadCount: opt.uploadCount,
+    uploadList: opt.uploadList,
+    maxLength: opt.maxLength,
+    fileVal: opt.fileVal,
+    auto: opt.auto,
+    size: opt.size,
+    okCallBack: opt.okCallBack
+  })
+}

@@ -40,9 +40,8 @@ let scroll = {
       startY: 0
     }
     if ($('.content-wrapper')) {
-      this.scroll = new BScroll('.content-wrapper', options)
+      this.Scroll = new BScroll('.content-wrapper', options)
     }
-    // console.log(this.scroll)
   }
 }
 let textArea = {// 监听textArea的输入字数
@@ -107,3 +106,5 @@ $(function () {
   swit.init()
   back.init()
 })
+
+export {scroll}

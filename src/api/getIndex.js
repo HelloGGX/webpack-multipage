@@ -42,13 +42,39 @@ let magAct = {// 管理活动
     }))
   },
   moveToGroup (data) { // 移动人员到相应组
-    return db.handleRequest(db.request.put('moveToGroup.php', {
+    return db.handleRequest(db.request.post('moveToGroup.php', {
       data: data,
+      showLoading: true
+    }))
+  },
+  getGroupPer (data) { // 获取该组成员
+    return db.handleRequest(db.request.post('getGroupPer.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  getPerApplyOpt (data) { // 获取用户报名选项
+    return db.handleRequest(db.request.get('getPerApplyOpt.php', {
+      params: data,
       showLoading: true
     }))
   },
   addGroup (data) { // 新增组
     return db.handleRequest(db.request.post('addGroup.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  deletGroup (data) { // 删除组
+    console.log(data)
+    return db.handleRequest(db.request.post('deleteGroup.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  editGroup (data) { // 编辑组名字
+    console.log(data)
+    return db.handleRequest(db.request.post('editGroup.php', {
       data: data,
       showLoading: true
     }))

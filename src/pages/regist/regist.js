@@ -45,7 +45,7 @@ let all = (function () {
             setTimeout(function () {
               loading.hide()
               _thi._postRegistData()
-            }, 1500)
+            }, 1000)
           }
         }, regexp)
       })
@@ -53,12 +53,14 @@ let all = (function () {
     _postRegistData () {
       model.postRegistData($('#registForm')).then((data) => { // resolve状态的回调函数
         // 获取数据成功时的处理逻辑
+        let password = $('input[name=password]').val()
+        let username = $('input[name=username]').val()
         delCookie('username')
-        delCookie('password')
+        delCookie('token')
         if (data.state === 'ok') { // 如果存在该用户"
           weui.toast('注册成功', 800)
-          setCookie('username', sha1(`${data.username}SD${'山渡户外119'}`), 1000 * 60)
-          setCookie('password', sha1(`${data.password}SD${'山渡户外119'}`), 1000 * 60)
+          setCookie('username', `${username}`, 1000 * 60)
+          setCookie('token', sha1(`${username}${password}${'SD山渡户外119'}`), 1000 * 60)
           window.location.href = `index.html?uid=${data.uid}`
         } else if (data.state === 'reg_y') {
           weui.alert('你已经注册过了,请直接登陆')

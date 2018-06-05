@@ -12,7 +12,7 @@ let all = (function () {
   let imgScroll = {
 
     currentIndex: 0,
-    scrol: new BScroll('.content-wrapper', {
+    scrol: new BScroll('.act-list', {
       probeType: 3,
       click: true
     }),
@@ -30,7 +30,7 @@ let all = (function () {
     navSwitch (e) {
       var anchorIndex = $(e.currentTarget).data('index')
       $(e.currentTarget).addClass('active').siblings().removeClass('active')
-      this.scrol.scrollToElement(document.getElementsByClassName('flagIndex')[anchorIndex], 100, false, 260)
+      this.scrol.scrollToElement(document.getElementsByClassName('flagIndex')[anchorIndex], 100, false, 240)
     },
     toTop () {
       this.scrol.scrollToElement(document.getElementsByClassName('act-list')[0], 100, false, 0)
@@ -82,12 +82,13 @@ let all = (function () {
       model.getActDetailData({id: getQueryString('id')}).then((data) => {
         console.log(data)
         let actId = data.list[0].act_id
-        let clubId = data.club[0].club_id
+        let clubId = data.club.club_id
         let hdThumbUrl = data.list[0].hd_thumb_url
         let price = data.list[0].price
         let clubName = data.club.club_name
         let clubMember = data.club.club_member
         let clubActs = data.club.club_acts
+        let clubLogo = data.club.club_logo
         let actName = data.list[0].act_name
         let actType = data.list[0].act_type
         let actAddr = data.list[0].act_addr
@@ -114,6 +115,7 @@ let all = (function () {
         $('.g-repeated-coupon-tag').html(clubName)
         $('#index_name').html(actName)
         $('.g-service-list').html(`${actType.map((key) => `<span class="g-service-item">${key}</span>`)}`)
+        $('.goods-mall-main img').attr('src', clubLogo)
         $('.goods-mall-name').html(clubName)
         $('.goods-mall-info span:first').html(`活动数量&nbsp;${clubActs}`)
         $('.goods-mall-info span:last').html(`会员数量&nbsp;${clubMember}`)
@@ -125,7 +127,7 @@ let all = (function () {
         $('.mall-recommend-main ul').html(`
           ${clubRecentAct.map((act) =>
     `<li class="mall-recommend-item">
-            <img src="${act.thumb_url}">
+            <img src="${act.hd_thumb_url}">
             <span class="mr-goods-name">
               ${act.act_name}
             </span>

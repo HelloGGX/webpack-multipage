@@ -62,7 +62,7 @@ let all = (function () {
 
         if (data.state === 'ok') { // 如果存在该用户
           weui.toast('登陆成功', 1000)
-          setCookie('token', sha1(`${data.username}${pass}SD${'山渡户外119'}`), 1000 * 60)
+          setCookie('token', sha1(`${data.username}${pass}${'SD山渡户外119'}`), 1000 * 60)
           setCookie('username', data.username, 1000 * 60)
           window.location.href = this.href(data.uid)
           window.sessionStorage.setItem('ucl', data.ucl)

@@ -84,16 +84,15 @@
                                         </div>
                                     </div>
                                     <div class="line"></div>
-                                    <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                        <div class="weui-cell__hd">
-                                            <label for="" class="weui-label">职业</label>
+                                    <a id="job" class="weui-cell weui-cell_access" href="javascript:;">
+                                        <input type="hidden" name="job" readonly="">
+                                        <div class="weui-cell__bd">
+                                            <p>职业</p>
                                         </div>
-                                        <div class="weui-cell__bd f-m-x">
-                                            <div class="weui-select text-right">
-                                                <input id="job" type="text"  name="job" readonly="" placeholder="未填写">
-                                            </div>
+                                        <div class="weui-cell__ft f-m-x">
+                                               
                                         </div>
-                                    </div>
+                                    </a>
                                     <div class="weui-cell weui-cell_select weui-cell_select-after myAddr">
                                         <div class="weui-cell__hd">
                                             <label for="" class="weui-label">家乡</label>
@@ -104,6 +103,24 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <a id="sports" class="weui-cell weui-cell_access" href="javascript:;">
+                                            <input type="hidden" name="sports" readonly="">
+                                            <div class="weui-cell__bd">
+                                                <p>喜欢运动</p>
+                                            </div>
+                                            <div class="weui-cell__ft f-m-x">
+                                                   
+                                            </div>
+                                        </a>
+                                        <a id="travelAddr" class="weui-cell weui-cell_access" href="javascript:;">
+                                                <input type="hidden" name="travelAddr" readonly="">
+                                                <div class="weui-cell__bd">
+                                                    <p>旅行足迹</p>
+                                                </div>
+                                                <div class="weui-cell__ft f-m-x">
+                                                       
+                                                </div>
+                                            </a>
                                 </div>
                             </form>
                          </div>
@@ -111,6 +128,7 @@
                 </div>
             </div>
         </div>
+        <%= require('html-loader!../addMainItem/addMainItem.html')  %>
     </div>
 </body>
 

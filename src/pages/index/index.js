@@ -199,33 +199,39 @@ let all = (function () {
     },
     _getAreaData (data) {
       let thi = this
-
-      thi.areadata = data
-      let _html = ''
-      let len = thi.areadata.length
-      for (let i = 0; i < len; i++) {
-        _html += `<div class="store-item" data-id=${thi.areadata[i].id}>
-                    <a href="act-detail.html?id=${thi.areadata[i].id}">
-                    <div class="store-content">
-                        <div class="goods-image">
-                            <div class="image-container">
-                                <img src=${thi.areadata[i].imgsrc} alt="">\
-                            </div>
-                        </div>
-                        <div class="goods-detail">
-                            <p class="goods-name">${thi.areadata[i].name}</p>
-                            <div class="goods-content">
-                                <p class="goods-sales">距离${thi.areadata[i].distance}米</p>
-                            </div>
-                            <del class="goods-market-price">${thi.areadata[i].marprice}</del>
-                            <div class="discount-price"><i>￥</i>${thi.areadata[i].disprice}</div>
-                            <div class="goods-buy">立即抢</div>
-                        </div>
-                    </div>
-                    </a>
-                </div>`
+      if (data !== null) {
+        thi.areadata = data
+        let _html = ''
+        let len = thi.areadata.length
+        for (let i = 0; i < len; i++) {
+          _html += `<div class="store-item" data-id=${thi.areadata[i].id}>
+                      <a href="act-detail.html?id=${thi.areadata[i].id}">
+                      <div class="store-content">
+                          <div class="goods-image">
+                              <div class="image-container" style="background-image:url(${thi.areadata[i].imgsrc})">
+                                  
+                              </div>
+                          </div>
+                          <div class="goods-detail">
+                              <p class="goods-name">${thi.areadata[i].name}</p>
+                              <div class="goods-content">
+                                  <p class="goods-sales">距离${thi.areadata[i].distance}米</p>
+                              </div>
+                              <del class="goods-market-price">${thi.areadata[i].marprice}</del>
+                              <div class="discount-price"><i>￥</i>${thi.areadata[i].disprice}</div>
+                              <div class="goods-buy">立即报名</div>
+                          </div>
+                      </div>
+                      </a>
+                  </div>`
+        }
+        $('.stores').html(_html)
+      } else {
+        $('#otherPage').html(`<div class="nothing-text" style="position: relative;">
+       
+        <p>暂时还没有新活动</p>
+    </div>`)
       }
-      $('.stores').html(_html)
     }
   }
   let Home = {

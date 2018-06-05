@@ -1,51 +1,141 @@
 import './show-g-per.less'
 import $ from 'jquery'
-import {clear} from 'common/js/dom'
+import {clear, Trim} from 'common/js/dom'
 import weui from 'weui.js'
+import model from 'api/getIndex'
+import {moveToGroup} from 'components/moveToGroup/moveToGroup'
 
 let showGroupPer = {
-
+  GID: null, // 存储组id
   inputTemp (gname) {
     return `<div class="aler-input">
-    <input type="text" name="gname" maxlength="10" value="${gname}">
+    <input type="text" name="gname" maxlength="40" value="${gname}">
     <div id="delGName" class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_default">删除</a></div>
     <div id="saveGName" class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
     </div>`
   },
+  perTemp (data) {
+    return ` <div data-gId='${data.group_id}' class="weui-cells margin class-lists">
+      ${data.guest === null ? '' : data.guest.map(key => `<div class="class-item">
+      <div class="weui-cell class-item-top">
+          <div class="weui-cell__hd per-head"><img src=${require(`../../imgs/icons/${key.guest_sex === '男' ? 'boy' : 'girl'}.jpg`)} alt=""></div>
+          <div class="weui-cell__bd">
+          <p class="f-m per-name">${key.guest_name}</p>
+          <p class="f-s per-bbname">${key.guest_type === '0' ? `发起人` : `${key.guest_typename}帮报`}</p>
+          </div>
+          <div class="weui-cell__ft">
+          <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
+          <p class="per-pay-way">${key.guest_pay === '否' ? `未付款` : `已付款`}</p>
+          </div>      
+      </div>
+      <div class="moreInfo show" style="display: none;">
+          <div class="moreInfo-top">
+          <p>${key.guest_sex}</p>
+          <p>${key.guest_tel}</p>
+          </div>
+          <div class="moreInfo-dowm">
+              <a class="txt-green" href="">短信</a>
+              <a class="txt-green" href="">电话</a>
+              <a class="txt-green" href="">编辑</a>
+              <a class="text-red btn-move" data-id="${key.guest_id}">移动</a>
+          </div>
+      </div>
+  </div>`)}
+</div>`
+  },
+  showGroupPer (e) { // 初始化该组成员信息
+    this.GID = $(e).attr('id')
+    let _thi = this
+    model.magAct.getGroupPer({groupId: _thi.GID}).then(data => {
+      $('#groupPerContainer').html(clear(_thi.perTemp(data)))
+    }).catch(errMsg => {
+      console.log(errMsg)
+    })
+  },
+  show () {
+    $('#showGPer').show()
+  },
+  hide () {
+    $('#showGPer').hide()
+  },
   init () {
     $('#cancelG').on('click', () => {
-      $('#showGPer').hide()
+      this.hide()
     })
-
-    $('.g-item').on('click', (e) => {
-      $('#showGPer').show()
+    $('.g-lists').on('click', '.g-item', (e) => {
       $('#showGPer').find('.g-title').html($(e.currentTarget).find('.g-name p').text())
+      this.showGroupPer(e.currentTarget)// 显示该组成员
+      this.show()
     })
-
-    $('.class-item-top').on('click', (e) => {
+    $('#groupPerContainer').on('click', '.class-item-top', (e) => {
       $(e.currentTarget).next().toggle()
     })
 
-    $('.btn-move').on('click', (e) => {
-      this.showGroup()
+    $('#groupPerContainer').on('click', '.btn-move', (e) => {
+      let _thi = this
+      moveToGroup({ perIdArr: [$(e.currentTarget).data('id')],
+        okCallBack: () => {
+          model.magAct.getGroupPer({groupId: _thi.GID}).then(data => {
+            $('#groupPerContainer').html(clear(_thi.perTemp(data)))
+          }).catch(errMsg => {
+            console.log(errMsg)
+          })
+        }}).init()
     })
 
     $('#editGTitle').on('click', (e) => {
+      let _thi = this
       require.ensure([], () => {
         require('vendor/dialog')
         $.alert.aler({
           title: '编辑分组',
-          content: this.inputTemp($('#showGPer').find('.g-title').html()),
+          content: this.inputTemp(Trim($('#showGPer').find('.g-title').html(), 'g').match(/[\u4e00-\u9fa5_a-zA-Z0-9]+(?=\()/g)[0]),
           height: 'auto',
           blankclose: true,
-          okCallback: function () {
-            // 这里做插入到新分组，删除在未分组ajax的操作
-            weui.alert('修改成功')
+          okCallback: function (e) {
+            if ($(e.currentTarget).attr('id') === 'delGName') { // 如果是删除组
+              _thi.deletGroup()
+            } else if ($(e.currentTarget).attr('id') === 'saveGName') { // 如果是编辑组名
+              _thi.editGroup()
+            }
           }
         })
       }, 'aler')
     })
   },
+  editGroup () {
+    let _thi = this
+
+    let groupName = $('input[name=gname]').val()
+    let groupId = $('#groupPerContainer').find('.class-lists').data('gid')
+    model.magAct.editGroup({group_id: groupId, group_name: groupName}).then(res => {
+      if (res.state === 'ok') {
+        _thi.hide()
+        moveToGroup({})._initActData()
+        weui.alert('编辑组名成功')
+      } else {
+        weui.alert('编辑组名失败')
+      }
+    }).catch(errMsg => {
+      weui.alert(errMsg)
+    })
+  },
+  deletGroup () {
+    let _thi = this
+    let groupId = $('#groupPerContainer').find('.class-lists').data('gid')
+    model.magAct.deletGroup({group_id: groupId}).then(res => {
+      if (res.state === 'ok') {
+        moveToGroup({})._initActData()
+        _thi.hide()
+        weui.alert('该组删除成功')
+      } else {
+        weui.alert('该组删除失败')
+      }
+    }).catch(errMsg => {
+      weui.alert(errMsg)
+    })
+  },
+
   groupListTemp (data) {
     return `<div class="group-list">
       <ul>
@@ -53,23 +143,8 @@ let showGroupPer = {
         ${data.map((key) => `<li class="dialog-confirm" data-id="${key.id}">${key.innerText}</li>`)}
       </ul>
     </div>`
-  },
-  showGroup () {
-    let gData = Array.from($('.g-item'))
-    require.ensure([], () => {
-      require('vendor/dialog')
-      $.alert.aler({
-        title: '分组到',
-        content: clear(this.groupListTemp(gData)),
-        height: 'auto',
-        blankclose: true,
-        okCallback: function () {
-          // 这里做插入到新分组，删除在未分组ajax的操作
-          weui.alert('移动成功')
-        }
-      })
-    }, 'aler')
   }
+
 }
 
 export {showGroupPer}

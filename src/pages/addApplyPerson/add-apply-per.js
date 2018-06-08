@@ -3,7 +3,7 @@ import weui from 'weui.js'
 import vali from 'vendor/validate'
 import {getQueryString, clear} from 'common/js/dom'
 import model from 'api/getIndex'
-
+import {moveToGroup} from 'components/moveToGroup/moveToGroup'
 // import {batchG} from '../batchGroup/batch-group'
 let regexp = {
   regexp: {
@@ -12,37 +12,43 @@ let regexp = {
   }
 }
 let addApplyPer = {
-
-  realNameTemp: `<div class="weui-cell">
-<div class="weui-cell__hd"><label class="weui-label">真实姓名</label></div>
-<div class="weui-cell__bd">
-  <input class="weui-input" required emptyTips="请输入真实姓名" name="realName" type="text" placeholder="你的姓名">
-</div>
-</div>`,
-  sexTemp: `<div class="weui-cell weui-cell_select weui-cell_select-after">
-<div class="weui-cell__hd">
-  <label for="" class="weui-label">性别</label>
-</div>
-<div class="weui-cell__bd">
-  <select class="weui-select"  name="sex">
-      <option value="男">男</option>
-      <option value="女">女</option>
-  </select>
-</div>
-</div>`,
-  idCard: `<div  class="weui-cell">
-<div class="weui-cell__hd"><label class="weui-label">身份证</label></div>
-<div class="weui-cell__bd">
-  <input class="weui-input" required pattern="REG_IDNUM" name="idCard" type="text" placeholder="请输入身份证号码" emptyTips="请输入身份证号码" notMatchTips="请输入正确的身份证号码">
-</div>
-</div>`,
+  applyItem: {}, // 保存自定义报名项
+  realNameTemp () {
+    return `<div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">真实姓名</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" required emptyTips="请输入真实姓名" name="realName" type="text" placeholder="你的姓名">
+    </div>
+    </div>`
+  },
+  sexTemp () {
+    return `<div class="weui-cell weui-cell_select weui-cell_select-after">
+    <div class="weui-cell__hd">
+      <label for="" class="weui-label">性别</label>
+    </div>
+    <div class="weui-cell__bd">
+      <select class="weui-select"  name="sex">
+          <option value="男">男</option>
+          <option value="女">女</option>
+      </select>
+    </div>
+    </div>`
+  },
+  idCard () {
+    return `<div  class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">身份证</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" required pattern="REG_IDNUM" name="idCard" type="text" placeholder="请输入身份证号码" emptyTips="请输入身份证号码" notMatchTips="请输入正确的身份证号码">
+    </div>
+    </div>`
+  },
   hide () {
     $('#addApplyPer').hide()
   },
   show () {
     $('#addApplyPer').show()
   },
-  init (initData) {
+  init () {
     $('#addPerForm').on('click', '#setAlreadyPay', (e) => {
       weui.confirm('确定设为已付款?', {
         title: '温馨提示',
@@ -75,26 +81,38 @@ let addApplyPer = {
 
     $('#savePer').on('click', () => {
       let _thi = this
-      // let groupId = $('select[name=groups] option:selected').data('id')
+      // let len = $('select[name=myopts-item]').length
+      let keys = []
+
+      for (let key in this.applyItem) {
+        if (this.applyItem.hasOwnProperty(key)) {
+          keys.push(key)
+        }
+      }
+      for (let i = 0; i < keys.length; i++) {
+        this.applyItem[keys[i]] = $($('select[name=myopts-item]')[i]).val()
+      }
+      $('input[name=customize-opts]').val(JSON.stringify(this.applyItem))
+
       weui.form.validate('#addPerForm', function (error) {
         if (!error) {
           var loading = weui.loading('提交中...')
           setTimeout(function () {
             loading.hide()
-            _thi._addPerData(initData)
+            _thi._addPerData()
             weui.toast('提交成功', 1000)
           }, 1000)
         }
       }, regexp)
     })
   },
-  _addPerData (initData) {
+  _addPerData () {
     let _thi = this
     model.magAct.addPer($('#addPerForm')).then(res => {
       if (res.state === 'ok') {
         _thi.hide()
         weui.alert('添加报名成员成功')
-        initData()
+        moveToGroup({})._initActData()
       }
     }).catch(errMsg => {
       weui.alert(errMsg)
@@ -111,6 +129,9 @@ let addApplyPer = {
     if (actForm[0].Formqtpay === '是') {
       costWay.push('其他支付方式')
     }
+    if (actForm[0].Formpay === '否' && actForm[0].Formqtpay === '否') {
+      costWay.push('免费')
+    }
     let htmlTemp = `<input type="hidden" name="perType" val="1"><div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
     <div class="weui-cell__bd">
@@ -122,7 +143,7 @@ let addApplyPer = {
     <div class="weui-cell__bd">
         <input class="weui-input" required pattern="REG_PHONE" name="phone" type="tel" placeholder="请输入手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
     </div>
-  </div> `
+  </div>`
     htmlTemp += `<div class="weui-cell weui-cell_select weui-cell_select-after">
     <div class="weui-cell__hd">
       <label for="" class="weui-label">费用选择</label>
@@ -153,33 +174,38 @@ let addApplyPer = {
 <div class="line"></div>`
     $('input[name=actId]').val(getQueryString('id'))
 
-    if (actForm[0].Formname) { // 如果真实姓名有值
-      htmlTemp += this.realNameTemp
+    if (actForm[0].Formname !== '') { // 如果真实姓名有值
+      htmlTemp += this.realNameTemp()
     }
-    if (actForm[0].Formsex) { // 如果性别有值
-      htmlTemp += this.sexTemp
+    if (actForm[0].Formsex !== '') { // 如果性别有值
+      htmlTemp += this.sexTemp()
     }
-    if (actForm[0].Formsfz) { // 如果身份证有值
-      htmlTemp += this.idCard
+    if (actForm[0].Formsfz !== '') { // 如果身份证有值
+      htmlTemp += this.idCard()
     }
-    if (actForm[0].Formzjx) { // 如果有自定义报名项
+    if (actForm[0].Formzjx !== '') { // 如果有自定义报名项
       let obj = JSON.parse(actForm[0].Formzjx)
+      this.applyItem = obj
+
       let zjxtem = ''
       for (let key in obj) {
-        zjxtem = `<div class="weui-cell weui-cell_select weui-cell_select-after">
+        zjxtem += `<div class="weui-cell weui-cell_select weui-cell_select-after">
         <div class="weui-cell__hd">
             <label for="" class="weui-label myopt-title">${key}</label>
         </div>
         <div class="weui-cell__bd">
             <select class="weui-select" name="myopts-item">
-               ${obj[key].map(item => `
-                <option value="${item}">${item}</option>
-               `)}
+               ${clear(`${obj[key].map(item => `
+               <option value="${item}">${item}</option>
+              `)}`)}
             </select>
         </div>
     </div>`
       }
-      htmlTemp += zjxtem
+      htmlTemp += `<div class="customize-opt">
+        <input name="customize-opts" type="hidden">
+        ${zjxtem}
+      </div>`
     }
     if ($('.g-lists .g-item').length > 0) { // 如果有分组
       htmlTemp += clear(this.groupListTemp(gData))

@@ -205,7 +205,7 @@ let all = (function () {
             </div>`
     },
     _getClubInfo (data) {
-      $('.club-logo img').attr('src', data.thumb_logo)
+      $('.club-logo').css('background-image', `url(${data.thumb_logo})`)
       $('.club-motto p').text(data.club_motto)
       $('.club-name').html(data.club_name)
       $('#clubId').html(data.club_id)

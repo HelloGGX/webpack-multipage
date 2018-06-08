@@ -25,7 +25,7 @@ let showGroupPer = {
           </div>
           <div class="weui-cell__ft">
           <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
-          <p class="per-pay-way">${key.guest_pay === '否' ? `未付款` : `已付款`}</p>
+          <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${(key.guest_wxpay === '否' && key.guest_qtpay === '否') ? `免费` : ``} ${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
           </div>      
       </div>
       <div class="moreInfo show" style="display: none;">
@@ -33,16 +33,20 @@ let showGroupPer = {
           <p>${key.guest_sex}</p>
           <p>${key.guest_tel}</p>
           </div>
+          <div class="moreInfo-midd">
+              ${key.guest_realname !== '' ? `<span>真实姓名：${key.guest_realname}</span>` : ''}
+              ${key.guest_idcard !== '' ? `/<span>身份证号：${key.guest_idcard}</span>` : ''}
+          </div>
           <div class="moreInfo-dowm">
-              <a class="txt-green" href="">短信</a>
-              <a class="txt-green" href="">电话</a>
-              <a class="txt-green" href="">编辑</a>
+              <a class="txt-green" href="tel:${key.guest_tel}">电话</a>
+              <a class="txt-green btn-edit">编辑</a>
               <a class="text-red btn-move" data-id="${key.guest_id}">移动</a>
           </div>
       </div>
   </div>`)}
 </div>`
   },
+
   showGroupPer (e) { // 初始化该组成员信息
     this.GID = $(e).attr('id')
     let _thi = this
@@ -107,18 +111,22 @@ let showGroupPer = {
     let _thi = this
 
     let groupName = $('input[name=gname]').val()
-    let groupId = $('#groupPerContainer').find('.class-lists').data('gid')
-    model.magAct.editGroup({group_id: groupId, group_name: groupName}).then(res => {
-      if (res.state === 'ok') {
-        _thi.hide()
-        moveToGroup({})._initActData()
-        weui.alert('编辑组名成功')
-      } else {
-        weui.alert('编辑组名失败')
-      }
-    }).catch(errMsg => {
-      weui.alert(errMsg)
-    })
+    if (groupName === '') {
+      weui.alert('组名不能为空')
+    } else {
+      let groupId = $('#groupPerContainer').find('.class-lists').data('gid')
+      model.magAct.editGroup({group_id: groupId, group_name: groupName}).then(res => {
+        if (res.state === 'ok') {
+          _thi.hide()
+          moveToGroup({})._initActData()
+          weui.alert('编辑组名成功')
+        } else {
+          weui.alert('编辑组名失败')
+        }
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    }
   },
   deletGroup () {
     let _thi = this

@@ -1,24 +1,31 @@
 import $ from 'jquery'
 
-export function compile (template) { // 模板编译函数
-  let evalExpr = /<%=(.+?)%>/g
-  let expr = /<%([\s\S]+?)%>/g
-  template = template
-    .replace(evalExpr, '`); \n echo( $1 ); \n echo(`')
-    .replace(expr, '`); \n $1 \n echo(`')
-  template = 'echo(`' + template + '`);'
-  let script =
-`(function parse(data){
-let output = "";
-function echo(html){
-output += html;
-}
-${template}
-return output;
-})`
-  return script
+export function itemtoArraytop (Arr, index) {
+  let temp = Arr[index]
+  if (index === 0) {
+    return Arr
+  }
+  for (let i = 0; i < Arr.length; i++) {
+    if (Arr[i] === Arr[index]) {
+      // 从第i个元素开始移除，1是长度，只移除一个元素。
+      Arr.splice(i, 1)
+      break
+    }
+  }
+  // unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+  Arr.unshift(temp)
+  return Arr
 }
 
+export function sliceArray (array, size) { // 分割数组
+  let result = []
+  for (let x = 0; x < Math.ceil(array.length / size); x++) {
+    let start = x * size
+    let end = start + size
+    result.push(array.slice(start, end))
+  }
+  return result
+}
 export function Trim (str, global) { // 去掉字符串中的所有空格
   let result
   result = str.replace(/(^\s+)|(\s+$)/g, '')
@@ -79,12 +86,12 @@ export function getCookie (cName) {
 }
 /* 日期转年龄 */
 export function ages (str) {
-  var r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/)
+  let r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/)
   if (r == null) return false
-  var d = new Date(r[1], r[3] - 1, r[4])
+  let d = new Date(r[1], r[3] - 1, r[4])
 
   if (d.getFullYear() === parseInt(r[1]) && (d.getMonth() + 1) === parseInt(r[3]) && d.getDate() === parseInt(r[4])) {
-    var Y = new Date().getFullYear()
+    let Y = new Date().getFullYear()
     return (`${Y - r[1]}`)
   } else {
     return ('输入的日期格式错误！')

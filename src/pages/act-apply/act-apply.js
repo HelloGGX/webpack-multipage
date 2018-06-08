@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {clear, getQueryString} from 'common/js/dom'
+import {clear, getQueryString, sliceArray} from 'common/js/dom'
 import vali from 'vendor/validate'
 let regexp = {
   regexp: {
@@ -14,6 +14,7 @@ let regexp = {
 
 let all = (function () {
   let Home = {
+    applyItem: {},
     INDEX: 0,
     temp: `<input type="hidden" name="perType" val="1">`,
     htmlTemp: `<div class="weui-cell">
@@ -58,6 +59,24 @@ let all = (function () {
 
       $('.btn-apply-comfirm').click((e) => {
         let _thi = this
+        let keys = []
+        let elem = []
+        let len = $('select[name=myopts-item]').length// 选项总个数
+        for (let key in this.applyItem) {
+          if (this.applyItem.hasOwnProperty(key)) {
+            keys.push(key)
+          }
+        }
+        let group = len / keys.length // 这里写的那么复杂解决的是每个帮报能获取各自的自定义填写项的值，你娃肯定写不出来
+        elem = sliceArray(Array.from($('select[name=myopts-item]')), keys.length)
+
+        for (let j = 0; j < group; j++) {
+          for (let i = 0; i < keys.length; i++) {
+            this.applyItem[keys[i]] = $(elem[j][i]).val()//
+          }
+          $($('input[name=customize-opts]')[j]).val(JSON.stringify(this.applyItem))
+        }
+
         weui.form.validate('#actApply', function (error) {
           if (!error) {
             var loading = weui.loading('提交中...')
@@ -146,41 +165,38 @@ let all = (function () {
 
         if (actForm[0].Formzjx) { // 如果有自定义报名项
           let obj = JSON.parse(actForm[0].Formzjx)
+          this.applyItem = obj
+          let html = ''
           for (let key in obj) {
-            $('#actApply .weui-cells').append(
-              `<div class="weui-cell weui-cell_select weui-cell_select-after">
-              <div class="weui-cell__hd">
-                  <label for="" class="weui-label myopt-title">${key}</label>
-              </div>
-              <div class="weui-cell__bd">
-                  <select class="weui-select" style="padding-left:1.6rem" name="myopts-item">
-                     ${obj[key].map(item => `
-                      <option value="${item}">${item}</option>
-                     `)}
-                  </select>
-              </div>
-          </div>`
-            )
-            this.temp += `<div class="weui-cell weui-cell_select weui-cell_select-after">
+            html += `<div class="weui-cell weui-cell_select weui-cell_select-after">
             <div class="weui-cell__hd">
                 <label for="" class="weui-label myopt-title">${key}</label>
             </div>
             <div class="weui-cell__bd">
                 <select class="weui-select" style="padding-left:1.6rem" name="myopts-item">
-                   ${obj[key].map(item => `
-                    <option value="${item}">${item}</option>
-                   `)}
+                   ${clear(`${obj[key].map(item => `
+                   <option value="${item}">${item}</option>
+                  `)}`)}
                 </select>
             </div>
-        </div><div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label for="" class="weui-label myopt-title"></label>
-        </div>
-        <div class="weui-cell__bd text-right">
-          <button class="delete-apply" type="btn">删除报名</button>
-        </div>
-      </div>`
+        </div>`
           }
+          this.temp += `<div class="customize-opt">
+          <input name="customize-opts" type="hidden">
+          ${html}<div class="weui-cell">
+          <div class="weui-cell__hd">
+              <label for="" class="weui-label myopt-title"></label>
+          </div>
+          <div class="weui-cell__bd text-right">
+            <button class="delete-apply" type="btn">删除报名</button>
+          </div>
+        </div>`
+          $('#actApply .weui-cells').append(
+            `<div class="customize-opt">
+            <input name="customize-opts" type="hidden">
+            ${html}
+          </div>`
+          )
         } else {
           this.temp += `<div class="weui-cell">
           <div class="weui-cell__hd">

@@ -8,7 +8,7 @@ let all = (function () {
     pageInit: function () {
       $('.quit').on('click', () => {
         delCookie('username')
-        delCookie('password')
+        delCookie('token')
       })
     }
   }

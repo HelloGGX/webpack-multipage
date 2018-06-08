@@ -18,23 +18,18 @@ let all = (function () {
       $('#uploadCancel').on('click', () => {
         this.hide()
       })
-
-      $('#uploaderCustomBtn').on('click', () => {
-        upload._customLoader()
-      })
     },
     show () {
+      let _thi = this
       $('#uploadPage').show()
-
-      upload.init({
-        id: 'uploader',
-        maxLength: 5,
-        fileVal: 'imgfile',
+      upload({maxLength: 5,
+        size: 3,
         auto: false,
+        id: 'uploader',
+        customBtn: 'uploaderCustomBtn',
         okCallBack: () => {
-          this.hide()
-        }
-      })// 手动上传照片
+          _thi.hide()
+        }}).init()
     },
     hide () {
       $('#uploadPage').hide()
@@ -77,9 +72,8 @@ let all = (function () {
         for (let i = 0; i < len; i++) {
           _html = clear(this.albumTemp(i, newdata))
           $('#album-container').append(_html)
+          $('.album-photos li').css('height', $('.album-photos li').width())
         }
-
-        $('.album-photos li').css('height', $('.album-photos li').width())
       }).catch((errmsg) => {
 
       })

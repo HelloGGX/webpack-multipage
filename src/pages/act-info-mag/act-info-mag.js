@@ -8,6 +8,7 @@ import {pickerAddr, pickerData} from 'components/picker/picker' // 引入地区�
 import {batchG} from '../batchGroup/batch-group'
 import {addApplyPer} from '../addApplyPerson/add-apply-per'
 import {showGroupPer} from '../showGroupPer/show-g-per'
+import {editApply} from '../getApplyOpts/getApplyOpts'
 import model from 'api/getIndex'
 import {getQueryString, clear} from 'common/js/dom'
 import {moveToGroup} from 'components/moveToGroup/moveToGroup'
@@ -117,8 +118,8 @@ let all = (function () {
       search.init()
       applyMagGroup.init()
       batchG.init(this._initActData)
-
-      addApplyPer.init(this._initActData)
+      editApply.init()
+      addApplyPer.init()
       showGroupPer.init()
 
       $('.actTime').on('click', (e) => {
@@ -133,7 +134,7 @@ let all = (function () {
             $('#openApply').find('button').html('打开活动')
           }
         }).catch(errMsg => {
-
+          weui.alert(errMsg)
         })
       })
 
@@ -151,14 +152,47 @@ let all = (function () {
               model.magAct.deleteAct(getQueryString('id')).then(res => {
                 console.log(res)
                 if (res.state === 'delete_ok') {
-                  window.alert('删除成功')
-                  window.history.go(-1)
+                  require.ensure([], () => {
+                    require('vendor/dialog')
+                    $.alert.aler({
+                      title: '温馨提示',
+                      content: '<p style="font-size: 16px;text-align: center;line-height: 60px;">删除成功</p>',
+                      height: 120,
+                      blankclose: true,
+                      okCallback: function (e) {
+                        window.history.go(-1)
+                      }
+                    })
+                  }, 'aler')
+                } else if (res.state === 'haspers') {
+                  require.ensure([], () => {
+                    require('vendor/dialog')
+                    $.alert.aler({
+                      title: '温馨提示',
+                      content: '<p style="font-size: 16px;text-align: center;line-height: 60px;">已经有人报名，不能删除</p>',
+                      height: 120,
+                      blankclose: true,
+                      okCallback: function (e) {
+                        return false
+                      }
+                    })
+                  }, 'aler')
                 } else if (res.state === 'delete_no') {
-                  window.alert('删除失败')
-                  return false
+                  require.ensure([], () => {
+                    require('vendor/dialog')
+                    $.alert.aler({
+                      title: '温馨提示',
+                      content: '<p style="font-size: 16px;text-align: center;line-height: 60px;">删除失败</p>',
+                      height: 120,
+                      blankclose: true,
+                      okCallback: function (e) {
+                        return false
+                      }
+                    })
+                  }, 'aler')
                 }
               }).catch(errMsg => {
-
+                weui.alert(errMsg)
               })
             }
           }]
@@ -228,8 +262,8 @@ let all = (function () {
                     <p class="f-s per-bbname">${key.guest_type === '0' ? `发起人` : `${mainPer}帮报`}</p>
                 </div>
                 <div class="weui-cell__ft">
-                  <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
-                  <p class="per-pay-way">${key.guest_pay}</p>
+                <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
+                <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
                 </div>      
               </div>
               <div class="moreInfo show" style="display: none;">
@@ -237,10 +271,14 @@ let all = (function () {
                   <p>${key.guest_sex}</p>
                   <p>${key.guest_tel}</p>
                 </div>
+                <div class="moreInfo-midd">
+                ${key.guest_realname !== '' ? `<span>真实姓名：${key.guest_realname}</span>` : ''}
+                ${key.guest_idcard !== '' ? `/<span>身份证号：${key.guest_idcard}</span>` : ''}
+                </div>
+                
                 <div class="moreInfo-dowm">
-                  <a class="txt-green" href="">短信</a>
-                  <a class="txt-green" href="">电话</a>
-                  <a class="txt-green" href="">编辑</a>
+                  <a class="txt-green" href="tel:${key.guest_tel}">电话</a>
+                  <a class="txt-green btn-edit">编辑</a>
                   <a class="text-red btn-audit" data-id="${key.guest_id}">分组</a>
                 </div>
               </div>
@@ -289,6 +327,7 @@ let all = (function () {
       $('#actEndLine').val(actEndTime)
       $('#Actaddr').val(actAddr)
       $('input[name=actDetailAddr]').val(actDetailAddr)
+      $('.unclassLen').html(`(${$('.unclass-item').length})`)
     },
     _initActData: function () { // 刷新重新初始化数据
       model.getActDetailData({id: getQueryString('id')}).then(data => {

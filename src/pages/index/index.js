@@ -215,7 +215,8 @@ let all = (function () {
                           <div class="goods-detail">
                               <p class="goods-name">${thi.areadata[i].name}</p>
                               <div class="goods-content">
-                                  <p class="goods-sales">距离${thi.areadata[i].distance}米</p>
+                                  <p class="goods-sales">${thi.areadata[i].time}</p>
+                                  <p class="goods-sales">活动积分${thi.areadata[i].integral}</p>
                               </div>
                               <del class="goods-market-price">${thi.areadata[i].marprice}</del>
                               <div class="discount-price"><i>￥</i>${thi.areadata[i].disprice}</div>

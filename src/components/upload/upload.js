@@ -3,7 +3,7 @@ import $ from 'jquery'
 import {getQueryString} from 'common/js/dom'
 
 export default class Upload {
-  constructor ({id = 'uploader', uploadCount = 0, uploadList = [], maxLength = 5, fileVal = 'imgfile', auto = true, size = 1, okCallBack = () => {}} = {}) {
+  constructor ({id = 'uploader', customBtn = 'uploaderCustomBtn', urlArr = [], uploadCount = 0, uploadList = [], maxLength = 5, fileVal = 'imgfile', auto = true, size = 1, okCallBack = () => {}} = {}) {
     this.id = id
     this.uploadCount = uploadCount
     this.uploadList = uploadList
@@ -12,10 +12,15 @@ export default class Upload {
     this.auto = auto
     this.size = size
     this.okCallBack = okCallBack
+    this.urlArr = urlArr
+    this.customBtn = customBtn// 手动上传按钮id
   }
   init () {
     this._seeImg()
     this._uploader()
+    $(`#${this.customBtn}`).on('click', (e) => {
+      this._customLoader()
+    })
   }
   _seeImg () { // 预览上传图片
     $('.uploaderFiles').on('click', (e) => {
@@ -25,20 +30,28 @@ export default class Upload {
         target = target.parentNode
       }
       if (!target) return
-      var url = target.getAttribute('style') || ''
-      var id = target.getAttribute('data-id')
+      let url = target.getAttribute('style') || ''
+      let id = target.getAttribute('data-id')
 
       if (url) {
         url = url.match(/url\((.*?)\)/)[1].replace(/"/g, '')
       }
-      var gallery = weui.gallery(url, {
+      let gallery = weui.gallery(url, {
 
         className: 'custom-name',
         onDelete: function onDelete () {
           weui.confirm('确定删除该图片？', function () {
             --_this.uploadCount
-            for (var i = 0, len = _this.uploadList.length; i < len; ++i) {
-              var file = _this.uploadList[i]
+            let len = $(`#${_this.id}`).find('.weui-uploader__file').length
+
+            for (let j = 0; j < len; ++j) {
+              if ($(target)[0].dataset === $($(`#${_this.id}`).find('.weui-uploader__file')[j])[0].dataset) {
+                _this.urlArr.splice(j, 1)
+              }
+            }
+            $(`#${_this.id}`).find('input').first().val(_this.urlArr)
+            for (let i = 0, len = _this.uploadList.length; i < len; ++i) {
+              let file = _this.uploadList[i]
               if (file.id === id) {
                 file.stop()
                 break
@@ -89,6 +102,7 @@ export default class Upload {
       },
       onQueued: function () { // 文件添加成功的回调
         _this.uploadList.push(this)
+        console.log(this)
         // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
         // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
 
@@ -109,9 +123,12 @@ export default class Upload {
         // return true; // 阻止默认行为，不使用默认的进度显示
       },
       onSuccess: function (ret) {
-        $(`#${_this.id}`).find('input').first().val(ret.imgurl)
+        _this.urlArr.push(ret.imgurl)
+        $(`#${_this.id}`).find('input').first().val(_this.urlArr)
+
+        _this.okCallBack(ret)
         weui.alert(`上传成功`)
-        _this.okCallBack()
+
         // return true; // 阻止默认行为，不使用默认的成功态
       },
       onError: function (err) {
@@ -122,6 +139,7 @@ export default class Upload {
     })
   }
   _customLoader () { // 手动上传按钮
+    console.log(this.uploadList)
     this.uploadList.map(file => {
       file.upload()
     })
@@ -136,6 +154,8 @@ export function upload (opt) {
     fileVal: opt.fileVal,
     auto: opt.auto,
     size: opt.size,
-    okCallBack: opt.okCallBack
+    okCallBack: opt.okCallBack,
+    urlArr: opt.urlArr,
+    customBtn: opt.customBtn
   })
 }

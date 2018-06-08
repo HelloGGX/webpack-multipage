@@ -41,11 +41,11 @@ class MoveToGroup {
                   <p class="f-s per-bbname">${key.guest_type === '0' ? `发起人` : `${mainPer}帮报`}</p>
               </div>
               <div class="weui-cell__ft">
-                <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
-                <p class="per-pay-way">${key.guest_pay}</p>
+              <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
+              <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
               </div>      
             </div>
-            <div class="moreInfo show">
+            <div class="moreInfo show" style="display:none">
               <div class="moreInfo-top">
                 <p>${key.guest_sex}</p>
                 <p>${key.guest_tel}</p>
@@ -83,23 +83,22 @@ class MoveToGroup {
       weui.alert(errMsg)
     })
   }
-  groupListTemp (data) { // 组列表模板
-    console.log(data)
+  groupListTemp (data, len) { // 组列表模板
     return `<div class="group-list">
       <ul>
-        ${data.map((key) => `<li class="dialog-confirm" data-id="${key.id}">${key.innerText}</li>`)}
+        ${data.map((key) => `<li class="dialog-confirm" data-id="0">未分组(${len})</li><li class="dialog-confirm" data-id="${key.id}">${key.innerText}</li>`)}
       </ul>
     </div>`
   }
   showGroup () { // 显示有哪些分组
     let gData = Array.from($('.g-item'))
-
+    let len = $('.unclass-item').length
     let _thi = this
     require.ensure([], () => {
       require('vendor/dialog')
       $.alert.aler({
         title: '温馨提示',
-        content: clear(this.groupListTemp(gData)),
+        content: clear(this.groupListTemp(gData, len)),
         height: 'auto',
         blankclose: true,
         okCallback: function (e) {
@@ -113,6 +112,7 @@ class MoveToGroup {
     let groupName = Trim($(e.currentTarget).html(), 'g').match(/[\u4e00-\u9fa5_a-zA-Z0-9]+(?=\()/g)[0]
     let groupId = $(e.currentTarget).data('id')
     // let perId =
+
     model.magAct.moveToGroup({id: getQueryString('id'), groupId: groupId, groupName: groupName, perId: this.perIdArr}).then(res => {
       if (res.state === 'ok') {
         weui.alert('移动到分组成功')

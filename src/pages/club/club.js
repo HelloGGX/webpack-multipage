@@ -87,8 +87,7 @@ let all = (function () {
       return `<div class="margin weui-panel weui-panel_access" id="${TYPE + data[i].id}">
       <div class="weui-panel__bd">
         <a href="club-detail.html?clubId=${data[i].id}" class="weui-media-box weui-media-box_appmsg">
-          <div class="club-thumb weui-media-box__hd ">
-            <img class="weui-media-box__thumb" src="${data[i].imgsrc}">
+          <div class="club-thumb weui-media-box__hd " style="background-image:url(${data[i].imgsrc})">
           </div>
           <div class="weui-media-box__bd">
             <h4 class="f-m weui-media-box__title">${data[i].name}</h4>

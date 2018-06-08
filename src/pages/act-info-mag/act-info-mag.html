@@ -43,6 +43,8 @@
             <%= require('html-loader!../addApplyPerson/add-apply-per.html')  %>
             <!--显示对应组成员弹出层-->
             <%= require('html-loader!../showGroupPer/show-g-per.html')  %>
+             <!--编辑对应成员报名选项弹出层-->
+             <%= require('html-loader!../getApplyOpts/getApplyOpts.html')  %>
             <div id="index-content-v2">
                 <div class="weui-tab">
                     <div class="weui-tab__panel content-panel">
@@ -223,7 +225,7 @@
                                                         </div>
                                                         <div class="m-group">
                                                             <div class="tit-group">
-                                                                <div class="txt-group icon-red f-m-x">未分组<span class="">（2）</span>人</div>
+                                                                <div class="txt-group icon-red f-m-x">未分组<span class="unclassLen"></span>人</div>
                                                                 <button type="btn" class="btn-group btn-batch">
                                                                 批量分组
                                                                 </button>

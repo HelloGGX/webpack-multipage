@@ -28,6 +28,14 @@ let batchG = {
     $('#addNewG').on('click', (e) => {
       this.addNewGroup(initData)
     })
+
+    $('#batchAll').on('click', () => {
+      if ($('.batch-unclass-item').find('input[name=labelItem]').is(':checked')) {
+        $("input[name='labelItem']").attr('checked', false)// 全选
+      } else {
+        $("input[name='labelItem']").attr('checked', true)// 全选
+      }
+    })
   },
   _unclassItemTemp (data) { // 未分组人员模板
     if (data !== null) {
@@ -39,9 +47,9 @@ let batchG = {
               <p class="f-m per-name">${key.guest_name}</p>
               <p class="f-s per-bbname">${key.guest_type === '0' ? `发起人` : `${key.guest_typename}帮报`}</p>
             </div>
-            <div class="weui-cell__ft">
-              <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
-              <p class="per-pay-way">${key.guest_pay === '否' ? `未付款` : `已付款`}</p>
+            <div class="weui-cell__ft f-m">
+            <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
+            <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''} ${(key.guest_wxpay === '否' && key.guest_qtpay === '否') ? `免费` : ``}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
             </div> 
             <div class="unclass-item-check">
               <input type="checkbox" class="weui-check" name="labelItem" data-id="${key.guest_id}">

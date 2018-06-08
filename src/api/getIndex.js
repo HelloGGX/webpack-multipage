@@ -21,8 +21,9 @@ let magAct = {// 管理活动
       showLoading: true
     }))
   },
-  ubdateAct (data) { // 编辑更新活动
-    return db.handleRequest(db.request.put(`ubdateApply.php`, {
+  updateAct (e) { // 编辑更新活动
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post(`updateAct.php`, {
       data: data,
       showLoading: true
     }))
@@ -31,6 +32,13 @@ let magAct = {// 管理活动
   addPer (e) { // 添加报名成员
     let data = serializeObject(e)
     return db.handleRequest(db.request.post('addPer.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  editPer (e) {
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('editPer.php', {
       data: data,
       showLoading: true
     }))

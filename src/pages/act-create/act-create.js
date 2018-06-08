@@ -40,11 +40,11 @@ let all = (function () {
     _imgTemp (data) {
       let id = 0
       return `${clear(`${data.map(item => `
-      <li class="weui-uploader__file" data-id="${id++}" style="background-image: url(&quot;http://125.65.111.19:82${item}&quot;);">  </li>
+      <li class="weui-uploader__file" data-id="${id++}" style="background-image: url(&quot;http://125.65.111.19${item}&quot;);">  </li>
       `)}`)}`
     },
     _applyCostTemp (data) {
-      return `${clear(`${data.map((key, i) => `
+      return `${clear(`${data.map((key) => `
       <li class="row">
       <div class="col-70">
       <div class="act_cost_title f-l">${key.prod_name}</div>
@@ -59,6 +59,62 @@ let all = (function () {
       <input type="hidden" name="applyCostPrice" value="${key.prod}">
       </div></li>
     `)}`)}`
+    },
+    _addfeeTemp (data) {
+      return `${clear(`${data.map(key => `
+      <div name="feeitems" class="feeitems">
+      <div class="list-block margin">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-media removeIcon">
+                <span>
+                  <img src="${require(`../../imgs/icons/removeIcon.png`)}" alt="">
+                </span>
+              </div>
+              <div class="item-inner">
+                <div class="item-title small-txt high-grey">
+                  费用设置
+                </div>
+                <div class="item-after  entered-input" style="width:70%;">
+                  <input id="feename" maxlength="20" type="text" name="fyName" class="fyName" value="${key.prod_name}"
+                  placeholder="20字以内">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+              </div>
+              <div class="item-inner">
+                <div class="item-title small-txt high-grey">
+                  金额
+                </div>
+                <div class="item-after  entered-input" style="width:70%;">
+                  <input class="feeprice" pattern="[0-9]*" type="number" name="fyje" value="${key.prod}" placeholder="有人报名后不能修改">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-media">
+              </div>
+              <div class="item-inner">
+                <div class="item-title small-txt high-grey">
+                  名额
+                </div>
+                <div class="item-after  entered-input" style="width:70%;">
+                  <input class="feenum" pattern="[0-9]*" type="number" value="${key.prod_num}" name="fyme" placeholder="默认不限">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+  </div>
+      `)}`)}`
     },
     _applyOptTemp (data) {
       let index = $('.apply-options .col-33').length - 1
@@ -89,8 +145,38 @@ let all = (function () {
         $('#uploader .uploaderFiles').html(_thi._imgTemp(_thi.thumbArr))
         $('input[name=applyCostType]').val(actData.pay_state)
         $('#actCost').find('.weui-select').html(actData.pay_state)
+
         if (actData.pay_state === '收费') {
+          costWay._fee = true
           $('#fymx').html(_thi._applyCostTemp(actData.pricecl))
+          $('#r2').attr('checked', 'checked')
+          $('#feeDetail').show()
+          $('#unfeeDetail').hide()
+          $('input[name=fysfzme]').val(actData.apply_cost_nums)
+          $('input[name=refundSet]').val(actData.refund)
+          $('#feeItem').html(_thi._addfeeTemp(actData.pricecl))
+          $('textarea[name=ExpDescr]').val(actData.ExpDescr)
+          $('input[name=payOnline]').prop('checked', () => {
+            if (actData.online_pay === '是') {
+              $('input[name=payOnline]').val('是')
+              return true
+            } else {
+              $('input[name=payOnline]').val('否')
+              return false
+            }
+          })
+
+          $('input[name=otherPay]').prop('checked', () => {
+            if (actData.other_pay === '是') {
+              $('input[name=otherPay]').val('是')
+              return true
+            } else {
+              $('input[name=otherPay]').val('否')
+              return false
+            }
+          })
+        } else {
+          costWay._fee = false
         }
         $('input[name=refund]').val(actData.refund)
         $('input[name=applyCostNums]').val(actData.apply_cost_nums)

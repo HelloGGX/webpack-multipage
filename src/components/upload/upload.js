@@ -67,7 +67,7 @@ export default class Upload {
   _uploader () {
     let _this = this
     weui.uploader(`#${_this.id}`, {
-      url: 'http://125.65.111.19:82/api/getupload.php',
+      url: 'http://125.65.111.19/api/getupload.php',
       auto: _this.auto,
       type: 'file',
       fileVal: _this.fileVal,

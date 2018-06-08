@@ -1,6 +1,20 @@
 import {serializeObject} from 'common/js/dom'
 import db from '../db/db'
-
+let person = {// 个人资料管理（资料获取，编辑）
+  getPerData (data) { // 获取用户资料
+    return db.handleRequest(db.request.get('getPerData.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  postPerData (e) { // 提交用户资料
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('postPerData.php', {
+      data: data,
+      showLoading: true
+    }))
+  }
+}
 let magAct = {// 管理活动
   getActInfoData (data) { // 获取活动信息数据
     return db.handleRequest(db.request.get('getActDetail.php', {
@@ -91,6 +105,7 @@ let magAct = {// 管理活动
 
 export default {
   magAct,
+  person,
   getMagInfo (data) { // 获取活动详情数据和报名选项数据
     return db.handleAll([this.getActDetailData(data), this.getApplyData(data)])
   },

@@ -187,21 +187,27 @@ let costWay = { // 费用设置类方法
         weui.alert('在线支付和其他支付方式至少选择一个')
         return false
       }
-      $('#fymx').append(this._applyCostTemp(arr, arrPrice, arrNum))
+      $('#fymx').html(this._applyCostTemp(arr, arrPrice, arrNum))
       $('#actCost').find('.weui-select').html('收费')
+      $('input[name=applyCostNums]').val($('input[name=fysfzme]').val())// 活动总名额
+      $('input[name=ExpDescr]').val($('textarea[name=ExpDescr]').val())// 活动须知
+      $('input[name=payOnlineInput]').val($('input[name=payOnline]').val())// 是否在线付费
+      $('input[name=otherPayInput]').val($('input[name=otherPay]').val())// 是否其他付费方式
+      $('input[name=refund]').val($('input[name=refundSet]').val())// 退款设置
+      $('.act_cost_ticket').show()
       weui.alert('添加成功')
       this.hide()
     } else { // 如果是免费
       $('#actCost').find('.weui-select').html('免费')
-      $('.act_cost_ticket').remove()
-      weui.alert('添加成功')
-      this.hide()
+      $('.act_cost_ticket').hide()
+      if ($('input[name=fyzme]').val() === '') {
+        weui.alert('活动总名额不能为空')
+      } else {
+        $('input[name=applyCostNums]').val($('input[name=fyzme]').val())
+        weui.alert('添加成功')
+        this.hide()
+      }
     }
-    $('input[name=applyCostNums]').val($('input[name=fysfzme]').val())// 活动总名额
-    $('input[name=ExpDescr]').val($('textarea[name=ExpDescr]').val())// 活动须知
-    $('input[name=payOnlineInput]').val($('input[name=payOnline]').val())// 是否在线付费
-    $('input[name=otherPayInput]').val($('input[name=otherPay]').val())// 是否其他付费方式
-    $('input[name=refund]').val($('input[name=refundSet]').val())// 退款设置
   },
   _removeItem (item) {
     $(item).parents('.feeitems').remove()

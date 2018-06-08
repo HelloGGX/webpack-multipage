@@ -3,10 +3,15 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法
-import {ages} from 'common/js/dom'
+import {ages, clear} from 'common/js/dom'
 import {clubItem} from '../addMainItem/addMainItem'// 添加主打项目 宣言 简介
+import {pickerAddr} from 'components/picker/picker'// 引入地区和日期选择对象方法
+
+import model from 'api/getIndex'
+
 let all = (function () {
   let Home = {
+    thumbArr: [],
     textAreaTemp: `<div class="weui-cells weui-cells_form margin">
     <div class="weui-cell">
         <div class="weui-cell__bd">
@@ -16,9 +21,59 @@ let all = (function () {
         </div>
     </div>
   </div>`,
+    _imgTemp (data) {
+      let id = 0
+      return `${clear(`${data.map(item => `
+    <li class="weui-uploader__file" data-id="${id++}" style="background-image: url(&quot;http://125.65.111.19${item}&quot;);">  </li>
+    `)}`)}`
+    },
+    _postPerData () {
+      model.person.postPerData($('#perEdit')).then(res => {
+        console.log(res)
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    },
+    _getPerData () {
+      let _thi = this
+      model.person.getPerData().then(data => {
+        console.log(data)
+        _thi.thumbArr.push(data.user_img)
+        $('input[name=hdImg]').val(_thi.thumbArr)
+        $('#uploader .uploaderFiles').html(_thi._imgTemp(_thi.thumbArr))
+        $('input[name=myName]').val(data.user_nice)
+        $('input[name=signature]').val(data.user_sign)
+        $('select[name=sex]').val(data.user_sex)
+        $('input[name=age]').val(data.user_age)
+        $('input[name=job]').val(data.user_office)
+        $('input[name=myAddr]').val(data.user_hometown)
+        $('input[name=sports]').val(data.user_love)
+        $('input[name=travelAddr]').val(data.user_mark)
+      }).catch(errMsg => {
+        console.log(errMsg)
+      })
+    },
     pageInit () {
+      this._getPerData()
+      $('.myAddr').on('click', (e) => {
+        pickerAddr.showAddr(e.currentTarget)
+      })
+      $('#saveEdit').on('click', () => {
+        let _thi = this
+        weui.form.validate('#perEdit', function (error) {
+          if (!error) {
+            var loading = weui.loading('提交中...')
+            setTimeout(function () {
+              loading.hide()
+              _thi._postPerData()
+              weui.toast('提交成功', 1000)
+            }, 1000)
+          }
+        })
+      })
       $('#uploader .weui-cell_select').on('click', () => {
-        upload({maxLength: 1, id: 'uploader'}).init()
+        const _thi = this
+        upload({maxLength: 1, size: 1, id: 'uploader', urlArr: _thi.thumbArr}).init()
       })
       clubItem.init()
       $('#job').on('click', (e) => {
@@ -51,11 +106,12 @@ let all = (function () {
           end: 2030,
           defaultValue: [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()],
           onChange: (result) => {
-            console.log(result)
+
           },
           onConfirm: (result) => {
             let birth = result.toString().replace(/\W/g, '-')
-
+            console.log(result)
+            $('input[name=birth]').val(`${result[0].label}${result[1].label}${result[2].label}`)
             $(e.currentTarget).val(ages(birth.toString()))
           },
           id: 'datePicker',

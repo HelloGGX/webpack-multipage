@@ -66,6 +66,14 @@ const pages = [ // 页面配置写在这里
   {
     title: '资料编辑',
     pageName: 'per-data-edit'
+  },
+  {
+    title: '我的订单',
+    pageName: 'orders'
+  },
+  {
+    title: '身份认证',
+    pageName: 'identity'
   }
 ]
 const dependencies = [ // 依赖的全局js

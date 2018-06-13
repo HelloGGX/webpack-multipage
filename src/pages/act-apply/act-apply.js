@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {clear, getQueryString, sliceArray} from 'common/js/dom'
+import {clear, getQueryString, sliceArray, attributeCount} from 'common/js/dom'
 import vali from 'vendor/validate'
 let regexp = {
   regexp: {
@@ -16,7 +16,7 @@ let all = (function () {
   let Home = {
     applyItem: {},
     INDEX: 0,
-    temp: `<input type="hidden" name="perType" val="1">`,
+    temp: '',
     htmlTemp: `<div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
     <div class="weui-cell__bd">
@@ -54,7 +54,9 @@ let all = (function () {
 </div>`,
     pageInit () {
       this._getApplyData()
-      this.helpApply()
+      $('#actApply').on('click', '.btn-bb-apply', () => {
+        this.helpApply()
+      })
       this.deleteApply()
 
       $('.btn-apply-comfirm').click((e) => {
@@ -88,18 +90,17 @@ let all = (function () {
         }, regexp)
       })
     },
+
     helpApply () { // 帮人报名
-      $('#actApply').on('click', '.btn-bb-apply', (e) => {
-        this.INDEX = $('#actApply .help-apply').length + 1
-        $(e.currentTarget).before(`
+      this.INDEX = $('#actApply .help-apply').length + 1
+      $('.btn-bb-apply').before(`
           <div id="help${this.INDEX}" class="help-apply">
             <input type="hidden" name="perType" value="1">
             <div class="weui-cells__title">帮报名${this.INDEX}</div>
             <div class="weui-cells"></div>
           </div>
         `)
-        $(`#help${this.INDEX}`).find('.weui-cells').append(clear(this.temp))
-      })
+      $(`#help${this.INDEX}`).find('.weui-cells').append(clear(this.temp))
     },
     deleteApply () { // 删除报名
       $('#actApply').on('click', '.delete-apply', (e) => {
@@ -109,6 +110,41 @@ let all = (function () {
           $($('.help-apply')[i]).attr('id', `help${i + 1}`)
           $($('.help-apply')[i]).find('.weui-cells__title').html(`帮报名${i + 1}`)
         }
+      })
+    },
+    _getPerApplyData () { // 获取用户填写的信息
+      let _thi = this
+      model.getPerApplyData({orderId: getQueryString('orderId')}).then(data => {
+        let len = data.users.length
+        for (let i = 0; i < len; i++) {
+          if (i < len - 1) {
+            _thi.helpApply()
+          }
+          $($('select[name=price]')[i]).val(data.users[i].user_price_selectid)
+          $($('input[name=nickname]')[i]).val(data.users[i].user_nice)
+          $($('input[name=phone]')[i]).val(data.users[i].user_phone)
+          if (data.users[i].user_realname !== '') {
+            $($('input[name=realName]')[i]).val(data.users[i].user_realname)
+          }
+          if (data.users[i].user_sex !== '') {
+            $($('select[name=sex]')[i]).val(data.users[i].user_sex)
+          }
+          if (data.users[i].user_idcard !== '') {
+            $($('input[name=idCard]')[i]).val(data.users[i].user_idcard)
+          }
+          if (data.users[i].user_opt !== '') {
+            let selectVal = JSON.parse(data.users[i].user_select)
+            let len = attributeCount(selectVal)
+
+            for (let j = 0; j < len; j++) { // 遍历对象属性名
+              let key = $($($('.customize-opt')[i]).find('select[name=myopts-item]')[j]).data('text')
+              $($($('.customize-opt')[i]).find('select[name=myopts-item]')[j]).val(selectVal[key])
+            }
+          }
+        }
+        console.log(data)
+      }).catch(errMsg => {
+        console.log(errMsg)
       })
     },
     _getApplyData () {
@@ -123,20 +159,20 @@ let all = (function () {
         }
         $('input[name=actId]').val(getQueryString('id'))
         $('input[name=clubId]').val(getQueryString('clubId'))
-        $('.main-apply .weui-cells').prepend(`
-          <div class="weui-cell weui-cell_select weui-cell_select-after">
+        $('.main-apply .weui-cells').prepend(
+          `<div class="weui-cell weui-cell_select weui-cell_select-after">
             <div class="weui-cell__hd">
               <label for="" class="weui-label">费用选择</label>
             </div>
             <div class="weui-cell__bd">
               <select class="weui-select" name="price" style="padding-left:1.6rem">
-                  ${applyInfo.Price.map(key => `
-                  <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
-                  `)}                                      
+                 ${clear(`${applyInfo.Price.map(key => `
+                 <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
+                 `)}`)}                              
               </select>
             </div>
-          </div>
-        `)
+          </div>`
+        )
         this.temp += `<div class="weui-cell weui-cell_select weui-cell_select-after">
           <div class="weui-cell__hd">
             <label for="" class="weui-label">费用</label>
@@ -173,7 +209,7 @@ let all = (function () {
                 <label for="" class="weui-label myopt-title">${key}</label>
             </div>
             <div class="weui-cell__bd">
-                <select class="weui-select" style="padding-left:1.6rem" name="myopts-item">
+                <select class="weui-select" style="padding-left:1.6rem" name="myopts-item" data-text='${key}'>
                    ${clear(`${obj[key].map(item => `
                    <option value="${item}">${item}</option>
                   `)}`)}
@@ -207,8 +243,13 @@ let all = (function () {
           </div>
         </div>`
         }
-      }).catch((errMess) => {
-
+      }).then(() => {
+        if (getQueryString('orderId') !== null) { // 如果是编辑模式
+          this._getPerApplyData()// 获取用户填写的数据
+          $('input[name=orderId]').val(getQueryString('orderId'))
+        }
+      }).catch((errMsg) => {
+        weui.alert(errMsg)
       })
     },
     _postApplyData () { // 提交报名
@@ -217,7 +258,7 @@ let all = (function () {
           window.location.href = `act-pay.html?id=${getQueryString('id')}&clubId=${getQueryString('clubId')}&orderId=${res.order_id}`
         }
       }).catch(errMsg => {
-
+        weui.alert(errMsg)
       })
     }
   }

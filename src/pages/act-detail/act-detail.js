@@ -4,7 +4,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import BScroll from 'better-scroll'
 import weui from 'weui.js'
-import {getQueryString} from 'common/js/dom'
+import {getQueryString, clear} from 'common/js/dom'
 
 import model from 'api/getIndex'
 
@@ -40,7 +40,7 @@ let all = (function () {
       var f = $('.go-top')
       if (!isNaN(newY)) {
         (-newY < 340) ? f.addClass('top-button-hide').removeClass('top-button-show') : f.removeClass('top-button-hide').addClass('top-button-show');
-        (-newY < 240) ? banner.addClass('banner-fade').find('.banner-tit').hide() : banner.removeClass('banner-fade').find('.banner-tit').show()
+        (-newY < 280) ? banner.addClass('banner-fade').find('.banner-tit').hide() : banner.removeClass('banner-fade').find('.banner-tit').show()
       }
     },
     getOffsetTopIndex (clas, i) {
@@ -74,11 +74,10 @@ let all = (function () {
 
   }
   let home = {
-    pageInit: function () {
-      imgScroll.init()
+    pageInit () {
       this._getActDetailData()
     },
-    _getActDetailData: function () {
+    _getActDetailData () {
       model.getActDetailData({id: getQueryString('id')}).then((data) => {
         console.log(data)
         let actId = data.list[0].act_id
@@ -143,12 +142,13 @@ let all = (function () {
         $('#notice').html(actNotice)
         $('#detailText').html(detailText)
         $('.act-detail-img').html(`
-        ${detailImgs.map((item) => `
+        ${clear(`${detailImgs.map((item) => `
         <li class="gd-item">
         <img src="${item}" alt="">
     </li>
-        `)}
+        `)}`)}
         `)
+        imgScroll.init()
       }).catch((errMess) => {
         // 获取数据失败时的处理逻辑
         weui.alert(errMess)

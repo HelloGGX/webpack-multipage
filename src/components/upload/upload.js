@@ -2,8 +2,18 @@ import weui from 'weui.js'
 import $ from 'jquery'
 import {getQueryString} from 'common/js/dom'
 
-export default class Upload {
-  constructor ({id = 'uploader', customBtn = 'uploaderCustomBtn', urlArr = [], uploadCount = 0, uploadList = [], maxLength = 5, fileVal = 'imgfile', auto = true, size = 1, okCallBack = () => {}} = {}) {
+class Upload {
+  constructor ({
+    id = 'uploader',
+    customBtn = 'uploaderCustomBtn',
+    urlArr = [],
+    uploadCount = $(`#${id}`).find('.weui-uploader__file').length === 0 ? 0 : $(`#${id}`).find('.weui-uploader__file').length,
+    uploadList = [],
+    maxLength = 5,
+    fileVal = 'imgfile',
+    auto = true,
+    size = 1,
+    okCallBack = () => {}} = {}) {
     this.id = id
     this.uploadCount = uploadCount
     this.uploadList = uploadList
@@ -18,14 +28,16 @@ export default class Upload {
   init () {
     this._seeImg()
     this._uploader()
+    console.log(this.uploadCount)
     $(`#${this.customBtn}`).on('click', (e) => {
       this._customLoader()
     })
   }
   _seeImg () { // 预览上传图片
-    $('.uploaderFiles').on('click', (e) => {
+    $(`#${this.id} .uploaderFiles`).on('click', (e) => {
       let target = e.target
-      let _this = this
+      let _thi = this
+
       while (!target.classList.contains('weui-uploader__file') && target) {
         target = target.parentNode
       }
@@ -41,23 +53,25 @@ export default class Upload {
         className: 'custom-name',
         onDelete: function onDelete () {
           weui.confirm('确定删除该图片？', function () {
-            --_this.uploadCount
-            let len = $(`#${_this.id}`).find('.weui-uploader__file').length
+            let len = $(`#${_thi.id}`).find('.weui-uploader__file').length
 
             for (let j = 0; j < len; ++j) {
-              if ($(target)[0].dataset === $($(`#${_this.id}`).find('.weui-uploader__file')[j])[0].dataset) {
-                _this.urlArr.splice(j, 1)
+              if ($(target)[0].dataset === $($(`#${_thi.id}`).find('.weui-uploader__file')[j])[0].dataset) {
+                _thi.urlArr.splice(j, 1)
               }
             }
-            $(`#${_this.id}`).find('input').first().val(_this.urlArr)
-            for (let i = 0, len = _this.uploadList.length; i < len; ++i) {
-              let file = _this.uploadList[i]
+            $(`#${_thi.id}`).find('input').first().val(_thi.urlArr)
+            for (let i = 0, len = _thi.uploadList.length; i < len; ++i) {
+              let file = _thi.uploadList[i]
               if (file.id === id) {
                 file.stop()
                 break
               }
             }
             target.remove()
+
+            --_thi.uploadCount
+
             gallery.hide()
           })
         }
@@ -65,12 +79,12 @@ export default class Upload {
     })
   }
   _uploader () {
-    let _this = this
-    weui.uploader(`#${_this.id}`, {
-      url: 'http://125.65.111.19/api/getupload.php',
-      auto: _this.auto,
+    let _thi = this
+    weui.uploader(`#${_thi.id}`, {
+      url: 'http://www.shanduhuwai.com/api/getupload.php',
+      auto: _thi.auto,
       type: 'file',
-      fileVal: _this.fileVal,
+      fileVal: _thi.fileVal,
       compress: {
         width: 1600,
         height: 41800,
@@ -78,30 +92,30 @@ export default class Upload {
       },
       onBeforeQueued: function (files) { // 文件添加前的回调，return false则不添加
         // `this` 是轮询到的文件, `files` 是所有文件
-
+        console.log(_thi.uploadCount)
         if (['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].indexOf(this.type) < 0) {
           weui.alert('请上传图片')
           return false // 阻止文件添加
         }
-        if (this.size > _this.size * 1024 * 1024) {
-          weui.alert(`请上传不超过${_this.size}M的图片`)
+        if (this.size > _thi.size * 1024 * 1024) {
+          weui.alert(`请上传不超过${_thi.size}M的图片`)
           return false
         }
-        if (files.length > _this.maxLength) { // 防止一下子选择过多文件
-          weui.alert(`最多只能上传${_this.maxLength}张图片，请重新选择`)
+        if (files.length > _thi.maxLength) { // 防止一下子选择过多文件
+          weui.alert(`最多只能上传${_thi.maxLength}张图片，请重新选择`)
           return false
         }
-        if (_this.uploadCount + 1 > _this.maxLength) {
-          weui.alert(`最多只能上传${_this.maxLength}张图片`)
+        if (_thi.uploadCount + 1 > _thi.maxLength) {
+          weui.alert(`最多只能上传${_thi.maxLength}张图片`)
           return false
         }
 
-        ++_this.uploadCount
+        ++_thi.uploadCount
 
         // return true; // 阻止默认行为，不插入预览图的框架
       },
       onQueued: function () { // 文件添加成功的回调
-        _this.uploadList.push(this)
+        _thi.uploadList.push(this)
         console.log(this)
         // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
         // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
@@ -123,10 +137,10 @@ export default class Upload {
         // return true; // 阻止默认行为，不使用默认的进度显示
       },
       onSuccess: function (ret) {
-        _this.urlArr.push(ret.imgurl)
-        $(`#${_this.id}`).find('input').first().val(_this.urlArr)
+        _thi.urlArr.push(ret.imgurl)
+        $(`#${_thi.id}`).find('input').first().val(_thi.urlArr)
 
-        _this.okCallBack(ret)
+        _thi.okCallBack(ret)
         weui.alert(`上传成功`)
 
         // return true; // 阻止默认行为，不使用默认的成功态
@@ -157,5 +171,5 @@ export function upload (opt) {
     okCallBack: opt.okCallBack,
     urlArr: opt.urlArr,
     customBtn: opt.customBtn
-  })
+  }).init()
 }

@@ -18,7 +18,18 @@ let all = (function () {
         slider.init(res.slidata)// 幻灯片初始化
         hotArea.init(res.areadata)// 热门区域初始化
       }, () => {}, () => {
-        weui.alert('建议登陆体验哦~')
+        weui.confirm('建议登陆体验哦~', {
+          title: '提示',
+          buttons: [{
+            label: '先逛逛看',
+            type: 'default',
+            onClick: function () { console.log('no') }
+          }, {
+            label: '马上登陆',
+            type: 'primary',
+            onClick: function () { window.location.href = 'login.html' }
+          }]
+        })
       })
     }
   }// 获取所有数据

@@ -2,9 +2,11 @@ import './act-pay.less'
 import 'components/banner/banner.less'
 import model from 'api/getIndex'
 import $ from 'jquery'
+import weui from 'weui.js'
 import {getQueryString, clear} from 'common/js/dom'
 let all = (function () {
   let Home = {
+    PRICE: 0, // 总价格
     pageInit () {
       $('.payways-main-li').on('click', (e) => {
         $(e.currentTarget).find('label').addClass('active').parents('.payways-main-li').siblings().find('label').removeClass('active')
@@ -13,6 +15,7 @@ let all = (function () {
     },
     _guestTemp (data) {
       let mainPer = data[0].guestname
+
       return `${data.map(key => `
       <li>
       <input type="hidden" name="guestname" value='${key.guestname}'>
@@ -21,7 +24,7 @@ let all = (function () {
       <input type="hidden" name="guest_jg" value='${key.guest_jg}'>
       <input type="hidden" name="guest_bbm" value='${key.guest_bbm}'>
       
-        <p class="order-username">${key.guestname}-${key.guestshouji}</p>
+        <p class="order-username">${key.guestnice}-${key.guestshouji}</p>
         <p class="order-ticket">
           <span>${key.guest_jgcl}</span>
           <span>￥${key.guest_jg}</span>
@@ -30,12 +33,31 @@ let all = (function () {
       </li>
       `)}`
     },
+
     _getApplySuccess () {
+      let _thi = this
       model.getApplySuccess({id: getQueryString('id'), clubId: getQueryString('clubId'), orderId: getQueryString('orderId')}).then(data => {
         let guest = data.guest
+        let len = guest.length
+        for (let i = 0; i < len; i++) {
+          _thi.PRICE += Number(guest[i].guest_jg)
+        }
+        $('#coupon').next().find('.weui-cell__ft').html(`￥${_thi.PRICE}`)
+        $('#actTitle').html(data.cpname)
+        $('.pay-act-time').text(data.cpksdate)
+        if (data.pay_onlin === '是') {
+          $('#weiPay').find('input').attr('checked', 'true')
+          $('#weiPay').find('label').addClass('active')
+        } else if (data.pay_other === '是') {
+          $('#otherPay').find('input').attr('checked', 'true')
+          $('#otherPay').find('label').addClass('active')
+        }
         $('#applyUnpay').html(clear(this._guestTemp(guest)))
+        $('#edit').on('click', () => {
+          window.location.href = `act-apply.html?id=${getQueryString('id')}&clubId=${getQueryString('clubId')}&orderId=${getQueryString('orderId')}`
+        })
       }).catch(errMsg => {
-
+        weui.alert(errMsg)
       })
     }
   }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <div>
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-grey">
+                            <div class="content-inner">
+                                <div>
+                                    <form id="identityID" action="" name="form1" method="post">
+                                        <div class="weui-cells weui-cells_form">
+                                            <div class="weui-cell">
+                                                <div class="weui-cell__hd"><label class="weui-label">真实姓名</label></div>
+                                                <div class="weui-cell__bd">
+                                                    <input class="weui-input" type="text" name="realName" placeholder="请输入">
+                                                </div>
+                                            </div>
+                                            <div class="line"></div>
+                                            <div class="weui-cells weui-cells_form club-logo-upload margin" id="frontID">
+                                                <input type="hidden" name="front" value="">
+                                                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                    <div class="weui-cell__hd">
+                                                        <label for="" class="weui-label">身份证正面</label>
+                                                    </div>
+                                                    <div class="weui-cell__bd">
+                                                        <div class="weui-select text-right">
+                                                            <div class="weui-uploader">
+                                                                <div class="weui-uploader__bd">
+                                                                    <ul class="weui-uploader__files img-covers uploaderFiles">
+            
+                                                                    </ul>
+                                                                    <div class="weui-uploader__input-box fright uploade-cover">
+                                                                        <input  name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="weui-cells weui-cells_form club-logo-upload margin" id="BackID">
+                                                <input type="hidden" name="back" value="">
+                                                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                    <div class="weui-cell__hd">
+                                                        <label for="" class="weui-label">身份证反面</label>
+                                                    </div>
+                                                    <div class="weui-cell__bd">
+                                                        <div class="weui-select text-right">
+                                                            <div class="weui-uploader">
+                                                                <div class="weui-uploader__bd">
+                                                                    <ul class="weui-uploader__files img-covers uploaderFiles">
+                
+                                                                    </ul>
+                                                                    <div class="weui-uploader__input-box fright uploade-cover">
+                                                                        <input  name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="weui-cells weui-cells_form club-logo-upload margin" id="hand">
+                                                <input type="hidden" name="hand" value="">
+                                                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                                                    <div class="weui-cell__hd">
+                                                        <label for="" class="weui-label">手持本人身份证拍照</label>
+                                                    </div>
+                                                    <div class="weui-cell__bd">
+                                                        <div class="weui-select text-right">
+                                                            <div class="weui-uploader">
+                                                                <div class="weui-uploader__bd">
+                                                                    <ul class="weui-uploader__files img-covers uploaderFiles">
+                    
+                                                                    </ul>
+                                                                    <div class="weui-uploader__input-box fright uploade-cover">
+                                                                        <input  name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cells__tips">身份认证后不可修改，审核通过后即可提现</div>
+                                            <div class="weui-btn-area">
+                                                <a class="weui-btn weui-btn_primary"  id="certified">认证</a>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

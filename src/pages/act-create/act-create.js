@@ -40,7 +40,7 @@ let all = (function () {
     _imgTemp (data) {
       let id = 0
       return `${clear(`${data.map(item => `
-      <li class="weui-uploader__file" data-id="${id++}" style="background-image: url(&quot;http://125.65.111.19${item}&quot;);">  </li>
+      <li class="weui-uploader__file" data-id="${id++}" style="background-image: url(&quot;${item}&quot;);">  </li>
       `)}`)}`
     },
     _applyCostTemp (data) {
@@ -142,7 +142,7 @@ let all = (function () {
         $('input[name=actDetailAddr]').val(actData.act_addrs)
         _thi.thumbArr.push(actData.hd_thumb_url)
         $('input[name=hdimg]').val(_thi.thumbArr)
-        $('#uploader .uploaderFiles').html(_thi._imgTemp(_thi.thumbArr))
+        $('#thumUploader .uploaderFiles').html(_thi._imgTemp(_thi.thumbArr))
         $('input[name=applyCostType]').val(actData.pay_state)
         $('#actCost').find('.weui-select').html(actData.pay_state)
 
@@ -241,7 +241,31 @@ let all = (function () {
         $('textarea[name=applyNotice]').val(actData.act_should_know)
         $('#actSubmit').text('确定')
         $('#actSave').hide()
-        console.log(actData)
+        // class Uploader1 extends upload {
+        //   constructor (maxLength = 3, size = 3, id = 'Detailuploader', urlArr = _thi.urlArr) {
+        //     super(maxLength, size, id, urlArr)// 调用父类的构造属性
+        //     this.maxLength = maxLength
+        //     this.size = size
+        //     this.id = id
+        //     this.urlArr = urlArr
+        //   }
+        // }
+        // class Uploader2 extends upload {
+        //   constructor (maxLength = 1, id = 'uploader', urlArr = _thi.thumbArr) {
+        //     super(maxLength, id, urlArr)
+        //     this.maxLength = maxLength
+        //     this.id = id
+        //     this.urlArr = urlArr
+        //   }
+        // }
+        // let Up1 = new Uploader1()
+        // let Up2 = new Uploader2()
+        // console.log(Up1)
+        // console.log(Up2)
+        // Up1.init()
+        // Up2.init()
+        upload({maxLength: 3, size: 3, id: 'Detailuploader', urlArr: _thi.urlArr})
+        upload({maxLength: 1, id: 'thumUploader', urlArr: _thi.thumbArr})
       }).catch(errMsg => {
         console.log(errMsg)
       })
@@ -250,6 +274,7 @@ let all = (function () {
       if (getQueryString('id') !== null) { // 如果是编辑模式
         $('input[name=edit]').val(getQueryString('id'))
         this._getActData()
+
         $('#actSubmit').on('click', (e) => {
           let _thi = this
           weui.form.validate('#createAct', function (error) {
@@ -266,6 +291,9 @@ let all = (function () {
           }, regexp)
         })
       } else { // 如果是创建活动模式
+        upload({maxLength: 3, size: 3, id: 'Detailuploader', urlArr: this.urlArr})
+        upload({maxLength: 1, id: 'thumUploader', urlArr: this.thumbArr})
+
         $('#actSubmit').on('click', (e) => {
           let _thi = this
 
@@ -294,16 +322,6 @@ let all = (function () {
 
       $('.actAddr').on('click', (e) => {
         pickerAddr.showAddr(e.currentTarget)
-      })
-
-      $('.actCover').on('click', () => {
-        let _thi = this
-        upload({maxLength: 3, id: 'uploader', urlArr: _thi.thumbArr}).init()
-      })
-
-      $('.actDetailCover').on('click', () => {
-        let _thi = this
-        upload({maxLength: 3, size: 3, id: 'Detailuploader', urlArr: _thi.urlArr}).init()
       })
 
       $('.bm-way-item').on('click', (e) => {

@@ -39,7 +39,7 @@ let scroll = {
       startX: 0,
       startY: 0
     }
-    if ($('.content-wrapper')) {
+    if ($('.content-wrapper').length > 0) {
       this.Scroll = new BScroll('.content-wrapper', options)
     }
   }

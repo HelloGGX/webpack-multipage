@@ -4,7 +4,7 @@ import qs from 'qs'
 import weui from 'weui.js'
 // import {showFullScreenLoading, tryHideFullScreenLoading} from 'common/js/common'
 
-axios.defaults.baseURL = 'http://125.65.111.19/api/'
+axios.defaults.baseURL = 'http://www.shanduhuwai.com/api/'
 
 const request = axios.create()
 let loading

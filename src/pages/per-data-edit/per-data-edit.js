@@ -24,7 +24,7 @@ let all = (function () {
     _imgTemp (data) {
       let id = 0
       return `${clear(`${data.map(item => `
-    <li class="weui-uploader__file" data-id="${id++}" style="background-image: url(&quot;http://125.65.111.19${item}&quot;);">  </li>
+    <li class="weui-uploader__file" data-id="${id++}" style="background-image: url(&quot;http://www.shanduhuwai.com${item}&quot;);">  </li>
     `)}`)}`
     },
     _postPerData () {
@@ -49,6 +49,7 @@ let all = (function () {
         $('input[name=myAddr]').val(data.user_hometown)
         $('input[name=sports]').val(data.user_love)
         $('input[name=travelAddr]').val(data.user_mark)
+        upload({maxLength: 1, size: 1, id: 'uploader', urlArr: _thi.thumbArr})
       }).catch(errMsg => {
         console.log(errMsg)
       })
@@ -71,10 +72,7 @@ let all = (function () {
           }
         })
       })
-      $('#uploader .weui-cell_select').on('click', () => {
-        const _thi = this
-        upload({maxLength: 1, size: 1, id: 'uploader', urlArr: _thi.thumbArr}).init()
-      })
+
       clubItem.init()
       $('#job').on('click', (e) => {
         clubItem.initTemp(e, ['学生', 'IT/互联网/通讯', '金融', '法律', '咨询', '文化/艺术', '影视/娱乐', '教育/科研', '房地产/建筑', '医药/健康', '能源/环保'])

@@ -16,7 +16,15 @@ export function itemtoArraytop (Arr, index) {
   Arr.unshift(temp)
   return Arr
 }
-
+export function attributeCount (obj) { // 获取对象属性的个数
+  var count = 0
+  for (var i in obj) {
+    if (obj.hasOwnProperty(i)) { // 建议加上判断,如果没有扩展对象属性可以不加
+      count++
+    }
+  }
+  return count
+}
 export function sliceArray (array, size) { // 分割数组
   let result = []
   for (let x = 0; x < Math.ceil(array.length / size); x++) {

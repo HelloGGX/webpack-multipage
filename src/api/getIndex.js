@@ -15,6 +15,7 @@ let person = {// 个人资料管理（资料获取，编辑）
     }))
   }
 }
+
 let magAct = {// 管理活动
   getActInfoData (data) { // 获取活动信息数据
     return db.handleRequest(db.request.get('getActDetail.php', {
@@ -102,12 +103,26 @@ let magAct = {// 管理活动
     }))
   }
 }
-
+let orders = {
+  getOrderData (data) {
+    return db.handleRequest(db.request.get('getOrderData.php', {
+      params: data,
+      showLoading: true
+    }))
+  }
+}
 export default {
   magAct,
   person,
+  orders,
   getMagInfo (data) { // 获取活动详情数据和报名选项数据
     return db.handleAll([this.getActDetailData(data), this.getApplyData(data)])
+  },
+  getPerApplyData (data) { // 获取用户填写的数据
+    return db.handleRequest(db.request.get('getPerApplyData.php', {
+      params: data,
+      showLoading: true
+    }))
   },
   postLoginData (e) { // 登陆
     let data = serializeObject(e)
@@ -202,7 +217,7 @@ export default {
       showLoading: true
     }))
   },
-  getApplyInfo (data) { // 获取报名信息
+  getApplyInfo (data) { // 活动管理列表获取报名信息列表
     return db.handleRequest(db.request.get('getApplyInfo.php', {
       params: data,
       showLoading: true
@@ -218,6 +233,12 @@ export default {
   },
   getApplySuccess (data) { // 报名成功后获取相关信息
     return db.handleRequest(db.request.get('getApplySucess.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  signOut (data) { // 退出登录
+    return db.handleRequest(db.request.post('signOut.php', {
       params: data,
       showLoading: true
     }))

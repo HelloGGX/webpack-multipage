@@ -24,15 +24,14 @@ let all = (function () {
     </div>
   </div>`,
     pageInit () {
-      $('#uploader .weui-cell_select').on('click', () => {
-        upload({maxLength: 1, id: 'uploader'}).init()
-      })
+      upload({maxLength: 1, id: 'uploader'})
+
       $('.actAddr').on('click', (e) => {
         pickerAddr.showAddr(e.currentTarget)
       })
-
+      clubItem.init()
       $('#addMainType').click((e) => {
-        clubItem.init(e, ['徒步', '跑步', '登山', '野营', '钓鱼', '球类', '摄影', '潜水', '自驾'])
+        clubItem.initTemp(e, ['徒步', '跑步', '登山', '野营', '钓鱼', '球类', '摄影', '潜水', '自驾'])
       })
 
       $('#submitReview').click((e) => {

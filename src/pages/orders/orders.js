@@ -79,6 +79,7 @@ let all = (function () {
       let newdata
       let _html = ''
       newdata = data[TYPE]
+      console.log(TYPE)
       if (newdata === null) {
         $('#order-grid').html(`<div class="nothing-text">
         <div class="nothing-img"></div>
@@ -90,11 +91,18 @@ let all = (function () {
           _html += this._temple(i, newdata, TYPE)
         }
         $('#order-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-        $('#' + TYPE).html(_html)
+        $(`#${TYPE}`).html(_html)
         $(document.getElementById(TYPE)).show().siblings().hide()
       }
     },
     switch () {
+      let item = $('.fixed_nav_item_catgoods')
+      let len = item.length
+      for (let i = 0; i < len; i++) {
+        if ($(item[i]).data('type') === TYPE) {
+          $(item[i]).find('span').addClass('nav_cur_cat').parent().siblings().find('span').removeClass('nav_cur_cat')
+        }
+      }
       $('.nav_fixed_catgoods').on('click', '.fixed_nav_item_catgoods', (e) => {
         $(e.currentTarget).find('span').addClass('nav_cur_cat').parent().siblings().find('span').removeClass('nav_cur_cat')
         TYPE = $(e.currentTarget).data('type')

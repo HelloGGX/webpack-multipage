@@ -27,6 +27,13 @@ let person = {// 个人资料管理（资料获取，编辑）
       data: data,
       showLoading: true
     }))
+  },
+  postCash (e) { // 提交提现信息
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('postCashData.php', {
+      data: data,
+      showLoading: true
+    }))
   }
 }
 

@@ -11,7 +11,13 @@
 
 <body>
     <div class="page">
-        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <div class="banner-container">
+                    <div class="banner">
+                        <div class="banner-icon-back banner-left" ><a href="person.html"><span></span></a></div>
+                        <div class="banner-tit banner-text"></div>
+                        <div class="banner-right"><a></a></div>
+                    </div>
+                </div>
             <div>
                 <div class="weui-tab">
                     <div class="weui-tab__panel content-panel">
@@ -19,12 +25,16 @@
                             <div class="content-inner">
                                 <div>
                                     <form id="cash" action="" name="form1" method="post">
+                                        <input type="hidden" name="bankId">
+                                        <input type="hidden" name="bankName">
+                                        <input type="hidden" name="bankNum">
                                         <div class="moneyCon">
                                             <div class="moneyNum">￥<span>0</span></div>
                                             <p>可提现金额</p>
                                         </div>
                                         <div class="weui-cells margin">
-                                            <a class="weui-cell weui-cell_access" href="bank.html">
+                                            
+                                            <a id="setCash" class="weui-cell weui-cell_access" href="bank.html">
                                                 <div class="weui-cell__hd"><img src="<%= require('../../imgs/icons/cash.png')%>" alt="" style="width:0.4rem;margin-right:0.1rem;display:block"></div>
                                                 <div class="weui-cell__bd">
                                                     <p class="f-m">请设置体现账户</p>
@@ -41,7 +51,7 @@
                                         </div>
                                         <div class="weui-cells__tips">每天1次，单笔最高3万元 <span style="float: right;color: #1aad19;">提现规则</span></div>
                                         <div class="weui-btn-area">
-                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="confirmCash">确认体现</a>
+                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="confirmCash">确认提现</a>
                                         </div>
                                         <div class="weui-cells__tips">
                                             <p>身份验证后不可修改，每周一至周五下午审核当天14：00之前的提现申请</p>

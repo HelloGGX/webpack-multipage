@@ -82,6 +82,10 @@ const pages = [ // 页面配置写在这里
   {
     title: '设置收款账户',
     pageName: 'bank'
+  },
+  {
+    title: '退款审核',
+    pageName: 'refund'
   }
 ]
 const dependencies = [ // 依赖的全局js

@@ -5,6 +5,9 @@ import {pickerAddr} from 'components/picker/picker'// 引入地区和日期选�
 import model from 'api/getIndex'
 
 class SetBank {
+  constructor ({intData = () => {}} = {}) {
+    this.intData = intData
+  }
   init () {
     $('.list-bank li').on('click', (e) => {
       this.show()
@@ -32,6 +35,7 @@ class SetBank {
       if (res.state === 'ok') {
         weui.alert('账户设置成功!')
         _thi.hide()
+        _thi.intData()// 刷新页面数据
       }
     }).catch(errMsg => {
       weui.alert(errMsg)
@@ -55,6 +59,8 @@ class SetBank {
     })
   }
 }
-export function setBank () {
-  return new SetBank().init()
+export function setBank (opt) {
+  return new SetBank({
+    intData: opt.intData
+  }).init()
 }

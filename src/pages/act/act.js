@@ -6,6 +6,7 @@ import weui from 'weui.js'
 
 let all = (function () {
   let TYPE = 'city'
+  let DATA = null
   let allData = {// 获取该页所有数据
     init () {
       this._getActData()
@@ -13,17 +14,18 @@ let all = (function () {
     _getActData () {
       model.getActData().then((data) => { // 获取数据成功时的处理逻辑
         Home._getNewData(data)
+        DATA = data
       }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)
       })
     }
   }// 获取所有数据
   let Home = {
-    pageInit: function () {
+    pageInit () {
       allData.init()
       this.switch()
     },
-    _temple: function (i, data) { // 模板
+    _temple (i, data) { // 模板
       return `<div class="store-item" data-id=${data[i].id}>
             <a href="act-detail.html?id=${data[i].id}">
             <div class="store-content">
@@ -46,7 +48,7 @@ let all = (function () {
             </a>
             </div>`
     },
-    _getNewData: function (data) {
+    _getNewData (data) {
       let newdata
       let _html = ''
       newdata = data[TYPE]
@@ -65,14 +67,14 @@ let all = (function () {
         $(document.getElementById(TYPE)).show().siblings().hide()
       }
     },
-    switch: function () {
+    switch () {
       $('.nav_fixed_catgoods').on('click', '.fixed_nav_item_catgoods', (e) => {
         $(e.currentTarget).find('span').addClass('nav_cur_cat').parent().siblings().find('span').removeClass('nav_cur_cat')
         TYPE = $(e.currentTarget).data('type')
         if (document.getElementById(TYPE)) {
           $(document.getElementById(TYPE)).show().siblings().hide()
         } else {
-          allData.init()
+          this._getNewData(DATA)
         }
       })
     }

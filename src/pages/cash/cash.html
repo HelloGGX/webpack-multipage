@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <div>
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-grey">
+                            <div class="content-inner">
+                                <div>
+                                    <form id="cash" action="" name="form1" method="post">
+                                        <div class="moneyCon">
+                                            <div class="moneyNum">￥<span>0</span></div>
+                                            <p>可提现金额</p>
+                                        </div>
+                                        <div class="weui-cells margin">
+                                            <a class="weui-cell weui-cell_access" href="bank.html">
+                                                <div class="weui-cell__hd"><img src="<%= require('../../imgs/icons/cash.png')%>" alt="" style="width:0.4rem;margin-right:0.1rem;display:block"></div>
+                                                <div class="weui-cell__bd">
+                                                    <p class="f-m">请设置体现账户</p>
+                                                </div>
+                                                <div class="weui-cell__ft"></div>
+                                            </a>
+                                            <div class="line"></div>
+                                            <div class="weui-cell margin">
+                                                <div class="weui-cell__hd"><label class="weui-label">金额</label></div>
+                                                <div class="weui-cell__bd">
+                                                    <input class="weui-input" type="number" pattern="[0-9]*" placeholder="可提现金额1000">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cells__tips">每天1次，单笔最高3万元 <span style="float: right;color: #1aad19;">提现规则</span></div>
+                                        <div class="weui-btn-area">
+                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="confirmCash">确认体现</a>
+                                        </div>
+                                        <div class="weui-cells__tips">
+                                            <p>身份验证后不可修改，每周一至周五下午审核当天14：00之前的提现申请</p>
+                                            <p>审核通过后当天安排打款，预计1个工作日内可到账</p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ import './person.less'
 import 'components/banner/banner.less'
 import {delCookie} from 'common/js/dom'
 import model from 'api/getIndex'
+import weui from 'weui.js'
 import $ from 'jquery'
 
 let all = (function () {
@@ -30,7 +31,7 @@ let all = (function () {
           window.location.href = 'login.html'
         }
       }).catch(errMsg => {
-
+        weui.alert(errMsg)
       })
     }
   }

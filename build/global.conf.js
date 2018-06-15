@@ -74,6 +74,14 @@ const pages = [ // 页面配置写在这里
   {
     title: '身份认证',
     pageName: 'identity'
+  },
+  {
+    title: '提现',
+    pageName: 'cash'
+  },
+  {
+    title: '设置收款账户',
+    pageName: 'bank'
   }
 ]
 const dependencies = [ // 依赖的全局js

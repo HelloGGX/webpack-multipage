@@ -8,7 +8,6 @@ let token = getCookie('token')
 export function judgeLogin (getdata, loginCallBack, noLoginCallBack) {
   model.postUserData({username: username, token: token}).then((res) => { // 如果匹配用户信息成功
     // 这里看res的返回
-
     getdata(res)
     if (res.login === 'ok') { // 如果已经登陆过
       loginCallBack()

@@ -1,0 +1,56 @@
+<!--======================这是设置收款账户的页面=========================-->
+<div id="setBank" class="cover" style="display: none;">
+        <div class="cover-inner">
+            <div class="cover-banner-container">
+                <div class="cover-banner">
+                    <div id="setBankCancel" class="cover-banner-icon-back cover-banner-left"><a href="#"><span></span></a></div>
+                    <div class="cover-banner-tit">设置收款账户</div>
+                    <div id="setBankSave" class="cover-banner-right"><a href="#">提交</a></div>
+                </div>
+            </div>
+            <div class="acNotice">
+                    <p>填写本人真实信息并仔细核对银行卡号!如果信息提供有误，造成的一切损失自行承担</p>
+                </div>
+            <div class="cover-form">
+                <form id="mybank" action="" name="form1" method="post">
+                    <div class="weui-cells weui-cells_form margin">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">收款银行</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" readonly type="text"  name="bankName">
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text"  name="userName" required emptyTips="姓名不能为空">
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">卡号</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="number"  name="idNum" required emptyTips="卡号不能为空">
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_select weui-cell_select-after bank-addr">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">开户所在地</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <div class="weui-select text-right" data-name="address">
+                                    <input  type="text" required emptyTips="活动地点不能是空的" name="bankAddr" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">开户支行</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text"  name="branch" required emptyTips="开户支行不能为空">
+                            </div>
+                        </div>
+                    </div>        
+                </form>
+            </div>
+        </div>
+    </div>

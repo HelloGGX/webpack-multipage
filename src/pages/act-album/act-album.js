@@ -3,16 +3,33 @@ import 'components/banner/banner.less'
 
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
+import weui from 'weui.js'
 import {clear, transDate, getQueryString} from 'common/js/dom'
 import model from 'api/getIndex'
 import {gallery} from 'components/gallery/gallery'
+import {judgeLogin} from 'components/judgeLogin/judge-login'
 
 let all = (function () {
   let DATA
   let uploadAlumb = {
     init () {
       $('#BtnUpload').on('click', () => {
-        this.show()
+        let _thi = this
+        judgeLogin(() => { // 判断是否登陆
+        }, () => { _thi.show() }, () => {
+          weui.confirm('请登陆再上传~', {
+            title: '提示',
+            buttons: [{
+              label: '取消',
+              type: 'default',
+              onClick: function () { console.log('no') }
+            }, {
+              label: '马上登陆',
+              type: 'primary',
+              onClick: function () { window.location.href = 'login.html' }
+            }]
+          })
+        })
       })
 
       $('#uploadCancel').on('click', () => {
@@ -29,7 +46,7 @@ let all = (function () {
         customBtn: 'uploaderCustomBtn',
         okCallBack: () => {
           _thi.hide()
-        }}).init()
+        }})
     },
     hide () {
       $('#uploadPage').hide()

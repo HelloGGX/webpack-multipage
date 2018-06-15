@@ -4,7 +4,7 @@ import 'components/banner/banner.less'
 import 'components/tabs/tabs.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {pickerAddr, pickerData} from 'components/picker/picker' // 引入地区和日期选择对象方法
+// import {pickerAddr, pickerData} from 'components/picker/picker' // 引入地区和日期选择对象方法
 import {batchG} from '../batchGroup/batch-group'
 import {addApplyPer} from '../addApplyPerson/add-apply-per'
 import {showGroupPer} from '../showGroupPer/show-g-per'
@@ -76,15 +76,15 @@ let all = (function () {
 
     }
   }
-  let textAreaTemp = `<div class="weui-cells weui-cells_form margin">
-  <div class="weui-cell">
-      <div class="weui-cell__bd">
-          <textarea name="theme" class="weui-textarea" style="height: 1.4rem;" maxlength="100" placeholder="请输入活动主题" rows="3"></textarea>
-          <div class="weui-textarea-counter"><span>0</span>/100</div>
-          <div class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
-      </div>
-  </div>
-</div>`
+  //   let textAreaTemp = `<div class="weui-cells weui-cells_form margin">
+  //   <div class="weui-cell">
+  //       <div class="weui-cell__bd">
+  //           <textarea name="theme" class="weui-textarea" style="height: 1.4rem;" maxlength="100" placeholder="请输入活动主题" rows="3"></textarea>
+  //           <div class="weui-textarea-counter"><span>0</span>/100</div>
+  //           <div class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
+  //       </div>
+  //   </div>
+  // </div>`
 
   let applyMagGroup = { // 分组报名成员对象
 
@@ -122,9 +122,9 @@ let all = (function () {
       addApplyPer.init()
       showGroupPer.init()
 
-      $('.actTime').on('click', (e) => {
-        pickerData.showDate(e.currentTarget)
-      })
+      // $('.actTime').on('click', (e) => {
+      //   pickerData.showDate(e.currentTarget)
+      // })
 
       $('#openApply').on('click', (e) => { // 打开关闭活动
         model.magAct.openApply({id: getQueryString('id')}).then(res => {
@@ -202,24 +202,24 @@ let all = (function () {
       // $('#editApply').on('click', () => { // 编辑活动
 
       // })
-      $('.actAddr').on('click', (e) => {
-        pickerAddr.showAddr(e.currentTarget)
-      })
-      $('#theme').click((e) => {
-        let _thi = this
-        require.ensure([], () => {
-          require('vendor/dialog')
-          $.alert.aler({
-            title: '提示',
-            content: textAreaTemp,
-            height: 320,
-            blankclose: true,
-            okCallback: function () {
-              $(e.currentTarget).val(_thi.getVal())
-            }
-          })
-        }, 'aler')
-      })
+      // $('.actAddr').on('click', (e) => {
+      //   pickerAddr.showAddr(e.currentTarget)
+      // })
+      // $('#theme').click((e) => {
+      //   let _thi = this
+      //   require.ensure([], () => {
+      //     require('vendor/dialog')
+      //     $.alert.aler({
+      //       title: '提示',
+      //       content: textAreaTemp,
+      //       height: 320,
+      //       blankclose: true,
+      //       okCallback: function () {
+      //         $(e.currentTarget).val(_thi.getVal())
+      //       }
+      //     })
+      //   }, 'aler')
+      // })
     },
     getVal () {
       return $('textarea[name=theme]').val()

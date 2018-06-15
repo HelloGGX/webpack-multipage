@@ -13,6 +13,20 @@ let person = {// 个人资料管理（资料获取，编辑）
       data: data,
       showLoading: true
     }))
+  },
+  postIdData (e) { // 身份认证
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('postIdData.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  postBankData (e) { // 设置银行账户信息
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('postBankData.php', {
+      data: data,
+      showLoading: true
+    }))
   }
 }
 

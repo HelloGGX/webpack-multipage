@@ -89,7 +89,18 @@ let all = (function () {
           })
         })
       }, () => { // 如果还没登陆
-        weui.alert('你还没有登陆,请登陆再试一次')
+        weui.confirm('你还没有登陆,请登陆再试一次~', {
+          title: '提示',
+          buttons: [{
+            label: '先逛逛看',
+            type: 'default',
+            onClick: function () { console.log('no') }
+          }, {
+            label: '马上登陆',
+            type: 'primary',
+            onClick: function () { window.location.href = 'login.html' }
+          }]
+        })
         return false
       })
     },

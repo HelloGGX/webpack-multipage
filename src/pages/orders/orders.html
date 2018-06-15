@@ -10,90 +10,37 @@
 </head>
 
 <body>
-  
-    <div class="page">
-        <div>
-            <!--搜索navbar-->
-            <%= require('html-loader!../../components/banner/banner.html')  %>
-            <div class="weui-tab">
-                <div class="weui-tab__panel content-panel">
-                    <div class="container-wrapper">
-                        <div class="container-inner">
-                                <!--tabs选项框-->
-                                <div class="nav_fixed_wrap relative">
-                                        <ul class="nav_fixed_catgoods nav-fixed-max-width">
-                                            <li class="fixed_nav_item_catgoods fixed_nav_item_catgoods_first" data-type="paid">
-                                                <span class="nav_cur_cat">已付款</span>
-                                            </li>
-                                            <li class="fixed_nav_item_catgoods" data-type="receipt">
-                                                <span class="">收款</span>
-                                            </li>
-                                            <li class="fixed_nav_item_catgoods" data-type="pend">
-                                                <span class="">待付</span>
-                                            </li>
-                                        </ul>
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+        <div class="page">
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="nav_fixed_wrap relative">
+                        <ul class="nav_fixed_catgoods nav-fixed-max-width">
+                            <li class="fixed_nav_item_catgoods fixed_nav_item_catgoods_first" data-type="paid">
+                                <span class="nav_cur_cat">已付款</span>
+                            </li>
+                            <li class="fixed_nav_item_catgoods" data-type="receipt">
+                                <span class="">收款</span>
+                            </li>
+                            <li class="fixed_nav_item_catgoods" data-type="pend">
+                                <span class="">待付</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-grey">
+                            <div class="content-inner">
+                                <div>
+                                    <ul id="order-grid" style="margin-top: 0.44rem;">
+                                                        
+                                    </ul>
                                 </div>
-                                <div class="weui-tab__panel content-panel">
-                                        <div class="content-wrapper">
-                                            <div class="content-inner">
-                                                <div>
-                                                    <ul id="order-grid">
-                                                        <li class="goods_grid_wrapper stores" id="paid" data-type="paid">
-                                                            <div class="orders-item"  data="0">
-                                                                <div class="item-top-block">
-                                                                  <img class="mall-icon" src="//imsproductionimg.yangkeduo.com/99a582e9a40d9b1466b04a916187d37f.jpg">
-                                                                  <div class="mall-name">
-                                                                    <span class="mall-name-text">创建者姓名</span>
-                                                                    <i class="iconfont icon-enter"></i>
-                                                                    <p class="order-status">待付款</p>
-                                                                  </div>
-                                                                </div>
-                                                                <div class="item-goods">
-                                                                  <img class="goods-img" src="//omsproductionimg.yangkeduo.com/images/2017-12-14/63e16595e1eaff2368a7581b19e2ee2c.jpeg@750w_1l_50Q.src">
-                                                                  <div class="goods-name">
-                                                                    <p>
-                                                                      【真羽绒】【超大仿真毛领】大毛领加厚羽绒服 女中长款 韩国连帽长过膝外套潮
-                                                                    </p>
-                                                                  </div>
-                                                                  <p class="spec">
-                                                                    创建者姓名  13556646545648
-                                                                  </p>
-                                                                  <div class="price-and-num">
-                                                                    <div class="goods-price">
-                                                                      <span>￥</span>98.00
-                                                                    </div>
-                                                                    <div class="goods-number">
-                                                                        x1
-                                                                    </div>
-                                                                  </div>
-                                                                </div>
-                                                                <div class="currency-block">
-                                                                  <p class="currency-free">(免运费)</p>
-                                                                  <p class="currency-amount">98.00</p>
-                                                                  <p class="currency-head">实付
-                                                                    <span>:</span>￥
-                                                                  </p>
-                                                                </div>
-                                                                <div class="button-block">
-                                                                  <div class="orders-button">
-                                                                    <a class="cancel"></a>
-                                                                    <a class="go-pay"></a>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-              
             </div>
         </div>
-    </div>
 </body>
 
 </html>

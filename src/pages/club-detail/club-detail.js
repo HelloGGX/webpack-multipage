@@ -5,7 +5,7 @@ import '../club-info/club-info.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {getQueryString, clear} from 'common/js/dom'
+import {getQueryString, clear, imgSuffix} from 'common/js/dom'
 import {judgeLogin} from 'components/judgeLogin/judge-login'
 
 let all = (function () {
@@ -28,7 +28,7 @@ let all = (function () {
     _getClubInfo (data) {
       $('#coverClubName').html(data.club_name)
       $('#coverClubId').html(data.club_id)
-      $('#coverClubLogo').find('img').attr('src', data.thumb_logo)
+      $('#coverClubLogo').find('img').attr('src', imgSuffix(data.thumb_logo, 2))
       // $('#coverClubStar')
       $('#coverClubMajor').html(clear(`
       ${data.club_major.map(key => `<span>${key}</span>`)}
@@ -173,7 +173,7 @@ let all = (function () {
       <a href="act-album.html?albumId=${data[i].id}">
           <div class="tidbits-item">
               <div class="tidbits-img">
-                  <img src="${data[i].photos[0].url[0]}" alt="">
+                  <img src="${imgSuffix(data[i].photos[0].url[0], 2)}" alt="">
               </div>
               <div class="tidbits-inner">
                   <p class="f-s">${data[i].name}</p>

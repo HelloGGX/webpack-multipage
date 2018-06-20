@@ -384,6 +384,7 @@ let all = (function () {
         // 获取数据成功时的处理逻辑
         if (res.state === 'ok') {
           weui.alert('提交成功,等待审核')
+          window.location.href = 'http://www.shanduhuwai.com/act-mag.html'
         } else {
           weui.alert('提交失败，请检查填写项')
         }

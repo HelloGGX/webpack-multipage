@@ -4,7 +4,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import BScroll from 'better-scroll'
 import weui from 'weui.js'
-import {getQueryString, clear} from 'common/js/dom'
+import {getQueryString, clear, imgSuffix} from 'common/js/dom'
 
 import model from 'api/getIndex'
 
@@ -114,7 +114,7 @@ let all = (function () {
         $('.g-repeated-coupon-tag').html(clubName)
         $('#index_name').html(actName)
         $('.g-service-list').html(`${actType.map((key) => `<span class="g-service-item">${key}</span>`)}`)
-        $('.goods-mall-main img').attr('src', clubLogo)
+        $('.goods-mall-main img').attr('src', imgSuffix(clubLogo, 2))
         $('.goods-mall-name').html(clubName)
         $('.goods-mall-info span:first').html(`活动数量&nbsp;${clubActs}`)
         $('.goods-mall-info span:last').html(`会员数量&nbsp;${clubMember}`)
@@ -126,7 +126,7 @@ let all = (function () {
         $('.mall-recommend-main ul').html(`
           ${clubRecentAct.map((act) =>
     `<li class="mall-recommend-item">
-            <img src="${act.hd_thumb_url}">
+            <img src="${imgSuffix(act.hd_thumb_url, 2)}">
             <span class="mr-goods-name">
               ${act.act_name}
             </span>

@@ -4,7 +4,7 @@ import 'components/banner/banner.less'
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
 import weui from 'weui.js'
-import {clear, transDate, getQueryString} from 'common/js/dom'
+import {clear, transDate, getQueryString, imgSuffix} from 'common/js/dom'
 import model from 'api/getIndex'
 import {gallery} from 'components/gallery/gallery'
 import {judgeLogin} from 'components/judgeLogin/judge-login'
@@ -63,7 +63,7 @@ let all = (function () {
             ${data[i].url.map(key => `
             <li>
               <div class="album-photo">
-                  <img src="${key}" alt="">
+                  <img src="${imgSuffix(key, 2)}" alt="">
               </div>
           </li>
             `)}

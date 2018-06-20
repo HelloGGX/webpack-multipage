@@ -55,6 +55,12 @@ export function luhmCheck (bankno) {
     return false
   }
 }
+export function imgSuffix (url, num) {
+  let reg = /(.jpg)$/g
+  let newurl = url.replace(reg, '')
+  newurl += `@${num}x.jpg`
+  return newurl
+}
 export function itemtoArraytop (Arr, index) {
   let temp = Arr[index]
   if (index === 0) {

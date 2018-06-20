@@ -3,6 +3,7 @@ import 'components/tabs/tabs.less'
 import model from '../../api/getIndex'
 import $ from 'jquery'
 import weui from 'weui.js'
+import {imgSuffix} from 'common/js/dom'
 
 let all = (function () {
   let TYPE = 'city'
@@ -30,7 +31,7 @@ let all = (function () {
             <a href="act-detail.html?id=${data[i].id}">
             <div class="store-content">
                 <div class="goods-image">
-                    <div class="image-container" style="background-image:url(${data[i].imgsrc})">
+                    <div class="image-container" style="background-image:url(${imgSuffix(data[i].imgsrc, 3)})">
                        
                     </div>
                 </div>

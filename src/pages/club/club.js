@@ -4,6 +4,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
+import {imgSuffix} from 'common/js/dom'
 
 let all = (function () {
   let TYPE = 'city'
@@ -87,7 +88,7 @@ let all = (function () {
       return `<div class="margin weui-panel weui-panel_access" id="${TYPE + data[i].id}">
       <div class="weui-panel__bd">
         <a href="club-detail.html?clubId=${data[i].id}" class="weui-media-box weui-media-box_appmsg">
-          <div class="club-thumb weui-media-box__hd " style="background-image:url(${data[i].imgsrc})">
+          <div class="club-thumb weui-media-box__hd " style="background-image:url(${imgSuffix(data[i].imgsrc, 2)})">
           </div>
           <div class="weui-media-box__bd">
             <h4 class="f-m weui-media-box__title">${data[i].name}</h4>

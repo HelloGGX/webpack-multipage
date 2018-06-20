@@ -2,6 +2,7 @@ import './index.less'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 import weui from 'weui.js'
+import {imgSuffix} from 'common/js/dom'
 import {judgeLogin} from 'components/judgeLogin/judge-login'
 
 let all = (function () {
@@ -236,7 +237,7 @@ let all = (function () {
                       <a href="act-detail.html?id=${thi.areadata[i].id}">
                       <div class="store-content">
                           <div class="goods-image">
-                              <div class="image-container" style="background-image:url(${thi.areadata[i].imgsrc})">
+                              <div class="image-container" style="background-image:url(${imgSuffix(thi.areadata[i].imgsrc, 3)})">
                                   
                               </div>
                           </div>

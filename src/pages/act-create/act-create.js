@@ -131,6 +131,13 @@ let all = (function () {
 
       model.getActDetailData({id: getQueryString('id')}).then(data => {
         let actData = data.list[0]
+        if (actData.apply_opts !== '') { // 如果有自定义的费用选项
+          window.sessionStorage.setItem('applyItems', actData.apply_opts)// 存储报名选项
+          AddapplyOption.applyItem = JSON.parse(window.sessionStorage.getItem('applyItems'))
+          let applyOpts = JSON.parse(actData.apply_opts)
+          $('#addItem').before(_thi._applyOptTemp(applyOpts))
+        }
+
         $('input[name=actTitle]').val(actData.act_name)
         $('textarea[name=actDetail]').val(actData.act_detail_text)
         $('input[name=hdDetailImg]').val(actData.act_detail_imgs)
@@ -205,9 +212,7 @@ let all = (function () {
 
         $('input[name=actOptions]').val(arr)
         $('input[name=actOptions1]').val(actData.apply_opts)
-        let applyOpts = JSON.parse(actData.apply_opts)
 
-        $('#addItem').before(_thi._applyOptTemp(applyOpts))
         $('input[name=endApplyTime]').val(actData.apply_endtime)
         $('input[name=hdbmfs]').val(actData.apply_way)
         $('input[name=zdend]').val(actData.group_min)
@@ -384,7 +389,7 @@ let all = (function () {
         }
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
-        weui.alert('数据获取有误')
+        weui.alert(ErrMsg)
       })
     }
   }

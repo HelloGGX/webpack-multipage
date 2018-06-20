@@ -12,6 +12,7 @@ import {editApply} from '../getApplyOpts/getApplyOpts'
 import model from 'api/getIndex'
 import {getQueryString, clear} from 'common/js/dom'
 import {moveToGroup} from 'components/moveToGroup/moveToGroup'
+import {batchReview} from '../reviewGroup/review-g'
 
 let all = (function () {
   let search = {// 搜索框显示及查询
@@ -85,14 +86,91 @@ let all = (function () {
   //       </div>
   //   </div>
   // </div>`
-
-  let applyMagGroup = { // 分组报名成员对象
+  let applyMagFail = {// 已拒绝报名成员
+    init () {
+      $('.fail-lists').on('click', '.fail-item-top', (e) => {
+        this.failItemShow(e)
+      })
+      $('.f-group .txt-group').on('click', (e) => {
+        $(e.currentTarget).parent().next('.fail-lists').toggle()
+      })
+    },
+    failItemShow (e) { // 未审核单个成员的显示隐藏切换
+      $(e.currentTarget).next('.moreInfo').toggle()
+    }
+  }
+  let applyMagReview = { // 审核报名成员
+    init () {
+      $('.unreview-lists').on('click', '.unreview-item-top', (e) => {
+        this.unreviewItemShow(e)
+      })
+      $('.r-group .txt-group').on('click', (e) => {
+        $(e.currentTarget).parent().next('.unreview-lists').toggle()
+      })
+      $('.unreview-lists').on('click', '.btn-review', (e) => {
+        this.singleClass(e)
+      })
+    },
+    unreviewItemShow (e) { // 未审核单个成员的显示隐藏切换
+      $(e.currentTarget).next('.moreInfo').toggle()
+    },
+    singleClass (e) { // 单个审核
+      weui.confirm('审核报名成员', {
+        title: '审核报名成员',
+        buttons: [{
+          label: '不通过',
+          type: 'default',
+          onClick: function () {
+            require.ensure([], () => {
+              require('vendor/dialog')
+              $.alert.aler({
+                title: '温馨提示',
+                content: batchReview.inputTemp(),
+                height: 'auto',
+                blankclose: true,
+                okCallback: function (elem) {
+                  let reason = $(elem.currentTarget).parent().prev().val()
+                  if (reason === '') {
+                    weui.alert('理由不能为空')
+                    return false
+                  } else {
+                    model.magAct.reviewPer({perId: [$(e.currentTarget).data('id')], call: 'fail', reason: reason}).then(res => {
+                      if (res.state === 'ok') { // 如果新建分组插入成功
+                        weui.alert('操作成功')
+                        Home._initActData()
+                      }
+                    }).catch(errMsg => {
+                      console.log(errMsg)
+                    })
+                  }
+                }
+              })
+            }, 'aler')
+          }
+        }, {
+          label: '通过',
+          type: 'primary',
+          onClick: function () {
+            model.magAct.reviewPer({perId: [$(e.currentTarget).data('id')], call: 'pass', reason: ''}).then(res => {
+              if (res.state === 'ok') { // 如果新建分组插入成功
+                weui.alert('操作成功')
+                Home._initActData()
+              }
+            }).catch(errMsg => {
+              console.log(errMsg)
+            })
+          }
+        }]
+      })
+    }
+  }
+  let applyMagGroup = { // 分组报名成员
 
     init () {
       $('.unclass-lists').on('click', '.unclass-item-top', (e) => {
         this.unclassItemShow(e)
       })
-      $('.tit-group .txt-group').on('click', (e) => {
+      $('.m-group .txt-group').on('click', (e) => {
         $(e.currentTarget).parent().next('.unclass-lists').toggle()
       })
       $('.unclass-lists').on('click', '.btn-audit', (e) => {
@@ -104,7 +182,11 @@ let all = (function () {
     },
     singleClass (e) { // 单个分组
       if ($('.g-lists .g-item').length > 0) { // 如果有分组
-        moveToGroup({perIdArr: [$(e.currentTarget).data('id')]}).init()
+        moveToGroup({
+          perIdArr: [$(e.currentTarget).data('id')],
+          okCallBack: () => {
+            Home._initActData()
+          }}).init()
       } else { // 如果没有分组
         weui.confirm('请先在"批量分组"中创建分组')
       }
@@ -117,11 +199,13 @@ let all = (function () {
       this.switch()
       search.init()
       applyMagGroup.init()
+      applyMagReview.init()
+      applyMagFail.init()
       batchG.init(this._initActData)
-      editApply.init()
-      addApplyPer.init()
-      showGroupPer.init()
-
+      editApply.init(this._initActData)
+      addApplyPer.init(this._initActData)
+      showGroupPer.init(this._initActData)
+      batchReview.init(this._initActData)
       // $('.actTime').on('click', (e) => {
       //   pickerData.showDate(e.currentTarget)
       // })
@@ -250,8 +334,83 @@ let all = (function () {
         return ''
       }
     },
+    _failItemTemp (data) { // 被拒绝人员模板
+      if (data.length > 0) {
+        let mainPer = data[0].guest_name
+        return ` ${data.map(key => `
+        <div class="fail-item">
+          <div class="weui-cell fail-item-top">
+              <div class="weui-cell__hd per-head"><img src=${require(`../../imgs/icons/${key.guest_sex === '男' ? 'boy' : 'girl'}.jpg`)} alt=""></div>
+                <div class="weui-cell__bd">
+                    <p class="f-m per-name">${key.guest_name}</p>
+                    <p class="f-s per-bbname">${key.guest_type === '0' ? `发起人` : `${mainPer}帮报`}</p>
+                </div>
+                <div class="weui-cell__ft">
+                <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
+                <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
+                </div>      
+              </div>
+              <div class="moreInfo show" style="display: none;">
+                <div class="moreInfo-top">
+                  <p>${key.guest_sex}</p>
+                  <p>${key.guest_tel}</p>
+                </div>
+                <div class="moreInfo-midd">
+                ${key.guest_realname !== '' ? `<span>真实姓名：${key.guest_realname}</span>` : ''}
+                ${key.guest_idcard !== '' ? `/<span>身份证号：${key.guest_idcard}</span>` : ''}
+                </div>
+                
+                <div class="moreInfo-dowm">
+                  <a class="txt-green" href="tel:${key.guest_tel}">电话</a>
+                  <a class="text-red" data-id="${key.guest_id}">已拒绝</a>
+                </div>
+              </div>
+            </div>
+        `)}`
+      } else {
+        return ''
+      }
+    },
+    _unreviewItemTemp (data) { // 未审核人员模板
+      if (data.length > 0) {
+        let mainPer = data[0].guest_name
+        return ` ${data.map(key => `
+        <div class="unreview-item">
+          <div class="weui-cell unreview-item-top">
+              <div class="weui-cell__hd per-head"><img src=${require(`../../imgs/icons/${key.guest_sex === '男' ? 'boy' : 'girl'}.jpg`)} alt=""></div>
+                <div class="weui-cell__bd">
+                    <p class="f-m per-name">${key.guest_name}</p>
+                    <p class="f-s per-bbname">${key.guest_type === '0' ? `发起人` : `${mainPer}帮报`}</p>
+                </div>
+                <div class="weui-cell__ft">
+                <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
+                <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
+                </div>      
+              </div>
+              <div class="moreInfo show" style="display: none;">
+                <div class="moreInfo-top">
+                  <p>${key.guest_sex}</p>
+                  <p>${key.guest_tel}</p>
+                </div>
+                <div class="moreInfo-midd">
+                ${key.guest_realname !== '' ? `<span>真实姓名：${key.guest_realname}</span>` : ''}
+                ${key.guest_idcard !== '' ? `/<span>身份证号：${key.guest_idcard}</span>` : ''}
+                </div>
+                
+                <div class="moreInfo-dowm">
+                  <a class="txt-green" href="tel:${key.guest_tel}">电话</a>
+                  <a class="txt-green btn-edit">编辑</a>
+                  <a class="text-red btn-review" data-id="${key.guest_id}">审核</a>
+                </div>
+              </div>
+            </div>
+        `)}`
+      } else {
+        return ''
+      }
+    },
     _unclassItemTemp (data) { // 未分组人员模板
-      if (data !== null) {
+      if (data.length > 0) {
         let mainPer = data[0].guest_name
         return ` ${data.map(key => `
         <div class="unclass-item">
@@ -294,6 +453,12 @@ let all = (function () {
     _getUnClassPer (data) { // 获取未分组人员信息
       $('.unclass-lists').html(clear(this._unclassItemTemp(data)))
     },
+    _getUnreviewPer (data) { // 获取未审核人员信息
+      $('.unreview-lists').html(clear(this._unreviewItemTemp(data)))
+    },
+    _getFailPer (data) { // 获取被拒绝的人员信息
+      $('.fail-lists').html(clear(this._failItemTemp(data)))
+    },
     _getActInfoData (data) {
       let sales = data.list[0].sales
       let theme = data.list[0].act_name
@@ -304,13 +469,43 @@ let all = (function () {
       let actAddr = data.list[0].act_addr
       let actDetailAddr = data.list[0].act_addrs
       let actState = data.list[0].act_state
+      let review = data.list[0].apply_review
       let group = data.group
       let guest = data.guest
-
+      if (review === '是') { // 如果报名需要审核
+        $('.r-group').show()
+      } else {
+        $('.r-group').hide()
+      }
       this._getGroups(group)
-
-      this._getUnClassPer(guest)// 在活动管理页面获取未分组游客信息
-      batchG.batchGetUnclassPer(guest)// 这里是批量分组里面获取未分组游客信息
+      let unreviewGuest = []
+      let unclassGuest = []
+      let failGuest = []
+      let guestLen = guest.length
+      for (let i = 0; i < guestLen; i++) {
+        if (guest[i].guest_reviewed === '待审') {
+          unreviewGuest.push(guest[i])
+        } else if (guest[i].guest_reviewed === '已审') {
+          unclassGuest.push(guest[i])
+        } else if (guest[i].guest_reviewed === '拒绝') {
+          failGuest.push(guest[i])
+        }
+      }
+      if (unclassGuest.length > 0) {
+        $('.m-group').show()
+      } else {
+        $('.m-group').hide()
+      }
+      if (failGuest.length > 0) {
+        $('.f-group').show()
+      } else {
+        $('.f-group').hide()
+      }
+      this._getUnClassPer(unclassGuest)// 在活动管理页面获取未分组游客信息
+      this._getUnreviewPer(unreviewGuest)// 在活动管理页面获取未审核游客信息
+      this._getFailPer(failGuest) // 在活动管理页面获取被拒绝游客信息
+      batchG.batchGetUnclassPer(unclassGuest)// 这里是批量分组里面获取未分组游客信息
+      batchReview.batchGetUnreviewPer(unreviewGuest)// 这里是批量审核里面获取未审核游客信息
 
       if (actState === '关闭报名') {
         $('#openApply').find('button').html('打开活动')
@@ -331,8 +526,10 @@ let all = (function () {
       $('#Actaddr').val(actAddr)
       $('input[name=actDetailAddr]').val(actDetailAddr)
       $('.unclassLen').html(`(${$('.unclass-item').length})`)
+      $('.unreviewLen').html(`(${$('.unreview-item').length})`)
+      $('.failLen').html(`(${$('.fail-item').length})`)
     },
-    _initActData: function () { // 刷新重新初始化数据
+    _initActData () { // 刷新重新初始化数据
       model.getActDetailData({id: getQueryString('id')}).then(data => {
         Home._getActInfoData(data)// 获取活动详细信息
       }).catch(errMsg => {

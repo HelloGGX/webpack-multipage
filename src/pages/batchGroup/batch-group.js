@@ -38,7 +38,7 @@ let batchG = {
     })
   },
   _unclassItemTemp (data) { // 未分组人员模板
-    if (data !== null) {
+    if (data.length > 0) {
       return `${data.map(key => `
       <div  class="batch-unclass-item">
         <div class="weui-cell unclass-item-top">
@@ -92,7 +92,7 @@ let batchG = {
   moveToGroup (initData) {
     let flag = false
     let arr = []// arr代表选中的队员id所组成的数组
-    Array.from($('input[name=labelItem]')).map((key) => {
+    Array.from($('#batchUnclass input[name=labelItem]')).map((key) => {
       if ($(key).is(':checked')) {
         arr.push($(key).attr('data-id'))
         flag = true

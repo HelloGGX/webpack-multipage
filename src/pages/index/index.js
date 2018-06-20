@@ -17,7 +17,33 @@ let all = (function () {
         scrollNav.init(res.navdata)// 顶部导航栏初始化
         slider.init(res.slidata)// 幻灯片初始化
         hotArea.init(res.areadata)// 热门区域初始化
-      }, () => {}, () => {
+      }, () => { // 登陆时候
+        $('.weui-flex__item').on('click', (e) => {
+          if ($(e.currentTarget).data('index') === 0) {
+            if (window.sessionStorage.getItem('ucl') === '用户') {
+              weui.alert('抱歉你是普通用户，不能创建活动')
+            } else {
+              window.location.href = 'act-create.html'
+            }
+          }
+        })
+      }, () => { // 未登陆时候
+        $('.weui-flex__item').on('click', (e) => {
+          if ($(e.currentTarget).data('index') === 0 || 8) {
+            weui.confirm('建议登陆体验哦~', {
+              title: '提示',
+              buttons: [{
+                label: '先逛逛看',
+                type: 'default',
+                onClick: function () { console.log('no') }
+              }, {
+                label: '马上登陆',
+                type: 'primary',
+                onClick: function () { window.location.href = 'login.html' }
+              }]
+            })
+          }
+        })
         weui.confirm('建议登陆体验哦~', {
           title: '提示',
           buttons: [{
@@ -164,15 +190,6 @@ let all = (function () {
     },
     init (data) {
       this._getSlideData(data)
-      $('.weui-flex__item').on('click', (e) => {
-        if ($(e.currentTarget).data('index') === 0) {
-          if (window.sessionStorage.getItem('ucl') === '用户') {
-            weui.alert('抱歉你是普通用户，不能创建活动')
-          } else {
-            window.location.href = 'act-create.html'
-          }
-        }
-      })
     },
     _getSlideData (data) {
       let thi = this

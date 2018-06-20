@@ -74,6 +74,7 @@ let magAct = {// 管理活动
   },
   editPer (e) {
     let data = serializeObject(e)
+    console.log(data)
     return db.handleRequest(db.request.post('editPer.php', {
       data: data,
       showLoading: true
@@ -82,6 +83,12 @@ let magAct = {// 管理活动
   getPer (data) { // 获取未分组报名人员信息
     return db.handleRequest(db.request.get('getPer.php', {
       params: data,
+      showLoading: true
+    }))
+  },
+  reviewPer (data) { // 审核人员
+    return db.handleRequest(db.request.post('reviewPer.php', {
+      data: data,
       showLoading: true
     }))
   },

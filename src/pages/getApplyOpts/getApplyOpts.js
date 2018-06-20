@@ -3,7 +3,7 @@ import $ from 'jquery'
 import weui from 'weui.js'
 import vali from 'vendor/validate'
 import {getQueryString, clear, itemtoArraytop} from 'common/js/dom'
-import {moveToGroup} from 'components/moveToGroup/moveToGroup'
+import {showGroupPer} from '../showGroupPer/show-g-per'
 let regexp = {
   regexp: {
     PHONE: vali.mobile(),
@@ -15,6 +15,7 @@ let editApply = {
   htmlTemp (data) {
     return `<input type="hidden" name="perType" value="${data.guest_type}">
     <input type="hidden" name="perId" value="${data.guest_id}">
+    <input type="hidden" name="groupId" value="${data.groupid}">
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
         <div class="weui-cell__bd">
@@ -37,14 +38,17 @@ let editApply = {
         </div>`
   },
   sexTemp (data) {
+    let sexData = ['男', '女']
+    let sexArray = itemtoArraytop(sexData, sexData.indexOf(data.sex))
     return `<div class="weui-cell weui-cell_select weui-cell_select-after">
         <div class="weui-cell__hd">
           <label for="" class="weui-label">性别</label>
         </div>
         <div class="weui-cell__bd">
           <select class="weui-select"  name="sex" value="${data.sex}">
-              <option value="男">男</option>
-              <option value="女">女</option>
+              ${clear(`${sexArray.map(item => `
+              <option value="${item}">${item}</option>
+              `)}`)}
           </select>
         </div>
         </div>`
@@ -57,7 +61,42 @@ let editApply = {
         </div>
         </div>`
   },
-  init () {
+  init (initData) {
+    $('#editApplyForm').on('click', '#editSetAlreadyPay', (e) => {
+      if ($(e.currentTarget).parent().prev().find('input[name=payStatus]').val() === '已付款') {
+        weui.confirm('确定设为未付款?', {
+          title: '温馨提示',
+          buttons: [{
+            label: '取消',
+            type: 'default',
+            onClick: () => { console.log('no') }
+          }, {
+            label: '确定',
+            type: 'primary',
+            onClick: () => {
+              $(e.currentTarget).parent().prev().find('input[name=payStatus]').val('未付款')
+              $(e.currentTarget).text('设为已付款')
+            }
+          }]
+        })
+      } else {
+        weui.confirm('确定设为已付款?', {
+          title: '温馨提示',
+          buttons: [{
+            label: '取消',
+            type: 'default',
+            onClick: () => { console.log('no') }
+          }, {
+            label: '确定',
+            type: 'primary',
+            onClick: () => {
+              $(e.currentTarget).parent().prev().find('input[name=payStatus]').val('已付款')
+              $(e.currentTarget).text('设为未付款')
+            }
+          }]
+        })
+      }
+    })
     $('body').on('click', '.btn-edit', (e) => {
       this._getPerApply(e)
       this.show()
@@ -83,20 +122,21 @@ let editApply = {
           var loading = weui.loading('提交中...')
           setTimeout(function () {
             loading.hide()
-            _thi._editPerData()
+            _thi._editPerData(initData)
             weui.toast('提交成功', 1000)
           }, 1000)
         }
       }, regexp)
     })
   },
-  _editPerData () {
+  _editPerData (initData) {
     let _thi = this
     model.magAct.editPer($('#editApplyForm')).then(res => {
       if (res.state === 'ok') {
         _thi.hide()
         weui.alert('修改报名成员信息成功')
-        moveToGroup({})._initActData()
+        initData()
+        showGroupPer.showGroupPer($('input[name=groupId]').val())
       }
     }).catch(errMsg => {
       weui.alert(errMsg)
@@ -120,7 +160,7 @@ let editApply = {
   getApplyData (data) {
     let costWay = []
 
-    // let price = data.payOpts
+    let price = data.payOpts
     if (data.wxpay === '是') {
       costWay.push('微信支付')
     }
@@ -135,13 +175,19 @@ let editApply = {
 
     let onlyTemp = this.htmlTemp(data)
 
+    let selectItem = price.find(item => item.priceid === Number(data.payOptsSelectid))
+
+    let priceArr = itemtoArraytop(price, price.indexOf(selectItem))
+
+    price = priceArr
+
     onlyTemp += `<div class="weui-cell weui-cell_select weui-cell_select-after">
     <div class="weui-cell__hd">
       <label for="" class="weui-label">费用选择</label>
     </div>
     <div class="weui-cell__bd">
       <select class="weui-select" name="price">
-          ${clear(`${data.payOpts.map(key => `
+          ${clear(`${price.map(key => `
           <option value="${key.priceid}">${key.pricename}￥${key.price}</option>
           `)}`)}                            
       </select>
@@ -149,17 +195,17 @@ let editApply = {
   </div><div class="weui-cell">
   <div class="weui-cell__hd"><label class="weui-label">支付方式</label></div>
   <div class="weui-cell__bd">
-      <input class="weui-input" type="text" name="costWay" readonly placeholder="" value="${costWay.join(',')}">
+      <input class="weui-input" type="text" name="costWay" readonly  value="${costWay.join(',')}">
   </div>
 </div><div class="weui-cell">
 <div class="weui-cell__hd">
   <label class="weui-label">支付状态</label>
 </div>
 <div class="weui-cell__bd">
-  <input class="weui-input" type="text" name="payStatus" readonly placeholder="" value="未付款">
+  <input class="weui-input" type="text" name="payStatus" readonly  value="${data.paystate === '0' ? '未付款' : '已付款'}">
 </div>
 <div class="weui-cell__ft">
-  <a id="editSetAlreadyPay" style="color:#e02e24">设为已付款</a>
+  <a id="editSetAlreadyPay" style="color:#e02e24">${data.paystate === '0' ? '设为已付款' : '设为未付款'}</a>
 </div>
 </div>
 <div class="line"></div>`
@@ -174,17 +220,19 @@ let editApply = {
     if (data.idcard !== '') { // 如果身份证有值
       onlyTemp += this.idCard(data)
     }
+
     if (data.customOpt !== '') { // 如果有自定义报名项
+      let zjxtem = ''
       let obj = JSON.parse(data.customOpt)
       let customSelect = JSON.parse(data.customSelect)
-
-      let zjxtem = ''
       this.applyItem = obj
-
+      $('input[name=myopts]').val(data.customSelect)
       for (let key in obj) {
         let arr = itemtoArraytop(obj[key], obj[key].indexOf(customSelect[key]))
         obj[key] = arr
+
         zjxtem += `<div class="weui-cell weui-cell_select weui-cell_select-after">
+        
         <div class="weui-cell__hd">
             <label for="" class="weui-label myopt-title">${key}</label>
         </div>
@@ -198,15 +246,21 @@ let editApply = {
     </div>`
       }
 
-      onlyTemp += `<div class="customize-opt">
-      <input name="customize-opts" type="hidden">
-      ${zjxtem}
-    </div>`
+      onlyTemp += `<div class="customize-opt"><input type="hidden" name="myopts">${zjxtem}</div>`
     }
     if (data.groupName !== '') { // 如果该用户有分组
       onlyTemp += clear(this.groupListTemp(data))
     }
     $('#editApplyForm .weui-cells').html(onlyTemp)
+    if ($('select[name=myopts-item]').length > 0) {
+      $('select[name=myopts-item]').on('change', (e) => {
+        let dataname = $(e.currentTarget).val()
+        let key = $(e.currentTarget).parent().prev().find('label').html()
+        let customSelect = JSON.parse(data.customSelect)
+        customSelect[key] = dataname
+        $('input[name=myopts]').val(JSON.stringify(customSelect))
+      })
+    }
   },
   groupListTemp (data) {
     return `<div class="weui-cell weui-cell_select weui-cell_select-after">

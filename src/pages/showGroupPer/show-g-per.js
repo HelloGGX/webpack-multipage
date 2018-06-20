@@ -47,8 +47,8 @@ let showGroupPer = {
 </div>`
   },
 
-  showGroupPer (e) { // 初始化该组成员信息
-    this.GID = $(e).attr('id')
+  showGroupPer (id) { // 初始化该组成员信息
+    this.GID = id
     let _thi = this
     model.magAct.getGroupPer({groupId: _thi.GID}).then(data => {
       $('#groupPerContainer').html(clear(_thi.perTemp(data)))
@@ -62,13 +62,13 @@ let showGroupPer = {
   hide () {
     $('#showGPer').hide()
   },
-  init () {
+  init (initData) {
     $('#cancelG').on('click', () => {
       this.hide()
     })
     $('.g-lists').on('click', '.g-item', (e) => {
       $('#showGPer').find('.g-title').html($(e.currentTarget).find('.g-name p').text())
-      this.showGroupPer(e.currentTarget)// 显示该组成员
+      this.showGroupPer($(e.currentTarget).attr('id'))// 显示该组成员
       this.show()
     })
     $('#groupPerContainer').on('click', '.class-item-top', (e) => {
@@ -98,16 +98,16 @@ let showGroupPer = {
           blankclose: true,
           okCallback: function (e) {
             if ($(e.currentTarget).attr('id') === 'delGName') { // 如果是删除组
-              _thi.deletGroup()
+              _thi.deletGroup(initData)
             } else if ($(e.currentTarget).attr('id') === 'saveGName') { // 如果是编辑组名
-              _thi.editGroup()
+              _thi.editGroup(initData)
             }
           }
         })
       }, 'aler')
     })
   },
-  editGroup () {
+  editGroup (initData) {
     let _thi = this
 
     let groupName = $('input[name=gname]').val()
@@ -118,7 +118,7 @@ let showGroupPer = {
       model.magAct.editGroup({group_id: groupId, group_name: groupName}).then(res => {
         if (res.state === 'ok') {
           _thi.hide()
-          moveToGroup({})._initActData()
+          initData()
           weui.alert('编辑组名成功')
         } else {
           weui.alert('编辑组名失败')
@@ -128,12 +128,12 @@ let showGroupPer = {
       })
     }
   },
-  deletGroup () {
+  deletGroup (initData) {
     let _thi = this
     let groupId = $('#groupPerContainer').find('.class-lists').data('gid')
     model.magAct.deletGroup({group_id: groupId}).then(res => {
       if (res.state === 'ok') {
-        moveToGroup({})._initActData()
+        initData()
         _thi.hide()
         weui.alert('该组删除成功')
       } else {

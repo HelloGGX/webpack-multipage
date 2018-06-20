@@ -3,7 +3,6 @@ import weui from 'weui.js'
 import vali from 'vendor/validate'
 import {getQueryString, clear} from 'common/js/dom'
 import model from 'api/getIndex'
-import {moveToGroup} from 'components/moveToGroup/moveToGroup'
 // import {batchG} from '../batchGroup/batch-group'
 let regexp = {
   regexp: {
@@ -48,7 +47,7 @@ let addApplyPer = {
   show () {
     $('#addApplyPer').show()
   },
-  init () {
+  init (initData) {
     $('#addPerForm').on('click', '#setAlreadyPay', (e) => {
       weui.confirm('确定设为已付款?', {
         title: '温馨提示',
@@ -99,20 +98,20 @@ let addApplyPer = {
           var loading = weui.loading('提交中...')
           setTimeout(function () {
             loading.hide()
-            _thi._addPerData()
+            _thi._addPerData(initData)
             weui.toast('提交成功', 1000)
           }, 1000)
         }
       }, regexp)
     })
   },
-  _addPerData () {
+  _addPerData (initData) {
     let _thi = this
     model.magAct.addPer($('#addPerForm')).then(res => {
       if (res.state === 'ok') {
         _thi.hide()
         weui.alert('添加报名成员成功')
-        moveToGroup({})._initActData()
+        initData()
       }
     }).catch(errMsg => {
       weui.alert(errMsg)
@@ -132,7 +131,9 @@ let addApplyPer = {
     if (actForm[0].Formpay === '否' && actForm[0].Formqtpay === '否') {
       costWay.push('免费')
     }
-    let htmlTemp = `<input type="hidden" name="perType" val="1"><div class="weui-cell">
+    let htmlTemp = `<input type="hidden" name="perType" val="1">
+    
+    <div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
     <div class="weui-cell__bd">
         <input class="weui-input" required emptyTips="请输入昵称" name="nickname" type="text" placeholder="你的昵称">
@@ -141,7 +142,7 @@ let addApplyPer = {
   <div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">手机</label></div>
     <div class="weui-cell__bd">
-        <input class="weui-input" required pattern="REG_PHONE" name="phone" type="tel" placeholder="请输入手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
+        <input class="weui-input" required pattern="REG_PHONE" name="phone" type="number" placeholder="请输入手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
     </div>
   </div>`
     htmlTemp += `<div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -150,9 +151,9 @@ let addApplyPer = {
     </div>
     <div class="weui-cell__bd">
       <select class="weui-select" name="price">
-          ${applyInfo.Price.map(key => `
-          <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
-          `)}                                      
+         ${clear(`${applyInfo.Price.map(key => `
+         <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
+         `)}`)}                              
       </select>
     </div>
   </div><div class="weui-cell">

@@ -260,7 +260,7 @@ AddapplyOption.Addconfirm = function () { // 新增报名项点击确定按钮
 
 AddapplyOption.Addinit = function () {
   this.init()
-  let defaultArray = ['身份证号', '真实姓名']
+  let defaultArray = []
   $('#addItem').on('click', () => {
     this.Addshow()
   })

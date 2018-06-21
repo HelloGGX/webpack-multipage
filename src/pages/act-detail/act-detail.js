@@ -79,7 +79,6 @@ let all = (function () {
     },
     _getActDetailData () {
       model.getActDetailData({id: getQueryString('id')}).then((data) => {
-        console.log(data)
         let actId = data.list[0].act_id
         let clubId = data.club.club_id
         let hdThumbUrl = data.list[0].hd_thumb_url
@@ -101,12 +100,40 @@ let all = (function () {
         let detailText = data.list[0].act_detail_text
         let detailImgs = data.list[0].act_detail_imgs
         let actState = data.list[0].act_state
+
+        if (data.juge_apply) { // 到时候就需要去掉感叹号(如果该用户已经报名该活动)
+          $('.goods-bottom-bar').append(`
+          <div class="mag-group-btn">
+                <a href="act-apply-mag.html?id=${actId}" class="apply-mag">
+                    <span>报名管理(${data.guest.length})</span>
+                </a>
+            </div>
+            <div class="mag-group-btn">
+                <a class="apply-help">
+                    <span>帮人报名</span>
+                </a>
+            </div>
+          `)
+        } else {
+          $('.goods-bottom-bar').append(`
+          <div class="goods-group-btn">
+          <a>
+              <span class="goods-buy-price index_price2"> 
+              </span>
+              <span>立即参加</span>
+          </a>
+      </div>
+          `)
+        }
         if (actState === '报名中') {
           $('.goods-group-btn a').attr('href', `act-apply.html?id=${actId}&clubId=${clubId}`)
+          $('.mag-group-btn .apply-help').attr('href', `act-apply.html?id=${actId}&clubId=${clubId}`)
         } else if (actState === '关闭报名') {
           $('.goods-group-btn').css('backgroundColor', '#b7b7b7')
           $('.goods-group-btn a').attr('href', 'javascript:')
           $('.goods-group-btn a span:last-child').html('报名已经关闭')
+          $('.mag-group-btn:last-child').css('backgroundColor', '#b7b7b7')
+          $('.mag-group-btn .apply-help').attr('href', 'javascript:')
         }
         $('.v5-banner').css({'background-image': 'url(' + hdThumbUrl + ')'})
         $('.index_price').html(price)
@@ -124,20 +151,20 @@ let all = (function () {
         $('input[name=actStar]').val(actIntegral)
         $('input[name=applyPeople]').val(`${sales}/${salesLimit}`)
         $('.mall-recommend-main ul').html(`
-          ${clubRecentAct.map((act) =>
+          ${clear(`${clubRecentAct.map((act) =>
     `<li class="mall-recommend-item">
-            <img src="${imgSuffix(act.hd_thumb_url, 2)}">
-            <span class="mr-goods-name">
-              ${act.act_name}
-            </span>
-            <div class="mr-goods-detail">
-              <span class="mr-price">
-                <i> ￥</i>
-                ${act.price}
-              </span>
-            </div>
-          </li>`
-  )}
+                    <img src="${imgSuffix(act.hd_thumb_url, 2)}">
+                    <span class="mr-goods-name">
+                      ${act.act_name}
+                    </span>
+                    <div class="mr-goods-detail">
+                      <span class="mr-price">
+                        <i> ￥</i>
+                        ${act.price}
+                      </span>
+                    </div>
+                  </li>`
+  )}`)}
         `)
         $('#notice').html(actNotice)
         $('#detailText').html(detailText)

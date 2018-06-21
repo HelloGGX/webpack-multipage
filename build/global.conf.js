@@ -86,6 +86,10 @@ const pages = [ // 页面配置写在这里
   {
     title: '退款审核',
     pageName: 'refund'
+  },
+  {
+    title: '报名管理',
+    pageName: 'act-apply-mag'
   }
 ]
 const dependencies = [ // 依赖的全局js

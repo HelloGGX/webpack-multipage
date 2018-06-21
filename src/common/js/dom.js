@@ -55,6 +55,32 @@ export function luhmCheck (bankno) {
     return false
   }
 }
+
+export function resetTime (time) {
+  let timer = null
+  let t = time
+  let m = 0
+  let s = 0
+  m = Math.floor(t / 60 % 60)
+  m < 10 && (m = '0' + m)
+  s = Math.floor(t % 60)
+  function countDown () {
+    s--
+    s < 10 && (s = '0' + s)
+    if (s.length >= 3) {
+      s = 59
+      m = '0' + (Number(m) - 1)
+    }
+    if (m.length >= 3) {
+      m = '00'
+      s = '00'
+      clearInterval(timer)
+    }
+    return `${m}分钟${s}秒`
+  }
+  timer = setInterval(countDown, 1000)
+}
+
 export function imgSuffix (url, num) {
   let reg = /(.jpg)$/g
   let newurl = url.replace(reg, '')

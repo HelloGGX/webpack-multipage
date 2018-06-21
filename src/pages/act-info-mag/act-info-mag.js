@@ -515,7 +515,7 @@ let all = (function () {
 
       $('#editApply a').attr('href', `act-create.html?id=${getQueryString('id')}`)
       $('#actDetail').on('click', () => {
-        window.location.href = `act-create.html?id=${getQueryString('id')}`
+        window.location.href = `act-detail.html?id=${getQueryString('id')}`
       })
       $('.actInfoInner ul li:first').find('span').html(sales)
       $('#theme').val(theme)

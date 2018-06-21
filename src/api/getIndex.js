@@ -38,6 +38,12 @@ let person = {// 个人资料管理（资料获取，编辑）
 }
 
 let magAct = {// 管理活动
+  getApplyHelp (data) { // 获取帮报的成员信息
+    return db.handleRequest(db.request.get('getApplyHelp.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
   getActInfoData (data) { // 获取活动信息数据
     return db.handleRequest(db.request.get('getActDetail.php', {
       params: data,
@@ -131,9 +137,22 @@ let magAct = {// 管理活动
     }))
   }
 }
+
 let orders = {
-  getOrderData (data) {
+  getOrderData (data) { // 获取订单数据
     return db.handleRequest(db.request.get('getOrderData.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  cancelOrder (data) { // 取消订单
+    return db.handleRequest(db.request.post('cancelOrder.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  deleteOrder (data) { // 删除订单
+    return db.handleRequest(db.request.delete('deleteOrder.php', {
       params: data,
       showLoading: true
     }))

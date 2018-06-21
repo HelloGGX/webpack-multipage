@@ -226,7 +226,7 @@ let editApply = {
       let obj = JSON.parse(data.customOpt)
       let customSelect = JSON.parse(data.customSelect)
       this.applyItem = obj
-      $('input[name=myopts]').val(data.customSelect)
+
       for (let key in obj) {
         let arr = itemtoArraytop(obj[key], obj[key].indexOf(customSelect[key]))
         obj[key] = arr
@@ -252,7 +252,9 @@ let editApply = {
       onlyTemp += clear(this.groupListTemp(data))
     }
     $('#editApplyForm .weui-cells').html(onlyTemp)
+
     if ($('select[name=myopts-item]').length > 0) {
+      $('input[name=myopts]').val(data.customSelect)
       $('select[name=myopts-item]').on('change', (e) => {
         let dataname = $(e.currentTarget).val()
         let key = $(e.currentTarget).parent().prev().find('label').html()

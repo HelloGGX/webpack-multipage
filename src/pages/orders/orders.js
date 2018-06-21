@@ -4,7 +4,7 @@ import 'components/tabs/tabs.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from '../../api/getIndex'
-import {getQueryString} from 'common/js/dom'
+import {getQueryString, resetTime, clear} from 'common/js/dom'
 
 let all = (function () {
   let TYPE = getQueryString('type')
@@ -27,6 +27,13 @@ let all = (function () {
     pageInit () {
       allData.init()
       this.switch()
+      $('body').on('click', '.cancel', (e) => {
+        this.cancelOrder(e)
+      })
+
+      $('body').on('click', '.delete', (e) => {
+        this.deleteOrder(e)
+      })
     },
     _temple (i, data, type) { // 模板
       return `<div class="orders-item"  data="${i}">
@@ -67,14 +74,74 @@ let all = (function () {
       </p>
     </div>
     <div class="button-block">
+      <p>活动名额保留:<span>${resetTime(1800)}</span></p>
       <div class="orders-button">
-        ${data[i].order_paystate === '1' ? `<a class="delete"></a><a class="again"></a>` : `<a class="cancel"></a><a class="go-pay"></a>`}
+        ${data[i].order_paystate === '1' ? `<a class="delete" data-id="${data[i].order_id}"></a><a class="again"></a>` : `<a class="cancel" data-id="${data[i].order_id}"></a><a class="go-pay"></a>`}
       </div>
     </div>`}
    
     </div>`
     },
-
+    reasonListTemp () { // 组列表模板
+      const data = [
+        '个人行程有变,参加不了',
+        '不符合报名条件,主办方拒绝参加',
+        '主办方变更了活动信息',
+        '实际情况与活动信息不符',
+        '主办方取消了活动',
+        '其他原因'
+      ]
+      return `<div class="group-list">
+        <ul>
+          ${clear(`${data.map((key) => `<li class="dialog-confirm">${key}</li>`)}`)}
+        </ul>
+      </div>`
+    },
+    deleteOrder (e) {
+      let orderId = $(e.currentTarget).data('id')
+      weui.confirm('温馨提示', {
+        title: '确定要删除吗？',
+        buttons: [{
+          label: '取消',
+          type: 'default',
+          onClick: function () { }
+        }, {
+          label: '删除',
+          type: 'primary',
+          onClick: function () {
+            model.orders.deleteOrder({orderId: orderId}).then(res => {
+              if (res.state === 'ok') {
+                weui.alert('订单删除成功')
+              }
+            }).catch(errMsg => {
+              weui.alert(errMsg)
+            })
+          }
+        }]
+      })
+    },
+    cancelOrder (e) {
+      let orderId = $(e.currentTarget).data('id')
+      require.ensure([], () => {
+        require('vendor/dialog')
+        $.alert.aler({
+          title: '取消原因',
+          content: this.reasonListTemp(),
+          height: 'auto',
+          blankclose: true,
+          okCallback: function (elem) {
+            let reason = $(elem.currentTarget).html()
+            model.orders.cancelOrder({orderId: orderId, reason: reason}).then(res => {
+              if (res.state === 'ok') {
+                weui.alert('订单取消成功')
+              }
+            }).catch(errMsg => {
+              weui.alert(errMsg)
+            })
+          }
+        })
+      }, 'aler')
+    },
     _getNewData (data) {
       let newdata
       let _html = ''

@@ -81,6 +81,7 @@ let showGroupPer = {
         okCallBack: () => {
           model.magAct.getGroupPer({groupId: _thi.GID}).then(data => {
             $('#groupPerContainer').html(clear(_thi.perTemp(data)))
+            initData()
           }).catch(errMsg => {
             console.log(errMsg)
           })

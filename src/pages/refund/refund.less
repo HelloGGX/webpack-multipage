@@ -1,0 +1,78 @@
+@import '../../common/css/variable.less';
+
+.btn-refund-group{
+    height: .44rem;
+    line-height: .44rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    .btn-refund-item{
+        color: @color-theme;
+        font-size:@font-size-medium-x;
+        button{
+            background-color: #fff;
+            width: 100%;
+            &:last-child{
+                border-right: 1px solid #dedede;
+            }
+        }
+    }
+}
+.refund-per{
+    border-bottom: 1px solid #e8e8e8;
+    .refund-per-head{
+        position: relative;
+        img{
+            width: 0.44rem;
+            height: 0.44rem;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        span{
+            line-height: 0.44rem;
+            margin-left: 0.1rem;
+            color: @color-theme;
+        }
+        .refund-time{
+            font-size: 12px;
+            color: #808080;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+    .refund-per-reason{
+        font-size: 16px;
+        line-height: 40px;
+        color: #fd9715;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 70%;
+        span{
+
+        }
+    }
+}
+.refund-act{
+    .refund-act-title{
+        font-size: 16px;
+        color: #808080;
+        p{
+        line-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 70%;
+        }
+    }
+    .refund-act-info{
+        font-size: 16px;
+        .refund-act-type{
+            float: left;
+        }
+        .refund-act-price{
+            float: right;
+        }
+    }
+}

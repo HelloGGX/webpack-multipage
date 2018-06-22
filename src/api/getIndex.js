@@ -38,6 +38,18 @@ let person = {// 个人资料管理（资料获取，编辑）
 }
 
 let magAct = {// 管理活动
+  cancelApply (data) { // 报名成员取消报名
+    return db.handleRequest(db.request.post('cancelApply.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  editApply (data) { // 修改报名成员填写信息
+    return db.handleRequest(db.request.post('editApply.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
   getApplyHelp (data) { // 获取帮报的成员信息
     return db.handleRequest(db.request.get('getApplyHelp.php', {
       params: data,

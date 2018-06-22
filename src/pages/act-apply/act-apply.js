@@ -40,7 +40,7 @@ let all = (function () {
         <label for="" class="weui-label">性别</label>
     </div>
     <div class="weui-cell__bd">
-        <select class="weui-select" style="padding-left:2.1rem" name="sex">
+        <select class="weui-select select-r" name="sex">
             <option value="男">男</option>
             <option value="女">女</option>
         </select>
@@ -165,7 +165,7 @@ let all = (function () {
               <label for="" class="weui-label">费用选择</label>
             </div>
             <div class="weui-cell__bd">
-              <select class="weui-select" name="price" style="padding-left:1.6rem">
+              <select class="weui-select select-r" name="price">
                  ${clear(`${applyInfo.Price.map(key => `
                  <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
                  `)}`)}                              
@@ -178,7 +178,7 @@ let all = (function () {
             <label for="" class="weui-label">费用</label>
           </div>
           <div class="weui-cell__bd">
-            <select class="weui-select" name="price" style="padding-left:1.6rem">
+            <select class="weui-select select-r" name="price">
                 ${applyInfo.Price.map(key => `
                 <option value="${key.Priceid}">${key.Pricename}￥${key.Price}</option>
                 `)}                                      
@@ -209,7 +209,7 @@ let all = (function () {
                 <label for="" class="weui-label myopt-title">${key}</label>
             </div>
             <div class="weui-cell__bd">
-                <select class="weui-select" style="padding-left:1.6rem" name="myopts-item" data-text='${key}'>
+                <select class="weui-select select-r" name="myopts-item" data-text='${key}'>
                    ${clear(`${obj[key].map(item => `
                    <option value="${item}">${item}</option>
                   `)}`)}

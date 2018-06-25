@@ -90,6 +90,10 @@ const pages = [ // 页面配置写在这里
   {
     title: '报名管理',
     pageName: 'act-apply-mag'
+  },
+  {
+    title: '我的俱乐部',
+    pageName: 'my-club'
   }
 ]
 const dependencies = [ // 依赖的全局js

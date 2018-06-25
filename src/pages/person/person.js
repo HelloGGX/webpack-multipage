@@ -19,6 +19,8 @@ let all = (function () {
         $('.per-head img').attr('src', data.user_img)
         $('.per-text h3').text(data.user_nice)
         $('.per-text p').text(`用户ID:${data.user_id}`)
+        $($('.Alldata .data-item')[0]).find('h3').html(data.user_act)
+        $($('.Alldata .data-item')[3]).find('h3').html(data.user_club)
       }).catch(errMsg => {
         console.log(errMsg)
       })

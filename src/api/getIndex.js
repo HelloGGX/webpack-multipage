@@ -44,7 +44,8 @@ let magAct = {// 管理活动
       showLoading: true
     }))
   },
-  editApply (data) { // 修改报名成员填写信息
+  editApply (e) { // 修改报名成员填写信息
+    let data = serializeObject(e)
     return db.handleRequest(db.request.post('editApply.php', {
       data: data,
       showLoading: true

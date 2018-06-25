@@ -8,6 +8,7 @@ import {getQueryString, clear, itemtoArraytop, converToDate} from 'common/js/dom
 let all = (function () {
   let Home = {
     DATA: null,
+    applyItem: {},
     realNameTemp (data) { // 真实姓名
       return `<div class="weui-cell">
       <div class="weui-cell__hd"><label class="weui-label">真实姓名</label></div>
@@ -74,6 +75,7 @@ let all = (function () {
       let obj = JSON.parse(data.customOpt)
       let html = ''
       let selected = JSON.parse(data.customSelect)
+      this.applyItem = obj
       for (let key in obj) {
         let arr = itemtoArraytop(obj[key], obj[key].indexOf(selected[key]))
         html += `<div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -102,7 +104,7 @@ let all = (function () {
         this.edit(e)
       })
       $('.apply-mag-lists').on('click', '.btn-confirm', (e) => {
-        this._postEdit($(e.currentTarget).attr('data-id'))
+        this._postEdit($(e.currentTarget).parents('.form-bb'))
       })
     },
     formTemp (data, i) {
@@ -138,7 +140,10 @@ let all = (function () {
               <label for="" class="weui-label myopt-title f-m" style="color:#e02e24">报名成功</label>
           </div>
           <div class="weui-cell__bd text-right">
-            <a class="btn-edit" data-id='${guests[i].guest_id}'>修改资料</a>
+            <input type="hidden" name="actId" value="${getQueryString('id')}">
+            <input type="hidden" name="guestId" value="${guests[i].guest_id}">
+            <input type="hidden" name="customize-opts">
+            <a class="btn-edit">修改资料</a>
             <a class="btn-cancel" data-id='${guests[i].guest_id}'>取消报名</a>
           </div>
         </div>`
@@ -187,8 +192,19 @@ let all = (function () {
         })
       }, 'aler')
     },
-    _postEdit (guestId) {
-      model.magAct.editApply({id: getQueryString('id'), guestId: guestId}).then(res => {
+    _postEdit (e) {
+      let keys = []
+      for (let key in this.applyItem) {
+        if (this.applyItem.hasOwnProperty(key)) {
+          keys.push(key)
+        }
+      }
+      for (let i = 0; i < keys.length; i++) {
+        this.applyItem[keys[i]] = $($(e).find('select[name=myopts-item]')[i]).val()
+      }
+      $('input[name=customize-opts]').val(JSON.stringify(this.applyItem))
+
+      model.magAct.editApply(e).then(res => {
         if (res.state === 'ok') {
           weui.alert('报名成员修改成功')
           this._getApplyHelp()

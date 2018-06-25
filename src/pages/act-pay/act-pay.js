@@ -11,6 +11,24 @@ let all = (function () {
       $('.payways-main-li').on('click', (e) => {
         $(e.currentTarget).find('label').addClass('active').parents('.payways-main-li').siblings().find('label').removeClass('active')
       })
+      $('.banner-left').on('click', (e) => {
+        weui.confirm('确定要离开吗？', {
+          title: '提示',
+          buttons: [{
+            label: '去意已决',
+            type: 'primary',
+            onClick: function () {
+              window.location.href = 'orders.html?type=pend'
+            }
+          }, {
+            label: '再想想',
+            type: 'default',
+            onClick: function () {
+
+            }
+          }]
+        })
+      })
       this._getApplySuccess()
     },
     _guestTemp (data) {

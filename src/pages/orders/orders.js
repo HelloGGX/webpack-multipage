@@ -4,7 +4,8 @@ import 'components/tabs/tabs.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from '../../api/getIndex'
-import {getQueryString, resetTime, clear} from 'common/js/dom'
+import '../../vendor/leftTime.min'
+import {getQueryString, clear} from 'common/js/dom'
 
 let all = (function () {
   let TYPE = getQueryString('type')
@@ -27,6 +28,7 @@ let all = (function () {
     pageInit () {
       allData.init()
       this.switch()
+
       $('body').on('click', '.cancel', (e) => {
         this.cancelOrder(e)
       })
@@ -37,7 +39,6 @@ let all = (function () {
     },
     _temple (i, data, type) { // 模板
       return `<div class="orders-item"  data="${i}">
-      
       <div class="item-top-block">
         <div class="mall-name">
           <span class="mall-name-text"> ${data[i].order_actop}</span>
@@ -74,13 +75,20 @@ let all = (function () {
       </p>
     </div>
     <div class="button-block">
-      <p>活动名额保留:<span>${resetTime(1800)}</span></p>
+      <p>活动名额保留:<span></span></p>
       <div class="orders-button">
         ${data[i].order_paystate === '1' ? `<a class="delete" data-id="${data[i].order_id}"></a><a class="again"></a>` : `<a class="cancel" data-id="${data[i].order_id}"></a><a class="go-pay"></a>`}
       </div>
     </div>`}
    
     </div>`
+    },
+    leftTime (e, time) {
+      $.leftTime(time, (d) => {
+        if (d.status) {
+          $(e).html(`${d.m}分${d.s}秒`)
+        }
+      })
     },
     reasonListTemp () { // 组列表模板
       const data = [
@@ -111,6 +119,8 @@ let all = (function () {
           onClick: function () {
             model.orders.deleteOrder({orderId: orderId}).then(res => {
               if (res.state === 'ok') {
+                $('#order-grid').html()
+                allData._getOrderData()
                 weui.alert('订单删除成功')
               }
             }).catch(errMsg => {
@@ -133,6 +143,8 @@ let all = (function () {
             let reason = $(elem.currentTarget).html()
             model.orders.cancelOrder({orderId: orderId, reason: reason}).then(res => {
               if (res.state === 'ok') {
+                $('#order-grid').html()
+                allData._getOrderData()
                 weui.alert('订单取消成功')
               }
             }).catch(errMsg => {
@@ -146,7 +158,7 @@ let all = (function () {
       let newdata
       let _html = ''
       newdata = data[TYPE]
-      console.log(TYPE)
+
       if (newdata === null) {
         $('#order-grid').html(`<div class="nothing-text">
         <div class="nothing-img"></div>
@@ -159,6 +171,9 @@ let all = (function () {
         }
         $('#order-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
         $(`#${TYPE}`).html(_html)
+        for (let i = 0; i < len; i++) {
+          this.leftTime($(`#${TYPE}`).find('.button-block p span')[i], newdata[i].order_regdate)
+        }
         $(document.getElementById(TYPE)).show().siblings().hide()
       }
     },

@@ -93,7 +93,35 @@ const pages = [ // 页面配置写在这里
   },
   {
     title: '我的俱乐部',
-    pageName: 'my-club'
+    pageName: 'club-my'
+  },
+  {
+    title: '发布游记',
+    pageName: 'travel-release'
+  },
+  {
+    title: '游记列表',
+    pageName: 'travel-list'
+  },
+  {
+    title: '游记详情',
+    pageName: 'travel-detail'
+  },
+  {
+    title: '活动收款',
+    pageName: 'act-receipt'
+  },
+  {
+    title: '俱乐部管理',
+    pageName: 'club-mag'
+  },
+  {
+    title: '会员管理',
+    pageName: 'member-mag'
+  },
+  {
+    title: '签到',
+    pageName: 'sign-in'
   }
 ]
 const dependencies = [ // 依赖的全局js

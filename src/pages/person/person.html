@@ -43,25 +43,25 @@
                                             <!-- Each "cell" has col-[widht in percents] class -->
                                             <div class="data-item col-25">
                                                 <a href="act-mag.html">
-                                                    <h3 class="high-grey">700</h3>
+                                                    <h3 class="high-grey">0</h3>
                                                     <p>活动</p>
                                                 </a>
                                             </div>
                                             <div class="data-item col-25">
-                                                <a>
-                                                    <h3 class="high-grey">100</h3>
+                                                <a href="travel-list.html">
+                                                    <h3 class="high-grey">0</h3>
                                                     <p>游记</p>
                                                 </a>
                                             </div>
                                             <div class="data-item col-25">
                                                 <a class="">
-                                                    <h3 class="high-grey">200</h3>
+                                                    <h3 class="high-grey">0</h3>
                                                     <p>花絮</p>
                                                 </a>
                                             </div>
                                             <div class="data-item col-25">
-                                                <a class="">
-                                                    <h3 class="high-grey">1</h3>
+                                                <a href="club-my.html">
+                                                    <h3 class="high-grey">0</h3>
                                                     <p>俱乐部</p>
                                                 </a>
                                             </div>
@@ -119,14 +119,32 @@
                                             <a class="weui-cell weui-cell_access" href="javascript:;">
                                                 <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-jf.png')%>" alt=""></div>
                                                 <div class="weui-cell__bd f-m-x">
-                                                    <p>我的积分</p>
+                                                    <p>我的积分<span id="integral" class="fright">0</span></p>
                                                 </div>
                                             </a>
-                                            <div class="weui-btn-area quit">
-                                                <a class="weui-btn weui-btn_default">退出登录</a>
-                                            </div>
+                                           
                                     </section>
-                                    
+                                    <div class="line"></div>
+                                    <section class="weui-cells margin">
+                                        <a class="weui-cell weui-cell_access" href="club-mag.html">
+                                            <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/club-mag.png')%>" alt=""></div>
+                                            <div class="weui-cell__bd f-m-x">
+                                                <p>俱乐部申请</p>
+                                            </div>
+                                        </a>
+                                       
+                                    </section>
+                                    <section class="weui-cells margin">
+                                        <a class="weui-cell weui-cell_access" href="member-mag.html">
+                                            <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/club-mag.png')%>" alt=""></div>
+                                            <div class="weui-cell__bd f-m-x">
+                                                <p>会员管理</p>
+                                            </div>
+                                        </a>
+                                        <div class="weui-btn-area quit">
+                                            <a class="weui-btn weui-btn_default">退出登录</a>
+                                        </div>
+                                    </section>
                                 </div>
                             </div>
                         </div>

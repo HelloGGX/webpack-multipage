@@ -1,0 +1,66 @@
+@import '../../common/css/variable.less';
+
+.btn-refund-group{
+    height: .44rem;
+    line-height: .44rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    .btn-refund-item{
+        color: @color-theme;
+        font-size:@font-size-medium-x;
+        button{
+            background-color: #fff;
+            width: 100%;
+            &:last-child{
+                border-right: 1px solid #dedede;
+            }
+        }
+    }
+}
+.pend-g,.pass-g{
+    height: auto;
+    background-color: #f2f2f2;
+    padding: .05rem 0;
+}
+.tit-group{
+    height: .34rem;
+    padding: 0 .1rem;
+    position: relative;
+    .txt-group{
+        line-height: .34rem;
+        float: left;
+        span{
+
+        }
+    }
+    i{
+        float: right;
+        font-size: 20px;
+    }
+}
+.pend-item{
+    .pend-item-head{
+        img{
+            width: 0.3rem;
+            height: 0.3rem;
+        }
+        span{
+            line-height: 0.44rem
+        }
+    }
+}
+.load-more{
+    text-align: center;
+    .btn-load{
+        i{
+            font-size: 26px;
+            font-weight: bold;
+        }
+    }
+}
+.all-load{
+    text-align: center;
+    line-height: 0.5rem;
+    font-size: 14px;
+}

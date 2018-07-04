@@ -10,7 +10,7 @@ import {gallery} from 'components/gallery/gallery'
 import {judgeLogin} from 'components/judgeLogin/judge-login'
 
 let all = (function () {
-  let DATA
+  // let DATA
   let uploadAlumb = {
     init () {
       $('#BtnUpload').on('click', () => {
@@ -46,6 +46,7 @@ let all = (function () {
         customBtn: 'uploaderCustomBtn',
         okCallBack: () => {
           _thi.hide()
+          window.location.reload()
         }})
     },
     hide () {
@@ -59,7 +60,7 @@ let all = (function () {
           <p>${transDate(data[i].time)}</p>
       </div>
       <div class="album-photos">
-          <ul class="clearfix">
+          <ul class="clearfix" data-album="${i}">
             ${data[i].url.map(key => `
             <li>
               <div class="album-photo">
@@ -74,25 +75,22 @@ let all = (function () {
     pageInit: function () {
       uploadAlumb.init()
       this._getAlbumData()
-      $('#album-container').on('click', '.album-photos li', (e) => {
-        gallery.init(DATA, e)
-      })
     },
     _getAlbumData () {
       model.getAlbumData({albumId: getQueryString('albumId')}).then((data) => {
         let newdata
         let _html = ''
         newdata = data['albums']
-        DATA = newdata
-
+        // DATA = newdata
+        gallery.init(newdata)
         let len = newdata.length
         for (let i = 0; i < len; i++) {
-          _html = clear(this.albumTemp(i, newdata))
-          $('#album-container').append(_html)
-          $('.album-photos li').css('height', $('.album-photos li').width())
+          _html += clear(this.albumTemp(i, newdata))
         }
+        $('#album-container').html(_html)
+        $('.album-photos li').css('height', $('.album-photos li').width())
       }).catch((errmsg) => {
-
+        weui.alert(errmsg)
       })
     }
   }

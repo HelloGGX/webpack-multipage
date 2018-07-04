@@ -4,6 +4,7 @@ import $ from 'jquery'
 import weui from 'weui.js'
 import {imgSuffix} from 'common/js/dom'
 import {judgeLogin} from 'components/judgeLogin/judge-login'
+import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   const DIRECTION_H = 'horizontal'
@@ -12,6 +13,23 @@ let all = (function () {
   let allData = {
     init () {
       this._getIndexData()
+      bubb.init(() => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            this._getIndexData()
+          })
+        }, 800)
+      }, () => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            this._getIndexData()
+          })
+        }, 800)
+      })
     },
     _getIndexData () {
       judgeLogin((res) => { // 判断是否登陆
@@ -26,6 +44,9 @@ let all = (function () {
             } else {
               window.location.href = 'act-create.html'
             }
+          }
+          if ($(e.currentTarget).data('index') === 8) {
+            window.location.href = 'club-create.html'
           }
         })
       }, () => { // 未登陆时候
@@ -237,7 +258,7 @@ let all = (function () {
                       <a href="act-detail.html?id=${thi.areadata[i].id}">
                       <div class="store-content">
                           <div class="goods-image">
-                              <div class="image-container" style="background-image:url(${imgSuffix(thi.areadata[i].imgsrc, 3)})">
+                              <div class="image-container" style="background-image:url(${imgSuffix(thi.areadata[i].imgsrc, 2)})">
                                   
                               </div>
                           </div>
@@ -245,7 +266,7 @@ let all = (function () {
                               <p class="goods-name">${thi.areadata[i].name}</p>
                               <div class="goods-content">
                                   <p class="goods-sales">${thi.areadata[i].time}</p>
-                                  <p class="goods-sales">活动积分${thi.areadata[i].integral}</p>
+                                  <p class="goods-sales">活动积分${thi.areadata[i].integral} <span>活动等级${thi.areadata[i].act_level}</span></p>
                               </div>
                               <del class="goods-market-price">${thi.areadata[i].marprice}</del>
                               <div class="discount-price"><i>￥</i>${thi.areadata[i].disprice}</div>

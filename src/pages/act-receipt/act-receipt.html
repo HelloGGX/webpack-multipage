@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-white">
+                            <div class="content-inner">
+                                <div>
+                                    <div class="pay-act">
+                                        <a href="">
+                                            <div class="pay-act-title" id="actTitle"></div>
+                                            <p class="pay-act-time"></p>
+                                            <p class="pay-act-time"></p>
+                                            <i class="iconfont icon-enter"></i>
+                                        </a>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="receipt-num">
+                                        <p></p>
+                                    </div>
+                                    <div class="apply-g">
+                                        <div class="tit-group">
+                                            <div class="txt-group icon-red f-s"><span class="apply-len"></span>已经确认报名</div>
+                                            <i class="iconfont icon-packup"></i>
+                                        </div>
+                                        <div class="weui-cells margin apply-lists">
+                                            
+                                        </div>
+                                        <div class="weui-cells margin load-more paid-more">
+                                            <a class="btn-load"> <i class="iconfont icon-more"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="refund-g">
+                                        <div class="tit-group">
+                                            <div class="txt-group icon-red f-s"><span class="refund-len"></span>已退款</div>
+                                            <i class="iconfont icon-packup"></i>
+                                        </div>
+                                        <div class="weui-cells margin refund-lists"> 
+                                            
+                                        </div>
+                                        <div class="weui-cells margin load-more refund-more">
+                                            <a class="btn-load"> <i class="iconfont icon-more"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

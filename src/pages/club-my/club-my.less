@@ -1,0 +1,114 @@
+@import '../../common/css/variable.less';
+#my-club{
+    margin-top: 0.6rem;
+    padding-bottom: 1rem;
+}
+.bg-club{
+    background-image: url('../../imgs/bg/wallpaper.jpg');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100%;
+}
+.banner-opacity{
+    background-color:rgba(0, 0, 0, 0,0)!important;
+    box-shadow: none!important;
+    .banner-tit{
+        color:#fff;
+    }
+}
+.per-info{
+    .per-head{
+        width: 100%;
+    text-align: center;
+    height: 0.8rem;
+        a{
+            width: 0.8rem;
+            height: 0.8rem;
+            overflow: hidden;
+            border-radius: 50%;
+            display: block;
+            border: 2px solid #fff;
+            margin: .7rem 0.6rem 0;;
+            position: relative;
+            img{
+
+            }
+        }
+    }
+    
+  
+}
+.club-lists{
+    margin-top: 0.8rem;
+    ul{
+        padding: 0 0.06rem;
+        li{
+            height: 0.8rem;
+            background-color: #63a594;
+            position: relative;
+            margin: 0.06rem 0;
+            .dots {
+                width: 0.2rem;
+                height: 0.2rem;
+                border-radius: 50%;
+                position: absolute;
+                background-color: #4a6377;
+                &:nth-child(1) {
+                    left: -.1rem;
+                    top: 40%;
+                    box-shadow: -1px 0px 1px rgba(74, 99, 119, 0.23) inset;
+                }
+                &:nth-child(2) {
+                    right: -.1rem;
+                    top: 40%;
+                    box-shadow: 1px 0px 1px rgba(74, 99, 119, 0.23) inset
+                }
+            }
+        }
+        .club-item{
+            padding: 0.05rem 0.2rem;
+            color:#fff;
+            background-image:url('../../imgs/bg/bg-myclub@2x.png');
+            background-size: cover;
+            background-position: 0 0;
+            background-repeat: repeat-x;
+            .club-logo {
+                float: left;
+                width: 0.44rem;
+                height: 0.44rem;
+                overflow: hidden;
+                border-radius: 50%;
+                margin-top: 0.1rem;
+                margin-right: 0.1rem;
+            }
+            .club-info{
+                .club-title{
+                    font-size: 18px;
+                    color: #fff;
+                    line-height: 0.4rem;
+                    p{
+    
+                    }
+                }
+                .club-id{
+                    p{
+    
+                    }
+                }
+            }
+            
+            .vip{
+                position: absolute;
+                right: 0.2rem;
+                top: 0.08rem;
+                text-align: center;
+                img{
+                    width: 0.5rem;
+                }
+                p{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

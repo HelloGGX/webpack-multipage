@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-white">
+                            <div class="content-inner">
+                                <div>
+                                    <section class="new-con">
+                                        <div class="new-title f-l"></div>
+                                        <div class="new-head clearfix">
+                                            <div class="new-pic"><img src="" alt=""></div>
+                                            <span></span>
+                                        </div>
+                                        <div class="new-txt">
+
+                                        </div>
+                                        <div class="weui-cells__title">来自活动</div>
+                                        <div id="linkAct"></div>
+                                    </section>
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-tabbar">
+                        <div class="btn-refund-group weui-flex">
+                            <div class="btn-refund-item weui-flex__item">
+                                <button id="edit" type="button">编辑</button>
+                            </div>
+                            <div class="btn-refund-item weui-flex__item">
+                                <button id="delete" type="button">删除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

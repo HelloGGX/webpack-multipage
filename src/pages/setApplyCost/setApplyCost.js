@@ -1,6 +1,6 @@
 import './setApplyCost.less'
 import $ from 'jquery'
-import weui from 'weui.js'
+import weui from '../../../node_modules/_weui.js@1.1.3@weui.js'
 import {Trim} from '../../common/js/dom'
 import {pickerData} from 'components/picker/picker'
 

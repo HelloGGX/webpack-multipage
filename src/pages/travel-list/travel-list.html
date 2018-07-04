@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-white">
+                            <div class="content-inner">
+                                <div>
+                                    <div class="weui-btn-area">
+                                        <a id="pubilcTrav" href="travel-release.html"  class="weui-btn weui-btn_primary">发布游记</a> 
+                                    </div>
+                                   <div class="travel-lists">
+                                        <div id="news" class="stores">
+                                            
+                                        </div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

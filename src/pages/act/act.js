@@ -4,6 +4,7 @@ import model from '../../api/getIndex'
 import $ from 'jquery'
 import weui from 'weui.js'
 import {imgSuffix} from 'common/js/dom'
+import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = 'city'
@@ -11,6 +12,23 @@ let all = (function () {
   let allData = {// 获取该页所有数据
     init () {
       this._getActData()
+      bubb.init(() => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            this._getActData()
+          })
+        }, 800)
+      }, () => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            this._getActData()
+          })
+        }, 800)
+      })
     },
     _getActData () {
       model.getActData().then((data) => { // 获取数据成功时的处理逻辑
@@ -31,7 +49,7 @@ let all = (function () {
             <a href="act-detail.html?id=${data[i].id}">
             <div class="store-content">
                 <div class="goods-image">
-                    <div class="image-container" style="background-image:url(${imgSuffix(data[i].imgsrc, 3)})">
+                    <div class="image-container" style="background-image:url(${imgSuffix(data[i].imgsrc, 2)})">
                        
                     </div>
                 </div>
@@ -39,7 +57,7 @@ let all = (function () {
                     <p class="goods-name">${data[i].name}</p>
                     <div class="goods-content">
                         <p class="goods-sales">活动时间${data[i].time}</p>
-                        <p class="goods-sales">活动积分${data[i].integral}</p>
+                        <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].act_level}</span></p>
                     </div>
                     <del class="goods-market-price">${data[i].price}</del>
                     <div class="discount-price"><i>￥</i>${data[i].price}</div>
@@ -53,6 +71,7 @@ let all = (function () {
       let newdata
       let _html = ''
       newdata = data[TYPE]
+
       if (newdata === null) {
         $('#act-grid').html(`<div class="nothing-text">
         <div class="nothing-img"></div>
@@ -61,7 +80,7 @@ let all = (function () {
       } else {
         let len = newdata.length
         for (let i = 0; i < len; i++) {
-          _html += Home._temple(i, newdata)
+          _html += this._temple(i, newdata)
         }
         $('#act-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
         $('#' + TYPE).html(_html)

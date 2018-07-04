@@ -56,10 +56,27 @@ export function luhmCheck (bankno) {
   }
 }
 
+export function jugePhone () { // 判断页面是在移动端还是PC端打开
+  console.log(navigator.userAgent)
+  return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+}
+
 export function imgSuffix (url, num) {
-  let reg = /(.jpg)$/g
+  let reg = /.(jpg|png|jpeg|bmp|gif)$/g
   let newurl = url.replace(reg, '')
-  newurl += `@${num}x.jpg`
+  let match = url.match(reg)
+  if (match[0] === '.jpg') {
+    newurl += `@${num}x.jpg`
+  } else if (match[0] === '.png') {
+    newurl += `@${num}x.png`
+  } else if (match[0] === '.jpeg') {
+    newurl += `@${num}x.jpeg`
+  } else if (match[0] === '.bmp') {
+    newurl += `@${num}x.bmp`
+  } else if (match[0] === '.gif') {
+    newurl += `@${num}x.gif`
+  }
+
   return newurl
 }
 export function itemtoArraytop (Arr, index) {
@@ -185,21 +202,21 @@ export function transDate ($time) {
   // let year = tt.getFullYear()
   let mouth = tt.getMonth() + 1
   let day = tt.getDate()
-  let time = tt.getHours() < 10 ? '0' + tt.getHours() : tt.getHours()
-  let min = tt.getMinutes() < 10 ? '0' + tt.getMinutes() : tt.getMinutes()
+  // let time = tt.getHours() < 10 ? '0' + tt.getHours() : tt.getHours()
+  // let min = tt.getMinutes() < 10 ? '0' + tt.getMinutes() : tt.getMinutes()
   let result
   let offset
   offset = Math.abs(today - day)
   if (days < 3 && offset < 3) {
     if (offset === 0) {
-      result = '今天' + time + ':' + min
+      result = '今天'
     } else if (offset === 1) {
-      result = '昨天' + time + ':' + min
+      result = '昨天'
     } else if (offset === 2) {
-      result = '前天' + time + ':' + min
+      result = '前天'
     }
   } else {
-    result = mouth + '-' + day + ' ' + time + ':' + min
+    result = mouth + '-' + day
   }
   return result
 }

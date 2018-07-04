@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+        <div id="index-content-v2" class="padding">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                  
+                    <div class="content bg-grey" style="padding-bottom: 0.44rem;">
+                        <div class="content-inner">
+                            <div>
+                                <form action="" method="post" id="traRelease">
+                                    <div class="weui-cells">
+                                        <div class="weui-cell">
+                                            <div class="weui-cell__hd"><label class="weui-label">标题</label></div>
+                                            <div class="weui-cell__bd f-m-x">
+                                                <input class="weui-input text-right" required="" type="text" maxlength="30" name="travelTitle"  placeholder="限30个字" emptytips="游记标题不能是空的">
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="editor">
+                                        <div id="editor"></div>
+                                        <div class="linked">
+                                            <i class="iconfont icon-label_fill"></i>
+                                            <span>关联活动</span>
+                                        </div>
+                                        <div class="link-act weui-cells margin">
+                                           
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="weui-cells weui-cells_form margin" id="thumUploader">
+                                                <input type="hidden" name="hdimg" required="" emptytips="请上传游记封面">
+                                                <div class="weui-cell weui-cell_select weui-cell_select-after actCover">
+                                                    <div class="weui-cell__hd">
+                                                        <label for="" class="weui-label">游记封面</label>
+                                                    </div>
+                                                    <div class="weui-cell__bd">
+                                                        <div class="weui-select text-right" data-name="cover">
+                                                            <div class="weui-uploader">
+                                                                <div class="weui-uploader__bd">
+                                                                    <ul class="weui-uploader__files img-covers uploaderFiles" id="uploaderFiles">
+    
+                                                                    </ul>
+                                                                    <div class="weui-uploader__input-box fright uploade-cover">
+                                                                        <input id="uploaderInput" name="imgfile" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="weui-cells__title">未设置时将默认使用正文第一张图片作为封面</div>
+                                        <div class="weui-cell weui-cell_switch">
+                                            <div class="weui-cell__bd">我要投稿</div>
+                                            <div class="weui-cell__ft">
+                                                <input class="weui-switch" name="publication" type="checkbox" value="否">
+                                            </div>
+                                        </div>
+                                        <a class="weui-cell weui-cell_access club-from" style="display: none">
+                                            <input type="hidden" name="linkClubId">
+                                            <div class="weui-cell__bd">
+                                                <p>来自</p>
+                                            </div>
+                                            <div class="weui-cell__ft"></div>
+                                            
+                                        </a>
+                                        <div class="weui-cells__title">游记投稿后如不违规将会出现在游记栏目中,经过资讯编辑部的审核后，优秀的作品会被推荐至资讯栏目</div>
+                                    </div>
+                                    <div class="weui-btn-area"> 
+                                        <a id="btn-public"  class="weui-btn weui-btn_primary">提交</a>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

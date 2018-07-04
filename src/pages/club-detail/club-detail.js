@@ -7,6 +7,7 @@ import weui from 'weui.js'
 import model from 'api/getIndex'
 import {getQueryString, clear, imgSuffix} from 'common/js/dom'
 import {judgeLogin} from 'components/judgeLogin/judge-login'
+import work from 'webworkify-webpack'
 
 let all = (function () {
   let DATA
@@ -37,6 +38,7 @@ let all = (function () {
       $('#coverClubMotto').html(data.club_motto)
       $('#coverClubIntr p').text(data.club_intr)
       $('#coverClubMember').html(`<p>俱乐部成员${data.club_renshu}</p>`)
+      $('.club-acts-num span').html(data.club_acts.length)
     }
   }
   let Home = {
@@ -198,14 +200,15 @@ let all = (function () {
             <a href="act-detail.html?id=${data[i].id}">
             <div class="store-content">
                 <div class="goods-image">
-                    <div class="image-container">
-                        <img src=${data[i].imgsrc} alt="">
+                    <div class="image-container" style="background-image:url(${imgSuffix(data[i].imgsrc, 2)})">
+                      
                     </div>
                 </div>
                 <div class="goods-detail">
                     <p class="goods-name">${data[i].name}</p>
                     <div class="goods-content">
                         <p class="goods-sales">活动时间${data[i].time}</p>
+                        <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].act_level}</span></p>
                     </div>
                     <div class="goods-market-price">报名人数:${data[i].apply_num}</div>
                     <div class="discount-price"><i>￥</i>${data[i].price}</div>
@@ -216,6 +219,11 @@ let all = (function () {
             </div>`
     },
     _getClubInfo (data) {
+      let w = work(require.resolve('./calculate.js'))// 多线程计算报名人数总值
+      w.postMessage([data])
+      w.addEventListener('message', event => {
+        $('.club-people-num span').html(event.data[0])
+      })
       $('.club-logo').css('background-image', `url(${data.thumb_logo})`)
       $('.club-motto p').text(data.club_motto)
       $('.club-name').html(data.club_name)

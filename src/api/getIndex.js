@@ -35,6 +35,42 @@ let person = {// 个人资料管理（资料获取，编辑）
       showLoading: true
     }))
   }
+
+}
+
+let travel = {// 游记相关
+  postTravel (e) { // 提交游记
+    let data = serializeObject(e)
+    console.log(data)
+    return db.handleRequest(db.request.post('postTravel.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  linkAct (data) { // 关联活动
+    return db.handleRequest(db.request.get('linkAct.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  getMyClub (data) { // 获取用户所在俱乐部信息
+    return db.handleRequest(db.request.get('getMyClub.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  getTravelList (data) {
+    return db.handleRequest(db.request.get('getTravelList.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  getTravelDetail (data) {
+    return db.handleRequest(db.request.get('getTravelDetail.php', {
+      params: data,
+      showLoading: true
+    }))
+  }
 }
 
 let magAct = {// 管理活动
@@ -83,7 +119,6 @@ let magAct = {// 管理活动
       showLoading: true
     }))
   },
-
   addPer (e) { // 添加报名成员
     let data = serializeObject(e)
     return db.handleRequest(db.request.post('addPer.php', {
@@ -151,7 +186,13 @@ let magAct = {// 管理活动
   }
 }
 
-let orders = {
+let orders = {// 订单
+  getReceipt (data) { // 获取活动订单收款信息
+    return db.handleRequest(db.request.get('getReceipt.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
   getOrderData (data) { // 获取订单数据
     return db.handleRequest(db.request.get('getOrderData.php', {
       params: data,
@@ -169,12 +210,63 @@ let orders = {
       params: data,
       showLoading: true
     }))
+  },
+  getRefund (data) { // 获取退款
+    return db.handleRequest(db.request.get('getRefund.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  refund (data) { // 退款申请通过还是不通过
+    return db.handleRequest(db.request.post('refund.php', {
+      data: data,
+      showLoading: true
+    }))
+  }
+}
+
+let mag = {// 管理员管理审核
+  getCheckClub (data) { // 获取申请为俱乐部的成员
+    return db.handleRequest(db.request.get('getCheckClub.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  checkClub (data) { // 审核俱乐部成立申请
+    return db.handleRequest(db.request.post('checkClub.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  getMember (data) { // 获取俱乐部成员
+    return db.handleRequest(db.request.get('getMember.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  checkMember (data) { // 审核俱乐部成员
+    return db.handleRequest(db.request.post('checkMember.php', {
+      data: data,
+      showLoading: true
+    }))
+  }
+}
+
+let pay = {// 支付相关
+  postPay (data) { // 支付
+    return db.handleRequest(db.request.post('postPay.php', {
+      data: data,
+      showLoading: true
+    }))
   }
 }
 export default {
   magAct,
   person,
   orders,
+  travel,
+  pay,
+  mag,
   getMagInfo (data) { // 获取活动详情数据和报名选项数据
     return db.handleAll([this.getActDetailData(data), this.getApplyData(data)])
   },

@@ -1,0 +1,98 @@
+@import '../../common/css/variable.less';
+
+.pay-act{
+    text-align: left;
+    margin: 0 0 0 15px;
+    line-height: 20px;
+    padding-top: 15px;
+    padding-bottom: 0.1rem;
+    position: relative;
+    i{
+        position: absolute;
+        right: 0.1rem;
+        top: 50%;
+        font-size: 0.24rem;
+    }
+    .pay-act-title{
+        font-size: @font-size-medium-x;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+    }
+    .pay-act-time{
+        color: #8e8e8e;
+        font-size:@font-size-small;
+        margin: 0 0.1rem 0;
+    }
+}
+.receipt-num{
+    text-align: center;
+    line-height: 0.44rem;
+    font-size: 18px;
+    padding: 0.1rem 0;
+   
+}
+.apply-g,.refund-g{
+    height: auto;
+    background-color: #f2f2f2;
+    padding: .05rem 0;
+}
+.tit-group{
+    height: .34rem;
+    padding: 0 .1rem;
+    position: relative;
+    .txt-group{
+        line-height: .34rem;
+        float: left;
+        span{
+
+        }
+        .apply-len{
+
+        }
+    }
+    i{
+        float: right;
+        font-size: 20px;
+    }
+}
+.refund-lists,.apply-lists{
+    .apply-item,.refund-item{
+        border-bottom: 1px solid #f2f2f2;
+        .per-head{
+            margin-right: 0.1rem;
+            img{
+                width: 40px;margin-right:5px;display:block;
+            }
+        }
+        .per-name{
+            font-size: @font-size-medium-x
+        }
+        .per-bbname{
+            font-size: @font-size-medium;
+            color:@color-dialog-background
+        }
+        .per-apply-cost{
+            font-size: 18px;
+            color: @color-theme;
+            font-weight: bold;
+        }
+        .per-pay-way{
+            font-size: @font-size-medium;
+        }
+    }
+}
+
+.load-more{
+    text-align: center;
+    .btn-load{
+        i{
+            font-size: 26px;
+            font-weight: bold;
+        }
+    }
+}
+.all-load{
+    text-align: center;
+    line-height: 0.5rem;
+    font-size: 14px;
+}

@@ -1,0 +1,134 @@
+@import '../../common/css/variable.less';
+
+.check-club{
+    border-bottom: 1px solid #e8e8e8;
+    .check-club-logo{
+        position: relative;
+        img{
+            width: .44rem;
+            height: .44rem;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        span{
+            line-height: .44rem;
+            margin-left: .1rem;
+            color: #e02e24;
+        }
+        .check-time{
+            font-size:@font-size-small;
+            color: gray;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+    .check-club-detail{
+        font-size: @font-size-medium-x;
+        line-height: 40px;
+        color: #fd9715;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 70%;
+        button{
+            margin-left: 0.1rem;
+            border: 1px solid #fd9715;
+            background-color: #fff;
+            border-radius: 0.1rem;
+            padding: 0 0.08rem;
+            display: inline-block;
+            line-height: 0.25rem;
+        }
+    }
+}
+.check-slogan{
+    .slogan-txt{
+        font-size: @font-size-medium;
+        color: gray;
+        p{
+            line-height: 0.3rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 70%;
+        }
+    }
+    .check-club-type{
+        color: #e02e24;
+        font-size:@font-size-small;
+        margin: .1rem 0;
+        span{
+            border: 1px solid #e02e24;
+            border-radius: .12rem;
+            padding: .02rem .06rem;
+            margin-right: .04rem;
+        }
+    }
+}
+
+.btn-refund-group{
+    height: .44rem;
+    line-height: .44rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    .btn-refund-item{
+        color: @color-theme;
+        font-size:@font-size-medium-x;
+        button{
+            background-color: #fff;
+            width: 100%;
+            &:last-child{
+                border-right: 1px solid #dedede;
+            }
+        }
+    }
+}
+
+.pend-g,.pass-g{
+    height: auto;
+    background-color: #f2f2f2;
+    padding: .05rem 0;
+}
+.tit-group{
+    height: .34rem;
+    padding: 0 .1rem;
+    position: relative;
+    .txt-group{
+        line-height: .34rem;
+        float: left;
+        span{
+
+        }
+    }
+    i{
+        float: right;
+        font-size: 20px;
+    }
+}
+.pend-item{
+    .pend-item-head{
+        img{
+            width: 0.3rem;
+            height: 0.3rem;
+        }
+        span{
+            line-height: 0.44rem
+        }
+    }
+}
+.load-more{
+    text-align: center;
+    .btn-load{
+        i{
+            font-size: 26px;
+            font-weight: bold;
+        }
+    }
+}
+.all-load{
+    text-align: center;
+    line-height: 0.5rem;
+    font-size: 14px;
+}

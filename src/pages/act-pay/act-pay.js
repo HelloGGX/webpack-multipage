@@ -30,6 +30,9 @@ let all = (function () {
         })
       })
       this._getApplySuccess()
+      $('#payApply').on('click', () => {
+        this._postPay()
+      })
     },
     _guestTemp (data) {
       let mainPer = data[0].guestname
@@ -51,7 +54,15 @@ let all = (function () {
       </li>
       `)}`
     },
-
+    _postPay () {
+      model.pay.postPay({orderId: getQueryString('orderId')}).then(res => {
+        if (res.state === 'ok') {
+          weui.alert('支付成功')
+        }
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    },
     _getApplySuccess () {
       let _thi = this
       model.getApplySuccess({id: getQueryString('id'), clubId: getQueryString('clubId'), orderId: getQueryString('orderId')}).then(data => {

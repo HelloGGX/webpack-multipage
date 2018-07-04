@@ -5,6 +5,7 @@ import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
 import {imgSuffix} from 'common/js/dom'
+import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = 'city'
@@ -81,6 +82,23 @@ let all = (function () {
     pageInit: function () {
       search.init()
       this._getNewData()
+      bubb.init(() => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            this._getNewData()
+          })
+        }, 800)
+      }, () => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            this._getNewData()
+          })
+        }, 800)
+      })
       this.switch()
     },
     _temple: function (i, data) { // 模板

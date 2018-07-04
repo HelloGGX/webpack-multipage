@@ -138,6 +138,7 @@ class Upload {
       },
       onSuccess: function (ret) {
         _thi.urlArr.push(ret.imgurl)
+        console.log(ret)
         $(`#${_thi.id}`).find('input').first().val(_thi.urlArr)
 
         _thi.okCallBack(ret)

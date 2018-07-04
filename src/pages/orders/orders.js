@@ -6,6 +6,7 @@ import weui from 'weui.js'
 import model from '../../api/getIndex'
 import '../../vendor/leftTime.min'
 import {getQueryString, clear} from 'common/js/dom'
+import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = getQueryString('type')
@@ -28,7 +29,23 @@ let all = (function () {
     pageInit () {
       allData.init()
       this.switch()
-
+      bubb.init(() => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            allData.init()
+          })
+        }, 800)
+      }, () => {
+        var loading = weui.loading('loading')
+        setTimeout(() => {
+          loading.hide(() => {
+            bubb.update()
+            allData.init()
+          })
+        }, 800)
+      })
       $('body').on('click', '.cancel', (e) => {
         this.cancelOrder(e)
       })
@@ -46,9 +63,9 @@ let all = (function () {
           <p class="order-status">${type === 'receipt' ? `${data[i].act_apply > 0 ? `有人报名` : `暂时没人报名`}` : `${data[i].order_paystate === '1' ? '已付款' : '待付款'}`}</p>
         </div>
       </div>
-      <div class="item-goods">
-        <a href="act-detail.html?id=${type === 'receipt' ? `${data[i].order_id}` : `${data[i].order_actid}`}">
-        <img class="goods-img" src="${data[i].order_actimg}">
+      <div class="item-goods" style="${type === 'receipt' ? 'height: auto;' : ''}">
+        <a href="${type === 'receipt' ? `act-receipt.html?id=${data[i].order_id}` : `act-detail.html?id=${data[i].order_actid}`}">
+        ${type === 'receipt' ? `` : `<img class="goods-img" src="${data[i].order_actimg}">`}
         <div class="goods-name">
           <p>
         ${data[i].order_act}
@@ -75,9 +92,9 @@ let all = (function () {
       </p>
     </div>
     <div class="button-block">
-      <p>活动名额保留:<span></span></p>
+      ${type === 'pend' ? ` <p>活动名额保留:<span></span></p>` : ``}
       <div class="orders-button">
-        ${data[i].order_paystate === '1' ? `<a class="delete" data-id="${data[i].order_id}"></a><a class="again"></a>` : `<a class="cancel" data-id="${data[i].order_id}"></a><a class="go-pay"></a>`}
+        ${data[i].order_paystate === '1' ? `<a class="delete" data-id="${data[i].order_id}"></a><a class="again"></a>` : `<a class="cancel" data-id="${data[i].order_id}"></a><a href="act-pay.html?orderId=${data[i].order_id}" class="go-pay"></a>`}
       </div>
     </div>`}
    
@@ -171,8 +188,10 @@ let all = (function () {
         }
         $('#order-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
         $(`#${TYPE}`).html(_html)
-        for (let i = 0; i < len; i++) {
-          this.leftTime($(`#${TYPE}`).find('.button-block p span')[i], newdata[i].order_regdate)
+        if (TYPE === 'pend') {
+          for (let i = 0; i < len; i++) {
+            this.leftTime($(`#${TYPE}`).find('.button-block p span')[i], newdata[i].order_regdate)
+          }
         }
         $(document.getElementById(TYPE)).show().siblings().hide()
       }

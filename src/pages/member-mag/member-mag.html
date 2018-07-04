@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <%= require('html-loader!../../components/banner/banner.html')  %>
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-white">
+                            <div class="content-inner">
+                                <div>
+                                    <div class="weui-cells weui-cells_checkbox member-lists">
+                                        <div class="pending-g">
+                                            <div class="tit-group">
+                                                <div class="txt-group icon-red f-s"><span class="pend-len">0人</span>待审加入</div>
+                                                <i class="iconfont icon-packup"></i>
+                                            </div>
+                                            <div class="weui-cells margin pend-lists">
+                                                      
+                                            </div>
+                                            <div class="weui-cells margin load-more pend-more">
+                                                <a class="btn-load"> <i class="iconfont icon-more"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="pass-g">
+                                            <div class="tit-group">
+                                                <div class="txt-group icon-red f-s"><span class="pass-len">0人</span>已加入</div>
+                                                <i class="iconfont icon-packup"></i>
+                                            </div>
+                                            <div class="weui-cells margin pass-lists">
+                                                    
+                                            </div>
+                                            <div class="weui-cells margin load-more pass-more">
+                                                <a class="btn-load"><i class="iconfont icon-more"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-tabbar">
+                        <div class="btn-refund-group weui-flex">
+                            <div class="btn-refund-item weui-flex__item">
+                                <button id="refuse" type="button">拒绝</button>
+                            </div>
+                            <div class="btn-refund-item weui-flex__item">
+                                <button id="pass" type="button">通过</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

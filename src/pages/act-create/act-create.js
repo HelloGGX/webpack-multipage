@@ -4,7 +4,7 @@ import './act-create.less'
 import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
-import weui from 'weui.js'
+import weui from '../../../node_modules/_weui.js@1.1.3@weui.js'
 import {AddapplyOption, EditapplyOption} from '../addApplyOption/addApplyOption'// 引入增加和编辑报名选项的对象
 import {costWay} from '../setApplyCost/setApplyCost'// 引入费用设置的对象
 import model from 'api/getIndex'
@@ -246,29 +246,7 @@ let all = (function () {
         $('textarea[name=applyNotice]').val(actData.act_should_know)
         $('#actSubmit').text('确定')
         $('#actSave').hide()
-        // class Uploader1 extends upload {
-        //   constructor (maxLength = 3, size = 3, id = 'Detailuploader', urlArr = _thi.urlArr) {
-        //     super(maxLength, size, id, urlArr)// 调用父类的构造属性
-        //     this.maxLength = maxLength
-        //     this.size = size
-        //     this.id = id
-        //     this.urlArr = urlArr
-        //   }
-        // }
-        // class Uploader2 extends upload {
-        //   constructor (maxLength = 1, id = 'uploader', urlArr = _thi.thumbArr) {
-        //     super(maxLength, id, urlArr)
-        //     this.maxLength = maxLength
-        //     this.id = id
-        //     this.urlArr = urlArr
-        //   }
-        // }
-        // let Up1 = new Uploader1()
-        // let Up2 = new Uploader2()
-        // console.log(Up1)
-        // console.log(Up2)
-        // Up1.init()
-        // Up2.init()
+
         upload({maxLength: 3, size: 3, id: 'Detailuploader', urlArr: _thi.urlArr})
         upload({maxLength: 1, id: 'thumUploader', urlArr: _thi.thumbArr})
       }).catch(errMsg => {

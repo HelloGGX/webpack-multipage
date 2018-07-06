@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <%= require('html-loader!../../components/meta/meta.html')  %>
-    <title>
-        <%= htmlWebpackPlugin.options.title %>
-    </title>
-   
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
 </head>
 
 <body>
     <div class="page">
         <div id="index-content-v2">
             <div class="weui-tab">
-                 <!--顶部导航-->
-                 <div id="navbar" class="nav-bar-container sticky">
-                        <div class="viewport">
-                            <div class="list-wrapper">
-                                <div class="scroll-content">
-                                    <div>
-                                        <ul class="nav-bar-content" id="navbar-ul">
-                                    
-                                        </ul>
-                                    </div>
+                <!--顶部导航-->
+                <!-- <div id="navbar" class="nav-bar-container sticky">
+                    <div class="viewport">
+                        <div class="list-wrapper">
+                            <div class="scroll-content">
+                                <div>
+                                    <ul class="nav-bar-content" id="navbar-ul">
+
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div> -->
+                <div class="banner-container">
+                        <div class="banner">
+                            <div class="banner-icon-back banner-left"><i class="iconfont icon-coordinates"></i><span>成都</span></div>
+                            <div class="banner-tit banner-text"></div>
+                            <div class="banner-right"><a></a></div>
+                        </div>
+                    </div>
                 <div class="weui-tab__panel content-panel">
-                   
+
                     <div class="bubble-wrapper">
                         <div class="content-inner">
                             <div>
@@ -37,170 +45,133 @@
                                         <div id="rp-banner" class="rp-banner slider-wrapper">
                                             <div class="slider">
                                                 <div class="islider-outer slider-group">
-                                                        
+
                                                 </div>
                                                 <div class="dots">
 
                                                 </div>
                                             </div>
-                                            
-                                        
                                         </div>
                                     </div>
                                     <!--选项区-->
                                     <div class="portal-entrance-container">
-                                            <div id="quick-entrance-3" class="quick-entrance-3 quick-entrance-3-scroll">
-                                                <ul class="qe3-scroller">
-                                                    <li class="qe3-row">
-                                                        <div data-index="0" class="qe3-item weui-flex__item">
-                                                            
-                                                            <div class="qe3-cube">
-                                                                <div class="qe3-item-img-box">
-                                                                    <img class="qe3-iib-img" src="<%= require('../../imgs/icons/run@2x.png')%>">
-                                                                </div>
-                                                                <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        组织活动
-                                                                    </span>
-                                                                </div>
+                                        <div id="quick-entrance-3" class="quick-entrance-3 quick-entrance-3-scroll">
+                                            <ul class="qe3-scroller">
+                                                <li class="qe3-row">
+                                                    <div data-index="0" class="qe3-item weui-flex__item">
+                                                        <div class="qe3-cube">
+                                                            <div class="qe3-item-img-box">
+                                                                <img class="qe3-iib-img" src="<%= require('../../imgs/icons/pen@2x.png')%>">
                                                             </div>
-                                                           
+                                                            <div class="qe3-cube-text">
+                                                                <span>签到</span>
+                                                            </div>
                                                         </div>
-                                                        <div data-index="1" class="qe3-item weui-flex__item">
-                                                            <a href="act-mag.html">
+                                                    </div>
+                                                    <div data-index="1" class="qe3-item weui-flex__item">
+                                                        <div class="qe3-cube">
+                                                            <div class="qe3-item-img-box">
+                                                                <img class="qe3-iib-img" src="<%= require('../../imgs/icons/money@2x.png')%>">
+                                                            </div>
+                                                            <div class="qe3-cube-text">
+                                                                <span>抢红包</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div data-index="2" class="qe3-item weui-flex__item">
+                                                        <a href="http://m.7dingdong.com/store/integralMall?store_id=4442922">
+                                                        <div class="qe3-cube">
+                                                            <div class="qe3-item-img-box">
+                                                                <img class="qe3-iib-img" src="<%= require('../../imgs/icons/closet@2x.png')%>">
+                                                            </div>
+                                                            <div class="qe3-cube-text">
+                                                                <span>积分商城</span>
+                                                            </div>
+                                                        </div>
+                                                        </a>
+                                                    </div>
+                                                    <div data-index="3" class="qe3-item weui-flex__item">
+
+                                                        <div class="qe3-cube">
+                                                            <div class="qe3-item-img-box">
+                                                                <img class="qe3-iib-img" src="<%= require('../../imgs/icons/run@2x.png')%>">
+                                                            </div>
+                                                            <div class="qe3-cube-text">
+                                                                <span>组织活动</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div data-index="4" class="qe3-item weui-flex__item">
+                                                        <a>
                                                             <div class="qe3-cube">
                                                                 <div class="qe3-item-img-box">
                                                                     <img class="qe3-iib-img" src="<%= require('../../imgs/icons/monitor@2x.png')%>">
                                                                 </div>
                                                                 <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        管理活动
-                                                                    </span>
+                                                                    <span>管理活动</span>
                                                                 </div>
                                                             </div>
-                                                            </a>
-                                                        </div>
-                                                        <div data-index="2" class="qe3-item weui-flex__item">
-                                                            <div class="qe3-cube">
-                                                                <div class="qe3-item-img-box">
-                                                                    <img class="qe3-iib-img" src="<%= require('../../imgs/icons/pen@2x.png')%>">
-                                                                </div>
-                                                                <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        签到
-                                                                    </span>
-                                                                </div>
+                                                        </a>
+                                                    </div>
+
+                                                </li>
+                                                <li class="qe3-row">
+                                                    <div data-index="5" class="qe3-item weui-flex__item">
+                                                        <div class="qe3-cube">
+                                                            <div class="qe3-item-img-box">
+                                                                <img class="qe3-iib-img" src="<%= require('../../imgs/icons/graph@2x.png')%>">
+                                                            </div>
+                                                            <div class="qe3-cube-text">
+                                                                <span>排行榜</span>
                                                             </div>
                                                         </div>
-                                                        <div data-index="3" class="qe3-item weui-flex__item">
-                                                            <div class="qe3-cube">
-                                                                <div class="qe3-item-img-box">
-                                                                    <img class="qe3-iib-img" src="<%= require('../../imgs/icons/closet@2x.png')%>">
-                                                                </div>
-                                                                <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        行装
-                                                                    </span>
-                                                                </div>
+                                                    </div>
+
+                                                    <div data-index="6" class="qe3-item weui-flex__item">
+
+                                                        <div class="qe3-cube">
+                                                            <div class="qe3-item-img-box">
+                                                                <img class="qe3-iib-img" src="<%= require('../../imgs/icons/cup@2x.png')%>">
+                                                            </div>
+                                                            <div class="qe3-cube-text">
+                                                                <span>创建俱乐部</span>
                                                             </div>
                                                         </div>
-                                                        <div data-index="4" class="qe3-item weui-flex__item">
-                                                            <div class="qe3-cube">
-                                                                <div class="qe3-item-img-box">
-                                                                    <img class="qe3-iib-img" src="<%= require('../../imgs/icons/shield@2x.png')%>">
-                                                                </div>
-                                                                <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        保险
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="qe3-row">
-                                                        <div data-index="5" class="qe3-item weui-flex__item">
-                                                            <div class="qe3-cube">
-                                                                <div class="qe3-item-img-box">
-                                                                    <img class="qe3-iib-img" src="<%= require('../../imgs/icons/diplom@2x.png')%>">
-                                                                </div>
-                                                                <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        加盟
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-index="6" class="qe3-item weui-flex__item">
-                                                            <div class="qe3-cube">
-                                                                <div class="qe3-item-img-box">
-                                                                    <img class="qe3-iib-img" src="<%= require('../../imgs/icons/money@2x.png')%>">
-                                                                </div>
-                                                                <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        抢红包
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-index="7" class="qe3-item weui-flex__item">
-                                                            <div class="qe3-cube">
-                                                                <div class="qe3-item-img-box">
-                                                                    <img class="qe3-iib-img" src="<%= require('../../imgs/icons/graph@2x.png')%>">
-                                                                </div>
-                                                                <div class="qe3-cube-text">
-                                                                    <span>
-                                                                        排行榜
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-index="8" class="qe3-item weui-flex__item">
-                                                           
-                                                                <div class="qe3-cube">
-                                                                    <div class="qe3-item-img-box">
-                                                                        <img class="qe3-iib-img" src="<%= require('../../imgs/icons/cup@2x.png')%>">
-                                                                    </div>
-                                                                    <div class="qe3-cube-text">
-                                                                        <span>
-                                                                            创建俱乐部
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                           
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                    </div> 
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                     <!--广告区域-->
                                     <div class="ad-container">
                                         <div class="ad-container-inner"></div>
                                     </div>
                                     <div class="na-hint-container">
-                                            <div class="na-hint">
-                                                <div class="na-hint-title">
-                                                    <span class="new-arrivals-icon"></span>
-                                                    <!--<img ms-src="newArrivalsIcon"/>-->
-                                                    <span>最新活动</span>
-                                                </div>
+                                        <div class="na-hint">
+                                            <div class="na-hint-title">
+                                                <span class="new-arrivals-icon"></span>
+                                                <!--<img ms-src="newArrivalsIcon"/>-->
+                                                <span>最新活动</span>
                                             </div>
+                                        </div>
                                     </div>
                                     <!--最新活动-->
                                     <div id="store">
                                         <div class="store-wrapper">
                                             <div class="store-group">
-                                                    <div class="stores">
-                                                        
-                                                    </div>
+                                                <div class="stores">
+
+                                                </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div id="otherPage">
 
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                 </div>

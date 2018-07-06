@@ -1,7 +1,7 @@
 import './setApplyCost.less'
 import $ from 'jquery'
-import weui from '../../../node_modules/_weui.js@1.1.3@weui.js'
-import {Trim} from '../../common/js/dom'
+import weui from 'weui.js'
+import {Trim} from 'common/js/dom'
 import {pickerData} from 'components/picker/picker'
 
 let costWay = { // 费用设置类方法
@@ -37,7 +37,7 @@ let costWay = { // 费用设置类方法
     })
 
     $('#applyCostCancel').on('click', (e) => {
-      this.hide()
+      this._saveApply()
     })
     $('#applyCostSave').on('click', (e) => {
       this._saveApply()

@@ -208,7 +208,7 @@ let all = (function () {
                     <p class="goods-name">${data[i].name}</p>
                     <div class="goods-content">
                         <p class="goods-sales">活动时间${data[i].time}</p>
-                        <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].act_level}</span></p>
+                        <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].level}</span></p>
                     </div>
                     <div class="goods-market-price">报名人数:${data[i].apply_num}</div>
                     <div class="discount-price"><i>￥</i>${data[i].price}</div>

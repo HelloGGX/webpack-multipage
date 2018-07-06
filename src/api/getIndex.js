@@ -225,6 +225,21 @@ let orders = {// 订单
   }
 }
 
+let sign = {// 签到
+  getSign (data) { // 获取申请为俱乐部的成员
+    return db.handleRequest(db.request.get('getSign.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  postSign (data) { // 审核俱乐部成立申请
+    return db.handleRequest(db.request.post('postSign.php', {
+      data: data,
+      showLoading: true
+    }))
+  }
+}
+
 let mag = {// 管理员管理审核
   getCheckClub (data) { // 获取申请为俱乐部的成员
     return db.handleRequest(db.request.get('getCheckClub.php', {
@@ -267,6 +282,7 @@ export default {
   travel,
   pay,
   mag,
+  sign,
   getMagInfo (data) { // 获取活动详情数据和报名选项数据
     return db.handleAll([this.getActDetailData(data), this.getApplyData(data)])
   },

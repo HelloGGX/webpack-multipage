@@ -9,9 +9,11 @@ import {bubb} from 'vendor/bubble'
 let all = (function () {
   let TYPE = 'city'
   let DATA = null
+  let PAGE = 1
   let allData = {// 获取该页所有数据
     init () {
       this._getActData()
+      let _thi = this
       bubb.init(() => {
         var loading = weui.loading('loading')
         setTimeout(() => {
@@ -25,13 +27,14 @@ let all = (function () {
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            this._getActData()
+            PAGE += 3
+            _thi._getActData(PAGE, TYPE)
           })
         }, 800)
       })
     },
-    _getActData () {
-      model.getActData().then((data) => { // 获取数据成功时的处理逻辑
+    _getActData (page, type) {
+      model.getActData({page: page, type: type}).then((data) => { // 获取数据成功时的处理逻辑
         Home._getNewData(data)
         DATA = data
       }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
@@ -57,7 +60,7 @@ let all = (function () {
                     <p class="goods-name">${data[i].name}</p>
                     <div class="goods-content">
                         <p class="goods-sales">活动时间${data[i].time}</p>
-                        <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].act_level}</span></p>
+                        <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].level}</span></p>
                     </div>
                     <del class="goods-market-price">${data[i].price}</del>
                     <div class="discount-price"><i>￥</i>${data[i].price}</div>
@@ -69,7 +72,6 @@ let all = (function () {
     },
     _getNewData (data) {
       let newdata
-      let _html = ''
       newdata = data[TYPE]
 
       if (newdata === null) {
@@ -79,11 +81,11 @@ let all = (function () {
     </div>`)
       } else {
         let len = newdata.length
-        for (let i = 0; i < len; i++) {
-          _html += this._temple(i, newdata)
-        }
         $('#act-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-        $('#' + TYPE).html(_html)
+        for (let i = 0; i < len; i++) {
+          $('#' + TYPE).append(this._temple(i, newdata))
+        }
+
         $(document.getElementById(TYPE)).show().siblings().hide()
       }
     },

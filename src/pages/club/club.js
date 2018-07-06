@@ -9,7 +9,7 @@ import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = 'city'
-
+  let PAGE = 1
   let search = {// 搜索框显示及查询
     deleteHistory () { // 删除历史记录
       $('#search_item').html('')
@@ -77,9 +77,8 @@ let all = (function () {
 
     }
   }
-
   let Home = {
-    pageInit: function () {
+    pageInit () {
       search.init()
       this._getNewData()
       bubb.init(() => {
@@ -95,13 +94,14 @@ let all = (function () {
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            this._getNewData()
+            PAGE += 3
+            this._getNewData(PAGE, TYPE)
           })
         }, 800)
       })
       this.switch()
     },
-    _temple: function (i, data) { // 模板
+    _temple (i, data) { // 模板
       let keyword = data[i].keyword.split(',')
       return `<div class="margin weui-panel weui-panel_access" id="${TYPE + data[i].id}">
       <div class="weui-panel__bd">
@@ -121,11 +121,10 @@ let all = (function () {
       </div>
     </div>`
     },
-    _getNewData: function () {
-      model.getClubData().then((data) => {
+    _getNewData (page, type) {
+      model.getClubData({page: page, type: type}).then((data) => {
         let newdata
         let _html = ''
-        // let src
         newdata = data[TYPE]
         if (newdata === null) {
           $('#club-grid').html(`<div class="nothing-text">

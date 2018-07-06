@@ -171,6 +171,15 @@ export function getCookie (cName) {
   }
   return ''
 }
+/* 2018-7-6转日期 */
+export function parserDate (date) {
+  var t = Date.parse(date)
+  if (!isNaN(t)) {
+    return new Date(Date.parse(date.replace(/-/g, '/')))
+  } else {
+    return new Date()
+  }
+}
 /* 日期转年龄 */
 export function ages (str) {
   let r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/)

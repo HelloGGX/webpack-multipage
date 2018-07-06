@@ -18,11 +18,15 @@
         }
     }
 }
-.pend-g,.pass-g{
-    height: auto;
-    background-color: #f2f2f2;
-    padding: .05rem 0;
+.member-lists{
+    padding-bottom: 1rem;
+    .pend-g,.pass-g{
+        height: auto;
+        background-color: #f2f2f2;
+        padding: .05rem 0;
+    }
 }
+
 .tit-group{
     height: .34rem;
     padding: 0 .1rem;
@@ -41,12 +45,45 @@
 }
 .pend-item{
     .pend-item-head{
-        img{
-            width: 0.3rem;
-            height: 0.3rem;
+        .pend-item-info{
+            display: inline-block;
+            p{
+                span{
+                    color: #808080;
+                }
+            }
         }
+        img{
+            display: inline-block;
+            width: 0.4rem;
+            height: 0.4rem;
+        }
+    }
+    .user-time{
         span{
-            line-height: 0.44rem
+
+        }
+    }
+}
+.pass-item{
+    .pass-item-head{
+        img{
+            display: inline-block;
+            width: 0.4rem;
+            height: 0.4rem;
+        }
+        .pass-item-info{
+            display: inline-block;
+            p{
+                span{
+                    color: #808080;
+                }
+            }
+        }
+    }
+    .pass-time{
+        span{
+
         }
     }
 }

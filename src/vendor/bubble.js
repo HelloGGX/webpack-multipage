@@ -337,10 +337,9 @@ scrol._initPullUpLoad = function (fn) { // 初始化上拉加载
 }
 scrol.onPullingUp = function (fn) { // 上拉过程中
   // 更新数据
-  console.log('pulling up and load data')
   setTimeout(() => {
     fn()
-  }, 1000)
+  }, 600)
 }
 let bubb = {
   init: (downfn, upfn) => {

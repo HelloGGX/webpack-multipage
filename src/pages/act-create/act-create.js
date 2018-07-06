@@ -4,7 +4,7 @@ import './act-create.less'
 import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
 import {upload} from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
-import weui from '../../../node_modules/_weui.js@1.1.3@weui.js'
+import weui from 'weui.js'
 import {AddapplyOption, EditapplyOption} from '../addApplyOption/addApplyOption'// 引入增加和编辑报名选项的对象
 import {costWay} from '../setApplyCost/setApplyCost'// 引入费用设置的对象
 import model from 'api/getIndex'
@@ -192,6 +192,7 @@ let all = (function () {
         $('input[name=otherPayInput]').val(actData.other_pay)
 
         $('select[name=actStar]').val(actData.act_integral)
+        $('select[name=actLevel]').val(actData.level)
         $('select[name=actType]').val(actData.act_type[0])
         $('select[name=insurance]').val(actData.act_insur)
         let arr = []
@@ -362,7 +363,7 @@ let all = (function () {
         // 获取数据成功时的处理逻辑
         if (res.state === 'ok') {
           weui.alert('提交成功,等待审核')
-          window.location.href = 'http://www.shanduhuwai.com/act-mag.html'
+          window.location.href = 'act-mag.html'
         } else {
           weui.alert('提交失败，请检查填写项')
         }

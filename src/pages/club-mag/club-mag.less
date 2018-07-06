@@ -30,7 +30,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: 70%;
         button{
             margin-left: 0.1rem;
             border: 1px solid #fd9715;
@@ -39,6 +38,19 @@
             padding: 0 0.08rem;
             display: inline-block;
             line-height: 0.25rem;
+        }
+        float: left;
+    }
+    .check-club-type{
+        color: #e02e24;
+        font-size:@font-size-small;
+        margin: .1rem 0;
+        float: right;
+        span{
+            border: 1px solid #e02e24;
+            border-radius: .12rem;
+            padding: .02rem .06rem;
+            margin-right: .04rem;
         }
     }
 }
@@ -54,17 +66,7 @@
             width: 70%;
         }
     }
-    .check-club-type{
-        color: #e02e24;
-        font-size:@font-size-small;
-        margin: .1rem 0;
-        span{
-            border: 1px solid #e02e24;
-            border-radius: .12rem;
-            padding: .02rem .06rem;
-            margin-right: .04rem;
-        }
-    }
+  
 }
 
 .btn-refund-group{
@@ -85,12 +87,15 @@
         }
     }
 }
-
-.pend-g,.pass-g{
-    height: auto;
-    background-color: #f2f2f2;
-    padding: .05rem 0;
+.club-lists{
+    padding-bottom: 1rem;
+    .pend-g,.pass-g,.refuse-g{
+        height: auto;
+        background-color: #f2f2f2;
+        padding: .05rem 0;
+    }
 }
+
 .tit-group{
     height: .34rem;
     padding: 0 .1rem;

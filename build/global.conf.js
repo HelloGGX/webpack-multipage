@@ -8,7 +8,7 @@ const pages = [ // 页面配置写在这里
     pageName: 'regist'
   },
   {
-    title: '首页',
+    title: '山渡户外',
     pageName: 'index'
   },
   {

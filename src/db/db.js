@@ -43,7 +43,7 @@ const createError = (code, resp) => {
   return err
 }
 
-const handleAll = (request) => {
+const handleAll = (request) => { // promisory一个promise工厂
   let args = []
   for (let i = 0; i < request.length; i++) {
     args.push(`data${i}`)

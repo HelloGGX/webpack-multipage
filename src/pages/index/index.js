@@ -1,4 +1,5 @@
 import './index.less'
+import 'components/banner/banner.less'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 import weui from 'weui.js'
@@ -7,8 +8,8 @@ import {judgeLogin} from 'components/judgeLogin/judge-login'
 import {bubb} from 'vendor/bubble'
 
 let all = (function () {
-  const DIRECTION_H = 'horizontal'
-  const DIRECTION_V = 'vertical'
+  // const DIRECTION_H = 'horizontal'
+  // const DIRECTION_V = 'vertical'
 
   let allData = {
     init () {
@@ -33,25 +34,31 @@ let all = (function () {
     },
     _getIndexData () {
       judgeLogin((res) => { // 判断是否登陆
-        scrollNav.init(res.navdata)// 顶部导航栏初始化
+        // scrollNav.init(res.navdata)// 顶部导航栏初始化
         slider.init(res.slidata)// 幻灯片初始化
         hotArea.init(res.areadata)// 热门区域初始化
       }, () => { // 登陆时候
         $('.weui-flex__item').on('click', (e) => {
-          if ($(e.currentTarget).data('index') === 0) {
+          if (Number($(e.currentTarget).data('index')) === 3) {
             if (window.sessionStorage.getItem('ucl') === '用户') {
               weui.alert('抱歉你是普通用户，不能创建活动')
             } else {
               window.location.href = 'act-create.html'
             }
           }
-          if ($(e.currentTarget).data('index') === 8) {
+          if (Number($(e.currentTarget).data('index')) === 0) {
+            window.location.href = 'sign-in.html'
+          }
+          if (Number($(e.currentTarget).data('index')) === 4) {
+            window.location.href = 'act-mag.html'
+          }
+          if (Number($(e.currentTarget).data('index')) === 6) {
             window.location.href = 'club-create.html'
           }
         })
       }, () => { // 未登陆时候
         $('.weui-flex__item').on('click', (e) => {
-          if ($(e.currentTarget).data('index') === 0 || 8) {
+          if ($(e.currentTarget).data('index') !== 5 && $(e.currentTarget).data('index') !== 2) {
             weui.confirm('建议登陆体验哦~', {
               title: '提示',
               buttons: [{
@@ -81,80 +88,80 @@ let all = (function () {
       })
     }
   }// 获取所有数据
-  let scrollNav = {// 顶部导航对象
-    probeType: 1,
-    click: true,
-    direction: 'horizontal',
-    startY: 0,
-    startX: 0,
-    init (data) {
-      this._getNavData(data)
-      this.initScroll()
-    },
-    initScroll () {
-      let options = {
-        probeType: this.probeType,
-        click: this.click,
-        scrollY: this.freeScroll || this.direction === DIRECTION_V,
-        scrollX: this.freeScroll || this.direction === DIRECTION_H,
-        startX: this.startX,
-        startY: this.startY
-      }
-      this.scroll = new BScroll('.list-wrapper', options)
-    },
-    _initNavWidth () {
-      let len = $('#navbar-ul').find('li').length
-      let liWidth = $('#navbar-ul').find('li').width() + 20
-      let allWidth = liWidth * len + 'px'
-      $('#navbar-ul').width(allWidth)
-    },
-    _selectNav (thi) {
-      this.current = $(thi).data('index')
-      this._adjust($(thi).data('index'))
-    },
-    _adjust (tabId) {
-      const viewportWidth = document.getElementsByClassName('viewport')[0].clientWidth
-      const tabListWidth = document.getElementById('navbar-ul').clientWidth
-      const minTranslate = Math.min(0, viewportWidth - tabListWidth)
-      const middleTranslate = viewportWidth / 2
-      const items = document.getElementById('navbar-ul').children
-      let width = 0
-      this.navdata.every((item, index) => {
-        if (item.id === tabId) {
-          return false
-        }
-        width += items[index].clientWidth + 25
-        return true
-      })
-      let translate = middleTranslate - width
-      translate = Math.max(minTranslate, Math.min(0, translate))
-      $('.scroll-content').css({
-        'transform': 'translate(' + translate + 'px' + ', 0px)',
-        'transition-duration': '300ms'
-      })
-      // this.scroll && this.scroll.scrollTo(translate, 0, 300)
-    },
-    refresh () {
-      this.scroll && this.scroll.refresh()
-    },
-    _getNavData (data) {
-      let thi = this
-      // Promise的方法then,catch方法
-      thi.navdata = data
-      let _html = ''
-      let len = thi.navdata.length
-      for (let i = 0; i < len; i++) {
-        _html += '<li class="nav-bar-item" data-index=' + thi.navdata[i].id + '><span>' + thi.navdata[i].text + '</span></li>'
-      }
-      $('#navbar-ul').html(_html)
-      $('#navbar-ul li').eq(0).find('span').addClass('nbi-selected')
-      thi._initNavWidth()
-      $('body').on('click', '.nav-bar-item', function (e) {
-        thi._selectNav(this)
-        $(this).find('span').addClass('nbi-selected').parent().siblings().find('span').removeClass('nbi-selected')
-      })
-    }
-  }
+  // let scrollNav = {// 顶部导航对象
+  //   probeType: 1,
+  //   click: true,
+  //   direction: 'horizontal',
+  //   startY: 0,
+  //   startX: 0,
+  //   init (data) {
+  //     this._getNavData(data)
+  //     this.initScroll()
+  //   },
+  //   initScroll () {
+  //     let options = {
+  //       probeType: this.probeType,
+  //       click: this.click,
+  //       scrollY: this.freeScroll || this.direction === DIRECTION_V,
+  //       scrollX: this.freeScroll || this.direction === DIRECTION_H,
+  //       startX: this.startX,
+  //       startY: this.startY
+  //     }
+  //     this.scroll = new BScroll('.list-wrapper', options)
+  //   },
+  //   _initNavWidth () {
+  //     let len = $('#navbar-ul').find('li').length
+  //     let liWidth = $('#navbar-ul').find('li').width() + 20
+  //     let allWidth = liWidth * len + 'px'
+  //     $('#navbar-ul').width(allWidth)
+  //   },
+  //   _selectNav (thi) {
+  //     this.current = $(thi).data('index')
+  //     this._adjust($(thi).data('index'))
+  //   },
+  //   _adjust (tabId) {
+  //     const viewportWidth = document.getElementsByClassName('viewport')[0].clientWidth
+  //     const tabListWidth = document.getElementById('navbar-ul').clientWidth
+  //     const minTranslate = Math.min(0, viewportWidth - tabListWidth)
+  //     const middleTranslate = viewportWidth / 2
+  //     const items = document.getElementById('navbar-ul').children
+  //     let width = 0
+  //     this.navdata.every((item, index) => {
+  //       if (item.id === tabId) {
+  //         return false
+  //       }
+  //       width += items[index].clientWidth + 25
+  //       return true
+  //     })
+  //     let translate = middleTranslate - width
+  //     translate = Math.max(minTranslate, Math.min(0, translate))
+  //     $('.scroll-content').css({
+  //       'transform': 'translate(' + translate + 'px' + ', 0px)',
+  //       'transition-duration': '300ms'
+  //     })
+  //     // this.scroll && this.scroll.scrollTo(translate, 0, 300)
+  //   },
+  //   refresh () {
+  //     this.scroll && this.scroll.refresh()
+  //   },
+  //   _getNavData (data) {
+  //     let thi = this
+  //     // Promise的方法then,catch方法
+  //     thi.navdata = data
+  //     let _html = ''
+  //     let len = thi.navdata.length
+  //     for (let i = 0; i < len; i++) {
+  //       _html += '<li class="nav-bar-item" data-index=' + thi.navdata[i].id + '><span>' + thi.navdata[i].text + '</span></li>'
+  //     }
+  //     $('#navbar-ul').html(_html)
+  //     $('#navbar-ul li').eq(0).find('span').addClass('nbi-selected')
+  //     thi._initNavWidth()
+  //     $('body').on('click', '.nav-bar-item', function (e) {
+  //       thi._selectNav(this)
+  //       $(this).find('span').addClass('nbi-selected').parent().siblings().find('span').removeClass('nbi-selected')
+  //     })
+  //   }
+  // }
   let slider = {// 幻灯片对象
     loop: true,
     autoPlay: true,
@@ -266,7 +273,7 @@ let all = (function () {
                               <p class="goods-name">${thi.areadata[i].name}</p>
                               <div class="goods-content">
                                   <p class="goods-sales">${thi.areadata[i].time}</p>
-                                  <p class="goods-sales">活动积分${thi.areadata[i].integral} <span>活动等级${thi.areadata[i].act_level}</span></p>
+                                  <p class="goods-sales">活动积分${thi.areadata[i].integral} <span>活动等级${thi.areadata[i].level}</span></p>
                               </div>
                               <del class="goods-market-price">${thi.areadata[i].marprice}</del>
                               <div class="discount-price"><i>￥</i>${thi.areadata[i].disprice}</div>

@@ -1,88 +1,173 @@
 import './member-mag.less'
 import 'components/banner/banner.less'
-import weui from '../../../node_modules/_weui.js@1.1.3@weui.js'
+import weui from 'weui.js'
+import model from 'api/getIndex'
 import $ from 'jquery'
-
-class More {
-  constructor ({
-    _pendContent = [],
-    _passContent = [],
-    _default = 6, // 默认显示个人个数
-    _loading = 10// 每次点击按钮后加载的个数
-  } = {}) {
-    this._pendContent = _pendContent
-    this._passContent = _passContent
-    this._default = _default
-    this._loading = _loading
-  }
-  pendTemp (data, i) {
-    return `<label class="weui-cell weui-check__label pend-item" for="c${i}"> 
-    <div class="weui-cell__hd">
-        <input  type="checkbox" class="weui-check" name="pendItem" id="${data.guest_id}">
-        <i class="weui-icon-checked"></i> 
-    </div> 
-    <div class="weui-cell__bd pend-item-head">
-        <img src="${data.guest_img === '' ? require('../../imgs/icons/boy.jpg') : data.guest_img}" alt="">
-        <span class="f-m">${data.guest_name}</span>
-    </div>
-    <div class="weui-cell__ft">
-        <a class="f-m" href="tel:${data.guest_phone}">电话</a>
-    </div>
-</label>`
-  }
-  passTemp () {
-
-  }
-  init (data, elem, type) {
-    elem.html('')
-    let len = this._default < data.length ? this._default : data.length
-    if (type === 'pend') {
-      for (let n = 0; n < len; n++) {
-        elem.append(this.pendTemp(data, n))
-      }
-      for (let i = this._default; i < data.length; i++) {
-        this._pendContent.push(this.pendTemp(data, i))
-      }
-    } else { // 如果是pass
-      for (let n = 0; n < len; n++) {
-        elem.append(this.passTemp(data, n))
-      }
-      for (let i = this._default; i < data.length; i++) {
-        this._passContent.push(this.passTemp(data, i))
-      }
-    }
-  }
-
-  loadMore (elem, type) {
-    let html = ''
-    if (type === 'pend') {
-      for (let i = 0; i < this._loading; i++) {
-        let target = this._pendContent.shift()
-        if (!target) {
-          elem.find('.all-load').remove()
-          elem.append('<p class="all-load">全部加载完毕...</p>')
-          break
-        }
-        html += target
-      }
-    } else { // 如果是pass
-
-    }
-    var loading = weui.loading('加载中...')
-    setTimeout(() => {
-      loading.hide()
-      elem.append(html)
-    }, 400)
-  }
-}
 
 let all = (function () {
   let Home = {
-    pageInit: function () {
-      let pendMore = new More()
-      let passMore = new More()
-      console.log(pendMore)
-      console.log(passMore)
+    PENDPAGE: 1,
+    PASSPAGE: 1,
+    pageInit () {
+      this.getAllMember()
+      $('.tit-group').on('click', (e) => {
+        $(e.currentTarget).next().toggle(() => {
+          if ($(e.currentTarget).find('i').hasClass('icon-unfold')) {
+            $(e.currentTarget).find('i').removeClass('icon-unfold')
+            $(e.currentTarget).siblings('.load-more').show()
+          } else {
+            $(e.currentTarget).find('i').addClass('icon-unfold')
+            $(e.currentTarget).siblings('.load-more').hide()
+          }
+        })
+      })
+      $('.pend-lists').on('click', '.pend-item', (e) => {
+        if ($(e.currentTarget).find('input[name=checkUser]').is(':checked')) {
+          $(e.currentTarget).find('input[name=checkUser]').prop('checked', false)
+        } else {
+          $(e.currentTarget).find('input[name=checkUser]').prop('checked', true)
+        }
+      })
+      $('.pend-more').on('click', (e) => {
+        this.PENDPAGE += 6
+        var loading = weui.loading('加载中...')
+        setTimeout(() => {
+          loading.hide()
+          this.getPendMember(this.PENDPAGE)
+        }, 400)
+      })
+      $('.pass-more').on('click', (e) => {
+        this.PASSPAGE += 6
+        var loading = weui.loading('加载中...')
+        setTimeout(() => {
+          loading.hide()
+          this.getPassMember(this.PASSPAGE)
+        }, 400)
+      })
+      $('#pass').on('click', () => {
+        this.checkMember(true)
+      })
+      $('#refuse').on('click', () => {
+        this.checkMember(false)
+      })
+    },
+    checkMember (flag) {
+      let ids = []
+      let checks = $('input[name=checkUser]')
+      let len = checks.length
+      for (let i = 0; i < len; i++) {
+        if ($(checks[i]).is(':checked')) {
+          ids.push($(checks[i]).attr('id'))
+        }
+      }
+      if (ids.length > 0) {
+        model.mag.checkMember({ids: ids, flag: flag}).then(res => {
+          if (res.state === 'ok') {
+            weui.alert('操作成功')
+            $('.pass-lists').html('')
+            $('.pend-lists').html('')
+            this.PENDPAGE = 1
+            this.PASSPAGE = 1
+            this.getAllMember()
+          }
+        }).catch(errMsg => {
+          weui.alert(errMsg)
+        })
+      } else {
+        weui.alert('请选择审核人员')
+      }
+    },
+    getPendMember (page) {
+      model.mag.getMember({page: page, type: 'pend'}).then(data => {
+        if (data.state === 'ok') {
+          let checkUser = data.checkuser
+          let checkLen = checkUser.length
+          if (checkLen === 0) {
+            $('.pend-lists').append(`<p style="text-align: center;font-size: 14px;line-height: 0.34rem;">已经没有数据了</p>`)
+            $('.pend-more').hide()
+          } else {
+            for (let i = 0; i < checkLen; i++) {
+              $('.pend-lists').append(this.checkTemp(checkUser, i))
+            }
+            $('.pend-more').show()
+          }
+          $('.pend-len').html(`${data.checknum}人`)
+        }
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    },
+    getPassMember (page) {
+      model.mag.getMember({page: page, type: 'pass'}).then(data => {
+        if (data.state === 'ok') {
+          let passUser = data.passuser
+          let passLen = passUser.length
+          if (passLen === 0) {
+            $('.pass-lists').append(`<p style="text-align: center;font-size: 14px;line-height: 0.34rem;">已经没有数据了</p>`)
+            $('.pass-more').hide()
+          } else {
+            for (let i = 0; i < passLen; i++) {
+              $('.pass-lists').append(this.passTemp(passUser, i))
+            }
+            $('.pass-more').show()
+          }
+          $('.pass-len').html(`${data.passnum}人`)
+        }
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    },
+    passTemp (data, i) {
+      return `<div class="weui-cell pass-item">
+      <div id="${data[i].user_id}" class="weui-cell__bd pass-item-head">
+        <img src="${data[i].user_img}" alt="">
+        <div class="pass-item-info f-m">
+            <p>${data[i].user_name}</p>
+            <p>电话:<span>${data[i].user_phone}</span></p>
+        </div>
+      </div>
+      <div class="weui-cell__ft pass-time">
+          <span class="f-m">${data[i].user_time}</span>
+      </div>
+  </div>`
+    },
+    checkTemp (data, i) {
+      return `<label class="weui-cell weui-check__label pend-item" for="c${i}">
+      <div class="weui-cell__hd">
+          <input type="checkbox"  class="weui-check" name="checkUser" id="${data[i].user_id}">
+          <i class="weui-icon-checked"></i> 
+      </div>
+      <div class="weui-cell__bd pend-item-head">
+          <img src="${data[i].user_img}" alt="">
+          <div class="pend-item-info f-m">
+              <p>${data[i].user_name}</p>
+              <p>电话:<span>${data[i].user_phone}</span></p>
+          </div>
+      </div>
+      <div class="weui-cell__ft pend-time">
+          <span class="f-m">${data[i].user_time}</span>
+      </div>
+  </label>`
+    },
+    getAllMember () {
+      model.mag.getMember({page: 1}).then(data => {
+        if (data.state === 'ok') {
+          let checkUser = data.checkuser
+          let checkLen = checkUser.length
+          let passUser = data.passuser
+          let passLen = passUser.length
+          $('.pend-len').html(`${data.checknum}人`)
+          $('.pass-len').html(`${data.passnum}人`)
+          for (let i = 0; i < checkLen; i++) {
+            $('.pend-lists').append(this.checkTemp(checkUser, i))
+          }
+          for (let i = 0; i < passLen; i++) {
+            $('.pass-lists').append(this.passTemp(passUser, i))
+          }
+        }
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
     }
 
   }

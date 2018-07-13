@@ -283,6 +283,12 @@ export default {
   pay,
   mag,
   sign,
+  postAddr (data) {
+    return db.handleRequest(db.request.post('postAddr.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
   getMagInfo (data) { // 获取活动详情数据和报名选项数据
     return db.handleAll([this.getActDetailData(data), this.getApplyData(data)])
   },
@@ -307,14 +313,14 @@ export default {
     }))
   },
 
-  // getIndexData (data) { // 获取首页数据
-  //   return db.handleRequest(db.request.get('getIndex.php', {
-  //     params: data,
-  //     showLoading: true
-  //   }))
-  // },
+  getIndexData (data) { // 获取首页数据
+    return db.handleRequest(db.request.get('getIndex.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
   postUserData (data) { // 获取首页数据,发送用户信息
-    return db.handleRequest(db.request.post('getIndex.php', {
+    return db.handleRequest(db.request.post('postUserData.php', {
       data: data,
       showLoading: true
     }))

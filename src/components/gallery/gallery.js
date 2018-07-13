@@ -1,4 +1,4 @@
-import Swiper from './swiper.min'
+import Swiper from 'Swiper'
 import $ from 'jquery'
 import './swiper.min.css'
 import './gallery.less'
@@ -8,6 +8,7 @@ let gallery = {
 
   init (imgsdata) {
     let _thi = this
+
     let swiper = new Swiper('.swiper-container', {
       zoom: true,
       width: window.innerWidth,

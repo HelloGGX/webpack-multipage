@@ -122,6 +122,10 @@ const pages = [ // 页面配置写在这里
   {
     title: '签到',
     pageName: 'sign-in'
+  },
+  {
+    title: '会员充值',
+    pageName: 'recharge'
   }
 ]
 const dependencies = [ // 依赖的全局js

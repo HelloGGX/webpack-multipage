@@ -9,7 +9,12 @@ import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = 'city'
-  let PAGE = 1
+  let PAGE = {
+    city: 1,
+    hot: 1,
+    star: 1
+  }
+
   let search = {// 搜索框显示及查询
     deleteHistory () { // 删除历史记录
       $('#search_item').html('')
@@ -86,7 +91,7 @@ let all = (function () {
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            this._getNewData()
+            window.location.reload()
           })
         }, 800)
       }, () => {
@@ -94,8 +99,8 @@ let all = (function () {
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            PAGE += 3
-            this._getNewData(PAGE, TYPE)
+            PAGE[TYPE] += 6
+            this._getNewData(PAGE[TYPE], TYPE)
           })
         }, 800)
       })
@@ -123,36 +128,45 @@ let all = (function () {
     },
     _getNewData (page, type) {
       model.getClubData({page: page, type: type}).then((data) => {
-        let newdata
-        let _html = ''
+        let newdata = null
         newdata = data[TYPE]
-        if (newdata === null) {
-          $('#club-grid').html(`<div class="nothing-text">
-          <div class="nothing-club"></div>
-          <p>暂时还没有俱乐部</p>
-      </div>`)
-        } else {
+        if (data.load) { // 如果不是初始化，是下拉刷新
           let len = newdata.length
-          $('#club-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-          for (let i = 0; i < len; i++) {
-            _html = this._temple(i, newdata)
-            $('#' + TYPE).append(_html)
+          if (len !== 0) { // 如果下拉刷新有值
+            for (let i = 0; i < len; i++) {
+              $('#' + TYPE).append(this._temple(i, newdata))
+            }
           }
-          $(document.getElementById(TYPE)).show().siblings().hide()
+        } else { // 如果是初始化
+          if (newdata.length === 0) { // 如果初始化没有数据
+            $(`#${TYPE}`).html(`<div class="nothing-text">
+              <div class="nothing-club"></div>
+              <p>暂时还没有俱乐部</p>
+            </div>`)
+            $('#pullup').hide()
+          } else { // 如果初始化有数据
+            let len = newdata.length
+            for (let i = 0; i < len; i++) {
+              $('#' + TYPE).append(this._temple(i, newdata))
+            }
+            $(document.getElementById(TYPE)).show().siblings().hide()
+          }
         }
       }).catch((ErrMsg) => {
-        // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)
       })
     },
-    switch: function () {
+    switch () {
       $('.nav_fixed_catgoods').on('click', '.fixed_nav_item_catgoods', (e) => {
         $(e.currentTarget).find('span').addClass('nav_cur_cat').parent().siblings().find('span').removeClass('nav_cur_cat')
         TYPE = $(e.currentTarget).data('type')
         if (document.getElementById(TYPE)) {
           $(document.getElementById(TYPE)).show().siblings().hide()
         } else {
-          this._getNewData()
+          $('#club-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+          PAGE[TYPE] = PAGE[TYPE]
+          this._getNewData(PAGE[TYPE], TYPE)
+          $(document.getElementById(TYPE)).show().siblings().hide()
         }
       })
     }

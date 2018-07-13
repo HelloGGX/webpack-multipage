@@ -29,16 +29,21 @@
                 </div> -->
                 <div class="banner-container">
                         <div class="banner">
-                            <div class="banner-icon-back banner-left"><i class="iconfont icon-coordinates"></i><span>成都</span></div>
+                            <input class="city" type="hidden" value="">
+                            <input class="province" type="hidden" value="">
+                            <input class="adcode" type="hidden" value="">
+                            <input class="fulladdr" type="hidden" value="">
+                            <div class="banner-icon-back banner-left"><i class="iconfont icon-coordinates"></i><span id="city"></span></div>
                             <div class="banner-tit banner-text"></div>
                             <div class="banner-right"><a></a></div>
                         </div>
                     </div>
                 <div class="weui-tab__panel content-panel">
-
+                    <div id="allmap"></div><!--百度地图必须的东西-->
                     <div class="bubble-wrapper">
                         <div class="content-inner">
                             <div>
+                               
                                 <div id="homePage">
                                     <!--幻灯片-->
                                     <div id="index-main-content">
@@ -139,6 +144,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div data-index="7" class="qe3-item weui-flex__item">
+
+                                                        <div class="qe3-cube">
+                                                            <div class="qe3-item-img-box">
+                                                                <img class="qe3-iib-img" src="<%= require('../../imgs/icons/diamond@2x.png')%>">
+                                                            </div>
+                                                            <div class="qe3-cube-text">
+                                                                <span>会员充值</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -180,6 +196,7 @@
 
         </div>
     </div>
+   
 </body>
 
 </html>

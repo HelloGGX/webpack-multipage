@@ -280,7 +280,7 @@ scrol.destroy = function () {
 }
 scrol.forceUpdate = function (dirty) {
   let me = this
-
+  $('#pullup').show()
   if (this.pullDownRefresh && this.isPullingDown) {
     this.isPullingDown = false
     $('#isPullingDown').hide()

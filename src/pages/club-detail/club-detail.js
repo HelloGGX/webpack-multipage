@@ -44,12 +44,10 @@ let all = (function () {
   let Home = {
     pageInit () {
       this.switch()
-
       clubInfo.init()
+      this._getClubDetail()
 
-      judgeLogin(() => { // 判断是否登陆
-        this._getClubDetail()// 不管等没登陆都要执行的句子
-      }, () => { // 如果已经登陆
+      judgeLogin(() => { // 如果已经登陆
         $('.join-club').click((e) => {
           weui.confirm('加入俱乐部成为会员', {
             title: '确定要要加入俱乐部吗？',

@@ -6,11 +6,13 @@ import weui from 'weui.js'
 import {imgSuffix} from 'common/js/dom'
 import {judgeLogin} from 'components/judgeLogin/judge-login'
 import {bubb} from 'vendor/bubble'
+import map from 'components/map/map'
+import model from 'api/getIndex'
 
 let all = (function () {
   // const DIRECTION_H = 'horizontal'
   // const DIRECTION_V = 'vertical'
-
+  let PAGE = 1
   let allData = {
     init () {
       this._getIndexData()
@@ -19,7 +21,7 @@ let all = (function () {
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            this._getIndexData()
+            window.location.reload()
           })
         }, 800)
       }, () => {
@@ -27,17 +29,47 @@ let all = (function () {
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            this._getIndexData()
+            PAGE += 6
+            this.getData(PAGE)
           })
         }, 800)
       })
     },
-    _getIndexData () {
-      judgeLogin((res) => { // 判断是否登陆
+    getMap () {
+      map.then(data => {
+        model.postAddr({addr: data.district}).then(res => {
+        }).catch(errMsg => {
+          weui.alert(errMsg)
+        })
+        let addComp = data
+        let cityName = document.getElementsByClassName('city')[0]
+        let province = document.getElementsByClassName('province')[0]
+        let adcode = document.getElementsByClassName('adcode')[0]
+        let fulladdr = document.getElementsByClassName('fulladdr')[0]
+        let city = document.getElementById('city')
+        var fullName = addComp.province + ', ' + addComp.city + ', ' + addComp.district + ', ' + addComp.street + ', ' + addComp.streetNumber
+        city.innerHTML = addComp.district
+        province.setAttribute('value', addComp.province)
+        cityName.setAttribute('value', addComp.city)
+        adcode.setAttribute('value', addComp.district)
+        fulladdr.setAttribute('value', fullName)
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    },
+    getData (page) {
+      model.getIndexData({page: page}).then(data => {
         // scrollNav.init(res.navdata)// 顶部导航栏初始化
-        slider.init(res.slidata)// 幻灯片初始化
-        hotArea.init(res.areadata)// 热门区域初始化
-      }, () => { // 登陆时候
+        slider.init(data.slidata)// 幻灯片初始化
+        hotArea.init(data.areadata, data.load)// 热门区域初始化
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
+    },
+    _getIndexData () {
+      this.getMap()
+      this.getData()
+      judgeLogin(() => { // 登陆时候
         $('.weui-flex__item').on('click', (e) => {
           if (Number($(e.currentTarget).data('index')) === 3) {
             if (window.sessionStorage.getItem('ucl') === '用户') {
@@ -54,6 +86,9 @@ let all = (function () {
           }
           if (Number($(e.currentTarget).data('index')) === 6) {
             window.location.href = 'club-create.html'
+          }
+          if (Number($(e.currentTarget).data('index')) === 7) {
+            window.location.href = 'recharge.html'
           }
         })
       }, () => { // 未登陆时候
@@ -224,18 +259,20 @@ let all = (function () {
       let thi = this
 
       thi.slidata = data
-      let _html = ''
-      let _dots = ''
-      let len = thi.slidata.length
-      for (let i = 0; i < len; i++) {
-        _html += '<div data-index=' + thi.slidata[i].id + '><a class="" href=' + thi.slidata[i].href + '><img src=' + thi.slidata[i].src + ' alt=""></a></div>'
-        _dots += '<span class="dot"></span>'
+      if (typeof thi.slidata !== 'undefined') {
+        let _html = ''
+        let _dots = ''
+        let len = thi.slidata.length
+        for (let i = 0; i < len; i++) {
+          _html += '<div data-index=' + thi.slidata[i].id + '><a class="" href=' + thi.slidata[i].href + '><img src=' + thi.slidata[i].src + ' alt=""></a></div>'
+          _dots += '<span class="dot"></span>'
+        }
+        $('.slider-group').html(_html)
+        $('.dots').html(_dots)
+        $('.dots .dot:first').addClass('active')
+        thi._initSliderWidth()
+        thi._initSlider()
       }
-      $('.slider-group').html(_html)
-      $('.dots').html(_dots)
-      $('.dots .dot:first').addClass('active')
-      thi._initSliderWidth()
-      thi._initSlider()
     },
     _play () {
       let pageIndex = this.currentPageIndex + 1
@@ -251,45 +288,53 @@ let all = (function () {
     }
   }
   let hotArea = {// 热门区域对象
-    init (data) {
-      this._getAreaData(data)
+    init (data, load) {
+      this._getAreaData(data, load)
     },
-    _getAreaData (data) {
-      let thi = this
-      if (data !== null) {
-        thi.areadata = data
-        let _html = ''
-        let len = thi.areadata.length
-        for (let i = 0; i < len; i++) {
-          _html += `<div class="store-item" data-id=${thi.areadata[i].id}>
-                      <a href="act-detail.html?id=${thi.areadata[i].id}">
-                      <div class="store-content">
-                          <div class="goods-image">
-                              <div class="image-container" style="background-image:url(${imgSuffix(thi.areadata[i].imgsrc, 2)})">
-                                  
-                              </div>
-                          </div>
-                          <div class="goods-detail">
-                              <p class="goods-name">${thi.areadata[i].name}</p>
-                              <div class="goods-content">
-                                  <p class="goods-sales">${thi.areadata[i].time}</p>
-                                  <p class="goods-sales">活动积分${thi.areadata[i].integral} <span>活动等级${thi.areadata[i].level}</span></p>
-                              </div>
-                              <del class="goods-market-price">${thi.areadata[i].marprice}</del>
-                              <div class="discount-price"><i>￥</i>${thi.areadata[i].disprice}</div>
-                              <div class="goods-buy">立即报名</div>
-                          </div>
-                      </div>
-                      </a>
-                  </div>`
+    _temple (i, data) {
+      return `<div class="store-item" data-id=${data[i].id}>
+      <a href="act-detail.html?id=${data[i].id}">
+        <div class="store-content">
+          <div class="goods-image">
+              <div class="image-container" style="background-image:url(${imgSuffix(data[i].imgsrc, 2)})">
+                            
+              </div>
+          </div>
+          <div class="goods-detail">
+            <p class="goods-name">${data[i].name}</p>
+              <div class="goods-content">
+                  <p class="goods-sales">${data[i].time}</p>
+                  <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].level}</span></p>
+              </div>
+              <del class="goods-market-price">${data[i].marprice}</del>
+              <div class="discount-price"><i>￥</i>${data[i].disprice}</div>
+              <div class="goods-buy">立即报名</div>
+            </div>
+        </div>
+      </a>
+    </div>`
+    },
+    _getAreaData (data, load) {
+      if (load) { // 如果不是初始化，是下拉刷新
+        let len = data.length
+        if (len !== 0) { // 如果下拉刷新有值
+          for (let i = 0; i < len; i++) {
+            $('.stores').append(this._temple(i, data))
+          }
         }
-        $('.stores').html(_html)
-      } else {
-        $('#otherPage').html(`<div class="nothing-text" style="position: relative;">
-       
-        <p>暂时还没有新活动</p>
-    </div>`)
+      } else { // 如果是初始化
+        if (data.length !== 0) { // 如果初始化有数据
+          let len = data.length
+          for (let i = 0; i < len; i++) {
+            $('.stores').append(this._temple(i, data))
+          }
+        }
       }
+    //   else {
+    //     $('#otherPage').html(`<div class="nothing-text" style="position: relative;">
+    //     <p>暂时还没有新活动</p>
+    // </div>`)
+    //   }
     }
   }
   let Home = {

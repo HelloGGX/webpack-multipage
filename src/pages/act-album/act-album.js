@@ -15,21 +15,22 @@ let all = (function () {
     init () {
       $('#BtnUpload').on('click', () => {
         let _thi = this
-        judgeLogin(() => { // 判断是否登陆
-        }, () => { _thi.show() }, () => {
-          weui.confirm('请登陆再上传~', {
-            title: '提示',
-            buttons: [{
-              label: '取消',
-              type: 'default',
-              onClick: function () { console.log('no') }
-            }, {
-              label: '马上登陆',
-              type: 'primary',
-              onClick: function () { window.location.href = 'login.html' }
-            }]
+        judgeLogin(
+          () => { _thi.show() },
+          () => {
+            weui.confirm('请登陆再上传~', {
+              title: '提示',
+              buttons: [{
+                label: '取消',
+                type: 'default',
+                onClick: function () { console.log('no') }
+              }, {
+                label: '马上登陆',
+                type: 'primary',
+                onClick: function () { window.location.href = 'login.html' }
+              }]
+            })
           })
-        })
       })
 
       $('#uploadCancel').on('click', () => {

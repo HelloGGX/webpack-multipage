@@ -10,31 +10,21 @@ import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = getQueryString('type')
-  let DATA = null
-  let allData = {// 获取该页所有数据
-    init () {
-      this._getOrderData()
-    },
-    _getOrderData () {
-      model.orders.getOrderData().then((data) => { // 获取数据成功时的处理逻辑
-        Home._getNewData(data)
-        DATA = data
-      }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
-        weui.alert(ErrMsg)
-      })
-    }
-  }// 获取所有数据
-
+  let PAGE = {
+    paid: 1,
+    receipt: 1,
+    pend: 1
+  }
   let Home = {
     pageInit () {
-      allData.init()
+      this._getOrderData()
       this.switch()
       bubb.init(() => {
         var loading = weui.loading('loading')
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            allData.init()
+            window.location.reload()
           })
         }, 800)
       }, () => {
@@ -42,7 +32,8 @@ let all = (function () {
         setTimeout(() => {
           loading.hide(() => {
             bubb.update()
-            allData.init()
+            PAGE[TYPE] += 6
+            this._getOrderData(PAGE[TYPE], TYPE)
           })
         }, 800)
       })
@@ -52,6 +43,38 @@ let all = (function () {
 
       $('body').on('click', '.delete', (e) => {
         this.deleteOrder(e)
+      })
+    },
+    _getOrderData (page, type) {
+      model.orders.getOrderData({page: page, type: type}).then((data) => { // 获取数据成功时的处理逻辑
+        let newdata = null
+        newdata = data[TYPE]
+        let len = newdata.length
+        if (data.load) { // 如果不是初始化，是下拉刷新
+          if (len !== 0) { // 如果下拉刷新有值
+            for (let i = 0; i < len; i++) {
+              $(`#${TYPE}`).append(this._temple(i, newdata, TYPE))
+            }
+          }
+        } else { // 如果是初始化
+          if (len === 0) { // 如果初始化没有数据
+            $(`#${TYPE}`).html(`<div class="nothing-text">
+            <div class="nothing-img"></div>
+            <p>暂时还订单</p>
+        </div>`)
+            $('#pullup').hide()
+          } else { // 如果初始化有数据
+            for (let i = 0; i < len; i++) {
+              $('#' + TYPE).append(this._temple(i, newdata, TYPE))
+              if (TYPE === 'pend') {
+                this.leftTim($('.pend-time')[i], newdata[i].order_regdate)
+              }
+            }
+            $(document.getElementById(TYPE)).show().siblings().hide()
+          }
+        }
+      }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
+        weui.alert(ErrMsg)
       })
     },
     _temple (i, data, type) { // 模板
@@ -92,7 +115,7 @@ let all = (function () {
       </p>
     </div>
     <div class="button-block">
-      ${type === 'pend' ? ` <p>活动名额保留:<span></span></p>` : ``}
+      ${type === 'pend' ? ` <p>活动名额保留:<span class="pend-time"></span></p>` : ``}
       <div class="orders-button">
         ${data[i].order_paystate === '1' ? `<a class="delete" data-id="${data[i].order_id}"></a><a class="again"></a>` : `<a class="cancel" data-id="${data[i].order_id}"></a><a href="act-pay.html?orderId=${data[i].order_id}" class="go-pay"></a>`}
       </div>
@@ -100,10 +123,13 @@ let all = (function () {
    
     </div>`
     },
-    leftTime (e, time) {
+    leftTim (e, time) { // 剩余时间
+      // time = time.replace(/-/g, '/')
       $.leftTime(time, (d) => {
         if (d.status) {
           $(e).html(`${d.m}分${d.s}秒`)
+        } else {
+          $(e).html(`${0}分${0}秒`)
         }
       })
     },
@@ -137,7 +163,7 @@ let all = (function () {
             model.orders.deleteOrder({orderId: orderId}).then(res => {
               if (res.state === 'ok') {
                 $('#order-grid').html()
-                allData._getOrderData()
+                $(e.currentTarget).parents('.orders-item').remove()
                 weui.alert('订单删除成功')
               }
             }).catch(errMsg => {
@@ -161,7 +187,7 @@ let all = (function () {
             model.orders.cancelOrder({orderId: orderId, reason: reason}).then(res => {
               if (res.state === 'ok') {
                 $('#order-grid').html()
-                allData._getOrderData()
+                $(e.currentTarget).parents('.orders-item').remove()
                 weui.alert('订单取消成功')
               }
             }).catch(errMsg => {
@@ -170,31 +196,6 @@ let all = (function () {
           }
         })
       }, 'aler')
-    },
-    _getNewData (data) {
-      let newdata
-      let _html = ''
-      newdata = data[TYPE]
-
-      if (newdata === null) {
-        $('#order-grid').html(`<div class="nothing-text">
-        <div class="nothing-img"></div>
-        <p>暂时还订单</p>
-    </div>`)
-      } else {
-        let len = newdata.length
-        for (let i = 0; i < len; i++) {
-          _html += this._temple(i, newdata, TYPE)
-        }
-        $('#order-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
-        $(`#${TYPE}`).html(_html)
-        if (TYPE === 'pend') {
-          for (let i = 0; i < len; i++) {
-            this.leftTime($(`#${TYPE}`).find('.button-block p span')[i], newdata[i].order_regdate)
-          }
-        }
-        $(document.getElementById(TYPE)).show().siblings().hide()
-      }
     },
     switch () {
       let item = $('.fixed_nav_item_catgoods')
@@ -207,11 +208,9 @@ let all = (function () {
       $('.nav_fixed_catgoods').on('click', '.fixed_nav_item_catgoods', (e) => {
         $(e.currentTarget).find('span').addClass('nav_cur_cat').parent().siblings().find('span').removeClass('nav_cur_cat')
         TYPE = $(e.currentTarget).data('type')
-        if (document.getElementById(TYPE)) {
-          $(document.getElementById(TYPE)).show().siblings().hide()
-        } else {
-          this._getNewData(DATA)
-        }
+        PAGE[TYPE] = PAGE[TYPE]
+        this._getOrderData(PAGE[TYPE], TYPE)
+        $(document.getElementById(TYPE)).show().siblings().hide()
       })
     }
   }

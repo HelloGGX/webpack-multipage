@@ -96,12 +96,16 @@ const generateConfig = env => {
         'pages': resolve('src/pages')
       }
     },
+    externals: {
+      Swiper: 'Swiper',
+      BMap: 'BMap'
+    },
     output: {
       path: resolve('dist'),
       filename: 'js/[name].[hash:5].js',
       chunkFilename: 'js/[name].[chunkhash:5].js',
-      publicPath: env === 'production'
-        ? '/' : ''
+      publicPath: env === 'production' ? '/' : '',
+      libraryTarget: 'umd'
     },
     module: {
       rules: [

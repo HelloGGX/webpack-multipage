@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import model from 'api/getIndex'
 import weui from 'weui.js'
 import $ from 'jquery'
-import {parserDate} from 'common/js/dom'
+import {parserDate, getCountDays} from 'common/js/dom'
 
 let all = (function () {
   let $$ = function (id) {
@@ -152,7 +152,8 @@ let all = (function () {
               return 2
             }
             tb.rows[i].cells[j].className = 'onToday'
-            this.qdDay.push(Date.parse(new Date()) / 1000)
+            let date = Year + '-' + Month + '-' + day
+            this.qdDay.push(Date.parse(parserDate(date)) / 1000)
 
             return 1
           }
@@ -164,14 +165,17 @@ let all = (function () {
     pageInit () {
       this.getSign()
     },
+
     getSign () {
       let isSign = false
       let myday = [] // 已签到的数组
       let _thi = this
+
       model.sign.getSign().then(data => {
         for (let i = 0; i < data.signday.length; i++) {
           myday.push(Date.parse(parserDate(data.signday[i])) / 1000)
         }
+
         let cale = new Calendar('idCalendar', {
           qdDay: myday,
           onToday: function (o) {
@@ -199,7 +203,7 @@ let all = (function () {
             if (res === 1) {
               $$('sign-txt').innerHTML = '已签到'
               $$('sign-count').innerHTML = parseInt($$('sign-count').innerHTML) + 1
-              _thi.postSign()
+              _thi.postSign(myday)
               isSign = true
             } else if (res === 2) {
               $$('sign-txt').innerHTML = '已签到'
@@ -213,8 +217,33 @@ let all = (function () {
         weui.alert(errMsg)
       })
     },
-    postSign () {
-      model.sign.postSign().then(res => {
+    rand (myday) {
+      let coin = null
+      let count = 0
+      if (typeof myday === 'object') {
+        if (Array.isArray(myday)) {
+          for (let i = myday.length - 1, l = 0; i > l; i--) {
+            if (myday[i] - myday[i - 1] === 86400) {
+              count++
+            } else {
+              count = 1
+              break
+            }
+          }
+          if (count < 4) { // 如果签到小于4天
+            coin = Math.ceil(Math.random() * 10)
+          } else if (count >= 4 && count < getCountDays() - 1) { // 如果连续签到5天
+            coin = Math.ceil(Math.random() * 20)
+          } else if (count === getCountDays() - 1) {
+            coin = Math.ceil(Math.random() * 100)
+          }
+        }
+      }
+      return coin
+    },
+    postSign (myday) {
+      let coin = this.rand(myday)
+      model.sign.postSign({coin: coin}).then(res => {
         if (res.state === 'ok') {
           weui.alert('签到成功')
         }

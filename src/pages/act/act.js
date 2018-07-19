@@ -49,6 +49,8 @@ let all = (function () {
             }
           }
         } else { // 如果是初始化
+          $('#act-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+          $(document.getElementById(TYPE)).show().siblings().hide()
           if (newdata.length === 0) { // 如果初始化没有数据
             $(`#${TYPE}`).html(`<div class="nothing-text">
               <div class="nothing-img"></div>
@@ -60,7 +62,6 @@ let all = (function () {
             for (let i = 0; i < len; i++) {
               $('#' + TYPE).append(this._temple(i, newdata))
             }
-            $(document.getElementById(TYPE)).show().siblings().hide()
           }
         }
       }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
@@ -97,7 +98,6 @@ let all = (function () {
         if (document.getElementById(TYPE)) {
           $(document.getElementById(TYPE)).show().siblings().hide()
         } else {
-          $('#act-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
           PAGE[TYPE] = PAGE[TYPE]
           this._getActData(PAGE[TYPE], TYPE)
           $(document.getElementById(TYPE)).show().siblings().hide()

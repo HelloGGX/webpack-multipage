@@ -1,0 +1,57 @@
+<!--======================这是设置付款账户的页面=========================-->
+<div id="setPay" class="cover" style="display: none;">
+    <div class="cover-inner">
+        <div class="cover-banner-container">
+            <div class="cover-banner">
+                <div id="setPayCancel" class="cover-banner-icon-back cover-banner-left"><a><span></span></a></div>
+                <div class="cover-banner-tit">设置付款账户</div>
+                <div id="setPaySave" class="cover-banner-right"><a>提交</a></div>
+            </div>
+        </div>
+        <div class="acNotice">
+                <p>填写本人真实信息并仔细核对银行卡号!如果信息提供有误，造成的一切损失自行承担</p>
+            </div>
+        <div class="cover-form">
+            <form id="myPay" action="" name="form1" method="post">
+                <input type="hidden" name="orderId">
+                <div class="weui-cells weui-cells_form margin">
+                    <div class="weui-cell weui-cell_select">
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" name="bankName">
+                                <option selected="" value="1">微信号</option>
+                                <option value="2">QQ号</option>
+                                <option value="3">Email</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text"  name="userName" required emptyTips="姓名不能为空">
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">卡号</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="number"  name="idNum" required emptyTips="卡号不能为空">
+                        </div>
+                    </div>
+                    <div  class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">身份证</label></div>
+                        <div class="weui-cell__bd">
+                            <input id="idCard" class="weui-input" type="number"   name="idCard" required emptyTips="身份证号码不能为空" notMatchTips="身份证号码有误">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">金额</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="number"  name="price" required readonly>
+                        </div>
+                    </div>
+                </div> 
+                       
+            </form>
+        </div>
+    </div>
+</div>

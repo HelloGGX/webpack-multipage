@@ -4,13 +4,17 @@ import model from 'api/getIndex'
 import $ from 'jquery'
 import weui from 'weui.js'
 import {getQueryString, clear} from 'common/js/dom'
+import {setPay} from '../setPay/set-pay'
+
 let all = (function () {
   let Home = {
     PRICE: 0, // 总价格
     pageInit () {
+      setPay()
       $('.payways-main-li').on('click', (e) => {
         $(e.currentTarget).find('label').addClass('active').parents('.payways-main-li').siblings().find('label').removeClass('active')
       })
+
       $('.banner-left').on('click', (e) => {
         weui.confirm('确定要离开吗？', {
           title: '提示',
@@ -31,7 +35,8 @@ let all = (function () {
       })
       this._getApplySuccess()
       $('#payApply').on('click', () => {
-        this._postPay()
+        $('input[name=orderId]').val(getQueryString('orderId'))
+        $('#setPay').show()
       })
     },
     _guestTemp (data) {
@@ -54,15 +59,6 @@ let all = (function () {
       </li>
       `)}`
     },
-    _postPay () {
-      model.pay.postPay({orderId: getQueryString('orderId')}).then(res => {
-        if (res.state === 'ok') {
-          weui.alert('支付成功')
-        }
-      }).catch(errMsg => {
-        weui.alert(errMsg)
-      })
-    },
     _getApplySuccess () {
       let _thi = this
       model.getApplySuccess({id: getQueryString('id'), clubId: getQueryString('clubId'), orderId: getQueryString('orderId')}).then(data => {
@@ -72,6 +68,7 @@ let all = (function () {
           _thi.PRICE += Number(guest[i].guest_jg)
         }
         $('#coupon').next().find('.weui-cell__ft').html(`￥${_thi.PRICE}`)
+        $('input[name=price]').val(_thi.PRICE)
         $('#actTitle').html(data.cpname)
         $('.pay-act-time').text(data.cpksdate)
         if (data.pay_onlin === '是') {

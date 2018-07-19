@@ -25,7 +25,7 @@ let validateId = function (idCard) {
         }
       } else {
         // 用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
-        if (idCardLast === idCardY[idCardMod]) {
+        if (Number(idCardLast) === idCardY[idCardMod]) {
 
         } else {
           pass = false

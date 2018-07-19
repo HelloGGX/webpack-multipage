@@ -37,8 +37,13 @@ let all = (function () {
       $('#coverClubAddr').html(data.club_addr)
       $('#coverClubMotto').html(data.club_motto)
       $('#coverClubIntr p').text(data.club_intr)
-      $('#coverClubMember').html(`<p>俱乐部成员${data.club_renshu}</p>`)
+      $('#coverClubMember').html(`<p>俱乐部成员${data.club_people}</p>`)
       $('.club-acts-num span').html(data.club_acts.length)
+      let w = work(require.resolve('./calculate.js'))// 多线程计算报名人数总值
+      w.postMessage([data])
+      w.addEventListener('message', event => {
+        $('.club-people-num span').html(event.data[0])
+      })
     }
   }
   let Home = {
@@ -217,11 +222,6 @@ let all = (function () {
             </div>`
     },
     _getClubInfo (data) {
-      let w = work(require.resolve('./calculate.js'))// 多线程计算报名人数总值
-      w.postMessage([data])
-      w.addEventListener('message', event => {
-        $('.club-people-num span').html(event.data[0])
-      })
       $('.club-logo').css('background-image', `url(${data.thumb_logo})`)
       $('.club-motto p').text(data.club_motto)
       $('.club-name').html(data.club_name)

@@ -57,20 +57,21 @@ let all = (function () {
             }
           }
         } else { // 如果是初始化
+          $('#order-grid').append("<li class='goods_grid_wrapper stores' id=" + TYPE + ' data-type=' + TYPE + '></li>')
+          $(document.getElementById(TYPE)).show().siblings().hide()
           if (len === 0) { // 如果初始化没有数据
             $(`#${TYPE}`).html(`<div class="nothing-text">
             <div class="nothing-img"></div>
             <p>暂时还订单</p>
         </div>`)
             $('#pullup').hide()
-          } else { // 如果初始化有数据
+          } else { // 如果初始化有数据,选项卡切换
             for (let i = 0; i < len; i++) {
               $('#' + TYPE).append(this._temple(i, newdata, TYPE))
               if (TYPE === 'pend') {
                 this.leftTim($('.pend-time')[i], newdata[i].order_regdate)
               }
             }
-            $(document.getElementById(TYPE)).show().siblings().hide()
           }
         }
       }).catch((ErrMsg) => { // 获取数据失败时的处理逻辑
@@ -117,7 +118,7 @@ let all = (function () {
     <div class="button-block">
       ${type === 'pend' ? ` <p>活动名额保留:<span class="pend-time"></span></p>` : ``}
       <div class="orders-button">
-        ${data[i].order_paystate === '1' ? `<a class="delete" data-id="${data[i].order_id}"></a><a class="again"></a>` : `<a class="cancel" data-id="${data[i].order_id}"></a><a href="act-pay.html?orderId=${data[i].order_id}" class="go-pay"></a>`}
+        ${data[i].order_paystate === '1' ? `<a class="delete" data-id="${data[i].order_id}"></a>` : `<a class="cancel" data-id="${data[i].order_id}"></a><a href="act-pay.html?orderId=${data[i].order_id}" class="go-pay"></a>`}
       </div>
     </div>`}
    
@@ -208,9 +209,13 @@ let all = (function () {
       $('.nav_fixed_catgoods').on('click', '.fixed_nav_item_catgoods', (e) => {
         $(e.currentTarget).find('span').addClass('nav_cur_cat').parent().siblings().find('span').removeClass('nav_cur_cat')
         TYPE = $(e.currentTarget).data('type')
-        PAGE[TYPE] = PAGE[TYPE]
-        this._getOrderData(PAGE[TYPE], TYPE)
-        $(document.getElementById(TYPE)).show().siblings().hide()
+        if (document.getElementById(TYPE)) {
+          $(document.getElementById(TYPE)).show().siblings().hide()
+        } else {
+          PAGE[TYPE] = PAGE[TYPE]
+          this._getOrderData(PAGE[TYPE], TYPE)
+          $(document.getElementById(TYPE)).show().siblings().hide()
+        }
       })
     }
   }

@@ -1,7 +1,8 @@
+@import '../../common/css/variable.less';
 .invite-user-info-view{
     background-color: #ffdb34;
     position: relative;
-    padding-bottom: .2rem;
+    height: 100%;
     .banner{
         width: 3.75rem;
         img{
@@ -54,3 +55,116 @@
     margin-top: .01rem;
     }
 }
+.sd-coin{
+    margin: 0.2rem 0;
+    text-align: center;
+    h2{
+        a{
+            color: #f40009;
+            font-size: 0.3rem;
+        }
+        
+        span{
+            font-size: 0.16rem;
+        }
+    }
+}
+.sku-selector-tit{
+    text-align: center;
+    font-size: 0.16rem;
+    font-weight: bold;
+}
+.sku-selector-number{
+    position: relative;
+    width: 100%;
+    height: .56rem;
+    margin-bottom: .23rem;
+    line-height: .8rem;
+    font-size: 0;
+    span {
+        display: inline-block;
+        font-size: .16rem;
+        color: #151516;
+    }
+    .btn-selector{
+        position: relative;
+        margin: 0 auto;
+        width: 1.9rem;
+    }
+}
+.sku-selector-reduce {
+    position: absolute;
+    height: .4rem;
+    width: .4rem;
+    left: 0;
+    top: .15rem;
+    border-radius: .02rem;
+    color: #eadc12;
+  text-align: center;
+    border: 1px solid #000;
+    background-color: #f40009;
+    &:before {
+        content: "";
+        position: absolute;
+        width: .16rem;
+        height: .04rem;
+        top: .15rem;
+        left: .1rem;
+        background: url('../../imgs/icons/reduce.png') 0 no-repeat;
+    }
+}
+.sku-selector-increase, .sku-selector-input {
+    height: .4rem;
+    width:1rem;
+    top: .15rem;
+    position: absolute;
+    border-radius: .02rem;
+}
+.sku-selector-input, .sku-selector-reduce-disable {
+    background-color: #f2f2f2;
+}
+.sku-selector-input {
+    width: 1rem;
+    right: .45rem;
+    line-height: normal;
+    font-size: .18rem;
+    margin: 0;
+    padding: .06px 0;
+    color: #eadc12;
+    text-align: center;
+    border: 1px solid #000;
+    background-color: #f40009;
+}
+.sku-selector-increase {
+    width: .4rem;
+    height: .4rem;
+    right: 0;
+    color: #eadc12;
+  text-align: center;
+    border: 1px solid #000;
+    background-color: #f40009;
+    &:before {
+        content: "";
+        position: absolute;
+        width: .4rem;
+        height: .3rem;
+        top: .07rem;
+        left: .1rem;
+        background: url('../../imgs/icons/increase.png') -0.06rem -0.04rem no-repeat;
+        background-size: 0.3rem 0.3rem;
+    }
+}
+.btn-confirm-coin{
+    height: 0.5rem;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    line-height: 0.5rem;
+    background-color: #f40009;
+    a{
+    font-size: @font-size-medium-x;
+    color: #fff;
+    }
+}
+

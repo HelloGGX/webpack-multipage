@@ -28,6 +28,7 @@ let person = {// 个人资料管理（资料获取，编辑）
       showLoading: true
     }))
   },
+
   postCash (e) { // 提交提现信息
     let data = serializeObject(e)
     return db.handleRequest(db.request.post('postCashData.php', {
@@ -268,9 +269,16 @@ let mag = {// 管理员管理审核
 }
 
 let pay = {// 支付相关
-  postPay (data) { // 支付
-    return db.handleRequest(db.request.post('postPay.php', {
+  postPayData (e) { // 设置支付账户信息
+    let data = serializeObject(e)
+    return db.handleRequest(db.request.post('postPayData.php', {
       data: data,
+      showLoading: true
+    }))
+  },
+  getPayData (data) { // 获取支付账户信息
+    return db.handleRequest(db.request.get('getPayData.php', {
+      params: data,
       showLoading: true
     }))
   }
@@ -283,6 +291,18 @@ export default {
   pay,
   mag,
   sign,
+  postCoin (data) { // 渡币兑换商城积分
+    return db.handleRequest(db.request.post('postCoin.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  getCoin (data) { // 获取渡币兑换商城积分记录
+    return db.handleRequest(db.request.get('getCoin.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
   postAddr (data) {
     return db.handleRequest(db.request.post('postAddr.php', {
       data: data,

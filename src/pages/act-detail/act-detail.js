@@ -5,6 +5,7 @@ import $ from 'jquery'
 import BScroll from 'better-scroll'
 import weui from 'weui.js'
 import {getQueryString, clear, imgSuffix} from 'common/js/dom'
+import {judgeLogin} from 'components/judgeLogin/judge-login'
 
 import model from 'api/getIndex'
 
@@ -135,6 +136,26 @@ let all = (function () {
           $('.mag-group-btn:last-child').css('backgroundColor', '#b7b7b7')
           $('.mag-group-btn .apply-help').attr('href', 'javascript:')
         }
+        judgeLogin(() => { // 登陆时候
+
+        }, () => { // 未登陆时候
+          $('.goods-group-btn a').attr('href', `javascript:`)
+          $('.mag-group-btn .apply-help').attr('href', `javascript:`)
+          $('.goods-bottom-bar').on('click', (e) => {
+            weui.confirm('建议登陆体验哦~', {
+              title: '提示',
+              buttons: [{
+                label: '先逛逛看',
+                type: 'default',
+                onClick: function () { console.log('no') }
+              }, {
+                label: '马上登陆',
+                type: 'primary',
+                onClick: function () { window.location.href = 'login.html' }
+              }]
+            })
+          })
+        })
         $('.v5-banner').css({'background-image': 'url(' + hdThumbUrl + ')'})
         $('.index_price').html(price)
         $('.goods-buy-price').html(`<i>￥</i>${price}`)

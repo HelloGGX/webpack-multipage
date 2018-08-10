@@ -1,0 +1,38 @@
+@import '../../common/css/variable.less';
+
+.album-item{
+    .album-time{
+        margin-top: 0.08rem;
+        p{
+            font-size: @font-size-medium-x;
+            padding: 0.08rem 0.1rem;
+        }
+    }
+    .album-photos,.mag-photos{
+        ul{
+            li{
+                position: relative;
+                width: 24%;
+                float: left;
+                display: inline-block;
+                margin: 0.5%;
+                overflow: hidden;
+                .album-photo{
+                    img{
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        display: block;
+                        transform: translate(-50%,-50%);
+                    }
+                }
+            }
+        }
+        
+    }
+}
+.btn-delete-comfirm{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

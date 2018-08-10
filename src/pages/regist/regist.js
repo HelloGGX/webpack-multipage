@@ -61,6 +61,7 @@ let all = (function () {
           weui.toast('注册成功', 800)
           setCookie('username', `${username}`, 1000 * 60)
           setCookie('token', sha1(`${username}${password}${'SD山渡户外119'}`), 1000 * 60)
+          window.sessionStorage.setItem('ucl', data.ucl)
           window.location.href = `index.html?uid=${data.uid}`
         } else if (data.state === 'reg_y') {
           weui.alert('你已经注册过了,请直接登陆')

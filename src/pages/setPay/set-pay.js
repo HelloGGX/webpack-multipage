@@ -13,7 +13,7 @@ class SetPay {
   init () {
     $('select[name=bankName]').html(
       `${clear(`${bank.map(key => `
-      <option value="${key.name}">${key.name}</option>
+      <option value="${key.val}">${key.name}</option>
       `)}`)}`
     )
     this._getPayData()

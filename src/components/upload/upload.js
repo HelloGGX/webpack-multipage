@@ -13,6 +13,7 @@ class Upload {
     fileVal = 'imgfile',
     auto = true,
     size = 1,
+    type = 'act',
     okCallBack = () => {}} = {}) {
     this.id = id
     this.uploadCount = uploadCount
@@ -24,6 +25,7 @@ class Upload {
     this.okCallBack = okCallBack
     this.urlArr = urlArr
     this.customBtn = customBtn// 手动上传按钮id
+    this.type = type
   }
   init () {
     this._seeImg()
@@ -127,7 +129,9 @@ class Upload {
       },
       onBeforeSend: function (data, headers) { // 文件上传前调用
         // console.log(`文件上传前调用的data:${headers}`)
-        $.extend(data, { albumId: getQueryString('albumId') }) // 可以扩展此对象来控制上传参数
+        const albumType = _thi.type
+
+        $.extend(data, { albumId: getQueryString('albumId'), type: albumType }) // 可以扩展此对象来控制上传参数
         // $.extend(headers, { Origin: 'http://125.65.111.19:82' }) // 可以扩展此对象来控制上传头部
         console.log(`文件上传前调用的data:${data.albumId}`)
         // return false; // 阻止文件上传
@@ -171,6 +175,7 @@ export function upload (opt) {
     size: opt.size,
     okCallBack: opt.okCallBack,
     urlArr: opt.urlArr,
-    customBtn: opt.customBtn
+    customBtn: opt.customBtn,
+    type: opt.type
   }).init()
 }

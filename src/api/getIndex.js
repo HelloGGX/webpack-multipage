@@ -291,6 +291,30 @@ export default {
   pay,
   mag,
   sign,
+  deleteAlbums (data) { // 删除相册
+    return db.handleRequest(db.request.post('deleteAlbums.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  getAlbums (data) { // 获取相册
+    return db.handleRequest(db.request.get('getAlbums.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  postAlbum (data) { // 创建相册
+    return db.handleRequest(db.request.post('postAlbum.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
+  search (data) { // 搜索
+    return db.handleRequest(db.request.post('search.php', {
+      data: data,
+      showLoading: true
+    }))
+  },
   postCoin (data) { // 渡币兑换商城积分
     return db.handleRequest(db.request.post('postCoin.php', {
       data: data,
@@ -407,6 +431,12 @@ export default {
   },
   getAlbumData (data) { // 获取对应活动相册数据
     return db.handleRequest(db.request.get('getActAlbum.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  getMyAlbumData (data) { // 获取我的花絮相册数据
+    return db.handleRequest(db.request.get('getMyAlbumData.php', {
       params: data,
       showLoading: true
     }))

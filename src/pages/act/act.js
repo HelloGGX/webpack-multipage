@@ -8,6 +8,7 @@ import {bubb} from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = 'city'
+  let PULLDATA = []
   let PAGE = {
     city: 1,
     hot: 1,
@@ -26,13 +27,12 @@ let all = (function () {
           })
         }, 800)
       }, () => {
-        var loading = weui.loading('loading')
         setTimeout(() => {
-          loading.hide(() => {
-            bubb.update()
+          bubb.update()
+          if (PULLDATA.length > 0) {
             PAGE[TYPE] += 3
             _thi._getActData(PAGE[TYPE], TYPE)
-          })
+          }
         }, 800)
       })
       this.switch()
@@ -41,6 +41,7 @@ let all = (function () {
       model.getActData({page: page, type: type}).then((data) => { // 获取数据成功时的处理逻辑
         let newdata = null
         newdata = data[TYPE]
+        PULLDATA = newdata
         if (data.load) { // 如果不是初始化，是下拉刷新
           let len = newdata.length
           if (len !== 0) { // 如果下拉刷新有值
@@ -59,6 +60,9 @@ let all = (function () {
             $('#pullup').hide()
           } else { // 如果初始化有数据
             let len = newdata.length
+            if (len < 4) {
+              $('.after-trigger').hide()
+            }
             for (let i = 0; i < len; i++) {
               $('#' + TYPE).append(this._temple(i, newdata))
             }
@@ -74,14 +78,14 @@ let all = (function () {
             <div class="store-content">
                 <div class="goods-image">
                     <div class="image-container" style="background-image:url(${imgSuffix(data[i].imgsrc, 2)})">
-                       
+
                     </div>
                 </div>
                 <div class="goods-detail">
                     <p class="goods-name">${data[i].name}</p>
                     <div class="goods-content">
                         <p class="goods-sales">活动时间${data[i].time}</p>
-                        <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].level}</span></p>
+                        <p class="goods-sales">活动经验${data[i].integral} <span>活动等级${data[i].level}</span></p>
                     </div>
                     <del class="goods-market-price">${data[i].price}</del>
                     <div class="discount-price"><i>￥</i>${data[i].price}</div>

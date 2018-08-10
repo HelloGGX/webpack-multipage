@@ -10,6 +10,7 @@ const request = axios.create()
 let loading
 request.interceptors.request.use(config => { // 在请求或响应被 then 或 catch 处理前拦截它们。
   // 在发送请求之前做些什么
+
   if (config.showLoading) {
     loading = weui.loading('正在加载')
   }

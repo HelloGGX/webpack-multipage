@@ -5,7 +5,7 @@
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
-   
+
 </head>
 
 <body>
@@ -23,7 +23,7 @@
                         <div class="content-inner">
                             <div>
                                 <div id="personPage">
-                                   
+
                                     <div class="per-info">
                                         <div class="per-head">
                                             <a href="per-data.html">
@@ -54,7 +54,7 @@
                                                 </a>
                                             </div>
                                             <div class="data-item col-25">
-                                                <a class="">
+                                                <a href="my-album.html">
                                                     <h3 class="high-grey">0</h3>
                                                     <p>花絮</p>
                                                 </a>
@@ -73,14 +73,14 @@
                                             <div class="weui-cell__bd f-m-x">
                                                 <p>待付款</p>
                                             </div>
-                                    
+
                                         </a>
                                         <a class="weui-cell weui-cell_access" href="orders.html?type=paid">
                                             <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-yf.png')%>" alt=""></div>
                                             <div class="weui-cell__bd f-m-x">
                                                 <p>已付款</p>
                                             </div>
-                                           
+
                                         </a>
                                         <a class="weui-cell weui-cell_access" href="orders.html?type=receipt">
                                             <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-sk.png')%>" alt=""></div>
@@ -93,14 +93,13 @@
                                             <div class="weui-cell__bd f-m-x">
                                                 <p>退款</p>
                                             </div>
-                                           
+
                                         </a>
-                                        <a class="weui-cell weui-cell_access" href="cash.html">
+                                        <a id="cash" class="weui-cell weui-cell_access" href="cash.html">
                                             <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-tx.png')%>" alt=""></div>
                                             <div class="weui-cell__bd f-m-x">
                                                 <p>提现</p>
                                             </div>
-                                           
                                         </a>
                                         <div class="line"></div>
                                         <a class="weui-cell weui-cell_access" href="identity.html">
@@ -108,47 +107,55 @@
                                                 <div class="weui-cell__bd f-m-x">
                                                     <p>身份认证</p>
                                                 </div>
-                                               
+
                                             </a>
-                                            <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <!-- <a class="weui-cell weui-cell_access" href="javascript:;">
                                                 <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-hb.png')%>" alt=""></div>
                                                 <div class="weui-cell__bd f-m-x">
                                                     <p>发红包</p>
                                                 </div>
-                                            </a>
+                                            </a> -->
                                             <a class="weui-cell weui-cell_access" href="javascript:;">
                                                 <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/pay-jf.png')%>" alt=""></div>
                                                 <div class="weui-cell__bd f-m-x">
-                                                    <p>我的积分<span id="integral" class="fright">0</span></p>
+                                                    <p>我的经验<span id="integral" class="fright">0</span></p>
                                                 </div>
                                             </a>
-                                           
+                                            <a class="weui-cell weui-cell_access" href="javascript:;">
+                                                <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/coin.png')%>" alt=""></div>
+                                                <div class="weui-cell__bd f-m-x">
+                                                    <p>我的度币<span id="coin" class="fright">0</span></p>
+                                                </div>
+                                            </a>
                                     </section>
                                     <div class="line"></div>
-                                    <section class="weui-cells margin">
+                                    <section id="clubMag" class="weui-cells margin">
                                         <a class="weui-cell weui-cell_access" href="club-mag.html">
                                             <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/club-mag.png')%>" alt=""></div>
                                             <div class="weui-cell__bd f-m-x">
                                                 <p>俱乐部申请</p>
                                             </div>
                                         </a>
-                                       
+
                                     </section>
-                                    <section class="weui-cells margin">
+                                    <section id="memberMag" class="weui-cells margin">
                                         <a class="weui-cell weui-cell_access" href="member-mag.html">
                                             <div class="weui-cell__hd"><img class="icon-order" src="<%= require('../../imgs/icons/club-mag.png')%>" alt=""></div>
                                             <div class="weui-cell__bd f-m-x">
                                                 <p>会员管理</p>
                                             </div>
                                         </a>
+
+                                    </section>
+                                    <div class="weui-cells">
                                         <div class="weui-btn-area quit">
                                             <a class="weui-btn weui-btn_default">退出登录</a>
                                         </div>
-                                    </section>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
                 <%= require('html-loader!../../components/footer/footer.html')  %>
             </div>

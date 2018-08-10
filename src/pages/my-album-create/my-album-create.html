@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+   
+</head>
+
+<body>
+    <div class="page">
+            <div class="banner-container">
+                    <div class="banner">
+                        <div class="banner-icon-back banner-left back" ><a><span></span></a></div>
+                        <div class="banner-tit banner-text"></div>
+                        <div id="magAlbum" class="banner-right"><a>管理</a></div>
+                        <div id="cancelMagAlbum" class="banner-right" style="display: none"><a>取消</a></div>
+                    </div>
+                </div>
+        <!--==================上传照片页面========================-->
+        <div id="uploadPage" class="cover" style="display: none;">
+                <div class="cover-inner">
+                    <div class="cover-banner-container">
+                        <div class="cover-banner">
+                            <div id="uploadCancel" class="cover-banner-icon-back cover-banner-left"><a href="#"><span></span></a></div>
+                            <div class="cover-banner-tit">上传照片</div>
+                        </div>
+                    </div>
+                    <div class="cover-form">
+                            <div class="weui-cells weui-cells_form" id="uploader">
+                                    <input type="hidden" name="actAlbum" id="hdimg" value="">
+                                    <div class="weui-cell">
+                                      <div class="weui-cell__bd">
+                                        <div class="weui-uploader">
+                                          <div class="weui-uploader__hd">
+                                            <p class="weui-uploader__title">
+                                              图片上传
+                                            </p>
+                                          </div>
+                                          <div class="weui-uploader__bd">
+                                            <ul class="weui-uploader__files uploaderFiles" id="uploaderFiles">
+                                            </ul>
+                                            <div class="weui-uploader__input-box">
+                                              <input id="uploaderCustomInput" class="weui-uploader__input" type="file"
+                                              accept="image/*" multiple="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="weui-btn-area"> 
+                                      <a id="uploaderCustomBtn" href="javascript:" class="weui-btn weui-btn_primary">上传</a> 
+                                </div> 
+                    </div>   
+                </div>
+            </div>
+        <%= require('html-loader!../../components/gallery/gallery.html')  %>
+        <div id="index-content-v2">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                    <div class="content-wrapper">
+                        <div class="content-inner">
+                            <div id="BtnUpload" class="weui-btn-area"> <a  class="weui-btn weui-btn_primary">上传照片</a> </div>
+                            <div id="album-container">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-delete-comfirm" style="display:none">
+                        <a class="weui-btn weui-btn_primary"><i class="iconfont icon-empty"></i> 删除</a>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+</body>
+
+</html>

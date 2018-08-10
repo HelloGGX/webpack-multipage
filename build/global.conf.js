@@ -126,6 +126,14 @@ const pages = [ // 页面配置写在这里
   {
     title: '会员充值',
     pageName: 'recharge'
+  },
+  {
+    title: '我的花絮',
+    pageName: 'my-album'
+  },
+  {
+    title: '添加花絮照片',
+    pageName: 'my-album-create'
   }
 ]
 const dependencies = [ // 依赖的全局js

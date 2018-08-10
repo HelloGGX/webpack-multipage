@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+        </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <div class="banner-container">
+            <div class="banner">
+                <div class="banner-icon-back banner-left back" ><a><span></span></a></div>
+                <div class="banner-tit banner-text"></div>
+                <div id="createAlbums" class="banner-right"><a>创建</a></div>
+            </div>
+        </div>
+            <div id="index-content-v2">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel content-panel">
+                        <div class="content-wrapper bg-white">
+                            <div class="content-inner">
+                                <div>
+                                    <div id="album-grid">
+                                        <div id="albums"></div>                   
+                                    </div>                       
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

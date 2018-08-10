@@ -21,11 +21,22 @@ let all = (function () {
           $('#integral').html(event.data[0])
         })
         w.postMessage([data])
+        if (window.sessionStorage.getItem('ucl') === '俱乐部') {
+          $('#clubMag').hide()
+        } else if (window.sessionStorage.getItem('ucl') === '用户') {
+          $('#clubMag').hide()
+          $('#memberMag').hide()
+          $('#cash').hide()
+        } else {
+          $('#clubMag').hide()
+          $('#memberMag').hide()
+        }
         $('.per-head img').attr('src', imgSuffix(data.user_img, 2))
         $('.per-text h3').text(data.user_nice)
         $('.per-text p').text(`用户ID:${data.user_id}`)
         $($('.Alldata .data-item')[0]).find('h3').html(data.user_act)
         $($('.Alldata .data-item')[3]).find('h3').html(data.user_club)
+        $('#coin').html(data.user_coin)
       }).catch(errMsg => {
         console.log(errMsg)
       })

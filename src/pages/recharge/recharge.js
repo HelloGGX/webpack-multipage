@@ -10,7 +10,7 @@ let all = (function () {
     init () {
       $('#sku-input').on('input propertychange', function (e) {
         if (!/^\d+$/.test(this.value)) {
-          this.value = 1
+          this.value = ''
         }
       })
       $('.sku-selector-reduce').on('click', (e) => {

@@ -361,6 +361,7 @@ let all = (function () {
     _postActData: function () {
       model.createActData($('#createAct')).then((res) => {
         // 获取数据成功时的处理逻辑
+
         if (res.state === 'ok') {
           weui.alert('提交成功,等待审核')
           window.location.href = 'act-mag.html'

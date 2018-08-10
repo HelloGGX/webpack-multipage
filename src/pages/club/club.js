@@ -6,85 +6,19 @@ import model from 'api/getIndex'
 import weui from 'weui.js'
 import {imgSuffix} from 'common/js/dom'
 import {bubb} from 'vendor/bubble'
+import {search} from 'components/search/search'
 
 let all = (function () {
   let TYPE = 'city'
+  let PULLDATA = []
   let PAGE = {
     city: 1,
     hot: 1,
     star: 1
   }
-
-  let search = {// 搜索框显示及查询
-    deleteHistory () { // 删除历史记录
-      $('#search_item').html('')
-      // localStorage.setItem('searchkey', '')
-    },
-    init () {
-      $('body').on('click', '.cancel-search', () => {
-        this.hide()
-      })
-      $('body').on('click', '.search-recent-delete-view', () => {
-        this.deleteHistory()
-      })
-      $('body').on('click', '.searchbar', () => {
-        this.show()
-      })
-      this.searchange()
-
-      $('body').on('click', '.search', () => {
-        var inputVal = $('#view-input').val().trim()
-        // alert(inputVal)
-        this.searchVal(inputVal)
-      })
-
-      $('body').on('click', '.recent-history-list', (e) => {
-        var val = $(e.currentTarget).html().trim()
-        this.searchVal(val)
-      })
-      $('.search-recent-list-view .recent-history-list').on('click', (e) => {
-        var val = $(e.currentTarget).html().trim()
-        this.searchVal(val)
-      })
-      $('.btn-reset').on('click', () => {
-        $('#view-input').val('')
-        $('.cancel-button-view').removeClass('search')
-        $('.cancel-button-view').addClass('cancel-search')
-        $('.cancel-button-view').html('返回')
-        $('.btn-reset').hide()
-      })
-    },
-    show () {
-      $('.search-view-container').css('visibility', 'visible')
-      $('.search-view-container').css('display', 'block')
-    },
-    hide () {
-      $('.search-view-container').css('visibility', 'hidden')
-      $('.search-view-container').css('display', 'none')
-    },
-    searchange () {
-      $('#view-input').bind('input propertychange', (e) => {
-        var newval = $(e.currentTarget).val()
-        if (newval.length > 0) {
-          $('.cancel-button-view').addClass('search')
-          $('.cancel-button-view').removeClass('cancel-search')
-          $('.cancel-button-view').html('搜索')
-          $('.btn-reset').show()
-        } else {
-          $('.cancel-button-view').removeClass('search')
-          $('.cancel-button-view').addClass('cancel-search')
-          $('.cancel-button-view').html('返回')
-          $('.btn-reset').hide()
-        }
-      })
-    },
-    searchVal (val) {
-
-    }
-  }
   let Home = {
     pageInit () {
-      search.init()
+      search({type: 'club'}).init()
       this._getNewData()
       bubb.init(() => {
         var loading = weui.loading('loading')
@@ -95,13 +29,12 @@ let all = (function () {
           })
         }, 800)
       }, () => {
-        var loading = weui.loading('loading')
         setTimeout(() => {
-          loading.hide(() => {
-            bubb.update()
+          bubb.update()
+          if (PULLDATA.length > 0) {
             PAGE[TYPE] += 6
             this._getNewData(PAGE[TYPE], TYPE)
-          })
+          }
         }, 800)
       })
       this.switch()
@@ -130,6 +63,7 @@ let all = (function () {
       model.getClubData({page: page, type: type}).then((data) => {
         let newdata = null
         newdata = data[TYPE]
+        PULLDATA = newdata
         if (data.load) { // 如果不是初始化，是下拉刷新
           let len = newdata.length
           if (len !== 0) { // 如果下拉刷新有值
@@ -148,6 +82,9 @@ let all = (function () {
             $('#pullup').hide()
           } else { // 如果初始化有数据
             let len = newdata.length
+            if (len < 4) {
+              $('.after-trigger').hide()
+            }
             for (let i = 0; i < len; i++) {
               $('#' + TYPE).append(this._temple(i, newdata))
             }

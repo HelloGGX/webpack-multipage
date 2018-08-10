@@ -13,6 +13,7 @@ let all = (function () {
   // const DIRECTION_H = 'horizontal'
   // const DIRECTION_V = 'vertical'
   let PAGE = 1
+  let AREADATA = []
   let allData = {
     init () {
       this._getIndexData()
@@ -25,13 +26,13 @@ let all = (function () {
           })
         }, 800)
       }, () => {
-        var loading = weui.loading('loading')
+        // var loading = weui.loading('loading')
         setTimeout(() => {
-          loading.hide(() => {
-            bubb.update()
+          bubb.update()
+          if (AREADATA.length > 0) {
             PAGE += 6
             this.getData(PAGE)
-          })
+          }
         }, 800)
       })
     },
@@ -60,6 +61,7 @@ let all = (function () {
     getData (page) {
       model.getIndexData({page: page}).then(data => {
         // scrollNav.init(res.navdata)// 顶部导航栏初始化
+        AREADATA = data.areadata
         slider.init(data.slidata)// 幻灯片初始化
         hotArea.init(data.areadata, data.load)// 热门区域初始化
       }).catch(errMsg => {
@@ -78,22 +80,22 @@ let all = (function () {
               window.location.href = 'act-create.html'
             }
           }
-          if (Number($(e.currentTarget).data('index')) === 0) {
-            window.location.href = 'sign-in.html'
-          }
+          // if (Number($(e.currentTarget).data('index')) === 0) {
+          //   window.location.href = 'sign-in.html'
+          // }
           if (Number($(e.currentTarget).data('index')) === 4) {
             window.location.href = 'act-mag.html'
           }
-          if (Number($(e.currentTarget).data('index')) === 6) {
+          if (Number($(e.currentTarget).data('index')) === 2) {
             window.location.href = 'club-create.html'
           }
-          if (Number($(e.currentTarget).data('index')) === 7) {
+          if (Number($(e.currentTarget).data('index')) === 0) {
             window.location.href = 'recharge.html'
           }
         })
       }, () => { // 未登陆时候
         $('.weui-flex__item').on('click', (e) => {
-          if ($(e.currentTarget).data('index') !== 5 && $(e.currentTarget).data('index') !== 2) {
+          if ($(e.currentTarget).data('index') !== 2 && $(e.currentTarget).data('index') !== 3) {
             weui.confirm('建议登陆体验哦~', {
               title: '提示',
               buttons: [{
@@ -297,14 +299,14 @@ let all = (function () {
         <div class="store-content">
           <div class="goods-image">
               <div class="image-container" style="background-image:url(${imgSuffix(data[i].imgsrc, 2)})">
-                            
+
               </div>
           </div>
           <div class="goods-detail">
             <p class="goods-name">${data[i].name}</p>
               <div class="goods-content">
                   <p class="goods-sales">${data[i].time}</p>
-                  <p class="goods-sales">活动积分${data[i].integral} <span>活动等级${data[i].level}</span></p>
+                  <p class="goods-sales">活动经验${data[i].integral} <span>活动等级${data[i].level}</span></p>
               </div>
               <del class="goods-market-price">${data[i].marprice}</del>
               <div class="discount-price"><i>￥</i>${data[i].disprice}</div>

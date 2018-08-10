@@ -4,6 +4,7 @@ const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 // const HtmlInlinkChunkPlugin = require('html-webpack-inline-chunk-plugin')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -12,7 +13,7 @@ function resolve (dir) {
 module.exports = {
   optimization: {// 跟commonChunkPlugin一个效果
     splitChunks: {
-      chunks: 'initial', // 只对入口文件处理
+      chunks: 'all', // 对所有文件处理
       automaticNameDelimiter: '-',
       name: 'libs',
       filename: 'js/libs/[name].[hash:5].js'
@@ -22,6 +23,7 @@ module.exports = {
     }
   },
   plugins: [
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.DllReferencePlugin({
       manifest: require('../src/dll/libs-manifest.json'),
       name: 'libs'
@@ -31,6 +33,12 @@ module.exports = {
       includeSourcemap: false,
       publicPath: '/js/libs/',
       outputPath: './js/libs'
+    }),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true
     }),
     new BundleAnalyzerPlugin(), // 打包分析
 

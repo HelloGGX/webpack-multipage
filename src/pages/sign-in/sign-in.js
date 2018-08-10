@@ -245,7 +245,7 @@ let all = (function () {
       let coin = this.rand(myday)
       model.sign.postSign({coin: coin}).then(res => {
         if (res.state === 'ok') {
-          weui.alert('签到成功')
+          weui.alert(`签到成功,恭喜你获得度币:${coin}`)
         }
       }).catch(errMsg => {
         weui.alert(errMsg)

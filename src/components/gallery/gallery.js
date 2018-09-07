@@ -31,7 +31,6 @@ let gallery = {
     $('#album-container').on('click', '.album-photos li', (e) => {
       let clickIndex = $(e.currentTarget).index()
       let imglist = $(e.currentTarget).parent().attr('data-album')
-      console.log(imgsdata)
       let imgs = imgsdata[Number(imglist)]
 
       for (let i = 0; i < imgs['url'].length; i++) {

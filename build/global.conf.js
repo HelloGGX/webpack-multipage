@@ -4,11 +4,15 @@ const pages = [ // 页面配置写在这里
     pageName: 'login'
   },
   {
+    title: '短信登陆',
+    pageName: 'login-msg'
+  },
+  {
     title: '注册',
     pageName: 'regist'
   },
   {
-    title: '山度户外',
+    title: '山度CLUB',
     pageName: 'index'
   },
   {
@@ -134,6 +138,14 @@ const pages = [ // 页面配置写在这里
   {
     title: '添加花絮照片',
     pageName: 'my-album-create'
+  },
+  {
+    title: '山度头条',
+    pageName: 'notice'
+  },
+  {
+    title: '找回密码',
+    pageName: 'get-pwd'
   }
 ]
 const dependencies = [ // 依赖的全局js

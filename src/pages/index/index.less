@@ -180,7 +180,10 @@
         }
         .ad-container{
             width: 100%;
-            height: 1.2rem;
+            height: 0.6rem;
+            overflow: hidden;
+            margin-top: 0.2rem;
+            margin-bottom: 0.2rem;
             .ad-container-inner{
                background: url('../../imgs/a.jpg') no-repeat 0 0;
                background-size: cover;
@@ -279,5 +282,101 @@ redPoint {
         height: 100%;
         width: 100%;
     }
+}
+.title-bar {
+  img{
+    width: 3.75rem;
+    height: 0.55rem;
+    position: relative;
+  }
+}
+.new{
+  display: -webkit-box;
+  -webkit-box-align: center;
+  background-size: 3.75rem auto;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-image: url('../../imgs/bg/tit-bar.png');
+.new-wrapper{
+    height: 0.6rem;
+    padding-left: 0.6rem;
+    -webkit-box-flex: 1;
+    overflow: hidden;
+  .new-group{
+    height: 0.6rem;
+    padding-left: 0.05rem;
+    -webkit-box-flex: 1;
+    overflow: hidden;
+    position: relative;
+  .new-item{
+    display: -webkit-box;
+    overflow: hidden;
+    .headline-link{
+        color: #333;
+        width: 2.4rem;
+        line-height: 0.27rem;
+        height: 0.6rem;
+        font-size: @font-size-medium;
+        p{
+        width: 2.4rem;
+         &.headline-tag{
+            padding-left: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: .27rem;
+            position: relative;
+             strong{
+                display: inline-block;
+                vertical-align: middle;
+                color: #ff5038;
+                font-weight: 400;
+                font-size: @font-size-small ;
+                line-height:  @font-size-small;
+                border-radius: .04rem;
+                border: 1px solid #ff5038;
+                margin-right: .04rem;
+                padding: .02rem .03rem;
+             }
+             span{
+                display: inline;
+                line-height: 0.27rem;
+                height: 0.27rem;
+                width: 2.78rem;
+                vertical-align: bottom;
+             }
+         }
+         &:first-child{
+             margin-top: 0;
+         }
+        }
+    }
+    .headline-subimg{
+        position: relative;
+        width: 0.72rem;
+        background: 50% no-repeat;
+        height: 0.6rem;
+        .new-image{
+            position: absolute;
+            height: 100%;
+            width: 98%;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-size: cover;
+            right: 0;
+        }
+        .headline-img-modal{
+            top: 0;
+            position: absolute;
+            background-color: transparent;
+            background: -webkit-linear-gradient(left,#fff,hsla(0,0%,100%,0) 50%);
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+}
+}
+
 }
 

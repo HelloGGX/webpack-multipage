@@ -122,7 +122,7 @@ let costWay = { // 费用设置类方法
   _applyCostTemp (arr, arrPrice, arrNum) {
     return `${arr.map((key, i) => `
     <li class="row">
-   
+
     <div class="col-70">
     <div class="act_cost_title f-l">${arr[i]}</div>
     <input type="hidden" name="applyCostName" value="${arr[i]}">
@@ -163,9 +163,6 @@ let costWay = { // 费用设置类方法
           } else if (arrPrice[i] === '') {
             weui.alert('第' + (i + 1) + '项的费用金额不能为空')
             return false
-          } else if (arrNum[i] === '') {
-            weui.alert('第' + (i + 1) + '项的费用名额不能为空')
-            return false
           } else if (arr[i] === arr[i + 1]) {
             weui.alert('费用名称重复：' + arr[i])
             return false
@@ -175,11 +172,12 @@ let costWay = { // 费用设置类方法
         weui.alert('请设置费用')
       }
 
-      if ($.trim($('#feeApllyNum').val()) === '') {
-        weui.alert('活动总名额不能为空')
-        return false
-      } else if (feeApllyNum < allNum) {
-        weui.alert('费用设置名额之合不能大于活动总名额')
+      // if ($.trim($('#feeApllyNum').val()) === '') {
+      //   weui.alert('活动总名额不能为空')
+      //   return false
+      // } else
+      if (feeApllyNum < allNum) {
+        weui.alert('费用设置名额之和不能大于活动总名额')
         return false
       }
 
@@ -200,13 +198,13 @@ let costWay = { // 费用设置类方法
     } else { // 如果是免费
       $('#actCost').find('.weui-select').html('免费')
       $('.act_cost_ticket').hide()
-      if ($('input[name=fyzme]').val() === '') {
-        weui.alert('活动总名额不能为空')
-      } else {
-        $('input[name=applyCostNums]').val($('input[name=fyzme]').val())
-        weui.alert('添加成功')
-        this.hide()
-      }
+      // if ($('input[name=fyzme]').val() === '') {
+      //   weui.alert('活动总名额不能为空')
+      // } else {
+      $('input[name=applyCostNums]').val($('input[name=fyzme]').val())
+      weui.alert('添加成功')
+      this.hide()
+      // }
     }
   },
   _removeItem (item) {

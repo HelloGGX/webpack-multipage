@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%= require('html-loader!../../components/meta/meta.html')  %>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+</head>
+
+<body>
+    <div class="page">
+        <%=require( 'html-loader!../../components/banner/banner.html') %>
+        <div id="login">
+            <div class="weui-tab">
+                <div class="weui-tab__panel content-panel">
+                    <div class="container-wrapper">
+                        <div class="container-inner">
+                            <form id="loginForm" class="mlogin" method="post">
+                                <input type="hidden" name="loginType" value="findPwd">
+                                <div class="am-list">
+                                    <div class="am-list-item">
+                                        <div class="am-list-control">
+                                            <input type="number" class="am-input-required" style="margin: 0 0 .1rem .0rem;" required  pattern="REG_PHONE" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号" name="username" placeholder="请输入手机号" value="" id="username">
+                                        </div>
+                                        <div class="am-list-action removeVal"><i class="am-icon-clear" style="display: none;"></i></div>
+                                    </div>
+                                    <div class="am-list-item" id="checkcodeWarp">
+                                      <div class="am-list-control">
+                                        <input type="text" class="am-input-required am-input-required-checkCode" style="margin: 0 0 .1rem .0rem;" name="msgCheckCode" placeholder="校验码" value="">
+                                      </div>
+                                      <div class="am-list-action am-list-action-msg removeVal"><i class="am-icon-clear" style="display: none;"></i></div>
+                                      <div class="am-list-button">
+                                          <input id="getCheckcode"  value="获取密码">
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="checkcode-wrap">
+                                    <div id="checkcode"></div>
+                                </div>
+
+                                <div class="am-field am-fieldBottom">
+                                    <a type="submit" class="am-button am-button-submit" id="complete">完成</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

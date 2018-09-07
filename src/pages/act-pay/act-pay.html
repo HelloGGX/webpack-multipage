@@ -2,99 +2,102 @@
 <html>
 
 <head>
-    <%= require('html-loader!../../components/meta/meta.html')  %>
-    <title>
-        <%= htmlWebpackPlugin.options.title %>
-    </title>
-   
+  <%= require('html-loader!../../components/meta/meta.html')  %>
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+
 </head>
 
 <body>
-    <div class="page">
-        <div class="banner-container">
-            <div class="banner">
-                <div class="banner-icon-back banner-left"><a><span></span></a></div>
-                <div class="banner-tit banner-text"></div>
-                <div class="banner-right"><a></a></div>
-            </div>
-        </div>
-        <div id="index-content-v2">
-            <div class="weui-tab">
-                <div class="weui-tab__panel content-panel">
-                    <div class="content-wrapper">
-                        <div class="content-inner">
-                            <div>
-                                <form id="actPay" action="" name="form1" method="post" style="background-color: #ffffff">
-                                    <div class="pay-act">
-                                        <input type="hidden" name="actTitle" >
-                                        <input type="hidden" name="payActTime" >
-                                        <div class="pay-act-title" id="actTitle"></div>
-                                        <p class="pay-act-time">开始时间：</p>
-                                    </div>
-                                    <div class="line"></div>
-                                    <div class="news new-new">
-                                        <div class="news-person" id="actPerson">报名成员</div>
-                                        <div class="content-apply-line"></div>
-                                        <div class="news-content">
-                                            <div class="news-join">
-                                                <span class="add-apply-person" id="edit">
-                                                     添加/修改
-                                                </span>
-                                                <div class="order-li" id="applyUnpay">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="line"></div>
-                                    <div class="weui-cells margin">
-                                        <a id="coupon" class="weui-cell weui-cell_access" href="javascript:;">
-                                            <div class="weui-cell__bd">
-                                                <p>优惠券</p>
-                                            </div>
-                                            <div class="weui-cell__ft">有用</div>
-                                        </a>
-                                        <div class="weui-cell">
-                                            <div class="weui-cell__bd">
-                                                <p>实际应付</p>
-                                            </div>
-                                            <div class="weui-cell__ft" style="color:#1aad19">￥100</div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="line"></div>
-                                    <div class="payways-main-li" id="weiPay">
-                                        <img src="<%= require('../../imgs/icons/weiPay@2x.png')%>" width="30px"> <span>微信支付</span>
-                                        <div class="payways-main-radio">
-                                            <input type="radio" value="_alipayurl" name="payway" checked="checked">
-                                            <label for="weiPay" class="active"></label>
-                                        </div>
-                                    </div>
-                                    <div class="payways-main-li" id="otherPay" style="display: block;">
+  <div class="page">
+    <div class="banner-container">
+      <div class="banner">
+        <div class="banner-icon-back banner-left"><a><span></span></a></div>
+        <div class="banner-tit banner-text"></div>
+        <div class="banner-right"><a></a></div>
+      </div>
+    </div>
+    <div id="index-content-v2">
+      <div class="weui-tab">
+        <div class="weui-tab__panel content-panel">
+          <div class="content-wrapper">
+            <div class="content-inner">
+              <div>
+                <form id="actPay" action="" name="form1" method="post" style="background-color: #ffffff">
+                  <input type="hidden" name="id">
+                  <input type="hidden" name="clubId">
+                  <input type="hidden" name="orderId">
+                  <div class="pay-act">
+                    <input type="hidden" name="actTitle">
+                    <input type="hidden" name="payActTime">
+                    <div class="pay-act-title" id="actTitle"></div>
+                    <p class="pay-act-time">开始时间：</p>
+                  </div>
+                  <div class="line"></div>
+                  <div class="news new-new">
+                    <div class="news-person" id="actPerson">报名成员</div>
+                    <div class="content-apply-line"></div>
+                    <div class="news-content">
+                      <div class="news-join">
+                        <span class="add-apply-person" id="edit">
+                          添加/修改
+                        </span>
+                        <div class="order-li" id="applyUnpay">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="line"></div>
+                  <div class="weui-cells margin">
+                    <a id="coupon" class="weui-cell weui-cell_access" href="javascript:;">
+                      <div class="weui-cell__bd">
+                        <p>优惠券</p>
+                      </div>
+                      <div class="weui-cell__ft">有用</div>
+                    </a>
+                    <div class="weui-cell">
+                      <div class="weui-cell__bd">
+                        <p>实际应付</p>
+                      </div>
+                      <div class="weui-cell__ft" style="color:#1aad19">￥100</div>
+                    </div>
+
+                  </div>
+                  <div class="line"></div>
+                  <div class="payways-main-li" id="weiPay">
+                    <img src="<%= require('../../imgs/icons/weiPay@2x.png')%>" width="30px"> <span>微信支付</span>
+                    <div class="payways-main-radio">
+                      <input type="radio" value="_alipayurl" name="payway" checked="checked">
+                      <label for="weiPay" class="active"></label>
+                    </div>
+                  </div>
+                  <!-- <div class="payways-main-li" id="otherPay" style="display: block;">
                                         <img src="<%= require('../../imgs/icons/otherPay.png')%>" width="30px"> <span>其它方式付款<a>(现场付款或转账)</a></span>
                                         <div class="payways-main-radio">
-                                            <input type="radio" value="_otherpayurl" name="payway" > 
+                                            <input type="radio" value="_otherpayurl" name="payway" >
                                             <label for="otherPay" class=""></label>
                                         </div>
-                                    </div>
-                                    <label for="weuiAgree" class="weui-agree">
-                                            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
-                                            <span class="weui-agree__text">
-                                                阅读并同意<a href="javascript:void(0);">《相关条款》</a>
-                                            </span>
-                                    </label>
-                                    <div class="weui-btn-area">
-                                            <a class="weui-btn weui-btn_primary" href="javascript:" id="payApply">确定</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>            
+                                    </div> -->
+                  <label for="weuiAgree" class="weui-agree">
+                    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+                    <span class="weui-agree__text">
+                      阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+                    </span>
+                  </label>
+                  <div class="weui-btn-area">
+                    <a class="weui-btn weui-btn_primary" href="javascript:" id="payApply">确定</a>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
-        <%= require('html-loader!../setPay/set-pay.html')  %>
+      </div>
     </div>
+    <!-- <%= require('html-loader!../setPay/set-pay.html')  %> -->
+  </div>
 </body>
 
 </html>

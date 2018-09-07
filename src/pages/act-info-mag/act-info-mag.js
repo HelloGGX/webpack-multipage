@@ -77,15 +77,7 @@ let all = (function () {
 
     }
   }
-  //   let textAreaTemp = `<div class="weui-cells weui-cells_form margin">
-  //   <div class="weui-cell">
-  //       <div class="weui-cell__bd">
-  //           <textarea name="theme" class="weui-textarea" style="height: 1.4rem;" maxlength="100" placeholder="请输入活动主题" rows="3"></textarea>
-  //           <div class="weui-textarea-counter"><span>0</span>/100</div>
-  //           <div class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">保存</a></div>
-  //       </div>
-  //   </div>
-  // </div>`
+
   let applyMagFail = {// 已拒绝报名成员
     init () {
       $('.fail-lists').on('click', '.fail-item-top', (e) => {
@@ -282,7 +274,32 @@ let all = (function () {
           }]
         })
       })
-
+      $('body').on('click', '.btn-msg', (e) => { // 单独发送短信
+        let phone = $(e.currentTarget).data('tel')
+        let textAreaTemp = `<div class="weui-cells weui-cells_form margin">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea name="theme" class="weui-textarea" style="height: 1.4rem;" maxlength="200" placeholder="请输入短信内容" rows="3"></textarea>
+                <div class="weui-textarea-counter"><span>0</span>/200</div>
+                <div class="dialog-confirm" style="margin-top:0.1rem"><a href="javascript:;" class="weui-btn weui-btn_primary">发送</a></div>
+            </div>
+        </div>
+      </div>`
+        require.ensure([], () => {
+          require('vendor/dialog')
+          $.alert.aler({
+            title: '温馨提示',
+            content: textAreaTemp,
+            height: 'auto',
+            blankclose: true,
+            okCallback: (e) => {
+              let content = $(e.currentTarget).siblings('.weui-textarea').val()
+              console.log(content)
+              this.sendMsg(phone, content)
+            }
+          })
+        }, 'aler')
+      })
       // $('#editApply').on('click', () => { // 编辑活动
 
       // })
@@ -304,6 +321,15 @@ let all = (function () {
       //     })
       //   }, 'aler')
       // })
+    },
+    sendMsg (phone, content) {
+      model.sendMsg({phone: phone, content: content}).then(res => {
+        if (res.state === 'ok') {
+          weui.alert('发送成功')
+        }
+      }).catch(errMsg => {
+        weui.alert(errMsg)
+      })
     },
     getVal () {
       return $('textarea[name=theme]').val()
@@ -348,7 +374,7 @@ let all = (function () {
                 <div class="weui-cell__ft">
                 <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
                 <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
-                </div>      
+                </div>
               </div>
               <div class="moreInfo show" style="display: none;">
                 <div class="moreInfo-top">
@@ -359,10 +385,11 @@ let all = (function () {
                 ${key.guest_realname !== '' ? `<span>真实姓名：${key.guest_realname}</span>` : ''}
                 ${key.guest_idcard !== '' ? `/<span>身份证号：${key.guest_idcard}</span>` : ''}
                 </div>
-                
+
                 <div class="moreInfo-dowm">
                   <a class="txt-green" href="tel:${key.guest_tel}">电话</a>
                   <a class="text-red" data-id="${key.guest_id}">已拒绝</a>
+                  <a class="text-red btn-msg" data-tel="${key.guest_tel}">短信</a>
                 </div>
               </div>
             </div>
@@ -385,7 +412,7 @@ let all = (function () {
                 <div class="weui-cell__ft">
                 <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
                 <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
-                </div>      
+                </div>
               </div>
               <div class="moreInfo show" style="display: none;">
                 <div class="moreInfo-top">
@@ -396,11 +423,12 @@ let all = (function () {
                 ${key.guest_realname !== '' ? `<span>真实姓名：${key.guest_realname}</span>` : ''}
                 ${key.guest_idcard !== '' ? `/<span>身份证号：${key.guest_idcard}</span>` : ''}
                 </div>
-                
+
                 <div class="moreInfo-dowm">
                   <a class="txt-green" href="tel:${key.guest_tel}">电话</a>
                   <a class="txt-green btn-edit">编辑</a>
                   <a class="text-red btn-review" data-id="${key.guest_id}">审核</a>
+                  <a class="text-red btn-msg" data-tel="${key.guest_tel}">短信</a>
                 </div>
               </div>
             </div>
@@ -423,7 +451,7 @@ let all = (function () {
                 <div class="weui-cell__ft">
                 <p class="per-apply-cost">${key.guest_pricecl} ￥${key.guest_price}</p>
                 <p class="per-pay-way">${key.guest_wxpay === '是' ? '微信支付' : ''}  ${key.guest_qtpay === '是' ? '其他支付方式' : ''}${key.guest_paystate === '1' ? `(已付款)` : `(未付款)`}</p>
-                </div>      
+                </div>
               </div>
               <div class="moreInfo show" style="display: none;">
                 <div class="moreInfo-top">
@@ -434,11 +462,12 @@ let all = (function () {
                 ${key.guest_realname !== '' ? `<span>真实姓名：${key.guest_realname}</span>` : ''}
                 ${key.guest_idcard !== '' ? `/<span>身份证号：${key.guest_idcard}</span>` : ''}
                 </div>
-                
+
                 <div class="moreInfo-dowm">
                   <a class="txt-green" href="tel:${key.guest_tel}">电话</a>
                   <a class="txt-green btn-edit">编辑</a>
                   <a class="text-red btn-audit" data-id="${key.guest_id}">分组</a>
+                  <a class="text-red btn-msg" data-tel="${key.guest_tel}">短信</a>
                 </div>
               </div>
             </div>

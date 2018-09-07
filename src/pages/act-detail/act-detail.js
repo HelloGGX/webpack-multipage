@@ -76,6 +76,7 @@ let all = (function () {
   }
   let home = {
     pageInit () {
+      imgScroll.init()
       this._getActDetailData()
     },
     _getActDetailData () {
@@ -119,7 +120,7 @@ let all = (function () {
           $('.goods-bottom-bar').append(`
           <div class="goods-group-btn">
           <a>
-              <span class="goods-buy-price index_price2"> 
+              <span class="goods-buy-price index_price2">
               </span>
               <span>立即参加</span>
           </a>
@@ -163,6 +164,7 @@ let all = (function () {
         $('#index_name').html(actName)
         $('.g-service-list').html(`${actType.map((key) => `<span class="g-service-item">${key}</span>`)}`)
         $('.goods-mall-main img').attr('src', imgSuffix(clubLogo, 2))
+        $('.goods-mall-main a').attr('href', `club-detail.html?clubId=${clubId}`)
         $('.goods-mall-name').html(clubName)
         $('.goods-mall-info span:first').html(`活动数量&nbsp;${clubActs}`)
         $('.goods-mall-info span:last').html(`会员数量&nbsp;${clubMember}`)
@@ -189,14 +191,13 @@ let all = (function () {
         `)
         $('#notice').html(actNotice)
         $('#detailText').html(detailText)
-        $('.act-detail-img').html(`
-        ${clear(`${detailImgs.map((item) => `
+        $('.act-detail-img').html(`${clear(`${detailImgs.map((item) => `
         <li class="gd-item">
-        <img src="${item}" alt="">
-    </li>
-        `)}`)}
-        `)
-        imgScroll.init()
+            <img src="${item}" alt="">
+        </li>`)}`)}`)
+        setTimeout(() => {
+          imgScroll.scrol.refresh()
+        }, 20)
       }).catch((errMess) => {
         // 获取数据失败时的处理逻辑
         weui.alert(errMess)

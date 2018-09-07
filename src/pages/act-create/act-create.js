@@ -248,7 +248,7 @@ let all = (function () {
         $('#actSubmit').text('确定')
         $('#actSave').hide()
 
-        upload({maxLength: 3, size: 3, id: 'Detailuploader', urlArr: _thi.urlArr})
+        upload({maxLength: 15, size: 3, id: 'Detailuploader', urlArr: _thi.urlArr})
         upload({maxLength: 1, id: 'thumUploader', urlArr: _thi.thumbArr})
       }).catch(errMsg => {
         console.log(errMsg)
@@ -275,7 +275,7 @@ let all = (function () {
           }, regexp)
         })
       } else { // 如果是创建活动模式
-        upload({maxLength: 3, size: 3, id: 'Detailuploader', urlArr: this.urlArr})
+        upload({maxLength: 15, size: 3, id: 'Detailuploader', urlArr: this.urlArr})
         upload({maxLength: 1, id: 'thumUploader', urlArr: this.thumbArr})
 
         $('#actSubmit').on('click', (e) => {
@@ -366,7 +366,7 @@ let all = (function () {
           weui.alert('提交成功,等待审核')
           window.location.href = 'act-mag.html'
         } else {
-          weui.alert('提交失败，请检查填写项')
+          weui.alert('提交失败,你可能不是俱乐部不能发起活动')
         }
       }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑

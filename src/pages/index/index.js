@@ -3,9 +3,15 @@ import 'components/banner/banner.less'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {imgSuffix} from 'common/js/dom'
-import {judgeLogin} from 'components/judgeLogin/judge-login'
-import {bubb} from 'vendor/bubble'
+import {
+  imgSuffix
+} from 'common/js/dom'
+import {
+  judgeLogin
+} from 'components/judgeLogin/judge-login'
+import {
+  bubb
+} from 'vendor/bubble'
 import map from 'components/map/map'
 import model from 'api/getIndex'
 
@@ -38,8 +44,9 @@ let all = (function () {
     },
     getMap () {
       map.then(data => {
-        model.postAddr({addr: data.district}).then(res => {
-        }).catch(errMsg => {
+        model.postAddr({
+          addr: data.district
+        }).then(res => {}).catch(errMsg => {
           weui.alert(errMsg)
         })
         let addComp = data
@@ -59,11 +66,14 @@ let all = (function () {
       })
     },
     getData (page) {
-      model.getIndexData({page: page}).then(data => {
+      model.getIndexData({
+        page: page
+      }).then(data => {
         // scrollNav.init(res.navdata)// 顶部导航栏初始化
         AREADATA = data.areadata
-        slider.init(data.slidata)// 幻灯片初始化
-        hotArea.init(data.areadata, data.load)// 热门区域初始化
+        slider.init(data.slidata) // 幻灯片初始化
+        hotArea.init(data.areadata, data.load) // 热门区域初始化
+        advertise.init() // 通知栏初始化
       }).catch(errMsg => {
         weui.alert(errMsg)
       })
@@ -101,11 +111,15 @@ let all = (function () {
               buttons: [{
                 label: '先逛逛看',
                 type: 'default',
-                onClick: function () { console.log('no') }
+                onClick: function () {
+                  console.log('no')
+                }
               }, {
                 label: '马上登陆',
                 type: 'primary',
-                onClick: function () { window.location.href = 'login.html' }
+                onClick: function () {
+                  window.location.href = 'login.html'
+                }
               }]
             })
           }
@@ -115,16 +129,20 @@ let all = (function () {
           buttons: [{
             label: '先逛逛看',
             type: 'default',
-            onClick: function () { console.log('no') }
+            onClick: function () {
+              console.log('no')
+            }
           }, {
             label: '马上登陆',
             type: 'primary',
-            onClick: function () { window.location.href = 'login.html' }
+            onClick: function () {
+              window.location.href = 'login.html'
+            }
           }]
         })
       })
     }
-  }// 获取所有数据
+  } // 获取所有数据
   // let scrollNav = {// 顶部导航对象
   //   probeType: 1,
   //   click: true,
@@ -199,7 +217,72 @@ let all = (function () {
   //     })
   //   }
   // }
-  let slider = {// 幻灯片对象
+  let advertise = { // 通知栏
+    loop: true,
+    autoPlay: true,
+    interval: 2000,
+    click: true,
+    threshold: 0.3,
+    speed: 400,
+    currentPageIndex: 0,
+    initAdver () {
+      let options = {
+        scrollX: false,
+        scrollY: true,
+        snap: {
+          loop: this.loop,
+          threshold: this.threshold,
+          speed: this.speed
+        },
+        bounce: false,
+        click: this.click
+      }
+      this.slide = new BScroll('.new-wrapper', options)
+      this.slide.on('scrollEnd', () => {
+        let pageIndex = this.slide.getCurrentPage().pageY
+        this.currentPageIndex = pageIndex
+        if (this.autoPlay) {
+          this.play()
+        }
+      })
+    },
+    initAdverHigh () {
+      this.children = $('.new-group').children()
+      let height = 0
+      let adverHigh = $('.new-item').height()
+      for (let i = 0; i < this.children.length; i++) {
+        let child = this.children[i]
+        $(child).addClass('new-slide')
+        child.style.height = adverHigh + 'px'
+        height += adverHigh
+      }
+      if (this.loop) {
+        height += 2 * adverHigh
+      }
+      $('.new-group').css('height', height + 'px')
+    },
+    init (data) {
+      this._getAdverData(data)
+    },
+    _getAdverData (data) {
+      this.initAdverHigh()
+      this.initAdver()
+      if (this.autoPlay) {
+        this.play()
+      }
+    },
+    play () {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.slide.next()
+      }, this.interval)
+      // console.log(this.currentPageIndex+1)
+      // this.timer = setTimeout(() => {
+      //   this.slide.goToPage(0, pageIndex, 400)
+      // }, this.interval)
+    }
+  }
+  let slider = { // 幻灯片对象
     loop: true,
     autoPlay: true,
     interval: 400,
@@ -289,7 +372,7 @@ let all = (function () {
       }, this.interval)
     }
   }
-  let hotArea = {// 热门区域对象
+  let hotArea = { // 热门区域对象
     init (data, load) {
       this._getAreaData(data, load)
     },
@@ -332,16 +415,16 @@ let all = (function () {
           }
         }
       }
-    //   else {
-    //     $('#otherPage').html(`<div class="nothing-text" style="position: relative;">
-    //     <p>暂时还没有新活动</p>
-    // </div>`)
-    //   }
+      //   else {
+      //     $('#otherPage').html(`<div class="nothing-text" style="position: relative;">
+      //     <p>暂时还没有新活动</p>
+      // </div>`)
+      //   }
     }
   }
   let Home = {
     pageInit: function () {
-      allData.init()// 获取该页所有json数据并展示
+      allData.init() // 获取该页所有json数据并展示
     }
   }
   return Home

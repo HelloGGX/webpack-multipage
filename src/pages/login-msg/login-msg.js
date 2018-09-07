@@ -1,9 +1,9 @@
-import './regist.less'
+import './login-msg.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
+import {setCookie} from 'common/js/dom'
 import vali from 'vendor/validate'
-import {setCookie, delCookie} from 'common/js/dom'
 
 let regexp = {
   regexp: {
@@ -16,7 +16,7 @@ let all = (function () {
   let Home = {
     InterValObj: null, // timer变量，控制时间
     count: 60, // 间隔函数，1秒执行
-    pageInit: function () {
+    pageInit () {
       $('.am-list-control').find('input').on('input propertychange', function () {
         var result = $(this).val()
         if (result.length > 0) {
@@ -30,29 +30,24 @@ let all = (function () {
         $(e.currentTarget).prev().find('input').val('')
       })
 
-      // $('.seePwd').on('click', (e) => {
-      //   if ($(e.currentTarget).prev().find('input').attr('type') === 'password') {
-      //     $(e.currentTarget).prev().find('input').attr('type', 'text')
-      //   } else {
-      //     $(e.currentTarget).prev().find('input').attr('type', 'password')
-      //   }
-      // })
-      $('#getCheckcode').on('click', (e) => {
-        this._checkCode()
-      })
-
       $('#btn-submit').on('click', (e) => {
         let _thi = this
-        weui.form.validate('#registForm', function (error) {
+        weui.form.validate('#loginForm', function (error) {
           if (!error) {
-            var loading = weui.loading('注册中...')
+            var loading = weui.loading('登陆中...')
             setTimeout(function () {
               loading.hide()
-              _thi._postRegistData()
+              _thi._postLoginData()
             }, 1000)
           }
         }, regexp)
       })
+      $('#getCheckcode').on('click', (e) => {
+        this._checkCode()
+      })
+    },
+    href (uid) {
+      return `index.html?uid=${uid}`
     },
     _checkCode () { // 检查手机号和验证码的正确性
       let phone = $('input[name=username]').val()
@@ -79,28 +74,26 @@ let all = (function () {
           $('#getCheckcode').val('请在' + curCount + '秒内输入验证码')
         }
       }, 1000) // 启动计时器，1秒执行一次
-      model.codeCheck({phone: phone, type: 'regist'}).then((res) => {
+      model.codeCheck({phone: phone, type: 'loginMsg'}).then((res) => {
+        if (res.reist === 'no') {
+          weui.alert('该手机号还没有注册，请检查你的手机号')
+        }
       })
     },
-    _postRegistData () {
-      model.postRegistData($('#registForm')).then((data) => { // resolve状态的回调函数
+    _postLoginData () {
+      model.postLoginData($('#loginForm')).then((data) => {
         // 获取数据成功时的处理逻辑
-        let username = $('input[name=username]').val()
-        delCookie('username')
-        delCookie('token')
-        if (data.state === 'ok') { // 如果存在该用户"
-          weui.toast('注册成功', 800)
-          setCookie('username', `${username}`, 1000 * 60)
-          setCookie('token', `${data.token}`, 1000 * 60)
+
+        if (data.state === 'ok') { // 如果存在该用户
+          weui.toast('登陆成功', 1000)
+          setCookie('token', data.token, 1000 * 60 * 60)
+          setCookie('username', data.username, 1000 * 60 * 60)
+          window.location.href = this.href(data.uid)
           window.sessionStorage.setItem('ucl', data.ucl)
-          window.location.href = `index.html?uid=${data.uid}`
-        } else if (data.state === 'reg_y') {
-          weui.alert('你已经注册过了,请直接登陆')
-          setTimeout(() => {
-            window.location.href = 'login.html'
-          }, 3000)
+        } else if (data.state === 'loginno') {
+          weui.alert('登陆不成功，请检查你的电话或验证码是否正确')
         }
-      }).catch((ErrMsg) => { // reject状态的回调函数
+      }).catch((ErrMsg) => {
         // 获取数据失败时的处理逻辑
         weui.alert(ErrMsg)
       })

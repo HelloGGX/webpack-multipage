@@ -59,16 +59,15 @@ $.alert = (function () {
     },
     openModal: function () {
       var _this = this
-      var alertHtml = [
-        '<section class="alert-main local-groups-popup-wrapper" id="alertMain">',
-        '<div class="alert-content ' + this.type + '" id="alertContent">',
-        '<div class="alert-title">' + this.title + '</div>',
-        '<div class="alert-list">' + this.content + '</div>',
-        '<div class="lgp-close alert-cancel dialog-cancel"></div>',
-        '</div>',
-        '</section>'
-      ]
-      $('body').append(alertHtml.join(''))
+      var alertHtml = `<section class="alert-main local-groups-popup-wrapper" id="alertMain">
+        <div class="alert-content ${this.type}" id="alertContent">
+        <div class="alert-title">${this.title}</div>
+        <div class="alert-list">${this.content}</div>
+        <div class="lgp-close alert-cancel dialog-cancel"></div>
+        </div>
+        </section>`
+
+      $('body').append(alertHtml)
       $('#alertContent').css({
         'height': _this.height + 'px',
         'top': '20%',

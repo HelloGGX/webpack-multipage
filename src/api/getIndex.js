@@ -1,6 +1,8 @@
-import {serializeObject} from 'common/js/dom'
+import {
+  serializeObject
+} from 'common/js/dom'
 import db from '../db/db'
-let person = {// 个人资料管理（资料获取，编辑）
+let person = { // 个人资料管理（资料获取，编辑）
   getPerData (data) { // 获取用户资料
     return db.handleRequest(db.request.get('getPerData.php', {
       params: data,
@@ -39,7 +41,7 @@ let person = {// 个人资料管理（资料获取，编辑）
 
 }
 
-let travel = {// 游记相关
+let travel = { // 游记相关
   postTravel (e) { // 提交游记
     let data = serializeObject(e)
     console.log(data)
@@ -74,7 +76,7 @@ let travel = {// 游记相关
   }
 }
 
-let magAct = {// 管理活动
+let magAct = { // 管理活动
   cancelApply (data) { // 报名成员取消报名
     return db.handleRequest(db.request.post('cancelApply.php', {
       data: data,
@@ -187,7 +189,7 @@ let magAct = {// 管理活动
   }
 }
 
-let orders = {// 订单
+let orders = { // 订单
   getReceipt (data) { // 获取活动订单收款信息
     return db.handleRequest(db.request.get('getReceipt.php', {
       params: data,
@@ -226,7 +228,7 @@ let orders = {// 订单
   }
 }
 
-let sign = {// 签到
+let sign = { // 签到
   getSign (data) { // 获取申请为俱乐部的成员
     return db.handleRequest(db.request.get('getSign.php', {
       params: data,
@@ -241,7 +243,7 @@ let sign = {// 签到
   }
 }
 
-let mag = {// 管理员管理审核
+let mag = { // 管理员管理审核
   getCheckClub (data) { // 获取申请为俱乐部的成员
     return db.handleRequest(db.request.get('getCheckClub.php', {
       params: data,
@@ -268,7 +270,7 @@ let mag = {// 管理员管理审核
   }
 }
 
-let pay = {// 支付相关
+let pay = { // 支付相关
   postPayData (e) { // 设置支付账户信息
     let data = serializeObject(e)
     return db.handleRequest(db.request.post('postPayData.php', {
@@ -291,6 +293,12 @@ export default {
   pay,
   mag,
   sign,
+  getOpenId (data) { // 获取openid
+    return db.handleRequest(db.request.get('openId.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
   deleteAlbums (data) { // 删除相册
     return db.handleRequest(db.request.post('deleteAlbums.php', {
       data: data,
@@ -463,6 +471,18 @@ export default {
   },
   signOut (data) { // 退出登录
     return db.handleRequest(db.request.post('signOut.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  codeCheck (data) { // 验证登陆
+    return db.handleRequest(db.request.post('codeCheck.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  sendMsg (data) { // 活动管理单独发送短信
+    return db.handleRequest(db.request.post('sendMsg.php', {
       params: data,
       showLoading: true
     }))

@@ -294,7 +294,7 @@ export default {
   mag,
   sign,
   getOpenId (data) { // 获取openid
-    return db.handleRequest(db.request.get('openId.php', {
+    return db.handleRequest(db.request.get('vipOpenid.php', {
       params: data,
       showLoading: true
     }))
@@ -483,6 +483,12 @@ export default {
   },
   sendMsg (data) { // 活动管理单独发送短信
     return db.handleRequest(db.request.post('sendMsg.php', {
+      params: data,
+      showLoading: true
+    }))
+  },
+  vipPay (data) { // vip支付
+    return db.handleRequest(db.request.post('vipPay.php', {
       params: data,
       showLoading: true
     }))

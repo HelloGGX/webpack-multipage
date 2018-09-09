@@ -82,7 +82,6 @@ let all = (function () {
         for (let i = 0; i < len; i++) {
           _thi.PRICE += Number(guest[i].guest_jg)
         }
-        console.log(openId)
         if (openId === '') {
           weui.alert('提示', {
             title: '微信支付需要授权，请确认',

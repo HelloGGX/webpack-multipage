@@ -2,57 +2,57 @@
 <html>
 
 <head>
-    <%= require('html-loader!../../components/meta/meta.html')  %>
-        <title>
-            <%= htmlWebpackPlugin.options.title %>
-        </title>
+  <%= require('html-loader!../../components/meta/meta.html')  %>
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
 
 </head>
 
 <body>
-    <div class="page">
-            <div id="index-content-v2" class="padding">
-                <div class="weui-tab">
-                    <div class="weui-tab__panel content-panel">
-                        <div class="content-wrapper bg-yellow">
-                            <div class="content-inner">
-                                <div>
-                                    <div class="invite-user-info-view">
-                                        <div class="banner">
-                                            <img src="//pinduoduoimg.yangkeduo.com/invite_user/invite_view_banner.png">
-                                        </div>
-                                        <div class="rule-button">规则</div>
-                                        <div class="back-button back"><i class="iconfont icon-return"></i></div>
-                                        <div class="invite-user-button">升级VIP 只需298元/年</div>
-
-                                        <div class="sd-coin">
-                                            <h2>
-                                                <span>你有</span>
-                                                <a>200</a> 
-                                                <span>渡币</span>
-                                            </h2>
-                                        </div>
-                                        <p class="sku-selector-tit">兑换商城积分</p>
-                                        <div class="sku-selector-number" style="padding-bottom: 1rem;" >
-                                            <div class="btn-selector">
-                                                <div class="sku-selector-reduce"></div>
-                                                <input type="number" id="sku-input" class="sku-selector-input" maxlength="5" value="50">
-                                                <div class="sku-selector-increase"></div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>    
-                                              
-                                </div>
-                            </div>
-                        </div>
-                        <div id="moneyChang" class="btn-confirm-coin">
-                            <a >确认兑换</a>
-                        </div>     
+  <div class="page">
+    <div id="index-content-v2" class="padding">
+      <div class="weui-tab">
+        <div class="weui-tab__panel content-panel">
+          <div class="content-wrapper">
+            <div class="content-inner">
+              <div>
+                <div class="invite-user-info-view">
+                  <div class="banner">
+                    <img src="<%= require('../../imgs/bg/vip.jpg')%>">
+                  </div>
+                  <div class="rule-button">规则</div>
+                  <div class="back-button back"><i class="iconfont icon-return"></i></div>
+                  <div data-vip="1" class="invite-user-button">升级VIP1 只需298元/年</div>
+                  <div data-vip="3" class="invite-user-button">升级VIP3 只需798元/年</div>
+                  <div data-vip="5" class="invite-user-button">升级VIP5 只需1298元/年</div>
+                  <div data-vip="10" class="invite-user-button">升级VIP10 只需2598元/年</div>
+                  <!-- <div class="sd-coin">
+                    <h2>
+                      <span>你有</span>
+                      <a>200</a>
+                      <span>渡币</span>
+                    </h2>
+                  </div>
+                  <p class="sku-selector-tit">兑换商城积分</p>
+                  <div class="sku-selector-number" style="padding-bottom: 1rem;">
+                    <div class="btn-selector">
+                      <div class="sku-selector-reduce"></div>
+                      <input type="number" id="sku-input" class="sku-selector-input" maxlength="5" value="50">
+                      <div class="sku-selector-increase"></div>
                     </div>
+                  </div> -->
                 </div>
+              </div>
             </div>
+          </div>
+          <!-- <div id="moneyChang" class="btn-confirm-coin">
+            <a>确认兑换</a>
+          </div> -->
+        </div>
+      </div>
     </div>
+  </div>
 </body>
 
 </html>

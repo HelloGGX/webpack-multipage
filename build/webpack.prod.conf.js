@@ -15,6 +15,7 @@ module.exports = {
     splitChunks: {
       chunks: 'all', // 对所有文件处理
       automaticNameDelimiter: '-',
+      minSize: 2,
       name: 'libs',
       filename: 'js/libs/[name].[hash:5].js'
     },

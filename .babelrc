@@ -1,11 +1,30 @@
 {
-    "presets": [
-      ["env", {
+  "presets": [
+    [
+      "env",
+      {
         "targets": {
-          "browsers": ["last 2 versions"]
+          "chrome": 52,
+          "browsers": [
+            ">= 1%",
+            "Chrome >= 45",
+            "Firefox >= 38",
+            "Edge >= 12",
+            "Explorer >= 8",
+            "iOS >= 8",
+            "Safari >= 7",
+            "Android >= 4.0",
+            "Opera >= 30"
+          ]
         },
-        "useBuiltIns": false,
-        "debug": true
-      }]
+        "modules": false,
+        "useBuiltIns": "usage",
+        "debug": true,
+        "uglify": true
+      }
     ]
-  }
+  ],
+  "plugins": [
+    "transform-runtime"
+  ]
+}

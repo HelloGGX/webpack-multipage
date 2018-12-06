@@ -76,14 +76,19 @@ const generateConfig = env => {
     }]
   }
 
+  const entry = (env) => {
+    let obj = { common: resolve('src/common/js/common.js') }
+    if (env === 'development') {
+      return Object.assign(obj, { libs: globalConfig.dependencies })
+    } else {
+      return obj
+    }
+  }
   return {
     mode: env,
     target: 'web',
     context: path.resolve(__dirname, '../'),
-    entry: {
-      libs: globalConfig.dependencies,
-      common: resolve('src/common/js/common.js')
-    },
+    entry: entry(env),
     resolve: {
       extensions: ['.js', '.json'],
       alias: {

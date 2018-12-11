@@ -1,13 +1,13 @@
 import './act-album.less'
 import 'components/banner/banner.less'
 
-import {upload} from 'components/upload/upload'// 引入上传图片对象方法
+import { upload } from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
 import weui from 'weui.js'
-import {clear, transDate, getQueryString, imgSuffix} from 'common/js/dom'
+import { clear, transDate, getQueryString, imgSuffix } from 'common/js/dom'
 import model from 'api/getIndex'
-import {gallery} from 'components/gallery/gallery'
-import {judgeLogin} from 'components/judgeLogin/judge-login'
+import { gallery } from 'components/gallery/gallery'
+import { judgeLogin } from 'components/judgeLogin/judge-login'
 
 let all = (function () {
   // let DATA
@@ -40,7 +40,7 @@ let all = (function () {
     show () {
       let _thi = this
       $('#uploadPage').show()
-      upload({maxLength: 5,
+      upload({ maxLength: 5,
         size: 3,
         auto: false,
         id: 'uploader',
@@ -48,7 +48,7 @@ let all = (function () {
         okCallBack: () => {
           _thi.hide()
           window.location.reload()
-        }})
+        } })
     },
     hide () {
       $('#uploadPage').hide()
@@ -78,7 +78,7 @@ let all = (function () {
       this._getAlbumData()
     },
     _getAlbumData () {
-      model.getAlbumData({albumId: getQueryString('albumId')}).then((data) => {
+      model.getAlbumData({ albumId: getQueryString('albumId') }).then((data) => {
         let newdata
         let _html = ''
         newdata = data['albums']

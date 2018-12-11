@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
-import {getQueryString} from 'common/js/dom'
+import { getQueryString } from 'common/js/dom'
 
 let all = (function () {
   let Home = {

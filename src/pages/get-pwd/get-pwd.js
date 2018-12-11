@@ -99,7 +99,7 @@ let all = (function () {
           $('#getCheckcode').val('请在' + curCount + '秒内输入验证码')
         }
       }, 1000) // 启动计时器，1秒执行一次
-      model.codeCheck({phone: phone, type: 'findPwd'}).then((res) => {
+      model.codeCheck({ phone: phone, type: 'findPwd' }).then((res) => {
         if (res.reist === 'no') {
           weui.alert('该手机号还没有注册，请检查你的手机号')
         }

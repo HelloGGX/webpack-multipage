@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
-import {getQueryString, clear, itemtoArraytop, converToDate} from 'common/js/dom'
+import { getQueryString, clear, itemtoArraytop, converToDate } from 'common/js/dom'
 
 let all = (function () {
   let Home = {
@@ -114,7 +114,7 @@ let all = (function () {
      </form>`
     },
     _getApplyHelp () {
-      model.magAct.getApplyHelp({id: getQueryString('id')}).then(data => {
+      model.magAct.getApplyHelp({ id: getQueryString('id') }).then(data => {
         let actForm = data.actForm
         let guests = data.guest_user
         this.DATA = data
@@ -180,7 +180,7 @@ let all = (function () {
           blankclose: true,
           okCallback: function (elem) {
             const reason = $(elem.currentTarget).html()
-            model.magAct.cancelApply({id: getQueryString('id'), guestId: guestId, reason: reason}).then(res => {
+            model.magAct.cancelApply({ id: getQueryString('id'), guestId: guestId, reason: reason }).then(res => {
               if (res.state === 'ok') {
                 weui.alert('报名取消成功，请等待活动组织者的退款')
                 _thi._getApplyHelp()

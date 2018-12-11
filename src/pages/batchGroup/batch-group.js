@@ -1,9 +1,9 @@
 import './batch-group.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {getQueryString, clear} from 'common/js/dom'
+import { getQueryString, clear } from 'common/js/dom'
 import model from 'api/getIndex'
-import {moveToGroup} from 'components/moveToGroup/moveToGroup'
+import { moveToGroup } from 'components/moveToGroup/moveToGroup'
 
 let batchG = {
 
@@ -100,7 +100,7 @@ let batchG = {
     })
     if (flag) { // 如果有选中的
       if ($('.g-lists .g-item').length > 0) { // 判断有分组存在
-        moveToGroup({perIdArr: arr}).init()
+        moveToGroup({ perIdArr: arr }).init()
       } else { // 如果还没有分组
         this.showAddGroup(arr, initData)
       }
@@ -128,7 +128,7 @@ let batchG = {
     let _thi = this
     let groupName = $('input[name=alerInput]').val()
     // let perId =
-    model.magAct.addGroup({id: getQueryString('id'), groupName: groupName, perId: arr}).then(res => {
+    model.magAct.addGroup({ id: getQueryString('id'), groupName: groupName, perId: arr }).then(res => {
       if (res.group_state === 'ok') { // 如果新建分组插入成功
         weui.alert('添加到新分组成功')
         _thi.hide()
@@ -147,4 +147,4 @@ let batchG = {
 
 }
 
-export {batchG}
+export { batchG }

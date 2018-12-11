@@ -61,7 +61,7 @@ let all = (function () {
         }
       }
       if (ids.length > 0) {
-        model.mag.checkMember({ids: ids, flag: flag}).then(res => {
+        model.mag.checkMember({ ids: ids, flag: flag }).then(res => {
           if (res.state === 'ok') {
             weui.alert('操作成功')
             $('.pass-lists').html('')
@@ -78,7 +78,7 @@ let all = (function () {
       }
     },
     getPendMember (page) {
-      model.mag.getMember({page: page, type: 'pend'}).then(data => {
+      model.mag.getMember({ page: page, type: 'pend' }).then(data => {
         if (data.state === 'ok') {
           let checkUser = data.checkuser
           let checkLen = checkUser.length
@@ -98,7 +98,7 @@ let all = (function () {
       })
     },
     getPassMember (page) {
-      model.mag.getMember({page: page, type: 'pass'}).then(data => {
+      model.mag.getMember({ page: page, type: 'pass' }).then(data => {
         if (data.state === 'ok') {
           let passUser = data.passuser
           let passLen = passUser.length
@@ -150,7 +150,7 @@ let all = (function () {
   </label>`
     },
     getAllMember () {
-      model.mag.getMember({page: 1}).then(data => {
+      model.mag.getMember({ page: 1 }).then(data => {
         if (data.state === 'ok') {
           let checkUser = data.checkuser
           let checkLen = checkUser.length

@@ -1,6 +1,6 @@
 import weui from 'weui.js'
 import $ from 'jquery'
-import {getQueryString} from 'common/js/dom'
+import { getQueryString } from 'common/js/dom'
 
 class Upload {
   constructor ({
@@ -14,7 +14,7 @@ class Upload {
     auto = true,
     size = 1,
     type = 'act',
-    okCallBack = () => {}} = {}) {
+    okCallBack = () => {} } = {}) {
     this.id = id
     this.uploadCount = uploadCount
     this.uploadList = uploadList

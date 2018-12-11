@@ -1,9 +1,9 @@
 import './show-g-per.less'
 import $ from 'jquery'
-import {clear, Trim} from 'common/js/dom'
+import { clear, Trim } from 'common/js/dom'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {moveToGroup} from 'components/moveToGroup/moveToGroup'
+import { moveToGroup } from 'components/moveToGroup/moveToGroup'
 
 let showGroupPer = {
   GID: null, // 存储组id
@@ -50,7 +50,7 @@ let showGroupPer = {
   showGroupPer (id) { // 初始化该组成员信息
     this.GID = id
     let _thi = this
-    model.magAct.getGroupPer({groupId: _thi.GID}).then(data => {
+    model.magAct.getGroupPer({ groupId: _thi.GID }).then(data => {
       $('#groupPerContainer').html(clear(_thi.perTemp(data)))
     }).catch(errMsg => {
       console.log(errMsg)
@@ -79,13 +79,13 @@ let showGroupPer = {
       let _thi = this
       moveToGroup({ perIdArr: [$(e.currentTarget).data('id')],
         okCallBack: () => {
-          model.magAct.getGroupPer({groupId: _thi.GID}).then(data => {
+          model.magAct.getGroupPer({ groupId: _thi.GID }).then(data => {
             $('#groupPerContainer').html(clear(_thi.perTemp(data)))
             initData()
           }).catch(errMsg => {
             console.log(errMsg)
           })
-        }}).init()
+        } }).init()
     })
 
     $('#editGTitle').on('click', (e) => {
@@ -116,7 +116,7 @@ let showGroupPer = {
       weui.alert('组名不能为空')
     } else {
       let groupId = $('#groupPerContainer').find('.class-lists').data('gid')
-      model.magAct.editGroup({group_id: groupId, group_name: groupName}).then(res => {
+      model.magAct.editGroup({ group_id: groupId, group_name: groupName }).then(res => {
         if (res.state === 'ok') {
           _thi.hide()
           initData()
@@ -132,7 +132,7 @@ let showGroupPer = {
   deletGroup (initData) {
     let _thi = this
     let groupId = $('#groupPerContainer').find('.class-lists').data('gid')
-    model.magAct.deletGroup({group_id: groupId}).then(res => {
+    model.magAct.deletGroup({ group_id: groupId }).then(res => {
       if (res.state === 'ok') {
         initData()
         _thi.hide()
@@ -156,4 +156,4 @@ let showGroupPer = {
 
 }
 
-export {showGroupPer}
+export { showGroupPer }

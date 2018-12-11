@@ -2,7 +2,7 @@ import './review-g.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {clear} from 'common/js/dom'
+import { clear } from 'common/js/dom'
 
 let batchReview = {
   inputTemp () {
@@ -119,7 +119,7 @@ let batchReview = {
       }
     })
     if (flag) { // 如果有选中的
-      model.magAct.reviewPer({perId: arr, call: juge, reason: reason}).then(res => {
+      model.magAct.reviewPer({ perId: arr, call: juge, reason: reason }).then(res => {
         if (res.state === 'ok') { // 如果新建分组插入成功
           weui.alert('操作成功')
           _thi.hide()
@@ -134,4 +134,4 @@ let batchReview = {
   }
 
 }
-export {batchReview}
+export { batchReview }

@@ -2,7 +2,7 @@
 import './addMainItem.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {clear} from 'common/js/dom'
+import { clear } from 'common/js/dom'
 
 let clubItem = {
   inputTemp: `<div class="aler-input">
@@ -105,4 +105,4 @@ let clubItem = {
   }
 
 }
-export {clubItem}
+export { clubItem }

@@ -1,7 +1,7 @@
 import './my-album.less'
 import 'components/banner/banner.less'
 import $ from 'jquery'
-import {imgSuffix} from 'common/js/dom'
+import { imgSuffix } from 'common/js/dom'
 import model from 'api/getIndex'
 import weui from 'weui.js'
 
@@ -51,7 +51,7 @@ let all = (function () {
       </div> `
     }
     createAlbum (name) {
-      model.postAlbum({albumName: name}).then(res => {
+      model.postAlbum({ albumName: name }).then(res => {
         if (res.state === 'ok') {
           this.getAlbum()
           console.log(res)

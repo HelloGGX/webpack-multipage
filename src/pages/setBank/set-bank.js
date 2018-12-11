@@ -1,11 +1,11 @@
 import $ from 'jquery'
 import weui from 'weui.js'
 import './set-bank.less'
-import {pickerAddr} from 'components/picker/picker'// 引入地区和日期选择对象方法
+import { pickerAddr } from 'components/picker/picker'// 引入地区和日期选择对象方法
 import model from 'api/getIndex'
 
 class SetBank {
-  constructor ({intData = () => {}} = {}) {
+  constructor ({ intData = () => {} } = {}) {
     this.intData = intData
   }
   init () {

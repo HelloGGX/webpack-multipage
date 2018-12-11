@@ -2,7 +2,7 @@ import './login-msg.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
-import {setCookie} from 'common/js/dom'
+import { setCookie } from 'common/js/dom'
 import vali from 'vendor/validate'
 
 let regexp = {
@@ -74,7 +74,7 @@ let all = (function () {
           $('#getCheckcode').val('请在' + curCount + '秒内输入验证码')
         }
       }, 1000) // 启动计时器，1秒执行一次
-      model.codeCheck({phone: phone, type: 'loginMsg'}).then((res) => {
+      model.codeCheck({ phone: phone, type: 'loginMsg' }).then((res) => {
         if (res.reist === 'no') {
           weui.alert('该手机号还没有注册，请检查你的手机号')
         }

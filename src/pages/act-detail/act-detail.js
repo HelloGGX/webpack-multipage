@@ -4,8 +4,8 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import BScroll from 'better-scroll'
 import weui from 'weui.js'
-import {getQueryString, clear, imgSuffix} from 'common/js/dom'
-import {judgeLogin} from 'components/judgeLogin/judge-login'
+import { getQueryString, clear, imgSuffix } from 'common/js/dom'
+import { judgeLogin } from 'components/judgeLogin/judge-login'
 
 import model from 'api/getIndex'
 
@@ -61,7 +61,7 @@ let all = (function () {
           }
         }
         this.moveScroll(newY)// 显示回到顶部按钮
-        $('.bg-layer').css({'transform': 'translate3d(0,' + newY + 'px,0)'})
+        $('.bg-layer').css({ 'transform': 'translate3d(0,' + newY + 'px,0)' })
         var percent = Math.abs(newY / imgHeight)// 拖动图片变大的算法
         var zIndex = 0
         var scale = 1
@@ -69,7 +69,7 @@ let all = (function () {
           scale = 1 + percent
           zIndex = 10
         }
-        $('.v5-banner').css({'z-index': zIndex, 'transform': 'scale(' + scale + ')'})
+        $('.v5-banner').css({ 'z-index': zIndex, 'transform': 'scale(' + scale + ')' })
       })
     }
 
@@ -80,7 +80,7 @@ let all = (function () {
       this._getActDetailData()
     },
     _getActDetailData () {
-      model.getActDetailData({id: getQueryString('id')}).then((data) => {
+      model.getActDetailData({ id: getQueryString('id') }).then((data) => {
         let actId = data.list[0].act_id
         let clubId = data.club.club_id
         let hdThumbUrl = data.list[0].hd_thumb_url
@@ -157,7 +157,7 @@ let all = (function () {
             })
           })
         })
-        $('.v5-banner').css({'background-image': 'url(' + hdThumbUrl + ')'})
+        $('.v5-banner').css({ 'background-image': 'url(' + hdThumbUrl + ')' })
         $('.index_price').html(price)
         $('.goods-buy-price').html(`<i>￥</i>${price}`)
         $('.g-repeated-coupon-tag').html(clubName)

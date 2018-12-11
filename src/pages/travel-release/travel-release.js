@@ -2,9 +2,9 @@ import './travel-release.less'
 import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {editor} from 'components/editor/editor' // 使用 npm 安装
-import {upload} from 'components/upload/upload'// 引入上传图片对象方法
-import {clear} from 'common/js/dom'// 这里如果改回来记得加上jugePhone
+import { editor } from 'components/editor/editor' // 使用 npm 安装
+import { upload } from 'components/upload/upload'// 引入上传图片对象方法
+import { clear } from 'common/js/dom'// 这里如果改回来记得加上jugePhone
 import model from 'api/getIndex'
 
 let all = (function () {
@@ -12,8 +12,8 @@ let all = (function () {
     thumbArr: [],
     editor: null,
     pageInit () {
-      this.editor = editor({pasteFilterStyle: true}).init()
-      upload({maxLength: 1, id: 'thumUploader', urlArr: this.thumbArr})
+      this.editor = editor({ pasteFilterStyle: true }).init()
+      upload({ maxLength: 1, id: 'thumUploader', urlArr: this.thumbArr })
       /// jugePhone() ? this.openPC() : console.log('pc')// 判断是PC端还是手机端
       $('#btn-public').on('click', () => {
         weui.form.validate('#traRelease', error => {

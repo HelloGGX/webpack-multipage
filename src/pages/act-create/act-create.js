@@ -1,15 +1,15 @@
 import 'components/banner/banner.less'
 import './act-create.less'
 
-import {pickerAddr, pickerData} from 'components/picker/picker'// 引入地区和日期选择对象方法
-import {upload} from 'components/upload/upload'// 引入上传图片对象方法
+import { pickerAddr, pickerData } from 'components/picker/picker'// 引入地区和日期选择对象方法
+import { upload } from 'components/upload/upload'// 引入上传图片对象方法
 import $ from 'jquery'
 import weui from 'weui.js'
-import {AddapplyOption, EditapplyOption} from '../addApplyOption/addApplyOption'// 引入增加和编辑报名选项的对象
-import {costWay} from '../setApplyCost/setApplyCost'// 引入费用设置的对象
+import { AddapplyOption, EditapplyOption } from '../addApplyOption/addApplyOption'// 引入增加和编辑报名选项的对象
+import { costWay } from '../setApplyCost/setApplyCost'// 引入费用设置的对象
 import model from 'api/getIndex'
 import vali from 'vendor/validate'
-import {converToDate, getQueryString, clear} from 'common/js/dom'
+import { converToDate, getQueryString, clear } from 'common/js/dom'
 let regexp = {
   regexp: {
     PHONE: vali.mobile()
@@ -129,7 +129,7 @@ let all = (function () {
     _getActData () {
       let _thi = this
 
-      model.getActDetailData({id: getQueryString('id')}).then(data => {
+      model.getActDetailData({ id: getQueryString('id') }).then(data => {
         let actData = data.list[0]
         if (actData.apply_opts !== '') { // 如果有自定义的费用选项
           window.sessionStorage.setItem('applyItems', actData.apply_opts)// 存储报名选项
@@ -248,8 +248,8 @@ let all = (function () {
         $('#actSubmit').text('确定')
         $('#actSave').hide()
 
-        upload({maxLength: 15, size: 3, id: 'Detailuploader', urlArr: _thi.urlArr})
-        upload({maxLength: 1, id: 'thumUploader', urlArr: _thi.thumbArr})
+        upload({ maxLength: 15, size: 3, id: 'Detailuploader', urlArr: _thi.urlArr })
+        upload({ maxLength: 1, id: 'thumUploader', urlArr: _thi.thumbArr })
       }).catch(errMsg => {
         console.log(errMsg)
       })
@@ -275,8 +275,8 @@ let all = (function () {
           }, regexp)
         })
       } else { // 如果是创建活动模式
-        upload({maxLength: 15, size: 3, id: 'Detailuploader', urlArr: this.urlArr})
-        upload({maxLength: 1, id: 'thumUploader', urlArr: this.thumbArr})
+        upload({ maxLength: 15, size: 3, id: 'Detailuploader', urlArr: this.urlArr })
+        upload({ maxLength: 1, id: 'thumUploader', urlArr: this.thumbArr })
 
         $('#actSubmit').on('click', (e) => {
           let _thi = this

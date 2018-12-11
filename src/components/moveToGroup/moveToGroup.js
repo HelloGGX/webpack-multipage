@@ -1,13 +1,13 @@
 import model from 'api/getIndex'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {getQueryString, Trim, clear} from 'common/js/dom'
+import { getQueryString, Trim, clear } from 'common/js/dom'
 
 class MoveToGroup {
   // targetelem代表选中的目标元素
   // perIdArr代表选中的游客id所组成的数组
   // okCallBack 代表移动到组成功后的回调函数
-  constructor ({perIdArr = [], okCallBack = () => {}} = {}) {
+  constructor ({ perIdArr = [], okCallBack = () => {} } = {}) {
     this.perIdArr = perIdArr
     this.okCallBack = okCallBack
   }
@@ -44,7 +44,7 @@ class MoveToGroup {
     let groupId = $(e.currentTarget).data('id')
     // let perId =
 
-    model.magAct.moveToGroup({id: getQueryString('id'), groupId: groupId, groupName: groupName, perId: this.perIdArr}).then(res => {
+    model.magAct.moveToGroup({ id: getQueryString('id'), groupId: groupId, groupName: groupName, perId: this.perIdArr }).then(res => {
       if (res.state === 'ok') {
         weui.alert('移动到分组成功')
         _thi.okCallBack()

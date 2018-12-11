@@ -301,7 +301,7 @@ scrol.forceUpdate = function (dirty) {
 }
 scrol._reboundPullDown = function () { // 下拉弹回时的函数
   let me = this
-  let {stopTime = 600} = me.pullDownRefresh
+  let { stopTime = 600 } = me.pullDownRefresh
   return new Promise(function (resolve) {
     setTimeout(function () {
       me.isRebounding = true
@@ -350,4 +350,4 @@ let bubb = {
   }
 }
 
-export {bubb}
+export { bubb }

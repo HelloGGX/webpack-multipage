@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import weui from 'weui.js'
 import vali from 'vendor/validate'
-import {getQueryString, clear} from 'common/js/dom'
+import { getQueryString, clear } from 'common/js/dom'
 import model from 'api/getIndex'
 // import {batchG} from '../batchGroup/batch-group'
 let regexp = {
@@ -71,7 +71,7 @@ let addApplyPer = {
     $('.addPer').on('click', () => {
       let _thi = this
       this.show()
-      model.getMagInfo({id: getQueryString('id')}).then(args => {
+      model.getMagInfo({ id: getQueryString('id') }).then(args => {
         _thi.getApplyData(args[1])// 获取报名填写项信息
       }).catch(errMsg => {
         weui.alert(errMsg)
@@ -229,4 +229,4 @@ let addApplyPer = {
   </div>`
   }
 }
-export {addApplyPer}
+export { addApplyPer }

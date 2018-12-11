@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
-import {imgSuffix} from 'common/js/dom'
+import { imgSuffix } from 'common/js/dom'
 
 class Search {
   constructor ({
@@ -92,7 +92,7 @@ class Search {
   </div>`
   }
   searchVal (val) { // 搜索值调用api
-    model.search({val: val, type: this.type}).then(res => {
+    model.search({ val: val, type: this.type }).then(res => {
       if (res.state === 'ok') {
         let club = res.club
         let len = club.length

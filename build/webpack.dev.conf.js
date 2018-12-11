@@ -19,7 +19,7 @@ module.exports = {
     contentBase: './',
     compress: true, // 一切服务都启用gzip 压缩
     host: HOST || 'localhost', // 指定使用一个 host。默认是 localhost
-    port: PORT || '8082', // 指定一个端口号
+    port: PORT || '8080', // 指定一个端口号
     open: true,
     overlay: { warnings: false, errors: true },
     proxy: {},

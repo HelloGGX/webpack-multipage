@@ -66,4 +66,4 @@ let gallery = {
 
 }
 
-export {gallery}
+export { gallery }

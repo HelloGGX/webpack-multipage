@@ -4,7 +4,7 @@ import 'common/css/iconfont.css'
 import 'weui'
 import BScroll from 'better-scroll'
 import $ from 'jquery'
-import {pageName, getCookie} from 'common/js/dom'
+import { pageName, getCookie } from 'common/js/dom'
 
 let title = {// 把每页的title值赋值给banner上的标题
   init () {
@@ -116,4 +116,4 @@ $(function () {
   back.init()
 })
 
-export {scroll}
+export { scroll }

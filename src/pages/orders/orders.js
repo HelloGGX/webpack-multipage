@@ -5,8 +5,8 @@ import $ from 'jquery'
 import weui from 'weui.js'
 import model from '../../api/getIndex'
 import '../../vendor/leftTime.min'
-import {getQueryString, clear} from 'common/js/dom'
-import {bubb} from 'vendor/bubble'
+import { getQueryString, clear } from 'common/js/dom'
+import { bubb } from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = getQueryString('type')
@@ -46,7 +46,7 @@ let all = (function () {
       })
     },
     _getOrderData (page, type) {
-      model.orders.getOrderData({page: page, type: type}).then((data) => { // 获取数据成功时的处理逻辑
+      model.orders.getOrderData({ page: page, type: type }).then((data) => { // 获取数据成功时的处理逻辑
         let newdata = null
         newdata = data[TYPE]
         let len = newdata.length
@@ -161,7 +161,7 @@ let all = (function () {
           label: '删除',
           type: 'primary',
           onClick: function () {
-            model.orders.deleteOrder({orderId: orderId}).then(res => {
+            model.orders.deleteOrder({ orderId: orderId }).then(res => {
               if (res.state === 'ok') {
                 $('#order-grid').html()
                 $(e.currentTarget).parents('.orders-item').remove()
@@ -185,7 +185,7 @@ let all = (function () {
           blankclose: true,
           okCallback: function (elem) {
             let reason = $(elem.currentTarget).html()
-            model.orders.cancelOrder({orderId: orderId, reason: reason}).then(res => {
+            model.orders.cancelOrder({ orderId: orderId, reason: reason }).then(res => {
               if (res.state === 'ok') {
                 $('#order-grid').html()
                 $(e.currentTarget).parents('.orders-item').remove()
@@ -212,7 +212,7 @@ let all = (function () {
         if (document.getElementById(TYPE)) {
           $(document.getElementById(TYPE)).show().siblings().hide()
         } else {
-          PAGE[TYPE] = PAGE[TYPE]
+          // PAGE[TYPE] = PAGE[TYPE]
           this._getOrderData(PAGE[TYPE], TYPE)
           $(document.getElementById(TYPE)).show().siblings().hide()
         }

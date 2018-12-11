@@ -1,8 +1,8 @@
 import './setApplyCost.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {Trim} from 'common/js/dom'
-import {pickerData} from 'components/picker/picker'
+import { Trim } from 'common/js/dom'
+import { pickerData } from 'components/picker/picker'
 
 let costWay = { // 费用设置类方法
   _id: '',
@@ -295,4 +295,4 @@ let costWay = { // 费用设置类方法
 
 }
 
-export {costWay}
+export { costWay }

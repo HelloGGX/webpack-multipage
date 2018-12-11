@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import weui from 'weui.js'
 import model from 'api/getIndex'
 import $ from 'jquery'
-import {imgSuffix} from 'common/js/dom'
+import { imgSuffix } from 'common/js/dom'
 
 let all = (function () {
   let Home = {

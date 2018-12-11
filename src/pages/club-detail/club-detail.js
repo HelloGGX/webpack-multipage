@@ -5,8 +5,8 @@ import '../club-info/club-info.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {getQueryString, clear, imgSuffix} from 'common/js/dom'
-import {judgeLogin} from 'components/judgeLogin/judge-login'
+import { getQueryString, clear, imgSuffix } from 'common/js/dom'
+import { judgeLogin } from 'components/judgeLogin/judge-login'
 import work from 'webworkify-webpack'
 
 let all = (function () {
@@ -64,7 +64,7 @@ let all = (function () {
               label: '马上加入',
               type: 'primary',
               onClick: function () {
-                model.joinClubData({clubId: getQueryString('clubId')}).then(res => {
+                model.joinClubData({ clubId: getQueryString('clubId') }).then(res => {
                   if (res.clubs === 'ycj') { // 如果已经是俱乐部一员
                     require.ensure([], () => {
                       require('vendor/dialog')
@@ -235,7 +235,7 @@ let all = (function () {
       $('#clubRank').html(`活动人气榜前${data.club_rank}`)
     },
     _getClubDetail () {
-      model.getClubDetailData({clubId: getQueryString('clubId')}).then((data) => {
+      model.getClubDetailData({ clubId: getQueryString('clubId') }).then((data) => {
         DATA = data
         this._getClubInfo(DATA)// 获取俱乐部基本数据
         clubInfo._getClubInfo(DATA)

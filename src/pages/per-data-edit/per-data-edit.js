@@ -2,10 +2,10 @@ import './per-data-edit.less'
 import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {upload} from 'components/upload/upload'// 引入上传图片对象方法
-import {ages, clear} from 'common/js/dom'
-import {clubItem} from '../addMainItem/addMainItem'// 添加主打项目 宣言 简介
-import {pickerAddr} from 'components/picker/picker'// 引入地区和日期选择对象方法
+import { upload } from 'components/upload/upload'// 引入上传图片对象方法
+import { ages, clear } from 'common/js/dom'
+import { clubItem } from '../addMainItem/addMainItem'// 添加主打项目 宣言 简介
+import { pickerAddr } from 'components/picker/picker'// 引入地区和日期选择对象方法
 
 import model from 'api/getIndex'
 
@@ -49,7 +49,7 @@ let all = (function () {
         $('input[name=myAddr]').val(data.user_hometown)
         $('input[name=sports]').val(data.user_love)
         $('input[name=travelAddr]').val(data.user_mark)
-        upload({maxLength: 1, size: 1, id: 'uploader', urlArr: _thi.thumbArr})
+        upload({ maxLength: 1, size: 1, id: 'uploader', urlArr: _thi.thumbArr })
       }).catch(errMsg => {
         console.log(errMsg)
       })

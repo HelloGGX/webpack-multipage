@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import model from 'api/getIndex'
 import weui from 'weui.js'
 import $ from 'jquery'
-import {clear} from 'common/js/dom'
+import { clear } from 'common/js/dom'
 
 let all = (function () {
   let Home = {
@@ -86,7 +86,7 @@ let all = (function () {
           ids.push($(this).attr('id'))
         }
       })
-      model.mag.checkClub({id: ids, flag: flag}).then(res => {
+      model.mag.checkClub({ id: ids, flag: flag }).then(res => {
         if (res.state === 'ok') {
           weui.alert('操作成功,系统将通知申请者')
           $('.pass-lists').html('')
@@ -102,7 +102,7 @@ let all = (function () {
       })
     },
     getRefuseClub (page) {
-      model.mag.getCheckClub({page: page, type: 'refuse'}).then(data => {
+      model.mag.getCheckClub({ page: page, type: 'refuse' }).then(data => {
         if (data.state === 'ok') {
           let refuseClub = data.refuseClubs
           let refuseLen = refuseClub.length
@@ -122,7 +122,7 @@ let all = (function () {
       })
     },
     getPendClub (page) {
-      model.mag.getCheckClub({page: page, type: 'pend'}).then(data => {
+      model.mag.getCheckClub({ page: page, type: 'pend' }).then(data => {
         if (data.state === 'ok') {
           let checkClub = data.checkClub
           let checkLen = checkClub.length
@@ -142,7 +142,7 @@ let all = (function () {
       })
     },
     getPassClub (page) {
-      model.mag.getCheckClub({page: page, type: 'pass'}).then(data => {
+      model.mag.getCheckClub({ page: page, type: 'pass' }).then(data => {
         if (data.state === 'ok') {
           let passClub = data.passClub
           let passLen = passClub.length
@@ -162,7 +162,7 @@ let all = (function () {
       })
     },
     _getAllClub () {
-      model.mag.getCheckClub({page: 1}).then(data => {
+      model.mag.getCheckClub({ page: 1 }).then(data => {
         if (data.state === 'ok') {
           let checkClub = data.checkClub
           let passClub = data.passClub

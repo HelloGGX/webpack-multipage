@@ -44,7 +44,6 @@ let pickerAddr = {// 地区选择
       }
     }
   },
-
   calculateDepth () {
     if (this.onlyProvince) {
       this.depth = 1
@@ -74,7 +73,6 @@ let pickerAddr = {// 地区选择
       className: 'picker'
     })
   }
-
 }
 
 let pickerData = {// 日期选择
@@ -129,4 +127,4 @@ let pickerData = {// 日期选择
   }
 }
 
-export {pickerAddr, pickerData}
+export { pickerAddr, pickerData }

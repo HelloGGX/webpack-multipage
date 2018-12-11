@@ -53,8 +53,8 @@ class Editor {
         // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
         return content + '<p></p>'
       }
-    //   onfocus: function () {
-    //     console.log(editor)
+      //   onfocus: function () {
+      //     console.log(editor)
 
     //     // _thi.fixbug(editor)
     //   }

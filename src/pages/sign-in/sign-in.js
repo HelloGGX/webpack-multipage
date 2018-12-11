@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import model from 'api/getIndex'
 import weui from 'weui.js'
 import $ from 'jquery'
-import {parserDate, getCountDays} from 'common/js/dom'
+import { parserDate, getCountDays } from 'common/js/dom'
 
 let all = (function () {
   let $$ = function (id) {
@@ -243,7 +243,7 @@ let all = (function () {
     },
     postSign (myday) {
       let coin = this.rand(myday)
-      model.sign.postSign({coin: coin}).then(res => {
+      model.sign.postSign({ coin: coin }).then(res => {
         if (res.state === 'ok') {
           weui.alert(`签到成功,恭喜你获得度币:${coin}`)
         }

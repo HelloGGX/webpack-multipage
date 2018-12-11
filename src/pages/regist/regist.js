@@ -3,7 +3,7 @@ import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
 import vali from 'vendor/validate'
-import {setCookie, delCookie} from 'common/js/dom'
+import { setCookie, delCookie } from 'common/js/dom'
 
 let regexp = {
   regexp: {
@@ -79,7 +79,7 @@ let all = (function () {
           $('#getCheckcode').val('请在' + curCount + '秒内输入验证码')
         }
       }, 1000) // 启动计时器，1秒执行一次
-      model.codeCheck({phone: phone, type: 'regist'}).then((res) => {
+      model.codeCheck({ phone: phone, type: 'regist' }).then((res) => {
       })
     },
     _postRegistData () {

@@ -1,7 +1,7 @@
 import './addApplyOption.less'
 
 import weui from 'weui.js'
-import {Trim} from 'common/js/dom'
+import { Trim } from 'common/js/dom'
 import $ from 'jquery'
 
 let applyOption = {
@@ -288,4 +288,4 @@ AddapplyOption.Addinit = function () {
   })
 }
 
-export {AddapplyOption, EditapplyOption}// 暴露对象
+export { AddapplyOption, EditapplyOption }// 暴露对象

@@ -3,7 +3,7 @@ import weui from 'weui.js'
 import './set-pay.less'
 import model from 'api/getIndex'
 import bank from 'api/bankData'
-import {clear} from 'common/js/dom'
+import { clear } from 'common/js/dom'
 import vali from 'vendor/validate'
 
 class SetPay {

@@ -34,16 +34,12 @@ const normalize = (title, pageName) => {
     entry: entry,
     template: url + '.html',
     name: pageName,
-    chunks: ['manifest', 'libs', 'common', pageName]
+    chunks: ['manifest', 'commons', 'base', 'libs', pageName]
   }
 }
 const configPages = []
-pages.map(item => {
-  configPages.push(normalize(item.title, item.pageName))
-})
-const config = []
-configPages.map(item => {
-  config.push(generatePage(item))
+pages.map((item) => {
+  configPages.push(generatePage(normalize(item.title, item.pageName)))
 })
 
-module.exports = config
+module.exports = configPages

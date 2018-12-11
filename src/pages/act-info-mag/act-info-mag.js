@@ -5,14 +5,14 @@ import 'components/tabs/tabs.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 // import {pickerAddr, pickerData} from 'components/picker/picker' // 引入地区和日期选择对象方法
-import {batchG} from '../batchGroup/batch-group'
-import {addApplyPer} from '../addApplyPerson/add-apply-per'
-import {showGroupPer} from '../showGroupPer/show-g-per'
-import {editApply} from '../getApplyOpts/getApplyOpts'
+import { batchG } from '../batchGroup/batch-group'
+import { addApplyPer } from '../addApplyPerson/add-apply-per'
+import { showGroupPer } from '../showGroupPer/show-g-per'
+import { editApply } from '../getApplyOpts/getApplyOpts'
 import model from 'api/getIndex'
-import {getQueryString, clear} from 'common/js/dom'
-import {moveToGroup} from 'components/moveToGroup/moveToGroup'
-import {batchReview} from '../reviewGroup/review-g'
+import { getQueryString, clear } from 'common/js/dom'
+import { moveToGroup } from 'components/moveToGroup/moveToGroup'
+import { batchReview } from '../reviewGroup/review-g'
 
 let all = (function () {
   let search = {// 搜索框显示及查询
@@ -126,7 +126,7 @@ let all = (function () {
                     weui.alert('理由不能为空')
                     return false
                   } else {
-                    model.magAct.reviewPer({perId: [$(e.currentTarget).data('id')], call: 'fail', reason: reason}).then(res => {
+                    model.magAct.reviewPer({ perId: [$(e.currentTarget).data('id')], call: 'fail', reason: reason }).then(res => {
                       if (res.state === 'ok') { // 如果新建分组插入成功
                         weui.alert('操作成功')
                         Home._initActData()
@@ -143,7 +143,7 @@ let all = (function () {
           label: '通过',
           type: 'primary',
           onClick: function () {
-            model.magAct.reviewPer({perId: [$(e.currentTarget).data('id')], call: 'pass', reason: ''}).then(res => {
+            model.magAct.reviewPer({ perId: [$(e.currentTarget).data('id')], call: 'pass', reason: '' }).then(res => {
               if (res.state === 'ok') { // 如果新建分组插入成功
                 weui.alert('操作成功')
                 Home._initActData()
@@ -178,7 +178,7 @@ let all = (function () {
           perIdArr: [$(e.currentTarget).data('id')],
           okCallBack: () => {
             Home._initActData()
-          }}).init()
+          } }).init()
       } else { // 如果没有分组
         weui.confirm('请先在"批量分组"中创建分组')
       }
@@ -203,7 +203,7 @@ let all = (function () {
       // })
 
       $('#openApply').on('click', (e) => { // 打开关闭活动
-        model.magAct.openApply({id: getQueryString('id')}).then(res => {
+        model.magAct.openApply({ id: getQueryString('id') }).then(res => {
           if (res.state === '0') { // 如果是活动打开的
             $('#openApply').find('button').html('关闭活动')
           } else if (res.state === '1') {
@@ -323,7 +323,7 @@ let all = (function () {
       // })
     },
     sendMsg (phone, content) {
-      model.sendMsg({phone: phone, content: content}).then(res => {
+      model.sendMsg({ phone: phone, content: content }).then(res => {
         if (res.state === 'ok') {
           weui.alert('发送成功')
         }
@@ -559,14 +559,14 @@ let all = (function () {
       $('.failLen').html(`(${$('.fail-item').length})`)
     },
     _initActData () { // 刷新重新初始化数据
-      model.getActDetailData({id: getQueryString('id')}).then(data => {
+      model.getActDetailData({ id: getQueryString('id') }).then(data => {
         Home._getActInfoData(data)// 获取活动详细信息
       }).catch(errMsg => {
         weui.alert(errMsg)
       })
     },
     _getData () {
-      model.getMagInfo({id: getQueryString('id')}).then(args => {
+      model.getMagInfo({ id: getQueryString('id') }).then(args => {
         this._getActInfoData(args[0])// 获取活动详细信息
       }).catch(errMsg => {
         weui.alert(errMsg)
@@ -580,4 +580,4 @@ $(function () {
   all.pageInit()
 })
 
-export {all}
+export { all }

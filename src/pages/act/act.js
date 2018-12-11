@@ -3,8 +3,8 @@ import 'components/tabs/tabs.less'
 import model from '../../api/getIndex'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {imgSuffix} from 'common/js/dom'
-import {bubb} from 'vendor/bubble'
+import { imgSuffix } from 'common/js/dom'
+import { bubb } from 'vendor/bubble'
 
 let all = (function () {
   let TYPE = 'city'
@@ -38,7 +38,7 @@ let all = (function () {
       this.switch()
     },
     _getActData (page, type) {
-      model.getActData({page: page, type: type}).then((data) => { // 获取数据成功时的处理逻辑
+      model.getActData({ page: page, type: type }).then((data) => { // 获取数据成功时的处理逻辑
         let newdata = null
         newdata = data[TYPE]
         PULLDATA = newdata
@@ -102,7 +102,7 @@ let all = (function () {
         if (document.getElementById(TYPE)) {
           $(document.getElementById(TYPE)).show().siblings().hide()
         } else {
-          PAGE[TYPE] = PAGE[TYPE]
+          // PAGE[TYPE] = PAGE[TYPE]
           this._getActData(PAGE[TYPE], TYPE)
           $(document.getElementById(TYPE)).show().siblings().hide()
         }

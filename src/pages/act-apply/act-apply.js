@@ -3,7 +3,7 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {clear, getQueryString, sliceArray, attributeCount} from 'common/js/dom'
+import { clear, getQueryString, sliceArray, attributeCount } from 'common/js/dom'
 import vali from 'vendor/validate'
 let regexp = {
   regexp: {
@@ -114,7 +114,7 @@ let all = (function () {
     },
     _getPerApplyData () { // 获取用户填写的信息
       let _thi = this
-      model.getPerApplyData({orderId: getQueryString('orderId')}).then(data => {
+      model.getPerApplyData({ orderId: getQueryString('orderId') }).then(data => {
         let len = data.users.length
         for (let i = 0; i < len; i++) {
           if (i < len - 1) {
@@ -148,7 +148,7 @@ let all = (function () {
       })
     },
     _getApplyData () {
-      model.getApplyData({id: getQueryString('id')}).then((data) => {
+      model.getApplyData({ id: getQueryString('id') }).then((data) => {
         let applyInfo = data.actDetail
         let actForm = applyInfo.actForm
         if (applyInfo.actbbm === '是') {

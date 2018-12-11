@@ -2,7 +2,7 @@ import './travel-detail.less'
 import 'components/banner/banner.less'
 import weui from 'weui.js'
 import model from 'api/getIndex'
-import {getQueryString} from 'common/js/dom'
+import { getQueryString } from 'common/js/dom'
 import $ from 'jquery'
 
 let all = (function () {
@@ -23,7 +23,7 @@ let all = (function () {
     </div>`
     },
     getDetail () {
-      model.travel.getTravelDetail({id: getQueryString('id')}).then(data => {
+      model.travel.getTravelDetail({ id: getQueryString('id') }).then(data => {
         if (data.state === 'ok') {
           $('.new-title').html(data.travel_name)
           $('.new-pic img').attr('src', data.travel_author_head)

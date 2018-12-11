@@ -2,8 +2,8 @@ import model from 'api/getIndex'
 import $ from 'jquery'
 import weui from 'weui.js'
 import vali from 'vendor/validate'
-import {getQueryString, clear, itemtoArraytop} from 'common/js/dom'
-import {showGroupPer} from '../showGroupPer/show-g-per'
+import { getQueryString, clear, itemtoArraytop } from 'common/js/dom'
+import { showGroupPer } from '../showGroupPer/show-g-per'
 let regexp = {
   regexp: {
     PHONE: vali.mobile(),
@@ -151,7 +151,7 @@ let editApply = {
   _getPerApply (e) {
     let _thi = this
     let id = $(e.currentTarget).next().data('id')
-    model.magAct.getPerApplyOpt({guest_id: id}).then(data => {
+    model.magAct.getPerApplyOpt({ guest_id: id }).then(data => {
       _thi.getApplyData(data)
     }).catch(errMsg => {
       weui.alert(errMsg)
@@ -278,4 +278,4 @@ let editApply = {
   }
 }
 
-export {editApply}
+export { editApply }

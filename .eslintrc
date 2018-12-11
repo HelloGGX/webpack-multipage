@@ -1,6 +1,10 @@
 {
+    "env": {
+        "browser": true,
+        "es6": true
+    },
     "extends": "standard",
-    "plugins":[
+    "plugins": [
         "html"
     ],
     "parser": "babel-eslint",

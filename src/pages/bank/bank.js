@@ -3,13 +3,13 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import banks from 'api/bankData'
 import model from 'api/getIndex'
-import {setBank} from '../setBank/set-bank'
+import { setBank } from '../setBank/set-bank'
 
 let all = (function () {
   let bank = {
     init () {
       $('.list-bank ul').html(this.getBankData())
-      setBank({intData: this._getPerData})
+      setBank({ intData: this._getPerData })
       this._getPerData()
     },
     getBankData () {

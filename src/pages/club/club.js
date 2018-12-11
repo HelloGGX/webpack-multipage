@@ -4,9 +4,9 @@ import 'components/banner/banner.less'
 import $ from 'jquery'
 import model from 'api/getIndex'
 import weui from 'weui.js'
-import {imgSuffix} from 'common/js/dom'
-import {bubb} from 'vendor/bubble'
-import {search} from 'components/search/search'
+import { imgSuffix } from 'common/js/dom'
+import { bubb } from 'vendor/bubble'
+import { search } from 'components/search/search'
 
 let all = (function () {
   let TYPE = 'city'
@@ -18,7 +18,7 @@ let all = (function () {
   }
   let Home = {
     pageInit () {
-      search({type: 'club'}).init()
+      search({ type: 'club' }).init()
       this._getNewData()
       bubb.init(() => {
         var loading = weui.loading('loading')
@@ -60,7 +60,7 @@ let all = (function () {
     </div>`
     },
     _getNewData (page, type) {
-      model.getClubData({page: page, type: type}).then((data) => {
+      model.getClubData({ page: page, type: type }).then((data) => {
         let newdata = null
         newdata = data[TYPE]
         PULLDATA = newdata
@@ -101,7 +101,7 @@ let all = (function () {
         if (document.getElementById(TYPE)) {
           $(document.getElementById(TYPE)).show().siblings().hide()
         } else {
-          PAGE[TYPE] = PAGE[TYPE]
+          // PAGE[TYPE] = PAGE[TYPE]
           this._getNewData(PAGE[TYPE], TYPE)
           $(document.getElementById(TYPE)).show().siblings().hide()
         }

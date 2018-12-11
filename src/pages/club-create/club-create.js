@@ -2,9 +2,9 @@ import './club-create.less'
 import 'components/banner/banner.less'
 import $ from 'jquery'
 import weui from 'weui.js'
-import {upload} from 'components/upload/upload'// 引入上传图片对象方法
-import {pickerAddr} from 'components/picker/picker'// 引入地区和日期选择对象方法
-import {clubItem} from '../addMainItem/addMainItem'// 添加主打项目 宣言 简介
+import { upload } from 'components/upload/upload'// 引入上传图片对象方法
+import { pickerAddr } from 'components/picker/picker'// 引入地区和日期选择对象方法
+import { clubItem } from '../addMainItem/addMainItem'// 添加主打项目 宣言 简介
 import vali from 'vendor/validate'
 import model from 'api/getIndex'
 let regexp = {
@@ -24,7 +24,7 @@ let all = (function () {
     </div>
   </div>`,
     pageInit () {
-      upload({maxLength: 1, id: 'uploader'})
+      upload({ maxLength: 1, id: 'uploader' })
 
       $('.actAddr').on('click', (e) => {
         pickerAddr.showAddr(e.currentTarget)

@@ -11,16 +11,17 @@ function resolve (dir) {
 }
 
 module.exports = {
-  optimization: {// 跟commonChunkPlugin一个效果
+  optimization: {
+    // 跟commonChunkPlugin一个效果
     splitChunks: {
       chunks: 'all', // 对所有文件处理
       automaticNameDelimiter: '-',
       minSize: 2,
-      name: 'libs',
+      name: 'commons',
       filename: 'js/libs/[name].[hash:5].js'
     },
     runtimeChunk: {
-      'name': 'manifest'
+      name: 'manifest'
     }
   },
   plugins: [
@@ -51,14 +52,15 @@ module.exports = {
     // new HtmlInlinkChunkPlugin({// 把该页的js追加到html页面
     //   inlineChunks: ['manifest']
     // }),
-    new CopyWebpackPlugin([ // 支持输入一个数组
+    new CopyWebpackPlugin([
+      // 支持输入一个数组
       {
         from: resolve('src/api'), // 将src/api
         to: './api', // 复制到publiv
         ignore: [ '*.js' ]
       }
     ]),
-    new CleanWebpack(['dist'], {
+    new CleanWebpack([ 'dist' ], {
       root: path.resolve(__dirname, '../'), // 根目录
       verbose: true, // 开启在控制台输出信息
       dry: false // 启用删除文件

@@ -35,7 +35,7 @@ let all = (function () {
         }
       })
 
-      model.orders.refund({id: ids, flag: flag}).then(res => {
+      model.orders.refund({ id: ids, flag: flag }).then(res => {
         if (res.state === 'ok') {
           weui.alert('操作成功,系统将自动退钱给相应用户到微信')
           this._getRefund()
